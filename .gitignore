@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+metacognition_results/
+scratch_smoke_results/
+results/
+.env
