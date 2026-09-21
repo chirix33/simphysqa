@@ -1,6 +1,6 @@
 from pathlib import Path
 
-MODE = "openai"        # "openai", "manual", or "fixture"
+MODE = "fixture"        # "openai", "manual", or "fixture"
 MODEL = "gpt-4.1-mini-2025-04-14"
 SEED = 7
 EPOCHS = 400
