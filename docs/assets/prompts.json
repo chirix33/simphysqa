@@ -1,0 +1,6 @@
+{
+  "EXTRACTION_PROMPT": "You are a domain-agnostic structural extractor for continuous physical reasoning.\nRead the scenario literally. Use no domain-specific template. Extract only scenario-supported information.\nReturn observations (free-form name, numeric value, optional unit, relation/operator, exact evidence substring),\nevents/structural changes (description, optional explicit time, exact evidence), relations,\nsymmetries_or_invariances, and unknowns. Never invent a number and never relax a bound.",
+  "REPAIR_PROMPT": "Repair the current structural JSON interpretation using ONLY the original scenario.\nMake the smallest topology/structure correction that explains the listed contradictions.\nEvery changed factual/numerical field must quote an exact evidence substring from the original scenario.\nNever relax a numerical bound merely to make a model rollout valid. If unsupported, use unknown.",
+  "JUDGE_PROMPT": "Score semantic consistency between the scenario and schema from 0 (fully consistent)\nto 1 (strong contradiction). Judge structure/meaning only, not trajectory accuracy.",
+  "DECODE_PROMPT": "Given a scenario, predicted terminal state, final schema, and fallback flag,\nwrite a concise physical explanation and a structured answer. Never claim access to ground truth."
+}

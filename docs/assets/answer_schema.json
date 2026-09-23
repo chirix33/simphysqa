@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "plain_text_answer": {
+      "type": "string"
+    },
+    "structured_answer": {
+      "type": "object",
+      "properties": {
+        "final_state": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "trajectory_summary": {
+          "type": "string"
+        },
+        "structural_interpretation": {
+          "type": "string"
+        },
+        "fallback_used": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "final_state",
+        "trajectory_summary",
+        "structural_interpretation",
+        "fallback_used"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "plain_text_answer",
+    "structured_answer"
+  ],
+  "additionalProperties": false
+}

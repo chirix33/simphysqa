@@ -7,3 +7,8 @@ results/
 .env
 .venv/
 phi_jepa_try.ipynb
+*.zip
+Phi_JEPA_Baseline_Runbook.md
+Phi_JEPA_September_22_Demo_Review_and_Decisions.md
+Phi_JEPA_Implementation_Review_and_TODOs.md
+docs/references/sources/

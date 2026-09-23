@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "score": {
+      "type": "number"
+    },
+    "reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "score",
+    "reason"
+  ],
+  "additionalProperties": false
+}

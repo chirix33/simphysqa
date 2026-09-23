@@ -1,0 +1,58 @@
+{
+  "created": "2026-09-23",
+  "note": "User-supplied sources. Notebook source cells preserved; outputs/metadata removed. No experiment rerun.",
+  "original_notebook_sha256": "a66b96b69c304268218d058235d4a1f5669164cd5cb0535323c6e6cce44668d6",
+  "sources": [
+    {
+      "path": "assets/answer_schema.json",
+      "bytes": 810,
+      "sha256": "83a666f9a9113816b1be267ce9f046a92ee138c8c2cd27106e97e5b9b91277e0"
+    },
+    {
+      "path": "assets/extract_schema.json",
+      "bytes": 1702,
+      "sha256": "4be5e3ba426fcbc3fb7c0105c002c974d18b67b75c75504a32a1db47eaf47adc"
+    },
+    {
+      "path": "assets/judge_schema.json",
+      "bytes": 216,
+      "sha256": "ab3ff1885b167e6dfd6025abda0e7613a86c4a7034d6ccc5e462b779f1dd0c29"
+    },
+    {
+      "path": "assets/prompts.json",
+      "bytes": 1304,
+      "sha256": "45dd7486061d72bddd473cb8938d008296b56a46cd1f84d738224aef0b10cc16"
+    },
+    {
+      "path": "references/sources/active_paper.pdf",
+      "bytes": 5806160,
+      "sha256": "1d10a3b6eb956d905b81f4c343fc95fb78f8fb661ebffe411a0b867763203d94"
+    },
+    {
+      "path": "references/sources/phi_jepa_results.zip",
+      "bytes": 10255032,
+      "sha256": "6b36adeb9011eb50d5d166fb1a51a424705e43929052f772cafe264cb94051ed"
+    },
+    {
+      "path": "references/sources/professor_demo_source.ipynb",
+      "bytes": 64681,
+      "sha256": "12517c51b3e7a6297386c1192659c6413770b9cb9c03f31a8fe650680c9ccc3d"
+    },
+    {
+      "path": "references/sources/september_22_part_1.docx",
+      "bytes": 84042,
+      "sha256": "e4ed329e77954b1029297be48036c24fbdf1ee793809d7a173a9b811c797230c"
+    },
+    {
+      "path": "references/sources/september_22_part_2.docx",
+      "bytes": 1716843,
+      "sha256": "c26fb11bf953c53da764a61579befee44029b7f4e5caaa4691d13e1e2e9606d2"
+    }
+  ],
+  "prompt_string_sha256": {
+    "EXTRACTION_PROMPT": "75367a15ed99d692ac0b0549d4aa3f3363816f7faec7b21805ed448588ee205c",
+    "REPAIR_PROMPT": "67917dfd82266f5965429b84c9623820fcd8d4fa4c9f3a497c4c82f3b6af48c9",
+    "JUDGE_PROMPT": "5ea5df63b08ad3aee40223417dcaed971cbb5ecd28dca598063b5598c4744c8e",
+    "DECODE_PROMPT": "ee01558f7a58dbcd18f6604752a3f941a84ad1aa8d8948bc9a291d9b77f34d31"
+  }
+}
