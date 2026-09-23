@@ -1,0 +1,9 @@
+{
+  "scenario_id": "fixture-round-trip-001",
+  "family_id": "fixture-only",
+  "question": "Fixture only: preserve an unknown observation without predicting motion.",
+  "initial_facts": [{"quantity_id":"position","value":null,"unit":"m","source":"explicit fixture unknown"}],
+  "observables": [{"quantity_id":"position","name":"Position","unit":"m","frame":"fixture origin","index":0,"output_mask":true,"absolute_tolerance":0.001}],
+  "initial_time": 2.0,
+  "horizon": 1.0
+}

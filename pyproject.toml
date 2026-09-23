@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools==84.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phi-jepa"
+version = "0.0.1"
+description = "Phi-JEPA phase P00 offline contracts and provenance"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+phi-jepa = "phi_jepa.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+phi_jepa = ["py.typed"]

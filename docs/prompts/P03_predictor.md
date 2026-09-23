@@ -4,7 +4,7 @@ Copy the text below into the coding session, or ask Codex to read this file afte
 
 ---
 
-You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/implementation/README.md and PROGRESS.md, then these package documents: [docs/02_architecture.md](../docs/02_architecture.md); [docs/03_data_evaluation.md](../docs/03_data_evaluation.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/implementation/; preserve equivalent paths if the user placed it elsewhere.
+You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/README.md and docs/PROGRESS.md, then these package documents: [docs/02_architecture.md](../docs/02_architecture.md); [docs/03_data_evaluation.md](../docs/03_data_evaluation.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/; preserve equivalent paths if the user placed it elsewhere.
 
 Implement only P03 using accepted data/provider interfaces. Add the structured encoder, linear fusion, latent vector field, differentiable RK4, linear physical and semantic heads, masked terminal physical MSE and semantic reconstruction objective. Fit normalization on training data only. Train an independent text-only latent ODE for fallback/no-schema comparison; do not reuse the full checkpoint with inputs zeroed.
 

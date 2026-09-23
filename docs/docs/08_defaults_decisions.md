@@ -32,7 +32,7 @@ These settings make implementation concrete. They are proposed plan defaults, no
 
 **Q4 — Genuine topology and fluid claims.** Current proxy/timed-parameter cases do not establish these claims. Choose validated implementations or narrow the paper claim. Do not silently relabel an event as topology or a pendulum as a fluid simulation.
 
-The immediate user action remains returning the PyTorch GPU-check output when available. Ubuntu/WSL/NVIDIA visibility is already confirmed; do not ask for BIOS setup again.
+The active P00 prompt records the user-reported PyTorch GPU-check pass. Ubuntu/WSL/NVIDIA visibility and FP32/BF16 forward/backward are confirmed by that report; model-specific baseline checks remain pending. Do not ask for BIOS setup again.
 
 ## Contradiction handling
 

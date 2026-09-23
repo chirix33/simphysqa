@@ -12,3 +12,9 @@ Phi_JEPA_Baseline_Runbook.md
 Phi_JEPA_September_22_Demo_Review_and_Decisions.md
 Phi_JEPA_Implementation_Review_and_TODOs.md
 docs/references/sources/
+
+# P00 local build and isolated CPU verification
+.p00-venv/
+build/
+dist/
+*.egg-info/

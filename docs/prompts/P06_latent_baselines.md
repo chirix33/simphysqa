@@ -4,7 +4,7 @@ Copy the text below into the coding session, or ask Codex to read this file afte
 
 ---
 
-You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/implementation/README.md and PROGRESS.md, then these package documents: [docs/03_data_evaluation.md](../docs/03_data_evaluation.md); [docs/05_baselines.md](../docs/05_baselines.md); [docs/06_phases.md](../docs/06_phases.md); [docs/10_environment.md](../docs/10_environment.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/implementation/; preserve equivalent paths if the user placed it elsewhere.
+You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/README.md and docs/PROGRESS.md, then these package documents: [docs/03_data_evaluation.md](../docs/03_data_evaluation.md); [docs/05_baselines.md](../docs/05_baselines.md); [docs/06_phases.md](../docs/06_phases.md); [docs/10_environment.md](../docs/10_environment.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/; preserve equivalent paths if the user placed it elsewhere.
 
 Implement only P06; also read references/baseline_runbook.md. Pin official source commits and preserve licenses. Keep isolated environments and a patch ledger. Implement shared-physics-to-native data adapters, verified solution-step conversion, local loaders, canonical multi-component targets, signed/scientific numeric parsing, token/filter audits, checkpoint loading, bounded smoke/profile commands and result import.
 

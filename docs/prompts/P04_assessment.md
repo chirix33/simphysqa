@@ -4,7 +4,7 @@ Copy the text below into the coding session, or ask Codex to read this file afte
 
 ---
 
-You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/implementation/README.md and PROGRESS.md, then these package documents: [docs/02_architecture.md](../docs/02_architecture.md); [docs/04_assessment_fallback.md](../docs/04_assessment_fallback.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/implementation/; preserve equivalent paths if the user placed it elsewhere.
+You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/README.md and docs/PROGRESS.md, then these package documents: [docs/02_architecture.md](../docs/02_architecture.md); [docs/04_assessment_fallback.md](../docs/04_assessment_fallback.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/; preserve equivalent paths if the user placed it elsewhere.
 
 Implement only P04's explicitly labeled development_r1_v1 path: immutable training-reference bank, k=1 retrieval, normalized-cosine latent score, generic supported contract severity, exact V1 scenario/schema judge interface, separate ID calibration, missing-component handling and the bounded fallback/output policy.
 

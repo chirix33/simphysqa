@@ -4,16 +4,21 @@ Prepared 23 September 2026. **This is a specification and phase-prompt package, 
 
 ## Start here
 
-Implementation can proceed while the workstation PyTorch check is pending. CPU contracts, dataset/oracle validation, provider fixtures, numerical components, evaluation, and checkpoint round trips do not require that workstation GPU. Mark GPU-only verification pending; never convert a fixture pass into an empirical result.
+Implementation can proceed. The active P00 prompt records a user-reported PyTorch 2.7.1+cu128 FP32/BF16 forward/backward pass; model-specific GPU verification remains pending. CPU contracts, dataset/oracle validation, provider fixtures, numerical components, evaluation, and checkpoint round trips do not require that workstation GPU. Mark GPU-only verification pending; never convert a fixture pass into an empirical result.
 
 The user coordinates this work. A separate Codex coding agent implements one authorized phase at a time. The planning assistant reviews Codex's reports, resolves questions, and supplies the next prompt. No implementation is launched by distributing this package.
 
-1. Put this folder in the repository as `docs/implementation/`, preserving its subdirectories. Use a new branch; preserve existing work.
-2. Merge [AGENTS.md](AGENTS.md) into the repository-root `AGENTS.md`, adapting the paths as its installation note specifies. Preserve existing applicable instructions and flag genuine conflicts.
+1. This handoff is installed directly in `docs/`, preserving its subdirectories. Use a phase branch and preserve existing work; do not create a duplicate installation.
+2. Read the existing repository-root [AGENTS.md](../AGENTS.md). Preserve applicable instructions and flag genuine conflicts.
 3. Give Codex [the Phase 0 prompt](prompts/P00_bootstrap.md). This phase inspects the actual checkout and establishes the smallest working executable slice.
 4. Return Codex's completion report to the planning assistant. Continue using the prompt for the next authorized phase only after the preceding acceptance gate has been assessed.
 
 The root package is deliberately small to read. Follow the relevant detailed links rather than pasting the entire package into every Codex session.
+
+`SHA256SUMS.txt` is the preserved original distribution snapshot, not an index of
+edited installed documentation; its `AGENTS.md` entry describes the original template.
+Current instructions are at repository-root `AGENTS.md`. Verify preserved assets and
+installed links with `python tools/verify_p00_handoff.py` from repository root.
 
 ## Document map
 
@@ -55,7 +60,7 @@ One JSON envelope describes extracted scenario facts; another contains the final
 | P07 | One-domain live pilot, resource profile and reproducible result exports | GPU/live-model gates apply |
 | P08 | Additional domains, approved ID/OOD experiment matrix and paper-ready evidence | GPU/compute/data gates apply |
 
-Detailed acceptance criteria and prerequisites are in [the phase specification](docs/06_phases.md). P00–P06 code does not have to wait for the pending CUDA check, but a phase with required unexecuted verification is `implemented_pending_validation`, not complete. Independent preparation may proceed while that specific check is pending; dependent scientific results may not.
+Detailed acceptance criteria and prerequisites are in [the phase specification](docs/06_phases.md). P00–P06 code does not have to wait for the model-specific CUDA checks, but a phase with required unexecuted verification is `implemented_pending_validation`, not complete. Independent preparation may proceed while that specific check is pending; dependent scientific results may not.
 
 ## Two scientific details to keep visible
 

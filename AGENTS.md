@@ -2,7 +2,7 @@
 
 ## Installation and scope
 
-This file is delivered inside the handoff package. Merge its policy into the repository-root `AGENTS.md`; do not overwrite existing instructions blindly. The full package should live at `docs/implementation/`. Read its `README.md`, active phase prompt, relevant specifications and `PROGRESS.md`. When this file is still inside the package, [the package index](docs/README.md) is its local entry point; rewrite that link to `docs/implementation/README.md` when installing at repository root.
+The handoff is installed directly in `docs/`; this repository-root file is the applicable policy. Read [the package index](docs/README.md), `docs/PROGRESS.md`, the active prompt in `docs/prompts/` and relevant specifications in `docs/docs/`. Preserve applicable existing instructions and the original assets/references. Do not duplicate the handoff into another directory.
 
 These instructions govern implementation work for this project. The current user instruction and newest explicit professor clarification take precedence over older drafts/prototype code. Report conflicts and preserve unrelated work.
 
@@ -22,7 +22,7 @@ Inspect actual checkout, nested instructions and git status. Preserve user chang
 
 Keep provider/network operations at explicit boundaries, use typed inputs, content-hashed caches and reproducible configs. No network in offline tests. No automatic fixture fallback for a failed live scientific run. No credentials in code/logs/manifests. Never execute extracted formulas as code.
 
-Use separate core/CoConuT/CODI environments. Pin source/model/data revisions. The RTX 5090 requires a compatible CUDA build; use the documented starting profile and verify it. WSL2 GPU visibility is confirmed; PyTorch computation is pending. CPU work may proceed independently.
+Use separate core/CoConuT/CODI environments. Pin source/model/data revisions. The RTX 5090 requires a compatible CUDA build; use the documented starting profile and verify it. WSL2 GPU visibility and the PyTorch 2.7.1+cu128 FP32/BF16 forward/backward check are user-reported passed in the active P00 prompt; model-specific validation remains pending. CPU work may proceed independently.
 
 Keep optimizer/solver states finite and shapes explicit. Count every solve/model call/retry; preserve units, time grids and train-only scaling. Do not suppress failed cases or silently substitute thresholds/scorers.
 
@@ -36,4 +36,4 @@ Live/long runs require an explicit configured budget and authorized credentials 
 
 ## Durable handoff
 
-For each phase, update `docs/implementation/PROGRESS.md`, write `docs/reviews/PXX_completion.md`, and record consequential choices in `docs/decisions/`. Include branch/commit, changed behavior, tests/artifacts, deviations, pending gates and next step. For blockers use the package's precise blocker template, attempt bounded safe diagnosis, and continue independent authorized work. The user will relay unresolved questions to the planning assistant.
+For each phase, update `docs/PROGRESS.md`, write `docs/reviews/PXX_completion.md`, and record consequential choices in `docs/decisions/`. Include branch/commit, changed behavior, tests/artifacts, deviations, pending gates and next step. For blockers use the package's precise blocker template, attempt bounded safe diagnosis, and continue independent authorized work. The user will relay unresolved questions to the planning assistant.

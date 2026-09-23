@@ -4,7 +4,7 @@ Copy the text below into the coding session, or ask Codex to read this file afte
 
 ---
 
-You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/implementation/README.md and PROGRESS.md, then these package documents: [docs/01_context.md](../docs/01_context.md); [docs/02_architecture.md](../docs/02_architecture.md); [docs/03_data_evaluation.md](../docs/03_data_evaluation.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/implementation/; preserve equivalent paths if the user placed it elsewhere.
+You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/README.md and docs/PROGRESS.md, then these package documents: [docs/01_context.md](../docs/01_context.md); [docs/02_architecture.md](../docs/02_architecture.md); [docs/03_data_evaluation.md](../docs/03_data_evaluation.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/; preserve equivalent paths if the user placed it elsewhere.
 
 Implement only P01 using the accepted P00 interfaces. Build the proposed passive-stopping benchmark with named x/v targets, correct sample timestamps, analytic and independent numerical oracle checks, text generation, train-only normalization, family-level partitions, parameter/combination/event-OOD manifests and a strict label-free inference conversion.
 
