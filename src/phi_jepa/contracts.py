@@ -50,3 +50,23 @@ class ScenarioInput(StrictFrozen):
     @classmethod
     def from_dict(cls, payload: dict) -> "ScenarioInput":
         return convert(cls, payload)
+
+
+@dataclass(frozen=True)
+class PhysicalPrediction(StrictFrozen):
+    """Numerical endpoint envelope, independent of any LLM answer or evaluator truth."""
+    scenario_id: str
+    observable_ids: tuple[str, ...]
+    observable_names: tuple[str, ...]
+    units: tuple[str, ...]
+    frames: tuple[str, ...]
+    time: float
+    values: tuple[float, ...]
+    times: tuple[float, ...] | None = None
+    trajectory: tuple[tuple[float, ...], ...] | None = None
+
+    def __post_init__(self):
+        super().__post_init__()
+        width = len(self.observable_ids)
+        if not width or len(set(self.observable_ids)) != width or any(len(row) != width for row in (self.observable_names, self.units, self.frames, self.values)):
+            raise ValueError("prediction dimensions/layout invalid")

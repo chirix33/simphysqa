@@ -28,7 +28,8 @@ def main():
             local = target.split("#")[0]
             if not (path.parent / local).exists():
                 failures.append(f"broken link: {path.relative_to(ROOT)} -> {target}")
-        if "docs/implementation/" in content and path != HANDOFF / "references/decision_ledger.md":
+        active_content = content.replace("not `docs/implementation/`", "")
+        if "docs/implementation/" in active_content and path != HANDOFF / "references/decision_ledger.md":
             failures.append(f"stale installation path: {path.relative_to(ROOT)}")
     if failures:
         raise SystemExit("\n".join(failures))

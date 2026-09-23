@@ -5,6 +5,7 @@ from pathlib import Path
 import json
 import platform
 import subprocess
+from .validation import load_json
 
 
 def canonical(value) -> bytes:
@@ -17,7 +18,8 @@ def digest(value) -> str:
 
 def code_provenance() -> dict:
     package = Path(__file__).parent
-    files = {path.name: sha256(path.read_bytes()).hexdigest() for path in sorted(package.glob("*.py"))}
+    files = {path.relative_to(package).as_posix(): sha256(path.read_bytes()).hexdigest()
+             for path in sorted(package.rglob("*.py"))}
     root = package.parent.parent
     metadata = root / "pyproject.toml"
     if metadata.exists():
@@ -68,3 +70,21 @@ def write_run(output: Path, payloads: dict, provenance: dict) -> Path:
 
 def environment() -> dict:
     return {"python": platform.python_version(), "platform": platform.platform(), "dependencies": {}, "device": "cpu"}
+
+
+def read_run(run: Path) -> tuple[dict, dict]:
+    """Verify manifest identity and each artifact before consuming a published bundle."""
+    raw = (run / "manifest.json").read_bytes()
+    manifest = load_json(run / "manifest.json")
+    if sha256(raw).hexdigest() != run.name or manifest.get("format_version") != 1:
+        raise ValueError("run manifest identity/version mismatch")
+    payloads = {}
+    for ref in manifest["artifacts"]:
+        name = ref["path"]
+        if not isinstance(name, str) or Path(name).name != name or any(c in name for c in "/\\:") or name in (".", "..", "manifest.json") or name in payloads:
+            raise ValueError("invalid or duplicate artifact path")
+        path = run / name
+        if path.is_symlink() or sha256(path.read_bytes()).hexdigest() != ref["sha256"]:
+            raise ValueError("artifact integrity failure: " + name)
+        payloads[name] = load_json(path)
+    return payloads, manifest

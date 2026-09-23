@@ -1,11 +1,11 @@
 # Implementation progress
 
-Updated 2026-09-23 from P00 verification. Later phases remain plans, not completed code.
+Updated from P00 and P01 verification. P02–P08 remain plans, not completed code.
 
 | Phase | Status | Evidence/report |
 | --- | --- | --- |
 | P00 | complete | [Completion report](reviews/P00_completion.md), [repository audit](reviews/P00_repo_audit.md); eight CPU tests passed; offline editable install and CLI verified |
-| P01 | not_started | — |
+| P01 | complete | [Completion report](reviews/P01_completion.md); 28 CPU tests passed, 32-family dataset and independent oracle/evaluator verification |
 | P02 | not_started | — |
 | P03 | not_started | — |
 | P04 | not_started | — |
@@ -19,3 +19,5 @@ Environment evidence: the active P00 prompt records the user-reported WSL check 
 P00 branch: `codex/p00-bootstrap`; base/current HEAD `8e1cd56feb8f9fb0ec8aee92b0d0365b32722066`; changes uncommitted for review. No unresolved P00 blockers. Fixture manifests/results and exact commands are linked in the completion report. [Engineering decisions](decisions/P00_bootstrap.md) record installation, environment, packaging and artifact choices. Next step: planner/user review of P00; P01 requires separate authorization.
 
 For every change: date, phase/substep, exact commit, actual checks, artifacts, remaining blockers and next step. Do not replace this with a list of aspirational completed checkboxes.
+
+P01: authorized by the user after planner acceptance of P00. Started at `dbff9573fa3d13adf4edafa42976afc2e5208e90` on `codex/p00-bootstrap` with only the expanded P01 prompt dirty; preserved it unchanged. P01 additions are uncommitted. See [P01 decisions](decisions/P01_data.md) and the completion report for exact checks, artifacts and limitations. No unresolved P01 blockers. Next: review P01; P02 requires separate authorization.
