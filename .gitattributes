@@ -1,0 +1,3 @@
+# Review inventories hash exact bytes. Preserve them across Windows checkouts.
+docs/reviews/artifacts/PDS_quadruped_refinement/** -text
+docs/reviews/artifacts/PDS_four_domain/** -text
