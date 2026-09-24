@@ -9,7 +9,7 @@ import shutil
 import subprocess
 from phi_jepa.artifacts import code_provenance, digest
 from phi_jepa.simulation.common import ROOT, read, write
-from phi_jepa.simulation.freeze import contract, verify_freeze
+from phi_jepa.simulation.freeze import contract, verify_freeze, source_identity
 from phi_jepa.simulation.sampling import sample
 from phi_jepa.simulation.scope import RELEASE_ENGINES
 
@@ -119,7 +119,8 @@ def freeze():
         raise ValueError("commit generator source before freezing")
     covered = read(ROOT / "licenses/scope.json")["mit_files"]
     selected = {p.removeprefix("src/phi_jepa/") for p in covered if p.startswith("src/phi_jepa/") or p == "pyproject.toml"}
-    source["source_files"] = {k: v for k, v in source["source_files"].items() if k in selected}
+    source["source_files"] = {k: v for k, v in source_identity().items() if k in selected}
+    source["hash_encoding"] = "UTF-8 source text with LF line endings; assets and notices use exact bytes"
     source["source_sha256"] = digest(source["source_files"])
     source["scope"] = "MIT-prepared generation dependencies, not unrelated legacy/model code"
     config = read(ROOT / "configs/dataset_release_four_domain.json")

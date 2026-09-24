@@ -11,6 +11,15 @@ CONTRACT_KEYS = ("spec_version", "master_seed", "counts", "time", "domains",
                  "attempt_policy")
 
 
+def source_identity():
+    """Hash source text in Git's LF form; asset/notice hashes remain byte-exact."""
+    result = {}
+    for name in code_provenance()["source_files"]:
+        path = ROOT / name if name == "pyproject.toml" else ROOT / "src/phi_jepa" / name
+        result[name] = sha256(path.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
+    return result
+
+
 def contract(config):
     return {key: config[key] for key in CONTRACT_KEYS}
 
@@ -23,7 +32,7 @@ def verify_freeze(config, check_runtime=True):
     frozen = read(path)
     if contract(config) != frozen["generation_contract"]:
         raise ValueError("release experiment differs from frozen settings")
-    current = code_provenance()["source_files"]
+    current = source_identity()
     if {name: current.get(name) for name in frozen["source"]["source_files"]} != frozen["source"]["source_files"]:
         raise ValueError("generator source differs from frozen source")
     ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", frozen["source"]["git_commit"], "HEAD"], cwd=ROOT, capture_output=True)

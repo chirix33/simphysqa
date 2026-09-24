@@ -37,7 +37,7 @@ class FreezeTests(unittest.TestCase):
             path = root / "freeze.json"; path.write_text(json.dumps(frozen))
             config["experiment_freeze"] = dict(path="freeze.json", sha256=sha256(path.read_bytes()).hexdigest())
             with patch("phi_jepa.simulation.freeze.ROOT", root), \
-                    patch("phi_jepa.simulation.freeze.code_provenance", return_value=dict(source_files={"x": "a"})), \
+                    patch("phi_jepa.simulation.freeze.source_identity", return_value={"x": "a"}), \
                     patch("phi_jepa.simulation.freeze.subprocess.run") as git:
                 git.return_value.returncode = 0
                 verify_freeze(config, check_runtime=False)
@@ -47,7 +47,7 @@ class FreezeTests(unittest.TestCase):
                 artifact.write_bytes(b"changed")
                 with self.assertRaisesRegex(ValueError, "artifact"):
                     verify_freeze(config, check_runtime=False)
-                with patch("phi_jepa.simulation.freeze.code_provenance", return_value=dict(source_files={"x": "b"})):
+                with patch("phi_jepa.simulation.freeze.source_identity", return_value={"x": "b"}):
                     with self.assertRaisesRegex(ValueError, "source"):
                         verify_freeze(config, check_runtime=False)
 

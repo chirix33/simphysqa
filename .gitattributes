@@ -1,3 +1,6 @@
+# Source fingerprints use LF text on every platform.
+*.py text eol=lf
+pyproject.toml text eol=lf
 # Review inventories hash exact bytes. Preserve them across Windows checkouts.
 docs/reviews/artifacts/PDS_quadruped_refinement/** -text
 docs/reviews/artifacts/PDS_four_domain/** -text
@@ -5,3 +8,8 @@ docs/reviews/artifacts/PDS_release_preparation/** -text
 licenses/** -text
 configs/frozen_dataset_domains/** -text
 configs/dataset_release_freeze.json -text
+dataset.schema.json -text
+MODEL_DATA_CONTRACT.md -text
+configs/dataset_registries/** -text
+configs/dataset_sampling.json -text
+configs/dataset-bullet-linux.lock.txt -text

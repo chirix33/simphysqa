@@ -79,6 +79,6 @@ test_unforced_stack_and_initial_state (test_simulation_bullet.BulletPhysicsTests
 test_exact_float_boundary_and_interval_end (test_simulation_bullet.SchedulerTests.test_exact_float_boundary_and_interval_end) ... ok
 
 ----------------------------------------------------------------------
-Ran 74 tests in 19.273s
+Ran 74 tests in 17.836s
 
 OK
