@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-09-24T14:54:09.814389+00:00",
+  "cwd": "/var/tmp/phi-jepa-release-a8920b2",
+  "command": [
+    "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/.dataset-bullet-venv/bin/python",
+    "-u",
+    "-m",
+    "phi_jepa.simulation.cli",
+    "generate",
+    "--config",
+    "configs/dataset_release_four_domain.json",
+    "--resume"
+  ],
+  "generation_revision": "a8920b23dfbdb089b95cee5c00a47758b942d4ce",
+  "resumed_completed_attempts": 711
+}

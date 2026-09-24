@@ -1,0 +1,228 @@
+{
+  "audit": {
+    "audit_budgets": {
+      "processing_seconds": 3600,
+      "wait_wall_seconds": 25200
+    },
+    "audit_processing_seconds": 924.6749658610033,
+    "audit_wall_seconds_including_wait": 6537.510314054999,
+    "checks": [
+      "artifact checksums",
+      "schema and named labels",
+      "frozen draw plans",
+      "four-domain selection",
+      "public/private exports",
+      "numeric registries and equal numeric blocks",
+      "target texts",
+      "group/split isolation",
+      "unique samples",
+      "all receipts and rejection ledger"
+    ],
+    "development_groups_excluded": 500,
+    "frozen_config": {
+      "path": "configs/dataset_release_freeze.json",
+      "sha256": "ceeb21d4548ff9c8ea5745a15f409310fecfeba598b43edae7d91030b7632319"
+    },
+    "generation_revision": "a8920b23dfbdb089b95cee5c00a47758b942d4ce",
+    "status": "pass",
+    "totals": {
+      "admitted": 6340,
+      "attempted": 6800,
+      "complete_diagnostic_rollouts": 13600,
+      "disk_bytes": 3175147445,
+      "questions": 11105,
+      "recorded_step_calls": 229500000,
+      "rejected": 460
+    },
+    "unaccounted_partial_rollouts": []
+  },
+  "extra_audit": {
+    "asset_files_verified": 6800,
+    "attempts_by_domain": {
+      "driving": 1700,
+      "object_pushing_stacking": 1700,
+      "robotic_arm": 1700,
+      "tethered_load": 1700
+    },
+    "checks": [
+      "all attempted groups globally unique",
+      "strict JSON for accepted and quarantined records",
+      "quarantine schema and semantic checks",
+      "record-to-asset hash links and license identifiers",
+      "exact generation revision/config/engine/seed per record"
+    ],
+    "partitions": [
+      {
+        "admitted_questions": 72,
+        "domain": "driving",
+        "partition": "ood_parameter_extrapolation",
+        "quarantined_questions": 28
+      },
+      {
+        "admitted_questions": 85,
+        "domain": "driving",
+        "partition": "ood_timed_event",
+        "quarantined_questions": 15
+      },
+      {
+        "admitted_questions": 96,
+        "domain": "driving",
+        "partition": "ood_unseen_combination",
+        "quarantined_questions": 4
+      },
+      {
+        "admitted_questions": 138,
+        "domain": "driving",
+        "partition": "test_id",
+        "quarantined_questions": 62
+      },
+      {
+        "admitted_questions": 740,
+        "domain": "driving",
+        "partition": "train",
+        "quarantined_questions": 260
+      },
+      {
+        "admitted_questions": 148,
+        "domain": "driving",
+        "partition": "validation",
+        "quarantined_questions": 52
+      },
+      {
+        "admitted_questions": 200,
+        "domain": "object_pushing_stacking",
+        "partition": "ood_parameter_extrapolation",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 100,
+        "domain": "object_pushing_stacking",
+        "partition": "ood_timed_event",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 200,
+        "domain": "object_pushing_stacking",
+        "partition": "ood_unseen_combination",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 400,
+        "domain": "object_pushing_stacking",
+        "partition": "test_id",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 2000,
+        "domain": "object_pushing_stacking",
+        "partition": "train",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 400,
+        "domain": "object_pushing_stacking",
+        "partition": "validation",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 190,
+        "domain": "robotic_arm",
+        "partition": "ood_parameter_extrapolation",
+        "quarantined_questions": 10
+      },
+      {
+        "admitted_questions": 96,
+        "domain": "robotic_arm",
+        "partition": "ood_timed_event",
+        "quarantined_questions": 4
+      },
+      {
+        "admitted_questions": 196,
+        "domain": "robotic_arm",
+        "partition": "ood_unseen_combination",
+        "quarantined_questions": 4
+      },
+      {
+        "admitted_questions": 394,
+        "domain": "robotic_arm",
+        "partition": "test_id",
+        "quarantined_questions": 6
+      },
+      {
+        "admitted_questions": 1962,
+        "domain": "robotic_arm",
+        "partition": "train",
+        "quarantined_questions": 38
+      },
+      {
+        "admitted_questions": 388,
+        "domain": "robotic_arm",
+        "partition": "validation",
+        "quarantined_questions": 12
+      },
+      {
+        "admitted_questions": 200,
+        "domain": "tethered_load",
+        "partition": "ood_parameter_extrapolation",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 100,
+        "domain": "tethered_load",
+        "partition": "ood_timed_event",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 200,
+        "domain": "tethered_load",
+        "partition": "ood_unseen_combination",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 400,
+        "domain": "tethered_load",
+        "partition": "test_id",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 2000,
+        "domain": "tethered_load",
+        "partition": "train",
+        "quarantined_questions": 0
+      },
+      {
+        "admitted_questions": 400,
+        "domain": "tethered_load",
+        "partition": "validation",
+        "quarantined_questions": 0
+      }
+    ],
+    "questions": {
+      "admitted": 11105,
+      "quarantined": 495
+    },
+    "status": "pass",
+    "unique_attempted_groups": 6800,
+    "wall_seconds": 37.96106066200082
+  },
+  "migration": {
+    "admitted": 544,
+    "attempted": 711,
+    "completed_utc": "2026-09-24T14:53:21.445540+00:00",
+    "copy_and_hash_seconds": 26.334556675000385,
+    "interrupted_after_progress": {
+      "accepted": 153,
+      "domain": "driving",
+      "index": 211,
+      "rejected": 58,
+      "total": 1000
+    },
+    "interruption_phase": "disk budget scan before next simulation",
+    "original_outputs_preserved": true,
+    "rejected": 167,
+    "source": "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/dataset-runs/release-four-domain-v1",
+    "status": "pass",
+    "target": "/var/tmp/phi-jepa-release-a8920b2/dataset-runs/release-four-domain-v1",
+    "verified_files": 3085
+  }
+}

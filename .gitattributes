@@ -5,6 +5,7 @@ pyproject.toml text eol=lf
 docs/reviews/artifacts/PDS_quadruped_refinement/** -text
 docs/reviews/artifacts/PDS_four_domain/** -text
 docs/reviews/artifacts/PDS_release_preparation/** -text
+docs/reviews/artifacts/PDS_generation/** -text
 licenses/** -text
 configs/frozen_dataset_domains/** -text
 configs/dataset_release_freeze.json -text

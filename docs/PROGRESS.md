@@ -1,11 +1,13 @@
 # Implementation progress
 
-Four-domain production generation authorized by the user on 24 September 2026.
-Preflight verified the finalized grants, frozen artifacts and WSL runtime. The
-committed enable switch starts the existing 6,800-attempt plan with unchanged
-thresholds, seeds and no replacement sampling. Completion and measured counts
-will be reported after validation; no training, push or publication is authorized.
-Earlier disabled-state entries below are historical.
+Four-domain production generation and local export completed on 24 September 2026.
+Generation revision `a8920b23dfbdb089b95cee5c00a47758b942d4ce`: exactly 6,800
+attempted base scenarios, 6,340 admitted, 460 quarantined, 11,105 admitted questions.
+All 24 partitions and combined-data checks passed; frozen thresholds and rejection
+policy were preserved. Native-storage resume reused 711 completed attempts.
+See [completion report](reviews/PDS_generation_completion.md) for counts, measured
+runtime/storage, hashes and commands. No training, push or publication occurred.
+Earlier preparation/disabled-state entries below are historical.
 
 License finalization, 24 September 2026: user confirmed rights-holder Kaushik Roy
 and authority for the scoped CC BY 4.0 dataset/assets and MIT generation code.

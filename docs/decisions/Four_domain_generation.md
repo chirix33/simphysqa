@@ -22,3 +22,23 @@ The launch record will record the resulting enablement commit before generation.
 Logs and outputs remain under `dataset-runs/`, outside Git. Only compact evidence
 and the completion report belong in Git. Development and quadruped data remain
 excluded. No training, remote push or publication is authorized.
+
+## Completion and storage-only relocation
+
+Generation revision `a8920b23dfbdb089b95cee5c00a47758b942d4ce` completed the exact
+6,800-attempt plan: 6,340 admitted, 460 quarantined, 11,105 admitted questions.
+No quota filling, threshold changes, source changes, or scientific configuration
+changes were made. All final release and independent data audits passed.
+
+Growing Windows/WSL filesystem scanning overhead justified a byte-verified native
+WSL working copy at `/var/tmp/phi-jepa-release-a8920b2`. After a completed receipt,
+the original process was interrupted during its next disk-budget scan. All 711
+completed attempts and 3,085 files were verified before exact resume. The original
+outputs are preserved as `dataset-runs/release-four-domain-v1-pre-native/`; the
+validated complete export was checksum-copied to the configured project path.
+This was an execution-storage choice within authorized local generation; no new
+license grant, public publication approval, or scientific setting was inferred.
+
+The enabled configuration remains committed for reproducibility and exact resume.
+This task performed no model training, remote push, or public publication. See the
+[completion report](../reviews/PDS_generation_completion.md) and compact evidence.
