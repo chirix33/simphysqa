@@ -1,5 +1,12 @@
 # Implementation progress
 
+Four-domain production generation authorized by the user on 24 September 2026.
+Preflight verified the finalized grants, frozen artifacts and WSL runtime. The
+committed enable switch starts the existing 6,800-attempt plan with unchanged
+thresholds, seeds and no replacement sampling. Completion and measured counts
+will be reported after validation; no training, push or publication is authorized.
+Earlier disabled-state entries below are historical.
+
 License finalization, 24 September 2026: user confirmed rights-holder Kaushik Roy
 and authority for the scoped CC BY 4.0 dataset/assets and MIT generation code.
 Notices and frozen legal metadata finalized; production remains disabled.
