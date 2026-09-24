@@ -25,3 +25,4 @@ build/
 dist/
 *.egg-info/
 DATASET_CODEX_PROMPT.md
+Phi_JEPA_Final_+_Baselines.ipynb
