@@ -1,0 +1,14 @@
+{
+  "reason": "Switch to verified two-process calibration after completed smoke; preserve every completed receipt",
+  "signal": "SIGINT",
+  "process_id": 1441,
+  "smoke_counts": {
+    "accepted": 5,
+    "attempted": 20,
+    "public_exported": 9,
+    "questions": 9,
+    "rejected": 15,
+    "resumed": 0
+  },
+  "maximum_interrupted_calibration_scenarios": 1
+}

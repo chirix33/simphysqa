@@ -28,6 +28,9 @@ def adapter(domain,engine=None):
     return MujocoAdapter()
 
 def comparison(coarse,fine,domain,target_times=(1.,2.,3.),cutoff=.2):
+    if domain=="quadruped_locomotion":
+        if not coarse.diagnostics.get("experiment_hash") or coarse.diagnostics["experiment_hash"]!=fine.diagnostics.get("experiment_hash"):
+            raise ValueError("quadruped refinement changed experiment or lacks fixed-clock provenance")
     differences=[]
     for state in coarse.states:
         if state["timestamp"]<=cutoff: continue
@@ -170,8 +173,9 @@ def run(config,domain,count,output,mode="smoke",resume=False,engine=None,split="
         peak_rss=max(peak_rss,psutil.Process().memory_info().rss)
         print(json.dumps(dict(domain=domain,index=index+1,total=count,accepted=accepted,rejected=rejected)),flush=True)
     if domain=="quadruped_locomotion":
-        qualified=any(read(p)["coarse"].get("nominal_locomotion_qualified",False) and read(p)["scenario"]["shift"]=="id" for p in (output/"diagnostics").glob("*.json"))
-        write(output/"nominal-gate.json",dict(qualified=qualified,criterion="At least one ID periodic-controller run advances >=0.2m in 3s without fall; perturbation failures are valid labels.",release_requires_further_calibration=True))
+        evidence=[read(p) for p in (output/"diagnostics").glob("*.json")]
+        qualified=any(p["coarse"].get("nominal_locomotion_qualified",False) and p["refined"].get("nominal_locomotion_qualified",False) and p["agreement"]["passed"] and p["scenario"]["shift"]=="id" for p in evidence)
+        write(output/"nominal-gate.json",dict(qualified=qualified,criterion="At least one ID periodic-controller refinement pair advances >=0.2m in 3s without fall in both runs and passes numerical agreement; every exported scenario also passes its own gates. Perturbation failures remain valid labels.",release_requires_further_calibration=True))
         if not qualified:
             # Keep runnable records privately, but do not export an unqualified
             # controller as a locomotion benchmark.

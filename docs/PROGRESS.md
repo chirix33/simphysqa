@@ -4,6 +4,24 @@ Updated from P00/P01 and the separately authorized dataset preparation task.
 P02–P08 remain plans, not completed model code. The newer dataset/model contract
 1.1.0 supersedes older physical-readout training assumptions for future work.
 
+Quadruped follow-up, 24 September 2026, `dataset-prep`, starting commit
+`4b997efd1dcbc8199c5981e44c71bd39fa8b7cb9`: fixed the controller-frequency
+confound in timestep refinement. A 24-run fixed-clock/one-factor MJX study
+initially qualified the 0.2 rad hip-amplitude gait at 0.5/0.25 ms under unchanged
+nominal endpoint/event thresholds. A later repeat audit failed those original
+tolerances, revoking that provisional qualification. Two serial 0.125 ms runs
+also fail: terminal base velocity differs by 0.016544569 m/s versus 0.01 m/s.
+Intermediate trajectory discrepancies remain explicit.
+Real force-duration/torque-hold checks and all 26 trace audits passed; Linux
+regression: 65 tests passed. Varied smoke completed with 5/20 admitted and 15/20
+quarantined (nine development records); these do not qualify a release. Calibration
+remains gated, with zero calibration scenarios simulated. Status remains
+`implemented_pending_validation`. See the
+[follow-up report](reviews/PDS_quadruped_refinement_completion.md) and
+[decisions](decisions/Quadruped_fixed_clock.md). Earlier quadruped comparisons
+changed controller frequency and are preserved as historical raw evidence, not
+isolated integration-convergence measurements.
+
 Dataset preparation, 24 September 2026, branch `dataset-prep`, starting commit
 `983feaec76acfd923cc7b7d18844ddd92696daff`: **implemented_pending_validation**.
 Five simulator adapters and the strict numeric/text/extraction contracts exist;

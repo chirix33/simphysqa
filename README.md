@@ -75,15 +75,37 @@ python3 -m venv .dataset-wsl-venv
 .dataset-wsl-venv/bin/python -m pip install --no-build-isolation --no-deps -e .
 export XLA_PYTHON_CLIENT_PREALLOCATE=false
 .dataset-wsl-venv/bin/phi-dataset inspect-environment --device-step
-.dataset-wsl-venv/bin/phi-dataset smoke --domain quadruped_locomotion --scenarios 20 --output dataset-runs/my-quadruped-smoke
-# Run calibration only after diagnosing the failed quadruped pilot gates.
-.dataset-wsl-venv/bin/phi-dataset calibrate --domain quadruped_locomotion --scenarios 100 --output dataset-runs/my-quadruped-calibration
+.dataset-wsl-venv/bin/python tools/study_dataset_quadruped.py --output dataset-runs/my-quadruped-study
+# This command verifies nominal refinement evidence before running smoke (20),
+# then calibration (100). Failed nominal qualification stops before either run.
+.dataset-wsl-venv/bin/python tools/run_qualified_quadruped_pilots.py --study dataset-runs/my-quadruped-study --output dataset-runs/my-qualified-quadruped-pilots
 ```
 
 `python -m phi_jepa.simulation.cli` is equivalent to `phi-dataset`. The delivered
 pilots are under `dataset-runs/final/<domain>/{smoke,calibrate}`; exploratory
 failures are also retained under `dataset-runs/`. These large local outputs are
 gitignored; durable compact evidence is linked in the completion report.
+
+Quadruped refinement uses a fixed physical controller clock with held torques.
+The bounded study in `configs/quadruped_refinement_study.json` compares 1, 0.5
+and 0.25 ms integration at a fixed 1 ms controller period, records synchronized
+1 ms states/commands/foot contacts, and changes one contact/solver/gait setting
+at a time. The general adapter default controller period is 2 ms; explicitly
+configure `quadruped_settings.controller_period_s` for a different experiment.
+The old quadruped manifests/registries describe the earlier controller and are
+not qualification evidence for this revision. See
+[fixed-clock decisions](docs/decisions/Quadruped_fixed_clock.md).
+`tools/audit_quadruped_study.py <study-directory>` independently checks saved
+torque laws and contact timestamps; `tools/verify_quadruped_clock.py --output
+<new-json-path>` runs two short instrumented MJX force/hold checks. These audits
+are distinct from nominal qualification and varied-scenario performance.
+
+The measured follow-up remains **implemented_pending_validation**: an initial
+nominal pass failed subsequent repeats, including 0.125 ms; smoke admitted 5/20
+scenarios and quarantined 15. The 100-case calibration remains gated. A revoked
+qualification blocks the pilot wrapper. See the
+[measured follow-up report](docs/reviews/PDS_quadruped_refinement_completion.md)
+for unchanged tolerances, all failed configurations and the remaining blocker.
 
 Add `--resume` to a smoke/calibration command with exactly the same source,
 configuration, mode, domain and scenario count. Completed receipts are verified;

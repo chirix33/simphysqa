@@ -1,0 +1,1 @@
+{"results":[{"artifact":"repeat-0.json","controller_ticks_checked":3000,"independent_geometry_timestamps_checked":301,"max_torque_law_error_Nm":7.438494264988549e-14,"passed":true},{"artifact":"repeat-1.json","controller_ticks_checked":3000,"independent_geometry_timestamps_checked":301,"max_torque_law_error_Nm":7.438494264988549e-14,"passed":true}]}

@@ -28,7 +28,9 @@ def tether_model(length, mass, dt):
  <geom type="sphere" pos="0 0 -{length}" size="0.025" contype="0" conaffinity="0" mass="0"/>
  <site name="load" pos="0 0 -{length}"/></body></body></worldbody></mujoco>'''
 
-def quadruped_model(payload_fraction, friction, dt):
+def quadruped_model(payload_fraction, friction, dt, settings=None):
+    from .quadruped import settings as validated_settings
+    cfg = validated_settings(settings or {})
     legs = []
     for name, x, y in (("fl", .22, .14), ("fr", .22, -.14), ("rl", -.22, .14), ("rr", -.22, -.14)):
         legs.append(f'''<body name="{name}_upper" pos="{x} {y} 0"><joint name="{name}_hip" axis="0 1 0"/>
@@ -36,8 +38,8 @@ def quadruped_model(payload_fraction, friction, dt):
 <body name="{name}_lower" pos="0 0 -0.2"><joint name="{name}_knee" axis="0 1 0"/>
 <geom type="capsule" fromto="0 0 0 0 0 -0.2" size="0.02" mass="0.2" contype="0" conaffinity="0"/>
 <geom name="{name}_foot" type="sphere" pos="0 0 -0.2" size="0.03" mass="0.05" friction="{friction} 0.005 0.0001"/></body></body>''')
-    return f'''<mujoco model="phi_quadruped_v1"><compiler angle="radian"/><option timestep="{dt}" solver="CG" iterations="20" ls_iterations="10" gravity="0 0 -9.81"/>
-<default><joint damping="0.1" armature="0.01"/><geom condim="3"/></default>
+    return f'''<mujoco model="phi_quadruped_v1"><compiler angle="radian"/><option timestep="{dt}" solver="{cfg['solver']}" iterations="{cfg['iterations']}" ls_iterations="10" tolerance="{cfg['solver_tolerance']}" gravity="0 0 -9.81"/>
+<default><joint damping="0.1" armature="0.01"/><geom condim="3" solref="{cfg['contact_time_constant_s']} {cfg['contact_damping_ratio']}"/></default>
 <worldbody><geom name="ground" type="plane" size="10 10 0.1" friction="{friction} 0.005 0.0001"/>
 <body name="base" pos="0 0 {0.4*math.cos(.25)+.03}"><freejoint/><geom type="box" size="0.25 0.12 0.06" mass="4"/>
 <geom type="box" pos="0 0 0.07" size="0.1 0.08 0.01" mass="{max(4*payload_fraction, 1e-12)}" contype="0" conaffinity="0"/>

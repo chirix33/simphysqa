@@ -1,0 +1,19 @@
+{
+  "purpose": "User-requested varied pilots after fixed-clock nominal qualification",
+  "current_status": "gated_after_nominal_replay_and_finer_refinement_failures",
+  "calibration_scenarios_actually_simulated": 0,
+  "parallel_calibration_qualified": false,
+  "finer_nominal_check": {"timestep_s": 0.000125, "maximum_runs": 2, "maximum_wall_seconds": 600, "outcome": "failed_original_label_tolerances"},
+  "nominal_study": "dataset-runs/quadruped-fixed-clock-study",
+  "pilot_config": "configs/dataset_quadruped_fixed_clock_pilot.json",
+  "output": "dataset-runs/quadruped-qualified-pilots",
+  "smoke_scenarios": 20,
+  "calibration_scenarios": 100,
+  "max_wall_seconds_per_invocation": 3600,
+  "maximum_smoke_invocations": 1,
+  "maximum_calibration_invocations": 2,
+  "resume_policy": "Only an exact source/config identity; completed accepted and rejected receipts are retained and never resampled. Second calibration invocation only if the first reaches its wall budget.",
+  "pilot_disk_gib": 20,
+  "minimum_free_disk_gib": 200,
+  "production_generation_enabled": false
+}

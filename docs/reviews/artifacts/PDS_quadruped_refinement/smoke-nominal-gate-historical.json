@@ -1,0 +1,1 @@
+{"criterion":"At least one ID periodic-controller refinement pair advances >=0.2m in 3s without fall in both runs and passes numerical agreement; every exported scenario also passes its own gates. Perturbation failures remain valid labels.","qualified":true,"release_requires_further_calibration":true}

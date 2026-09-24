@@ -1,0 +1,27 @@
+Failed to import warp: No module named 'warp'
+Failed to import mujoco_warp: No module named 'warp'
+baseline 0.001 0.8081907132176268 False
+baseline 0.0005 0.870445601609192 True
+baseline 0.00025 0.866987708689121 True
+solver_newton 0.001 0.7011002109825702 False
+solver_newton 0.0005 0.8449372161276163 True
+solver_newton 0.00025 0.8610504031294756 True
+solver_iterations_100 0.001 1.0404254969592341 True
+solver_iterations_100 0.0005 0.8445291405891575 True
+solver_iterations_100 0.00025 0.8711410580055483 True
+contact_time_004 0.001 0.4815337276308244 False
+contact_time_004 0.0005 0.41905566776117 False
+contact_time_004 0.00025 0.39378692912606084 False
+contact_time_001 0.001 1.0100448932663477 True
+contact_time_001 0.0005 0.9995930637965527 True
+contact_time_001 0.00025 0.9480359666544674 True
+contact_damping_2 0.001 0.8413143020327656 True
+contact_damping_2 0.0005 0.8574194643644404 True
+contact_damping_2 0.00025 0.8721590127480416 True
+hip_amplitude_02 0.001 0.20808123357833663 False
+hip_amplitude_02 0.0005 0.20850685586224063 False
+hip_amplitude_02 0.00025 0.20676824137743638 False
+gait_kd_4 0.001 1.088652169189116 True
+gait_kd_4 0.0005 1.1077719126507943 True
+gait_kd_4 0.00025 1.1050037214446997 True
+Study completed nominal qualification: hip_amplitude_02
