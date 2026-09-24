@@ -12,6 +12,13 @@
 
 Prepared 24 September 2026; updated after the user confirmed the numeric-plus-answer-embedding objective. Status: design contract and provisional pilot configuration, not a completed dataset. No simulations, GPU checks, or training were run while preparing this package. No project source code was changed.
 
+Release preparation amendment: the budget is **6,800 attempted base scenarios**.
+Preserve all attempted draws and quarantine failures; do not resample to fill
+quotas. Actual admitted counts must be reported separately. CC BY 4.0 dataset/assets
+and MIT generation-code notices are prepared but not granted until the exact
+rights-holder and authority are confirmed; see `LICENSE.md`. The configuration
+is frozen for review and production remains disabled.
+
 ## 1. Scope and authority
 
 The user's decisions in this session supersede the older domain list in the 22 September decision ledger:

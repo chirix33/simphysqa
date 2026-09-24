@@ -1,4 +1,9 @@
-Current release status: **disabled, pending four-domain review**. See
+Prepared licensing and release freeze: see [license scope/status](LICENSE.md)
+and [final preparation report](docs/reviews/PDS_release_preparation_completion.md).
+CC BY 4.0 dataset/assets and MIT code remain pending rights-holder/authority
+confirmation. The 6,800-attempt configuration is frozen but disabled.
+
+Current release status: **disabled, pending rights-holder and licensing authority**. See
 [the four-domain completion report](docs/reviews/PDS_four_domain_completion.md).
 `configs/dataset_release_four_domain.json` selects only arm, driving, objects and
 tether, with their existing calibrated timesteps. Its planned total is 6,800 base
@@ -144,10 +149,11 @@ CoConuT/CODI solution traces.
 The explicit future release command is:
 
 ```bash
-phi-dataset generate --config configs/frozen-release.json --resume
+phi-dataset generate --config configs/dataset_release_four_domain.json --resume
 ```
 
-There is deliberately no enabled `frozen-release.json` yet. It must specify
+The prepared `dataset_release_four_domain.json` is frozen and deliberately disabled.
+Activation requires finalized license evidence and refreshed freeze verification, plus
 `status: frozen`, `final_generation_enabled: true`, `release_output`, all four
 `validated_domain_manifests`, and four development-frozen `numeric_registries`.
 Source and config must be committed; manifests must include passed calibration

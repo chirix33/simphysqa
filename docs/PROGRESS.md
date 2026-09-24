@@ -1,5 +1,11 @@
 # Implementation progress
 
+Release preparation, 24 September 2026: CC BY 4.0 dataset/asset and MIT code
+licenses prepared with explicit file scope; rights-holder name and authority
+remain pending. Frozen source `f70ee987abea09607260f34407f8b841753fb70d`; 6,800
+attempted draws, no resampling, production disabled. 74 offline tests passed.
+See [preparation report](reviews/PDS_release_preparation_completion.md).
+
 Four-domain scope amendment, 24 September 2026: quadruped/MJX deferred; current
 configuration failed unchanged qualification thresholds. Investigation preserved
 in commit `3fcbf8f32d6d0732c11016b67ad5b0f460f68f58`. Release selection now includes
