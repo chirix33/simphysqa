@@ -22,7 +22,7 @@ def main():
     parser.add_argument("--output",type=Path,required=True)
     args=parser.parse_args()
     if args.output.exists(): raise ValueError("audit output already exists")
-    cfg=read(ROOT/"pilot_config.json")
+    cfg=read(ROOT/"configs/dataset_quadruped_development.json")
     cfg["quadruped_settings"]={"controller_period_s":.001}
     cfg["time"]["quadruped_target_times_s"]=[.12]
     s=replace(sample(cfg,"quadruped_locomotion",0,"clock_audit"),event_start=.01)

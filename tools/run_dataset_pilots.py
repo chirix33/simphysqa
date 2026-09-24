@@ -5,7 +5,8 @@ from phi_jepa.simulation.pipeline import run
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument("--domains",nargs="+",required=True)
+    from phi_jepa.simulation.scope import RELEASE_ENGINES
+    parser.add_argument("--domains",nargs="+",choices=list(RELEASE_ENGINES),default=list(RELEASE_ENGINES))
     parser.add_argument("--resume",action="store_true")
     args=parser.parse_args()
     for domain in args.domains:

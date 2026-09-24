@@ -1,0 +1,240 @@
+{
+  "spec_version": "1.1.0",
+  "status": "release_candidate_pending_review",
+  "final_generation_enabled": false,
+  "master_seed": 20260924,
+  "reported_hardware": {
+    "gpu": "RTX 5090",
+    "vram_mib": 32607,
+    "driver": "610.60",
+    "free_storage_tb_approx": 1.89,
+    "os": null,
+    "cpu": null,
+    "ram_gib": null
+  },
+  "limits": {
+    "pilot_gpu_memory_fraction": 0.75,
+    "pilot_disk_gib": 20,
+    "proposed_release_disk_gib": 100,
+    "minimum_free_disk_gib": 200,
+    "render_all_runs": false
+  },
+  "counts": {
+    "smoke_base_scenarios_per_domain": 20,
+    "calibration_base_scenarios_per_domain": 100,
+    "proposed_release_per_domain": {
+      "train": 1000,
+      "validation": 200,
+      "test_id": 200,
+      "ood_parameter_extrapolation": 100,
+      "ood_unseen_combination": 100,
+      "ood_timed_event": 100
+    },
+    "structural_ood_enabled": false,
+    "cross_simulator_pilot_pairs": 20,
+    "questions_per_base_scenario": 2
+  },
+  "time": {
+    "default_timestep_s": 0.002,
+    "default_saved_interval_s": 0.02,
+    "default_cutoff_s": 0.2,
+    "default_target_times_s": [
+      1.0,
+      2.0
+    ],
+    "quadruped_target_times_s": [
+      1.0,
+      2.0,
+      3.0
+    ]
+  },
+  "domains": {
+    "robotic_arm": {
+      "engine": "mujoco",
+      "scene": "custom planar two-link arm",
+      "id": {
+        "payload_kg": [
+          0.0,
+          0.5
+        ],
+        "initial_joint_angles_rad": [
+          -0.4,
+          0.4
+        ],
+        "initial_joint_velocity_rad_s": [
+          -0.2,
+          0.2
+        ],
+        "joint_torque_Nm": [
+          -1.0,
+          1.0
+        ]
+      },
+      "parameter_ood": {
+        "payload_kg": [
+          0.6,
+          0.8
+        ]
+      },
+      "event_id_time_s": [
+        0.4,
+        0.6
+      ],
+      "event_ood_time_s": [
+        0.8,
+        1.0
+      ],
+      "event": "0.1 s torque pulse, magnitude 0.5 N*m"
+    },
+    "driving": {
+      "engine": "pybullet",
+      "scene": "four-wheel vehicle on level plane; prescribed wheel brake torque",
+      "id": {
+        "initial_forward_speed_m_s": [
+          1.0,
+          3.0
+        ],
+        "lateral_friction_coefficient": [
+          0.5,
+          0.9
+        ],
+        "mass_multiplier": [
+          0.9,
+          1.1
+        ]
+      },
+      "parameter_ood": {
+        "lateral_friction_coefficient": [
+          0.2,
+          0.35
+        ]
+      },
+      "event_id_time_s": [
+        0.4,
+        0.6
+      ],
+      "event_ood_time_s": [
+        0.8,
+        1.0
+      ],
+      "event": "braking starts; brake opposes wheel motion and cannot propel vehicle backward"
+    },
+    "object_pushing_stacking": {
+      "engine": "pybullet",
+      "scene": "two blocks; pushing and pre-stacked subfamilies",
+      "id": {
+        "block_mass_kg": [
+          0.2,
+          0.6
+        ],
+        "contact_friction_coefficient": [
+          0.4,
+          0.8
+        ],
+        "push_force_N": [
+          0.5,
+          2.0
+        ]
+      },
+      "parameter_ood": {
+        "block_mass_kg": [
+          0.8,
+          1.0
+        ]
+      },
+      "event_id_time_s": [
+        0.4,
+        0.6
+      ],
+      "event_ood_time_s": [
+        0.8,
+        1.0
+      ],
+      "event": "0.1 s horizontal push at published application point"
+    },
+    "tethered_load": {
+      "engine": "mujoco",
+      "scene": "point suspension on prescribed moving support; fixed-length taut pendulum cable approximation",
+      "id": {
+        "cable_length_m": [
+          0.5,
+          1.0
+        ],
+        "load_mass_kg": [
+          0.5,
+          1.5
+        ],
+        "initial_swing_angle_rad": [
+          -0.2,
+          0.2
+        ],
+        "support_acceleration_m_s2": [
+          0.2,
+          0.6
+        ]
+      },
+      "parameter_ood": {
+        "cable_length_m": [
+          1.2,
+          1.5
+        ]
+      },
+      "event_id_time_s": [
+        0.4,
+        0.6
+      ],
+      "event_ood_time_s": [
+        0.8,
+        1.0
+      ],
+      "event": "support braking pulse; entire support motion profile is provided"
+    }
+  },
+  "model_data_contract": {
+    "revision": "1.1.0",
+    "numeric_registry": "fixed_per_domain",
+    "numeric_source_root": "must_be_pinned_per_adapter",
+    "flattening_sources": [
+      "public_simulator_json",
+      "llm_extracted_json"
+    ],
+    "input_text_fields": [
+      "question",
+      "public_context"
+    ],
+    "target_text_fields": [
+      "question",
+      "public_context",
+      "reference_answer"
+    ],
+    "embedding_mode": "one_embedding_per_combined_text",
+    "embedding_model": null,
+    "embedding_frozen": true,
+    "numeric_target": "exact_copy_of_input_numeric_vector",
+    "loss": "terminal_mse_all_concatenated_coordinates",
+    "numeric_loss_scaling": "raw_no_unapproved_normalization",
+    "dynamics_update": "state_dependent_neural_vector_field",
+    "ode_time_interpretation": "reasoning_integration_time_distinct_from_physical_time",
+    "future_simulator_states_role": "reference_answer_and_independent_evaluation",
+    "answer_decoder_status": "model_integration_dependency"
+  },
+  "release_output": "dataset-runs/release-four-domain-v1",
+  "validated_domain_manifests": {
+    "robotic_arm": "configs/dataset_domains/robotic_arm.json",
+    "driving": "configs/dataset_domains/driving.json",
+    "object_pushing_stacking": "configs/dataset_domains/object_pushing_stacking.json",
+    "tethered_load": "configs/dataset_domains/tethered_load.json"
+  },
+  "numeric_registries": {
+    "robotic_arm": "configs/dataset_registries/robotic_arm.json",
+    "driving": "configs/dataset_registries/driving.json",
+    "object_pushing_stacking": "configs/dataset_registries/object_pushing_stacking.json",
+    "tethered_load": "configs/dataset_registries/tethered_load.json"
+  },
+  "integration_timesteps_s": {
+    "robotic_arm": 0.0001,
+    "driving": 0.0001,
+    "object_pushing_stacking": 0.002,
+    "tethered_load": 0.002
+  }
+}

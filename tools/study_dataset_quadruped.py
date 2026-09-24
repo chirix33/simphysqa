@@ -23,7 +23,7 @@ def main():
     parser.add_argument("--baseline-only",action="store_true")
     args=parser.parse_args()
     plan=read(args.study)
-    base=read(ROOT/"pilot_config.json")
+    base=read(ROOT/"configs/dataset_quadruped_development.json")
     base["quadruped_settings"]={"controller_period_s":plan["controller_period_s"]}
     base["quadruped_trace_interval_s"]=plan["trace_interval_s"]
     scenario=replace(sample(base,"quadruped_locomotion",0,"nominal_qualification"),event_start=plan["event_start_s"],parameters=plan["nominal_parameters"])

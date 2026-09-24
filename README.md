@@ -1,3 +1,12 @@
+Current release status: **disabled, pending four-domain review**. See
+[the four-domain completion report](docs/reviews/PDS_four_domain_completion.md).
+`configs/dataset_release_four_domain.json` selects only arm, driving, objects and
+tether, with their existing calibrated timesteps. Its planned total is 6,800 base
+scenarios; production generated/admitted counts are both zero. Quadruped/MJX
+commands below are preserved development documentation, not next steps.
+Explicit adapter access uses `--config configs/dataset_quadruped_development.json`;
+no further quadruped runs are authorized in the current task.
+
 # Φ-JEPA dataset design package — revision 1.1.0
 
 Start with MODEL_DATA_CONTRACT.md and SPECIFICATION.md, then give CODEX_PROMPT.md and this package to Codex in the Φ-JEPA repository.
@@ -21,7 +30,7 @@ To validate a public record or numbered bundle with the same schema, replace its
 
 JSON Schema verifies structure. The semantic and production-admission gates in SPECIFICATION.md remain required. The examples deliberately have record_origin=illustrative_only and incomplete runtime provenance; they must never enter a real benchmark.
 
-Confirmed scope: five domains, no slosh/fluid, MuJoCo/PyBullet/MJX with one primary engine per domain, future prediction, and private reference outcomes. Concrete simulation settings remain pilot defaults. No simulator or GPU execution was performed for this design package.
+Current first-release scope: four domains (arm, driving, objects, tether), no slosh/fluid, MuJoCo/PyBullet with MJX deferred and one primary engine per domain, future prediction, and private reference outcomes. Concrete simulation settings remain pilot defaults. No simulator or GPU execution was performed for this design package.
 
 ## Implemented dataset generator
 
@@ -139,8 +148,8 @@ phi-dataset generate --config configs/frozen-release.json --resume
 ```
 
 There is deliberately no enabled `frozen-release.json` yet. It must specify
-`status: frozen`, `final_generation_enabled: true`, `release_output`, all five
-`validated_domain_manifests`, and five development-frozen `numeric_registries`.
+`status: frozen`, `final_generation_enabled: true`, `release_output`, all four
+`validated_domain_manifests`, and four development-frozen `numeric_registries`.
 Source and config must be committed; manifests must include passed calibration
 and physical checks, cleared gates and granted asset licensing. The command
 checks these before dispatching configured train/validation/ID/OOD partitions.

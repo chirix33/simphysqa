@@ -1,5 +1,13 @@
 # Implementation progress
 
+Four-domain scope amendment, 24 September 2026: quadruped/MJX deferred; current
+configuration failed unchanged qualification thresholds. Investigation preserved
+in commit `3fcbf8f32d6d0732c11016b67ad5b0f460f68f58`. Release selection now includes
+only arm, driving, objects and corrected tether. Planned total 6,800; production
+generated/admitted 0. Production remains disabled. See
+[readiness review](reviews/PDS_four_domain_completion.md). Earlier entries below
+are historical and their five-domain release blocker is superseded.
+
 Updated from P00/P01 and the separately authorized dataset preparation task.
 P02–P08 remain plans, not completed model code. The newer dataset/model contract
 1.1.0 supersedes older physical-readout training assumptions for future work.

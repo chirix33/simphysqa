@@ -97,6 +97,16 @@ def budget(c,path):
 
 def run(config,domain,count,output,mode="smoke",resume=False,engine=None,split="development",release_shift=None):
     config=copy.deepcopy(config)
+    if domain in config.get("integration_timesteps_s",{}):
+        config["time"]["default_timestep_s"]=config["integration_timesteps_s"][domain]
+    if mode=="release":
+        from .scope import check_release_scope, RELEASE_ENGINES
+        check_release_scope(config)
+        if domain not in RELEASE_ENGINES: raise ValueError("domain excluded from first release")
+        if engine is not None and engine!=RELEASE_ENGINES[domain]: raise ValueError("release engine override forbidden")
+        if split not in ("train","validation","test_id","test_ood"): raise ValueError("release requires a release split")
+    elif split!="development":
+        raise ValueError("development runs cannot write release splits")
     if "sampling" not in config: config["sampling"]=read(ROOT/"configs/dataset_sampling.json")
     check_config(config)
     if domain not in config["domains"]: raise ValueError("unknown domain")

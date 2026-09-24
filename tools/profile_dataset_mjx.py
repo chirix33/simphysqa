@@ -11,7 +11,7 @@ from phi_jepa.simulation.scenes import quadruped_model,gait
 from phi_jepa.simulation.common import ROOT,read,write
 
 def main():
-    config=read(ROOT/"pilot_config.json")
+    config=read(ROOT/"configs/dataset_quadruped_development.json")
     model=mujoco.MjModel.from_xml_string(quadruped_model(0,.8,.002))
     data=mujoco.MjData(model); data.qpos[7:]=gait(0,1)[0]; mujoco.mj_forward(model,data)
     mm=mjx.put_model(model,impl="jax"); dd=mjx.put_data(model,data,impl="jax")

@@ -1,14 +1,24 @@
 # Φ-JEPA simulation dataset specification — design revision 1.1.0
 
+> Release amendment, 24 September 2026: the first release includes robotic arm
+> (MuJoCo), driving (PyBullet), object pushing/stacking (PyBullet), and tethered
+> load (MuJoCo). Quadruped locomotion and further MJX qualification are deferred.
+> The retained current quadruped configuration failed unchanged numerical gates;
+> this is not a claim that MJX generally cannot support locomotion. Historical
+> quadruped records, including five admitted smoke groups, are development only.
+> No further quadruped experiments, production generation, or training are authorized
+> in this scope update. See docs/reviews/PDS_four_domain_completion.md.
+
+
 Prepared 24 September 2026; updated after the user confirmed the numeric-plus-answer-embedding objective. Status: design contract and provisional pilot configuration, not a completed dataset. No simulations, GPU checks, or training were run while preparing this package. No project source code was changed.
 
 ## 1. Scope and authority
 
 The user's decisions in this session supersede the older domain list in the 22 September decision ledger:
 
-- Five domains: robotic arm, driving, object pushing/stacking, quadruped locomotion, and tethered load/swinging payload.
+- Four release domains: robotic arm, driving, object pushing/stacking, and tethered load/swinging payload. Quadruped requirements below are retained for deferred development only.
 - Liquid slosh and its former mechanical proxy are excluded.
-- Selected engines: MuJoCo, PyBullet, and MJX; one primary engine per domain, with selected matched cross-simulator studies.
+- Release engines: MuJoCo and PyBullet; MJX is deferred; one primary engine per domain, with selected matched cross-simulator studies.
 - Future-state prediction is the primary task. Future event prediction is secondary. Observed-outcome counting and counterfactual questions are outside this first release.
 - Keep the requested readable fields: global_context, question, states, explanation, label. Place inputs and reference outputs in distinct objects and exports.
 - User-reported workstation: RTX 5090, 32,607 MiB VRAM, driver 610.60, approximately 1.89 TB free storage. OS, CPU, RAM, and actual runtime compatibility remain unmeasured.
@@ -67,7 +77,7 @@ Create one manifest per domain with every fixed model parameter, every sampled p
 | Robotic arm | MuJoCo native | Custom planar two-link arm; model dimensions and inertias pinned; commanded joint torques, optional attached payload | Joint angles and angular velocities at T; end-effector position at T | Joint-limit contact by T |
 | Driving | PyBullet | Four-wheel vehicle on a flat surface, low-speed straight braking, explicit wheel geometry and control | Forward position and speed at T | Stopped by T; stop time when observed |
 | Object pushing/stacking | PyBullet | Two rigid blocks on a table, with distinct pushing and pre-stacked subfamilies | Each block's position and orientation at T | Support lost, object left table, or stable stack at T |
-| Quadruped locomotion | MJX-JAX provisional | One pinned quadruped on level ground; fully specified periodic reference and PD control | Base position, velocity, roll and pitch at T | Fall by T; sustained locomotion criterion |
+| Quadruped locomotion (deferred, excluded from release) | MJX-JAX development only | One pinned quadruped on level ground; fully specified periodic reference and PD control | Base position, velocity, roll and pitch at T | Fall by T; sustained locomotion criterion |
 | Tethered load | MuJoCo native | Moving support with one load; fixed-length taut suspension approximation | Load position, swing angle and angular velocity at T | Crossing a declared spatial boundary |
 
 Robotic-arm pilot is implemented and checked first. Then add other domains using the same contract. Pushing/stacking contains two explicit task subfamilies; report their coverage separately.
@@ -163,21 +173,21 @@ Reserve evaluation families before generating any final cross-simulator set; no 
 
 Progression: arm smoke run of 20 base scenarios -> arm calibration and validation -> other domain smoke runs -> calibration of each -> frozen manifests -> release generation. Smoke and calibration records use development split and do not measure generalization.
 
-Smoke: 20 base scenarios/domain (10 nominal, 4 parameter shift, 3 combination shift, 3 event shift), at most two questions per scenario. All five domains total 100 scenarios, up to 200 questions. This is a software/physics check, not a statistical comparison.
+Smoke: 20 base scenarios/domain (10 nominal, 4 parameter shift, 3 combination shift, 3 event shift), at most two questions per scenario. All four release domains total 80 scenarios, up to 160 questions. This is a software/physics check, not a statistical comparison.
 
 Calibration: 100 fresh development scenarios/domain, including nominal and each shift family. Suggested allocation 40/20/20/20. Measure labels, input lengths, rejection rates, wall time, disk growth and numerical agreement.
 
-Proposed first release, disabled by default: per domain 1,000 train + 200 validation + 200 ID test + 100 parameter OOD + 100 combination OOD + 100 event OOD = 1,700 independent base scenarios. Across five domains: 8,500 base scenarios and up to 17,000 questions. These counts are adjustable after pilot profiling; no claim of statistical sufficiency is attached.
+Proposed first release, disabled by default: per domain 1,000 train + 200 validation + 200 ID test + 100 parameter OOD + 100 combination OOD + 100 event OOD = 1,700 independent base scenarios. Across four domains: 6,800 planned base scenarios and up to 13,600 questions. Split totals: 4,000 train, 800 validation, 800 ID test, and 400 per OOD category. Calibration totals 400 planned development scenarios. Quadruped quota is removed without redistribution. Planned counts are not generated or admitted counts; no claim of statistical sufficiency is attached.
 
-Headless generation; do not render every rollout. Stream shards and avoid retaining all trajectories in GPU RAM. CPU workers depend on measured CPU/RAM, which are not yet known. Profile MJX batches 1, 8, 32, 64 and choose from measurements, reserving memory headroom; initial cap 75% of reported VRAM. Budget 20 GiB pilot output, 100 GiB proposed initial release, and retain at least 200 GiB free disk. These are conservative run limits, not predicted consumption.
+Headless generation; do not render every rollout. Stream shards and avoid retaining all trajectories in GPU RAM. CPU workers depend on measured CPU/RAM, which are not yet known. For deferred MJX development only, retain the historical batch profiles 1, 8, 32, 64; further profiling is deferred, reserving memory headroom; initial cap 75% of reported VRAM. Budget 20 GiB pilot output, 100 GiB proposed initial release, and retain at least 200 GiB free disk. These are conservative run limits, not predicted consumption.
 
-Detect OS/Python/CPU/RAM/driver/GPU in Codex's actual execution environment, then pin compatible packages after a real MJX device-step smoke test. Do not assert that the reported driver guarantees compatibility. Record compilation separately from steady-state runtime. Verify deterministic-seed replay within declared tolerances; do not promise bitwise equality across platforms or engines.
+Detect OS/Python/CPU/RAM/driver/GPU in Codex's actual execution environment, then pin compatible native MuJoCo/PyBullet packages. MJX device-step qualification is deferred. Do not assert that the reported driver guarantees compatibility. Record compilation separately from steady-state runtime. Verify deterministic-seed replay within declared tolerances; do not promise bitwise equality across platforms or engines.
 
 Final generation requires a frozen manifest, successful pilot report, explicit release command, and final_generation_enabled=true in a committed config. This is a reproducibility gate, not a recurring request for permission. A failed gate blocks only the dependent generation and explains the concrete failure.
 
 ## 12. What is sealed and what the pilot freezes
 
-Settled: five-domain scope, no fluid simulation, three-engine strategy, future prediction, readable JSON, private labels, grouped splits and no source implementation in this document session.
+Settled: four-domain first release, no fluid simulation, MuJoCo/PyBullet release engines with MJX deferred, future prediction, readable JSON, private labels, grouped splits and no source implementation in this document session.
 
 Specified here for Codex implementation: JSON contract v1.0.0 plus model–dataset contract revision 1.1.0, proposed engine mapping, scenes, export layout, pilot workflow, provisional parameter ranges, time grids, label rules, OOD definitions and resource limits.
 

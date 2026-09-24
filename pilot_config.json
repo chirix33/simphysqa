@@ -17,12 +17,6 @@
     "pilot_disk_gib": 20,
     "proposed_release_disk_gib": 100,
     "minimum_free_disk_gib": 200,
-    "mjx_batch_candidates": [
-      1,
-      8,
-      32,
-      64
-    ],
     "render_all_runs": false
   },
   "counts": {
@@ -157,41 +151,6 @@
         1.0
       ],
       "event": "0.1 s horizontal push at published application point"
-    },
-    "quadruped_locomotion": {
-      "engine": "mjx",
-      "implementation": "jax",
-      "scene": "one pinned quadruped model on level plane",
-      "id": {
-        "body_payload_fraction": [
-          0.0,
-          0.1
-        ],
-        "contact_friction_coefficient": [
-          0.6,
-          1.0
-        ],
-        "joint_reference_frequency_hz": [
-          0.8,
-          1.2
-        ]
-      },
-      "parameter_ood": {
-        "body_payload_fraction": [
-          0.15,
-          0.2
-        ]
-      },
-      "event_id_time_s": [
-        0.6,
-        0.8
-      ],
-      "event_ood_time_s": [
-        1.2,
-        1.4
-      ],
-      "event": "0.1 s lateral force pulse of magnitude 0.05*total_mass*gravity",
-      "controller": "fully specified periodic joint reference and PD torque law; pilot must establish locomotion"
     },
     "tethered_load": {
       "engine": "mujoco",
