@@ -64,5 +64,14 @@ class FreezeTests(unittest.TestCase):
                 verify_license(config)
 
 
+    def test_confirmed_scoped_grant_passes_without_enabling_generation(self):
+        config = dict(licensing_decision="unused", domains={"robotic_arm": {}}, asset_license="CC-BY-4.0", final_generation_enabled=False)
+        decision = dict(status="granted", grantor="Kaushik Roy", authority_confirmed=True,
+                        authorization_evidence="User confirmation in coding session", license="CC-BY-4.0", code_license="MIT", domains=["robotic_arm"])
+        with patch("phi_jepa.simulation.freeze.read", return_value=decision):
+            verify_license(config)
+        self.assertFalse(config["final_generation_enabled"])
+
+
 if __name__ == "__main__":
     unittest.main()

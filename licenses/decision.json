@@ -1,14 +1,24 @@
 {
-  "status": "pending_rights_holder_authority",
-  "grantor": null,
-  "authority_confirmed": false,
-  "authorization_evidence": null,
+  "status": "granted",
+  "grantor": "Kaushik Roy",
+  "authority_confirmed": true,
+  "authorization_evidence": {
+    "source": "Explicit user confirmation in this coding session",
+    "date": "2026-09-24",
+    "user_message": "rights-holder: Kaushik Roy.\nauthority: yes",
+    "scope": "Response to the question confirming CC BY 4.0 for dataset/assets and MIT for generation code, including applicable co-owner or institutional rights."
+  },
   "license": "CC-BY-4.0",
   "code_license": "MIT",
-  "domains": ["robotic_arm", "driving", "object_pushing_stacking", "tethered_load"],
+  "domains": [
+    "robotic_arm",
+    "driving",
+    "object_pushing_stacking",
+    "tethered_load"
+  ],
   "user_selection": "CC BY 4.0 for the dataset and project-authored scene/model assets; MIT for project-authored generation code.",
-  "clarification": "Creative Comments was clarified to mean the Creative Commons license, not a rights-holder name. No authority confirmation was supplied.",
-  "public_redistribution": "pending_ownership_and_authority",
+  "clarification": "The subsequent explicit confirmation supplies the rights-holder name and authority previously missing.",
+  "public_redistribution": "scoped_CC_BY_4_0_and_MIT_grants_confirmed; no publication performed",
   "internal_generation": "no_concrete_scene_asset_restriction_identified; existing project redistribution-before-generation gate retained",
   "production_generation_enabled": false
 }

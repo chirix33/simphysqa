@@ -1,9 +1,9 @@
-Prepared licensing and release freeze: see [license scope/status](LICENSE.md)
+Finalized licensing and release freeze: see [license scope/status](LICENSE.md)
 and [final preparation report](docs/reviews/PDS_release_preparation_completion.md).
-CC BY 4.0 dataset/assets and MIT code remain pending rights-holder/authority
-confirmation. The 6,800-attempt configuration is frozen but disabled.
+Rights-holder Kaushik Roy and licensing authority are confirmed for the scoped
+CC BY 4.0 dataset/assets and MIT code. The 6,800-attempt configuration stays disabled.
 
-Current release status: **disabled, pending rights-holder and licensing authority**. See
+Current release status: **licenses finalized; generation remains disabled**. See
 [the four-domain completion report](docs/reviews/PDS_four_domain_completion.md).
 `configs/dataset_release_four_domain.json` selects only arm, driving, objects and
 tether, with their existing calibrated timesteps. Its planned total is 6,800 base

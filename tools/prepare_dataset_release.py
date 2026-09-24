@@ -9,7 +9,7 @@ import shutil
 import subprocess
 from phi_jepa.artifacts import code_provenance, digest
 from phi_jepa.simulation.common import ROOT, read, write
-from phi_jepa.simulation.freeze import contract, verify_freeze, source_identity
+from phi_jepa.simulation.freeze import contract, verify_freeze, source_identity, verify_license
 from phi_jepa.simulation.sampling import sample
 from phi_jepa.simulation.scope import RELEASE_ENGINES
 
@@ -40,6 +40,10 @@ def hashed(path):
 
 
 def inventory():
+    decision = read(ROOT / "licenses/decision.json")
+    granted = decision["status"] == "granted"
+    if granted:
+        verify_license(dict(licensing_decision="licenses/decision.json", domains=RELEASE_ENGINES, asset_license=decision["license"]))
     entries = []; measurements = []; families = []
     descriptions = {
         "robotic_arm": ("src/phi_jepa/simulation/scenes.py:arm_model", "MJCF: two box links, hinge joints, finite spherical payload, tip site; authored inertias and control law"),
@@ -50,8 +54,8 @@ def inventory():
     for domain in RELEASE_ENGINES:
         source, description = descriptions[domain]
         families.append(dict(domain=domain, origin="project_authored_procedural", source=source,
-            description=description, ownership="unconfirmed; Git provenance is not an ownership grant",
-            existing_project_license="none found", proposed_license="CC-BY-4.0", grant_status="not_granted",
+            description=description, ownership=decision["grantor"] if granted else "unconfirmed; Git provenance is not an ownership grant",
+            existing_project_license=decision["license"] if granted else "none found", proposed_license="CC-BY-4.0", grant_status="granted" if granted else "not_granted",
             redistribution="intended: model files and descriptions embedded in public records; not published yet"))
         for mode in ("smoke", "calibrate"):
             folder = "corrected-" + mode if domain == "tethered_load" else mode
@@ -97,7 +101,7 @@ def inventory():
     code += ["src/phi_jepa/__init__.py", "src/phi_jepa/artifacts.py", "src/phi_jepa/validation.py", "pyproject.toml"]
     code += ["tools/" + name for name in ("prepare_dataset_release.py", "review_four_domain_release.py", "check_four_domain_solvers.py", "run_dataset_pilots.py", "collect_dataset_evidence.py")]
     code += ["tests/" + name for name in ("test_simulation.py", "test_simulation_bullet.py", "test_release_scope.py", "test_release_freeze.py")]
-    write(ROOT / "licenses/scope.json", dict(status="prepared_not_granted", mit_files=sorted(code),
+    write(ROOT / "licenses/scope.json", dict(status="granted" if granted else "prepared_not_granted", grantor=decision["grantor"], authorization_evidence="licenses/decision.json", mit_files=sorted(code),
         cc_by_files=["dataset.schema.json", "configs/dataset_sampling.json", "configs/dataset_release_four_domain.json", "configs/dataset_release_freeze.json"] +
             [f"configs/dataset_registries/{d}{suffix}.json" for d in RELEASE_ENGINES for suffix in ("", ".extracted")] +
             [f"configs/frozen_dataset_domains/{d}.json" for d in RELEASE_ENGINES],
@@ -130,11 +134,21 @@ def freeze():
         attempt_policy=dict(total_attempted_base_scenarios=6800, per_domain=1700, resample_to_fill_quotas=False,
                             failures="preserve attempted draws, quarantine failures, report admitted counts separately"))
     config["limits"].update(max_run_wall_seconds=7200, max_generation_wall_seconds=21600)
+    decision = read(ROOT / config["licensing_decision"])
+    granted = decision["status"] == "granted"
+    if granted:
+        config["asset_license"] = decision["license"]
+        config["code_license"] = decision["code_license"]
+        verify_license(config)
+    else:
+        config.pop("asset_license", None)
+        config.pop("code_license", None)
     plans = []
     for domain in RELEASE_ENGINES:
         old = read(ROOT / f"configs/dataset_domains/{domain}.json")
-        old.update(status="validation_frozen_license_pending", asset_license_status="not_granted",
-            unmet_release_gates=["rights-holder identity and authority for CC BY 4.0 assets and MIT generation code"],
+        old.update(status="validated_frozen" if granted else "validation_frozen_license_pending", asset_license_status="granted" if granted else "not_granted",
+            asset_license=decision["license"] if granted else None, rights_holder=decision["grantor"] if granted else None,
+            unmet_release_gates=[] if granted else ["rights-holder identity and authority for CC BY 4.0 assets and MIT generation code"],
             generator_source_revision=source["git_commit"], generator_source_sha256=source["source_sha256"],
             asset_inventory="docs/reviews/artifacts/PDS_release_preparation/asset-inventory.json",
             planned_attempts=1700, production_generated=0, production_admitted=0,
@@ -171,7 +185,7 @@ def freeze():
         files={p.relative_to(ROOT).as_posix(): hashed(p) for p in files if p.is_file()},
         runtime_packages={n: metadata.version(n) for n in ("mujoco", "pybullet", "numpy", "jsonschema", "psutil")},
         reviewed_evidence_commit="22aacf8", review="docs/reviews/PDS_four_domain_completion.md",
-        preparation_note="Settings frozen; ownership/authority pending. 6800 attempted draws, no resampling. No simulations performed by freeze.")
+        preparation_note=("Scoped license grants confirmed; production disabled. " if granted else "Ownership/authority pending. ") + "6800 attempted draws, no resampling. No simulations performed by freeze.")
     path = ROOT / "configs/dataset_release_freeze.json"; write(path, frozen)
     config["experiment_freeze"] = dict(path=path.relative_to(ROOT).as_posix(), sha256=hashed(path))
     write(ROOT / "configs/dataset_release_four_domain.json", config)

@@ -1,19 +1,19 @@
-# Prepared attribution — pending rights-holder and authority
+# Dataset attribution
 
 Title: **Phi-JEPA Four-Domain Research Dataset**
 
-Prepared copyright notice: Copyright (c) 2026 **[RIGHTS_HOLDER_PENDING]**.
+Copyright notice: Copyright (c) 2026 **Kaushik Roy**.
 
-Intended dataset/model-asset license: Creative Commons Attribution 4.0
+Dataset/model-asset license: Creative Commons Attribution 4.0
 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/ .
-This is a proposed notice, not an effective grant until authorization is recorded.
+The rights-holder name and authority were confirmed by the user; see decision.json.
 
 Source and reproducible generator: https://github.com/chirix33/phi-jepa
 (repository reference; no public dataset URL or DOI has been assigned).
 
-Prepared attribution wording once authorized:
+Suggested attribution wording:
 
-“Phi-JEPA Four-Domain Research Dataset, [RIGHTS_HOLDER_PENDING], 2026,
+“Phi-JEPA Four-Domain Research Dataset, Kaushik Roy, 2026,
 CC BY 4.0. Source: https://github.com/chirix33/phi-jepa . Release version and
 source revision: see the accompanying release manifest. Changes: [describe any
 modifications, or state unmodified].”

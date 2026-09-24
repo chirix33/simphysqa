@@ -1,5 +1,11 @@
 # Implementation progress
 
+License finalization, 24 September 2026: user confirmed rights-holder Kaushik Roy
+and authority for the scoped CC BY 4.0 dataset/assets and MIT generation code.
+Notices and frozen legal metadata finalized; production remains disabled.
+See [authorization decision](decisions/License_authorization.md). Earlier pending
+licensing entries below describe the historical preparation state.
+
 Release preparation, 24 September 2026: CC BY 4.0 dataset/asset and MIT code
 licenses prepared with explicit file scope; rights-holder name and authority
 remain pending. Frozen source `f70ee987abea09607260f34407f8b841753fb70d`; 6,800

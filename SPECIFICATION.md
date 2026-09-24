@@ -15,8 +15,8 @@ Prepared 24 September 2026; updated after the user confirmed the numeric-plus-an
 Release preparation amendment: the budget is **6,800 attempted base scenarios**.
 Preserve all attempted draws and quarantine failures; do not resample to fill
 quotas. Actual admitted counts must be reported separately. CC BY 4.0 dataset/assets
-and MIT generation-code notices are prepared but not granted until the exact
-rights-holder and authority are confirmed; see `LICENSE.md`. The configuration
+and MIT generation-code grants are confirmed for rights-holder Kaushik Roy;
+see `LICENSE.md` for exact coverage and exclusions. The configuration
 is frozen for review and production remains disabled.
 
 ## 1. Scope and authority

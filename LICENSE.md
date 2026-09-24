@@ -1,31 +1,30 @@
-# Prepared licensing — not yet an authorized grant
+# Dataset and generation-code licensing
 
-The intended public dataset is the **Phi-JEPA Four-Domain Research Dataset**.
-The user selected CC BY 4.0 for the dataset and project-authored scene/model
-assets, and MIT for project-authored generation code. The exact rights-holder
-name and confirmation of authority are still missing. No ownership is inferred
-from Git authorship, repository access, or the phrase “Creative Commons”.
+Copyright (c) 2026 Kaushik Roy.
 
-Until `licenses/decision.json` records that confirmation, the texts below are
-prepared for review only. No project license grant is asserted by their presence.
+The user confirmed the rights-holder name and authority to grant the scoped
+licenses, including applicable co-owner or institutional rights, on 24 September
+2026. The exact confirmation is recorded in `licenses/decision.json`.
 
-- `licenses/CC-BY-4.0.txt`: unmodified standard license text, intended for the
-  generated dataset and authored MJCF/URDF/JSON model descriptions.
-- `licenses/MIT-generation.txt`: prepared MIT notice with an explicit unresolved
-  rights-holder field. Applies only to the files enumerated in `licenses/scope.json`
-  once authorized; this is not a blanket license for the repository.
-- `licenses/ATTRIBUTION.md`: dataset attribution and reuse notice template.
-- `licenses/THIRD_PARTY.md` and `licenses/third-party/`: separate original notices
-  and provenance. No third-party material is relicensed under our proposed grants.
+- The Phi-JEPA Four-Domain Research Dataset and project-authored scene/model
+  assets are licensed under **CC BY 4.0**; see `licenses/CC-BY-4.0.txt` and
+  `licenses/ATTRIBUTION.md`.
+- Project-authored generation code is licensed under **MIT**; see
+  `licenses/MIT-generation.txt`.
+- Exact file coverage and exclusions are in `licenses/scope.json`. This is not
+  a blanket license for the entire repository. Authored model definitions in
+  generator files are also offered as CC BY 4.0 assets as specified there.
+- Third-party notices and preserved adopted references retain their original
+  terms; see `licenses/THIRD_PARTY.md` and `licenses/third-party/`. They are not
+  relicensed by these grants. `MIT-template.txt` is a retained standard-text
+  reference; `MIT-generation.txt` is the applicable copyright notice.
 
-The full dataset includes inputs, private-for-evaluation references, metadata,
-and numerical labels. “Private” describes the model-evaluation boundary, not a
-promise to withhold reference files from a future public research download.
-Quarantined failures remain explicitly rejected, never admitted training examples.
-No dataset download, DOI, publication or ownership grant is claimed yet.
+The dataset scope includes inputs, references, labels, evaluator metadata and
+explicitly quarantined failures. Private-for-evaluation references remain separate
+from model inputs even when distributed publicly for research. Failed examples
+are never silently admitted as training data.
 
-Internal generation and public redistribution are distinct. Inspection found no
-third-party scene assets or concrete scene-asset restriction preventing internal
-generation. It did not establish ownership or a permission grant. The existing
-project policy gates `generate` on redistribution licensing; that policy remains
-in place. Production generation and public release are both still disabled.
+Licensing is finalized for this scope. Production generation remains disabled,
+and no dataset publication, public download URL or DOI is claimed. The license
+authorization does not launch generation, publish the repository, or extend the
+grant to excluded third-party or unrelated materials.
