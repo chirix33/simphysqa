@@ -1,0 +1,9 @@
+<mujoco model="phi_taut_pendulum_v1"><compiler angle="radian"/>
+ <option timestep="0.002" gravity="0 0 -9.81" integrator="RK4" tolerance="1e-10" iterations="100"/>
+ <worldbody><body name="support" mocap="true" pos="0 0 2"/>
+ <body name="pivot" pos="0 0 2"><joint name="support_x" type="slide" axis="1 0 0" damping="0"/>
+ <inertial pos="0 0 0" mass="0.1" diaginertia="0.001 0.001 0.001"/>
+ <body name="swing"><joint name="swing" axis="0 -1 0" damping="0"/>
+ <inertial pos="0 0 -0.7452967562393479" mass="0.8910217122869327" diaginertia="0.000000001 0.000000001 0.000000001"/>
+ <geom type="sphere" pos="0 0 -0.7452967562393479" size="0.025" contype="0" conaffinity="0" mass="0"/>
+ <site name="load" pos="0 0 -0.7452967562393479"/></body></body></worldbody></mujoco>

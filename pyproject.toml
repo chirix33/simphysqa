@@ -6,11 +6,12 @@ build-backend = "setuptools.build_meta"
 name = "phi-jepa"
 version = "0.0.1"
 description = "Phi-JEPA phase P00 offline contracts and provenance"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = []
 
 [project.scripts]
 phi-jepa = "phi_jepa.cli:main"
+phi-dataset = "phi_jepa.simulation.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

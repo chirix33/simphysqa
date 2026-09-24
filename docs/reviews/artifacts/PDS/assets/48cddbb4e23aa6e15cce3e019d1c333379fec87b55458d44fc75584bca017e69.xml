@@ -1,0 +1,9 @@
+<mujoco model="phi_planar_arm_v1">
+ <compiler angle="radian"/><option timestep="0.0001" gravity="0 0 -9.81" integrator="RK4" tolerance="1e-10" iterations="100"/>
+ <default><joint damping="0.05" limited="true" range="-2.8 2.8"/><geom contype="0" conaffinity="0"/></default>
+ <worldbody><body name="link1" pos="0 0 1"><joint name="joint_1" axis="0 1 0"/>
+ <geom type="box" pos="0.2 0 0" size="0.2 0.025 0.025" mass="1"/>
+ <body name="link2" pos="0.4 0 0"><joint name="joint_2" axis="0 1 0"/>
+ <geom type="box" pos="0.15 0 0" size="0.15 0.025 0.025" mass="0.8"/>
+ <body name="payload" pos="0.3 0 0"><geom type="sphere" size="0.025" mass="0.4813749016174469"/><site name="tip" size="0.005"/></body>
+ </body></body></worldbody></mujoco>

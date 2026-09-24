@@ -1,0 +1,281 @@
+{
+  "schema_version": "1.0.0",
+  "samples": {
+    "1": {
+      "schema_version": "1.0.0",
+      "sample_id": "illustration_001",
+      "input": {
+        "domain": "robotic_arm",
+        "task_type": "future_state_prediction",
+        "global_context": "ILLUSTRATIVE FORMAT ONLY. A planar two-link arm moves under the specified joint torques. Values have not been simulated.",
+        "question": "What will joint 1 angle be at 1.0 s under the specified controls?",
+        "entities": [
+          {
+            "entity_id": "arm_1",
+            "type": "planar_two_link_arm",
+            "properties": [
+              {
+                "entity_id": "arm_1",
+                "name": "link_lengths",
+                "value": [
+                  0.4,
+                  0.3
+                ],
+                "unit": "m",
+                "frame": "not_applicable"
+              },
+              {
+                "entity_id": "arm_1",
+                "name": "link_masses",
+                "value": [
+                  1.0,
+                  0.8
+                ],
+                "unit": "kg",
+                "frame": "not_applicable"
+              }
+            ]
+          },
+          {
+            "entity_id": "joint_1",
+            "type": "hinge",
+            "properties": []
+          },
+          {
+            "entity_id": "joint_2",
+            "type": "hinge",
+            "properties": []
+          }
+        ],
+        "coordinate_convention": "SI units. Right-handed world: x forward, y left, z up. Revolute angles use the right-hand rule.",
+        "observation_cutoff": 0.2,
+        "states": [
+          {
+            "state_id": "illustration_state_0",
+            "step_index": 0,
+            "timestamp": 0.0,
+            "measurements": [
+              {
+                "entity_id": "joint_1",
+                "name": "angle",
+                "value": 0.1,
+                "unit": "rad",
+                "frame": "joint_local"
+              },
+              {
+                "entity_id": "joint_1",
+                "name": "angular_velocity",
+                "value": 0.0,
+                "unit": "rad/s",
+                "frame": "joint_local"
+              },
+              {
+                "entity_id": "joint_2",
+                "name": "angle",
+                "value": 0.0,
+                "unit": "rad",
+                "frame": "joint_local"
+              },
+              {
+                "entity_id": "joint_2",
+                "name": "angular_velocity",
+                "value": 0.0,
+                "unit": "rad/s",
+                "frame": "joint_local"
+              }
+            ],
+            "relations": [],
+            "context": "Joint 1 angle is 0.1 rad and angular velocity is 0.0 rad/s at 0.0 s."
+          },
+          {
+            "state_id": "illustration_state_100",
+            "step_index": 100,
+            "timestamp": 0.2,
+            "measurements": [
+              {
+                "entity_id": "joint_1",
+                "name": "angle",
+                "value": 0.12,
+                "unit": "rad",
+                "frame": "joint_local"
+              },
+              {
+                "entity_id": "joint_1",
+                "name": "angular_velocity",
+                "value": 0.15,
+                "unit": "rad/s",
+                "frame": "joint_local"
+              },
+              {
+                "entity_id": "joint_2",
+                "name": "angle",
+                "value": 0.0,
+                "unit": "rad",
+                "frame": "joint_local"
+              },
+              {
+                "entity_id": "joint_2",
+                "name": "angular_velocity",
+                "value": 0.0,
+                "unit": "rad/s",
+                "frame": "joint_local"
+              }
+            ],
+            "relations": [],
+            "context": "Joint 1 angle is 0.12 rad and angular velocity is 0.15 rad/s at 0.2 s."
+          }
+        ],
+        "controller": {
+          "mode": "explicit_schedule",
+          "description": "Constant commanded torques; no feedback controller.",
+          "equations": [],
+          "parameters": [],
+          "initial_internal_state": [],
+          "update_interval_s": 0.002,
+          "controls": [
+            {
+              "entity_id": "joint_1",
+              "channel": "applied_torque",
+              "start_time": 0.0,
+              "end_time": 1.0,
+              "value": 0.2,
+              "unit": "N*m",
+              "frame": "joint_local",
+              "interpolation": "constant"
+            },
+            {
+              "entity_id": "joint_2",
+              "channel": "applied_torque",
+              "start_time": 0.0,
+              "end_time": 1.0,
+              "value": 0.0,
+              "unit": "N*m",
+              "frame": "joint_local",
+              "interpolation": "constant"
+            }
+          ]
+        },
+        "known_events": [],
+        "answer_spec": [
+          {
+            "target_id": "joint_1_angle_at_1s",
+            "entity_id": "joint_1",
+            "quantity": "angle",
+            "answer_type": "number",
+            "unit": "rad",
+            "frame": "joint_local",
+            "query_kind": "at_time",
+            "start_time": 1.0,
+            "end_time": 1.0,
+            "rule_id": "joint_angle_v1",
+            "rule_definition": "Read the unwrapped signed angle of joint_1 at the requested time.",
+            "absolute_tolerance": 0.01,
+            "relative_tolerance": 0.0
+          }
+        ]
+      },
+      "reference": {
+        "states": [
+          {
+            "state_id": "illustration_state_500",
+            "step_index": 500,
+            "timestamp": 1.0,
+            "measurements": [
+              {
+                "entity_id": "joint_1",
+                "name": "angle",
+                "value": 0.23,
+                "unit": "rad",
+                "frame": "joint_local"
+              },
+              {
+                "entity_id": "joint_1",
+                "name": "angular_velocity",
+                "value": 0.08,
+                "unit": "rad/s",
+                "frame": "joint_local"
+              },
+              {
+                "entity_id": "joint_2",
+                "name": "angle",
+                "value": 0.0,
+                "unit": "rad",
+                "frame": "joint_local"
+              },
+              {
+                "entity_id": "joint_2",
+                "name": "angular_velocity",
+                "value": 0.0,
+                "unit": "rad/s",
+                "frame": "joint_local"
+              }
+            ],
+            "relations": [],
+            "context": "Joint 1 angle is 0.23 rad and angular velocity is 0.08 rad/s at 1.0 s."
+          }
+        ],
+        "events": [],
+        "structured_label": [
+          {
+            "target_id": "joint_1_angle_at_1s",
+            "value": 0.23,
+            "unit": "rad",
+            "frame": "joint_local"
+          }
+        ],
+        "label": "Illustrative answer: 0.23 radians.",
+        "explanation": "The illustrative reference state at 1.0 s lists joint_1 angle as 0.23 rad. This is not a measured simulation result or a verified solution trace.",
+        "explanation_kind": "descriptive",
+        "evidence": [
+          {
+            "evidence_id": "illustration_e1",
+            "state_ids": [
+              "illustration_state_500"
+            ],
+            "event_ids": [],
+            "description": "Illustrative terminal-state readout."
+          }
+        ],
+        "solution_trace": {
+          "status": "unavailable",
+          "steps": [],
+          "verification_record": null
+        }
+      },
+      "metadata": {
+        "record_origin": "illustrative_only",
+        "base_scenario_id": "illustration_base_001",
+        "split_group_id": "illustration_group_001",
+        "split": "development",
+        "distribution": "illustrative",
+        "shifts": [],
+        "simulation": {
+          "engine": "mujoco",
+          "implementation": "native",
+          "engine_version": null,
+          "model_id": "planar_arm_definition_pending",
+          "assets": [],
+          "generator_commit": null,
+          "config_sha256": null,
+          "seed": 42,
+          "integration_timestep_s": 0.002,
+          "saved_state_interval_s": 0.02,
+          "duration_s": 1.0,
+          "solver_settings": [],
+          "dtype": "float64",
+          "runtime_environment": []
+        },
+        "validation": {
+          "status": "illustrative_only",
+          "checks": [
+            {
+              "name": "physical_answerability",
+              "status": "not_run",
+              "details": "Schematic example lacks a pinned complete physical model and simulation provenance; never use for training or evaluation."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

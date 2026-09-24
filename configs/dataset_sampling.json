@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "grouping_granularity": "base_parameter_draw_and_control_schedule",
+  "shared_prior_policy": "Fixed geometry and controller law are shared public priors, not held-out families. Every question, wording variant and matched-engine derivative shares its source group.",
+  "combination_pairs": {
+    "robotic_arm": ["payload_kg", "joint_torque_Nm"],
+    "driving": ["initial_forward_speed_m_s", "mass_multiplier"],
+    "object_pushing_stacking": ["block_mass_kg", "push_force_N"],
+    "quadruped_locomotion": ["body_payload_fraction", "joint_reference_frequency_hz"],
+    "tethered_load": ["cable_length_m", "support_acceleration_m_s2"]
+  },
+  "id_quadrants": [[0,0], [0,1], [1,0]],
+  "combination_ood_quadrant": [1,1],
+  "midpoint_fraction": 0.5,
+  "signed_torque_policy": "alternate_sign_independently_of_magnitude",
+  "smoke_shift_weights": [0.5,0.2,0.15,0.15],
+  "calibration_shift_weights": [0.4,0.2,0.2,0.2],
+  "shift_order": ["id","parameter_extrapolation","unseen_combination","timed_event"],
+  "object_subfamilies": ["pushing","pre_stacked"]
+}

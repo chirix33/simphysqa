@@ -1,0 +1,6 @@
+{"domain": "tethered_load", "index": 1, "total": 2, "accepted": 1, "rejected": 0}
+{"domain": "tethered_load", "index": 2, "total": 2, "accepted": 2, "rejected": 0}
+----------------------------------------------------------------------
+Ran 55 tests in 5.887s
+
+OK (skipped=3)

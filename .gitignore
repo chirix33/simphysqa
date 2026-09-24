@@ -15,6 +15,13 @@ docs/references/sources/
 
 # P00 local build and isolated CPU verification
 .p00-venv/
+.dataset-venv/
+.dataset-wsl-venv/
+.dataset-bullet-venv/
+dataset-install.log
+dataset-bullet-install.log
+dataset-runs/
 build/
 dist/
 *.egg-info/
+DATASET_CODEX_PROMPT.md

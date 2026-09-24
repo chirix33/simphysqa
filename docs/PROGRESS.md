@@ -1,6 +1,20 @@
 # Implementation progress
 
-Updated from P00 and P01 verification. P02–P08 remain plans, not completed code.
+Updated from P00/P01 and the separately authorized dataset preparation task.
+P02–P08 remain plans, not completed model code. The newer dataset/model contract
+1.1.0 supersedes older physical-readout training assumptions for future work.
+
+Dataset preparation, 24 September 2026, branch `dataset-prep`, starting commit
+`983feaec76acfd923cc7b7d18844ddd92696daff`: **implemented_pending_validation**.
+Five simulator adapters and the strict numeric/text/extraction contracts exist;
+four domains have admitted smoke/calibration artifacts. The MJX quadruped executes
+on GPU but fails controller/refinement qualification; its 100-case calibration
+and final generation remain blocked. Final Linux suite: 55 tests passed. No
+model training or production generation occurred. See the
+[dataset report](reviews/PDS_completion.md), [decisions](decisions/Dataset_preparation.md)
+and [measured summary](reviews/artifacts/PDS/summary.json). Earlier tether pilots
+are superseded by the corrected-onset runs identified in the report. Changes
+remain uncommitted for review; the pre-existing user assets are preserved.
 
 | Phase | Status | Evidence/report |
 | --- | --- | --- |
