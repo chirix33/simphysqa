@@ -1,0 +1,14 @@
+{
+  "status": "pending_rights_holder_authority",
+  "grantor": null,
+  "authority_confirmed": false,
+  "authorization_evidence": null,
+  "license": "CC-BY-4.0",
+  "code_license": "MIT",
+  "domains": ["robotic_arm", "driving", "object_pushing_stacking", "tethered_load"],
+  "user_selection": "CC BY 4.0 for the dataset and project-authored scene/model assets; MIT for project-authored generation code.",
+  "clarification": "Creative Comments was clarified to mean the Creative Commons license, not a rights-holder name. No authority confirmation was supplied.",
+  "public_redistribution": "pending_ownership_and_authority",
+  "internal_generation": "no_concrete_scene_asset_restriction_identified; existing project redistribution-before-generation gate retained",
+  "production_generation_enabled": false
+}

@@ -71,6 +71,8 @@ class ReleaseScopeTests(unittest.TestCase):
                                 calibration_path="fixture", checks=[dict(status="pass")])
                 return dict(domain="quadruped_locomotion")
             with self.subTest(wrong=wrong), patch("phi_jepa.simulation.release.read", side_effect=lookup), \
+                    patch("phi_jepa.simulation.release.verify_freeze"), \
+                    patch("phi_jepa.simulation.release.verify_license"), \
                     patch("phi_jepa.simulation.release.subprocess.run") as tracked, \
                     patch("phi_jepa.simulation.release.subprocess.check_output", return_value=""), \
                     patch("phi_jepa.simulation.pipeline.validate_dataset", return_value=dict(groups=1)):

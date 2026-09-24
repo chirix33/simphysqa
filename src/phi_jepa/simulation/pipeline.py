@@ -92,21 +92,27 @@ def check_config(c):
 def budget(c,path):
     free=shutil.disk_usage(path).free
     if free<c["limits"]["minimum_free_disk_gib"]*2**30: raise RuntimeError("minimum disk headroom gate")
-    size=sum(f.stat().st_size for f in Path(path).rglob("*") if f.is_file())
-    if size>c["limits"]["pilot_disk_gib"]*2**30: raise RuntimeError("pilot disk budget exceeded")
+    release=c.get("final_generation_enabled",False)
+    folder=ROOT/c["release_output"] if release else Path(path)
+    size=sum(f.stat().st_size for f in folder.rglob("*") if f.is_file())
+    limit=c["limits"]["proposed_release_disk_gib" if release else "pilot_disk_gib"]
+    if size>limit*2**30: raise RuntimeError("dataset disk budget exceeded")
 
-def run(config,domain,count,output,mode="smoke",resume=False,engine=None,split="development",release_shift=None):
+def run(config,domain,count,output,mode="smoke",resume=False,engine=None,split="development",release_shift=None,deadline=None):
     config=copy.deepcopy(config)
-    if domain in config.get("integration_timesteps_s",{}):
-        config["time"]["default_timestep_s"]=config["integration_timesteps_s"][domain]
     if mode=="release":
         from .scope import check_release_scope, RELEASE_ENGINES
         check_release_scope(config)
         if domain not in RELEASE_ENGINES: raise ValueError("domain excluded from first release")
         if engine is not None and engine!=RELEASE_ENGINES[domain]: raise ValueError("release engine override forbidden")
         if split not in ("train","validation","test_id","test_ood"): raise ValueError("release requires a release split")
+        from .freeze import verify_freeze, verify_license
+        frozen_release=verify_freeze(config)
+        verify_license(config)
     elif split!="development":
         raise ValueError("development runs cannot write release splits")
+    if domain in config.get("integration_timesteps_s",{}):
+        config["time"]["default_timestep_s"]=config["integration_timesteps_s"][domain]
     if "sampling" not in config: config["sampling"]=read(ROOT/"configs/dataset_sampling.json")
     check_config(config)
     if domain not in config["domains"]: raise ValueError("unknown domain")
@@ -129,12 +135,19 @@ def run(config,domain,count,output,mode="smoke",resume=False,engine=None,split="
         atomic_write(output/"source_snapshot"/name,original.read_bytes())
     shifts=[release_shift]*count if release_shift else allocation(count,mode,config)
     scenarios=[sample(config,domain,i,mode,shift,split) for i,shift in enumerate(shifts)]
+    if mode=="release":
+        plans=read(ROOT/frozen_release["partition_plan_path"])
+        matches=[p for p in plans if p["domain"]==domain and p["split"]==split and p["shift"]==release_shift]
+        if len(matches)!=1 or matches[0]["attempted_draw_budget"]!=count or matches[0]["scenario_plan_sha256"]!=digest([asdict(s) for s in scenarios]):
+            raise ValueError("release draws differ from frozen partition plan")
     write(output/"partitions.json",[asdict(s) for s in scenarios])
     started=time.perf_counter(); accepted=0; rejected=0; resumed=0
     import psutil
     peak_rss=psutil.Process().memory_info().rss
     dt=config["time"]["default_timestep_s"]
     for index,s in enumerate(scenarios):
+        if deadline is not None and time.monotonic()>deadline:
+            raise RuntimeError("generation wall budget exhausted; resume preserves attempted draws")
         budget(config,output)
         if time.perf_counter()-started>config["limits"].get("max_run_wall_seconds",1800): raise RuntimeError("wall time budget reached; --resume preserves completed scenarios")
         shard=output/"shards"/(s.group+".jsonl"); receipt=output/"receipts"/(s.group+".json")

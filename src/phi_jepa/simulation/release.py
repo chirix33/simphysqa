@@ -4,11 +4,14 @@ from hashlib import sha256
 from pathlib import Path
 from .common import ROOT,read
 from .scope import check_release_scope, check_release_partition
+from .freeze import verify_freeze, verify_license
 
 def release_gates(config_path):
     config=read(config_path)
     check_release_scope(config)
     if not config.get("final_generation_enabled") or config.get("status")!="frozen": raise ValueError("final generation disabled: requires frozen committed release configuration")
+    verify_freeze(config)
+    verify_license(config)
     if not config.get("asset_license"): raise ValueError("release requires the actual granted asset license identifier/text")
     relative=Path(config_path).resolve().relative_to(ROOT)
     tracked=subprocess.run(["git","ls-files","--error-unmatch",str(relative)],cwd=ROOT,capture_output=True)
@@ -40,20 +43,29 @@ def generate(config_path,resume=False):
     from .validation import validate_groups
     from .common import write
     config=release_gates(config_path)
+    import time
+    started=time.monotonic()
     output=ROOT/config["release_output"]
     if not output.resolve().is_relative_to(ROOT): raise ValueError("release output must remain in repository")
     reports={}; all_records=[]
     for domain in config["domains"]:
         for name,count in config["counts"]["proposed_release_per_domain"].items():
+            if time.monotonic()-started>config["limits"]["max_generation_wall_seconds"]:
+                raise RuntimeError("generation wall budget exhausted; resume retains attempted draws")
             shift=name.removeprefix("ood_") if name.startswith("ood_") else "id"
             split="test_ood" if name.startswith("ood_") else name
             path=output/domain/name
-            reports[domain+"/"+name]=run(config,domain,count,path,"release",resume,split=split,release_shift=shift)
+            reports[domain+"/"+name]=run(config,domain,count,path,"release",resume,split=split,release_shift=shift,
+                                      deadline=started+config["limits"]["max_generation_wall_seconds"])
             validate_dataset(path)
             records=list(records_at(path))
             check_release_partition(read(path/"manifest.json"),records,domain,split)
             all_records.extend(records)
     groups=validate_groups(all_records)
-    result=dict(status="generated",groups=groups,partitions=reports)
+    counts={key:sum(r["counts"][key] for r in reports.values()) for key in ("attempted","accepted","rejected","questions")}
+    if counts["attempted"]!=config["attempt_policy"]["total_attempted_base_scenarios"]:
+        raise ValueError("release attempt total differs from frozen budget")
+    result=dict(status="generated",groups=groups,counts=counts,partitions=reports,
+                attempt_policy=config["attempt_policy"],experiment_freeze=config["experiment_freeze"])
     write(output/"release-manifest.json",result)
     return result

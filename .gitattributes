@@ -1,3 +1,7 @@
 # Review inventories hash exact bytes. Preserve them across Windows checkouts.
 docs/reviews/artifacts/PDS_quadruped_refinement/** -text
 docs/reviews/artifacts/PDS_four_domain/** -text
+docs/reviews/artifacts/PDS_release_preparation/** -text
+licenses/** -text
+configs/frozen_dataset_domains/** -text
+configs/dataset_release_freeze.json -text
