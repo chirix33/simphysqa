@@ -80,7 +80,7 @@ class P02aTests(unittest.TestCase):
         self.assertEqual(before[0].n_current,after[0].n_current)
         self.assertEqual(before[0].n_next,before[1].n_current)
         self.assertAlmostEqual(before[0].dt,0.02)
-        self.assertEqual(before[0].weight,0.5)
+        self.assertEqual(before[0].weight,1.0)  # active user-approved default
         self.assertNotIn('private answer',before[0].context_json)
 
     def test_time_order_horizon_and_context(self):

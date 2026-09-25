@@ -1,4 +1,25 @@
-# Active sequential-plan status — 24 September 2026
+# Current post-P07 audit status — 25 September 2026
+
+The requested [focused source/artifact audit](reviews/Post_P07_focused_audit.md)
+is complete, with three contract-preserving fixes and **124 passing targeted
+tests**. The saved primary rollout replays exactly; coordinate diagnostics show
+step-index error dominates raw numerical MSE. Custom checkpoint updates and
+gradient/optimizer paths are verified, but output-quality failures remain.
+The [four-domain matrix](reviews/Post_P07_coverage_matrix.md) records contact-event,
+initial-crossing-state, typed-contract and calibration gaps. RQ1/RQ2 evidence is
+mapped explicitly; OOD clarification still needs an operational definition.
+
+The audit began from clean implementation commit
+`5810d1899007ae602c3db1ca486d43a1b7865ba4` on `full-phi-jepa-from-dataset`;
+the local origin-tracking reference matches (no remote refresh performed).
+Audit changes are uncommitted; no commit/push was requested or performed.
+The older status entries below retain their historical run-time meaning.
+Original reports/checkpoints are preserved. No new empirical training, encoder
+forward, model generation, paid call or dataset regeneration occurred.
+The [revised proposed budget](reviews/Post_P07_next_pilot_revision.md) reserves a
+training-only fitting diagnostic inside the previous caps; it is not launched.
+
+# Historical sequential-plan status — 24 September 2026
 
 Stage 8/P07 is **complete for the user-approved bounded correctness/resource
 evidence package**. Existing seed-11 tether selections/checkpoints and limits are

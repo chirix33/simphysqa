@@ -139,7 +139,7 @@ def forecast_states(problem, reference):
 
 def make_pairs(problem, reference, identity, layout, provenance, multiplicities,
                *, context_mode='public_base_for_offline_audit', enrichment=None,
-               duplicate_policy='inverse_transition_multiplicity'):
+               duplicate_policy='equal_question_pairs'):
     if duplicate_policy not in ('inverse_transition_multiplicity', 'equal_question_pairs'):
         raise ValueError('explicit supported weighting required')
     if identity.split != 'train': raise ValueError('recorded supervised pairs require training partition')

@@ -36,6 +36,9 @@ def load_checkpoint(directory,*,identity,device='cpu',training=False):
         optimizer=torch.optim.AdamW((p for p in model.parameters() if p.requires_grad))
         optimizer.load_state_dict(payload['optimizer']); torch.set_rng_state(payload['rng_cpu'])
         if payload['rng_cuda']: torch.cuda.set_rng_state_all(payload['rng_cuda'])
+        runtime=identity.get('config',{}).get('correctness',{})
+        if runtime.get('gradient_checkpointing',False):
+            model.t5.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant':False})
         model.train()
     else: model.eval()
     return model,optimizer,payload['updates']

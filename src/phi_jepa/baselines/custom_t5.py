@@ -126,7 +126,8 @@ class CustomT5(nn.Module):
         if branch=='teacher':
             if self.settings.method!='codi_inspired_t5_distillation': raise ValueError('teacher_branch_only_codi')
             return self.t5.generate(input_ids=input_ids,attention_mask=attention_mask,**generation)
-        if branch not in ('student','coconut'): raise ValueError('generation_branch')
+        expected='student' if self.settings.method=='codi_inspired_t5_distillation' else 'coconut'
+        if branch!=expected: raise ValueError('generation_branch_method_mismatch')
         enc,mask,_=self.enhanced_encoder(input_ids,attention_mask)
         start=torch.full((input_ids.shape[0],1),self.t5.config.decoder_start_token_id,dtype=torch.long,device=input_ids.device)
         return self.t5.generate(encoder_outputs=enc,attention_mask=mask,decoder_input_ids=start,**generation)
