@@ -1,4 +1,37 @@
-# Current post-P07 audit status — 25 September 2026
+# Current learning-pilot status — 25 September 2026
+
+P08 completed the user-approved [revised pilot](reviews/Post_P07_next_pilot_revision.md)
+within every cap. The [completion report](reviews/P08_completion.md) includes
+learning curves, generation failures, coordinate/physical errors, hold-last
+comparisons and resource accounting. All five numerical neural fits reached
+1,000 updates, LR performed one fit, and each custom method completed separate
+fresh 20-update diagnostic and 180-update broader runs. The exact
+[32/eight selection](reviews/artifacts/P08/selection.json) was frozen before work;
+entire validation scenarios were excluded from training.
+
+Primary achieved 0/8 complete validation answers and 1/24 correct numerical
+components. Coconut typed validity was 4/8; CODI student validity was 0/8, with
+eight teacher fallback recoveries reported only in the separate hybrid condition.
+These failures remain in all denominators. The bounded execution is complete,
+but learning quality, convergence and full-study claims are not established.
+The run used 51.52 GPU minutes, 5.48 charged CPU minutes, about 8.07 GB of new
+artifacts and USD 5.57 over 111 provider attempts. Final offline verification
+passed 127 tests; all 73 original P07 source-artifact hashes were unchanged.
+The current implementation base is `ba5d31d` (including the committed audit fixes);
+each new stage records working-tree source hashes and configuration identities.
+New P08 work remains local and uncommitted/unpushed.
+Original evidence/checkpoints are preserved; new native results are under
+`/home/aashraf/phi-jepa/p08-learning-01`.
+
+**Clarification correction:** Interactive clarification exists in the prototype;
+production integration, its trigger, and its connection to OOD assessment remain
+unfinished. Notebook cells 45 and 51 implement the forced/scripted two-call demo.
+The [correction and proposal](reviews/P08_clarification_correction_and_proposal.md)
+supersede the prototype omission in the historical audit. Assessment-status
+explanation is not substituted for interactive clarification. This extension,
+calibration and full-study claims remain pending and do not delay this pilot.
+
+# Historical post-P07 audit status — 25 September 2026
 
 The requested [focused source/artifact audit](reviews/Post_P07_focused_audit.md)
 is complete, with three contract-preserving fixes and **124 passing targeted
