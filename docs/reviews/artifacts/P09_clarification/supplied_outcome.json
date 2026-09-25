@@ -1,0 +1,1260 @@
+{
+  "evidence_kind": "software_fixture_only",
+  "independently_reviewed_scientific_example": false,
+  "snapshot": {
+    "attempt_id": "supplied_outcome",
+    "status": "unresolved_outcome_supplied",
+    "records": {
+      "created": {
+        "mode": "scripted_demo",
+        "original_sha256": "5ace0c291f9d9e26e7f351e9d1a718903ff1a33d6478ef459bc5144a2b2c1627",
+        "provider_identity": {
+          "kind": "software_fixture",
+          "model": "mock_frozen_answer",
+          "version": 1
+        },
+        "task_sha256": "d34be5d8b3450b0bbef0b5011950c7d46d0f48b4580b62980e9eb30be7279d82",
+        "version": "clarification-v1"
+      },
+      "original": {
+        "output_readout": [
+          {
+            "answer_type": "boolean",
+            "end_time": 0.44,
+            "entity_id": "load",
+            "evidence": [
+              0.2,
+              0.44
+            ],
+            "frame": "world",
+            "quantity": "boundary_crossed",
+            "query_kind": "at_time",
+            "reason": null,
+            "rule_sha256": "6e2cc3552ea0c8a366215e9e8f71caec94fa77291c0b897fc95c5e1268d32159",
+            "source": "sampled_public_rule",
+            "start_time": 0.44,
+            "status": "supported",
+            "target_id": "load:boundary_crossed",
+            "unit": "1",
+            "value": false
+          },
+          {
+            "answer_type": "vector",
+            "end_time": 0.44,
+            "entity_id": "load",
+            "evidence": [
+              0.44,
+              0.44
+            ],
+            "frame": "world",
+            "quantity": "position",
+            "query_kind": "at_time",
+            "reason": null,
+            "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac",
+            "source": "numeric_forecast",
+            "start_time": 0.44,
+            "status": "supported",
+            "target_id": "load:position",
+            "unit": "m",
+            "value": [
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        ],
+        "physical_forecast": {
+          "sample_id": "fixture",
+          "states": [
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "11",
+              "step_index": 11,
+              "timestamp": 0.22
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "12",
+              "step_index": 12,
+              "timestamp": 0.24
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "13",
+              "step_index": 13,
+              "timestamp": 0.26
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "14",
+              "step_index": 14,
+              "timestamp": 0.28
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "15",
+              "step_index": 15,
+              "timestamp": 0.3
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "16",
+              "step_index": 16,
+              "timestamp": 0.32
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "17",
+              "step_index": 17,
+              "timestamp": 0.34
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "18",
+              "step_index": 18,
+              "timestamp": 0.36
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "19",
+              "step_index": 19,
+              "timestamp": 0.38
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "20",
+              "step_index": 20,
+              "timestamp": 0.4
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "21",
+              "step_index": 21,
+              "timestamp": 0.42
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "22",
+              "step_index": 22,
+              "timestamp": 0.44
+            }
+          ]
+        },
+        "public_problem": {
+          "input": {
+            "answer_spec": [
+              {
+                "absolute_tolerance": 0.0,
+                "answer_type": "boolean",
+                "end_time": 0.44,
+                "entity_id": "load",
+                "frame": "world",
+                "quantity": "boundary_crossed",
+                "query_kind": "at_time",
+                "relative_tolerance": 0.0,
+                "rule_definition": "Load COM crosses x=0.1m with 0.005m hysteresis after cutoff.",
+                "rule_id": "terminal_readout_v1",
+                "start_time": 0.44,
+                "target_id": "load:boundary_crossed",
+                "unit": "1"
+              },
+              {
+                "absolute_tolerance": 0.0,
+                "answer_type": "vector",
+                "end_time": 0.44,
+                "entity_id": "load",
+                "frame": "world",
+                "quantity": "position",
+                "query_kind": "at_time",
+                "relative_tolerance": 0.0,
+                "rule_definition": "Read the named channel at the requested absolute time. Unwrapped angles; quaternion xyzw compared by sign-invariant rotation angle; other vectors by Euclidean norm.",
+                "rule_id": "terminal_readout_v1",
+                "start_time": 0.44,
+                "target_id": "load:position",
+                "unit": "m"
+              }
+            ],
+            "controller": {
+              "magnitude": 2.0
+            },
+            "coordinate_convention": "Right-handed world x-forward/y-left/z-up; quaternion xyzw; unwrapped right-hand joint angles; all channels SI.",
+            "domain": "tethered_load",
+            "entities": [],
+            "global_context": "fixture",
+            "known_events": [],
+            "observation_cutoff": 0.2,
+            "question": "Explain load position and BC at the requested time; BC is an undefined abbreviation in this wording.",
+            "states": [
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "0",
+                "step_index": 0,
+                "timestamp": 0.0
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "1",
+                "step_index": 1,
+                "timestamp": 0.02
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "2",
+                "step_index": 2,
+                "timestamp": 0.04
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "3",
+                "step_index": 3,
+                "timestamp": 0.06
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "4",
+                "step_index": 4,
+                "timestamp": 0.08
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "5",
+                "step_index": 5,
+                "timestamp": 0.1
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "6",
+                "step_index": 6,
+                "timestamp": 0.12
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "7",
+                "step_index": 7,
+                "timestamp": 0.14
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "8",
+                "step_index": 8,
+                "timestamp": 0.16
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "9",
+                "step_index": 9,
+                "timestamp": 0.18
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "10",
+                "step_index": 10,
+                "timestamp": 0.2
+              }
+            ],
+            "task_type": "future_state_prediction"
+          },
+          "sample_id": "fixture",
+          "schema_version": "1.0.0"
+        }
+      },
+      "call_reserved": {
+        "input_sha256": "cede77df753d810c994a05658186b0191dd0b28e22a7b03e7b04eeaedc367472",
+        "provider": {
+          "kind": "software_fixture",
+          "model": "mock_frozen_answer",
+          "version": 1
+        },
+        "stage": "initial"
+      },
+      "call_finished": {
+        "failure": null,
+        "latency_seconds": 0.00031143000000000143,
+        "response_id": "mock-response",
+        "returned_model": "mock_frozen_answer",
+        "stage": "initial",
+        "text": "{\"answer\": {\"plain_text_answer\": \"fixture answer\", \"targets\": [{\"target_id\": \"load:boundary_crossed\", \"entity_id\": \"load\", \"quantity\": \"boundary_crossed\", \"answer_type\": \"boolean\", \"unit\": \"1\", \"frame\": \"world\", \"query_kind\": \"at_time\", \"start_time\": 0.44, \"end_time\": 0.44, \"status\": \"supported\", \"value\": false, \"reason\": null}, {\"target_id\": \"load:position\", \"entity_id\": \"load\", \"quantity\": \"position\", \"answer_type\": \"vector\", \"unit\": \"m\", \"frame\": \"world\", \"query_kind\": \"at_time\", \"start_time\": 0.44, \"end_time\": 0.44, \"status\": \"supported\", \"value\": [0.0, 0.0, 1.0], \"reason\": null}]}, \"clarification_request\": {\"missing_or_ambiguous_information\": \"What BC abbreviates in the public question.\", \"affected_target_ids\": [\"load:boundary_crossed\"], \"resolution_rationale\": \"Clarifies the wording of the explanation without altering the already specified event or its value.\", \"question\": \"Does BC refer to the boundary-crossing target already listed?\", \"public_evidence_paths\": [\"/public_problem/input/question\", \"/public_problem/input/answer_spec/0\"], \"readout_evidence_target_ids\": [\"load:boundary_crossed\"]}}",
+        "usage": {
+          "cost_usd": 0.0,
+          "input_tokens": 10,
+          "output_tokens": 20
+        }
+      },
+      "initial_answer": {
+        "plain_text_answer": "fixture answer",
+        "targets": [
+          {
+            "answer_type": "boolean",
+            "end_time": 0.44,
+            "entity_id": "load",
+            "frame": "world",
+            "quantity": "boundary_crossed",
+            "query_kind": "at_time",
+            "reason": null,
+            "start_time": 0.44,
+            "status": "supported",
+            "target_id": "load:boundary_crossed",
+            "unit": "1",
+            "value": false
+          },
+          {
+            "answer_type": "vector",
+            "end_time": 0.44,
+            "entity_id": "load",
+            "frame": "world",
+            "quantity": "position",
+            "query_kind": "at_time",
+            "reason": null,
+            "start_time": 0.44,
+            "status": "supported",
+            "target_id": "load:position",
+            "unit": "m",
+            "value": [
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        ]
+      },
+      "clarification_request": {
+        "affected_target_ids": [
+          "load:boundary_crossed"
+        ],
+        "missing_or_ambiguous_information": "What BC abbreviates in the public question.",
+        "public_evidence_paths": [
+          "/public_problem/input/question",
+          "/public_problem/input/answer_spec/0"
+        ],
+        "question": "Does BC refer to the boundary-crossing target already listed?",
+        "readout_evidence_target_ids": [
+          "load:boundary_crossed"
+        ],
+        "resolution_rationale": "Clarifies the wording of the explanation without altering the already specified event or its value."
+      },
+      "status": {
+        "value": "unresolved_outcome_supplied"
+      },
+      "reply": {
+        "actor_id": "fixture-user",
+        "channel": "software_fixture",
+        "message_id": "fixture-message",
+        "received_at": "2026-09-25T12:00:00+00:00",
+        "source": "scripted_demo",
+        "text": "I observed that the final boundary-crossing value is true."
+      },
+      "reply_review": {
+        "category": "outcome_supplying",
+        "no_conflict": true,
+        "no_supplied_outcome": false,
+        "preserves_physical_assumptions": true,
+        "preserves_task": true,
+        "reason": "Synthetic human-review fixture for routing behavior.",
+        "reply_quote": "I observed that the final boundary-crossing value is true.",
+        "resolves_requested_gap": false,
+        "reviewed_at": "2026-09-25T12:01:00+00:00",
+        "reviewer_id": "fixture-reviewer"
+      }
+    },
+    "call_attempts": 1,
+    "total_usage": {
+      "input_tokens": 10,
+      "output_tokens": 20,
+      "cost_usd": 0.0
+    },
+    "call_latency_seconds": 0.00031143000000000143,
+    "journal_head": "aeafd84244e2ffb1ec61223b5eaeb73f87a1e3aa4acec4c81897e6253e9d9d08"
+  },
+  "provider_payloads": [
+    {
+      "stage": "initial",
+      "original": {
+        "output_readout": [
+          {
+            "answer_type": "boolean",
+            "end_time": 0.44,
+            "entity_id": "load",
+            "evidence": [
+              0.2,
+              0.44
+            ],
+            "frame": "world",
+            "quantity": "boundary_crossed",
+            "query_kind": "at_time",
+            "reason": null,
+            "rule_sha256": "6e2cc3552ea0c8a366215e9e8f71caec94fa77291c0b897fc95c5e1268d32159",
+            "source": "sampled_public_rule",
+            "start_time": 0.44,
+            "status": "supported",
+            "target_id": "load:boundary_crossed",
+            "unit": "1",
+            "value": false
+          },
+          {
+            "answer_type": "vector",
+            "end_time": 0.44,
+            "entity_id": "load",
+            "evidence": [
+              0.44,
+              0.44
+            ],
+            "frame": "world",
+            "quantity": "position",
+            "query_kind": "at_time",
+            "reason": null,
+            "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac",
+            "source": "numeric_forecast",
+            "start_time": 0.44,
+            "status": "supported",
+            "target_id": "load:position",
+            "unit": "m",
+            "value": [
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        ],
+        "physical_forecast": {
+          "sample_id": "fixture",
+          "states": [
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "11",
+              "step_index": 11,
+              "timestamp": 0.22
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "12",
+              "step_index": 12,
+              "timestamp": 0.24
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "13",
+              "step_index": 13,
+              "timestamp": 0.26
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "14",
+              "step_index": 14,
+              "timestamp": 0.28
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "15",
+              "step_index": 15,
+              "timestamp": 0.3
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "16",
+              "step_index": 16,
+              "timestamp": 0.32
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "17",
+              "step_index": 17,
+              "timestamp": 0.34
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "18",
+              "step_index": 18,
+              "timestamp": 0.36
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "19",
+              "step_index": 19,
+              "timestamp": 0.38
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "20",
+              "step_index": 20,
+              "timestamp": 0.4
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "21",
+              "step_index": 21,
+              "timestamp": 0.42
+            },
+            {
+              "context": "fixture",
+              "measurements": [
+                {
+                  "entity_id": "load",
+                  "frame": "world",
+                  "name": "position",
+                  "unit": "m",
+                  "value": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                }
+              ],
+              "relations": [],
+              "state_id": "22",
+              "step_index": 22,
+              "timestamp": 0.44
+            }
+          ]
+        },
+        "public_problem": {
+          "input": {
+            "answer_spec": [
+              {
+                "absolute_tolerance": 0.0,
+                "answer_type": "boolean",
+                "end_time": 0.44,
+                "entity_id": "load",
+                "frame": "world",
+                "quantity": "boundary_crossed",
+                "query_kind": "at_time",
+                "relative_tolerance": 0.0,
+                "rule_definition": "Load COM crosses x=0.1m with 0.005m hysteresis after cutoff.",
+                "rule_id": "terminal_readout_v1",
+                "start_time": 0.44,
+                "target_id": "load:boundary_crossed",
+                "unit": "1"
+              },
+              {
+                "absolute_tolerance": 0.0,
+                "answer_type": "vector",
+                "end_time": 0.44,
+                "entity_id": "load",
+                "frame": "world",
+                "quantity": "position",
+                "query_kind": "at_time",
+                "relative_tolerance": 0.0,
+                "rule_definition": "Read the named channel at the requested absolute time. Unwrapped angles; quaternion xyzw compared by sign-invariant rotation angle; other vectors by Euclidean norm.",
+                "rule_id": "terminal_readout_v1",
+                "start_time": 0.44,
+                "target_id": "load:position",
+                "unit": "m"
+              }
+            ],
+            "controller": {
+              "magnitude": 2.0
+            },
+            "coordinate_convention": "Right-handed world x-forward/y-left/z-up; quaternion xyzw; unwrapped right-hand joint angles; all channels SI.",
+            "domain": "tethered_load",
+            "entities": [],
+            "global_context": "fixture",
+            "known_events": [],
+            "observation_cutoff": 0.2,
+            "question": "Explain load position and BC at the requested time; BC is an undefined abbreviation in this wording.",
+            "states": [
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "0",
+                "step_index": 0,
+                "timestamp": 0.0
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "1",
+                "step_index": 1,
+                "timestamp": 0.02
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "2",
+                "step_index": 2,
+                "timestamp": 0.04
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "3",
+                "step_index": 3,
+                "timestamp": 0.06
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "4",
+                "step_index": 4,
+                "timestamp": 0.08
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "5",
+                "step_index": 5,
+                "timestamp": 0.1
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "6",
+                "step_index": 6,
+                "timestamp": 0.12
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "7",
+                "step_index": 7,
+                "timestamp": 0.14
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "8",
+                "step_index": 8,
+                "timestamp": 0.16
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "9",
+                "step_index": 9,
+                "timestamp": 0.18
+              },
+              {
+                "context": "fixture",
+                "measurements": [
+                  {
+                    "entity_id": "load",
+                    "frame": "world",
+                    "name": "position",
+                    "unit": "m",
+                    "value": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ],
+                "relations": [],
+                "state_id": "10",
+                "step_index": 10,
+                "timestamp": 0.2
+              }
+            ],
+            "task_type": "future_state_prediction"
+          },
+          "sample_id": "fixture",
+          "schema_version": "1.0.0"
+        }
+      },
+      "context": {}
+    }
+  ]
+}

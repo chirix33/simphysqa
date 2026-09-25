@@ -1,0 +1,756 @@
+[
+  {
+    "method": "coconut_inspired_t5_gru",
+    "branch": "coconut",
+    "sample_id": "1bbb33b715cd2013a19bb6530cf530a0",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "target_count",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {
+      "load:position": 2
+    },
+    "binding_errors": [
+      {
+        "row": 1,
+        "target_id": "load:position",
+        "fields": [
+          "answer_type"
+        ]
+      }
+    ],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.019999785384556,0.0,1.380242935242728]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.017352435242626,0.0,1.380242980808024]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.024434735242728},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.024949389242885},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "coconut_inspired_t5_gru",
+    "branch": "coconut",
+    "sample_id": "96499ec1fca3c7551999fb9c808350cf",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.018997035355656,0.0,1.14680807090907070]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.020277035242728},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.019657070666668},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "coconut_inspired_t5_gru",
+    "branch": "coconut",
+    "sample_id": "c0863ac062786727c369aa55050f61a0",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "target_count",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {
+      "load:swing_angle": 2
+    },
+    "binding_errors": [
+      {
+        "row": 1,
+        "target_id": "load:swing_angle",
+        "fields": [
+          "quantity"
+        ]
+      },
+      {
+        "row": 2,
+        "target_id": "load:swing_angle",
+        "fields": [
+          "unit"
+        ]
+      }
+    ],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.03580247070902455,0.0,1.4089024703524]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.0703524353524},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad/s\",\"value\":-0.0703524352426},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.135242893942428},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "coconut_inspired_t5_gru",
+    "branch": "coconut",
+    "sample_id": "b203a522628d7a0dac4f63181a975c39",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.099244529453556,0.0,1.20780677090903524]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.1282828353867},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.1282828902428},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "coconut_inspired_t5_gru",
+    "branch": "coconut",
+    "sample_id": "a7aac3d1a98fb47e47c9e3c1758288d8",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "target_count",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {
+      "load:swing_angle": 2
+    },
+    "binding_errors": [
+      {
+        "row": 1,
+        "target_id": "load:swing_angle",
+        "fields": [
+          "quantity"
+        ]
+      },
+      {
+        "row": 2,
+        "target_id": "load:swing_angle",
+        "fields": [
+          "unit"
+        ]
+      }
+    ],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.135568070855656,0.0,1.299677070352435]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.1355680809024},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad/s\",\"value\":-0.1355680809024},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.135568080909024},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "coconut_inspired_t5_gru",
+    "branch": "coconut",
+    "sample_id": "1382c1d0664759284c7e4537ee4f6dec",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[-0.199959527989927,0.0,1.068676790353524]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.1992927353567},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.199959527989967},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "coconut_inspired_t5_gru",
+    "branch": "coconut",
+    "sample_id": "084bac04e8203ef56e8dec4e650d520f",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "target_count",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {
+      "load:position": 2
+    },
+    "binding_errors": [
+      {
+        "row": 1,
+        "target_id": "load:position",
+        "fields": [
+          "answer_type"
+        ]
+      }
+    ],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.0070707080909056,0.0,1.31451390353524]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.0070707080902428,0.0,1.3145139090352426]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.0070707024289024},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.0070707024289024},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "coconut_inspired_t5_gru",
+    "branch": "coconut",
+    "sample_id": "708f7e403db6f51337c89c2288ecf514",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.128282770355656,0.0,1.330309727703524]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.156702727703524},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.128282727272767},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "student",
+    "sample_id": "1bbb33b715cd2013a19bb6530cf530a0",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "answer_envelope",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[-0.0143524959596,0.0,1.3803024353524]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.0283524352426},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.028352435249524},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "teacher",
+    "sample_id": "1bbb33b715cd2013a19bb6530cf530a0",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[-0.0143524959596,0.0,1.3803024353524]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.0283524352426},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.028352435249696},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "student",
+    "sample_id": "96499ec1fca3c7551999fb9c808350cf",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "answer_envelope",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.0189995959899,0.0,1.1468080703524]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.020247035242626},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.024999595989927},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "teacher",
+    "sample_id": "96499ec1fca3c7551999fb9c808350cf",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.0189995959899,0.0,1.14680803903524]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.020243535357624},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.02269595989927},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "student",
+    "sample_id": "c0863ac062786727c369aa55050f61a0",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "answer_envelope",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[-0.035808080808080,0.0,1.408308080808080]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.035808080808070},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.135808080808080},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "teacher",
+    "sample_id": "c0863ac062786727c369aa55050f61a0",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[-0.035808080808080,0.0,1.408308080808080]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.03580808080808024},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":-0.13580808080808024},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "student",
+    "sample_id": "b203a522628d7a0dac4f63181a975c39",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "answer_envelope",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.0999595959899,0.0,1.2058970353535]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.1282435353524},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.128999595989927},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "teacher",
+    "sample_id": "b203a522628d7a0dac4f63181a975c39",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.0999595959899,0.0,1.2058970353535]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.1282435353524},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.128999595989927},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "student",
+    "sample_id": "a7aac3d1a98fb47e47c9e3c1758288d8",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "answer_envelope",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.135249595989927,0.0,1.2996569953535]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.1352435353524},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.1352495353524},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "teacher",
+    "sample_id": "a7aac3d1a98fb47e47c9e3c1758288d8",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.135249595989927,0.0,1.2996569953535]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.1352435353524},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.1352495353524},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "student",
+    "sample_id": "1382c1d0664759284c7e4537ee4f6dec",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "answer_envelope",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[-0.1032495959599,0.0,1.0702770353577]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.1999595959835},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.1332435353577},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "teacher",
+    "sample_id": "1382c1d0664759284c7e4537ee4f6dec",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[-0.1032495959599,0.0,1.0702770353577]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":-0.1999595959835},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.1332435353577},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "student",
+    "sample_id": "084bac04e8203ef56e8dec4e650d520f",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "answer_envelope",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.007070708080808080,0.0,1.314526780808080]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.007070708080808080},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.003070808080808080},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "teacher",
+    "sample_id": "084bac04e8203ef56e8dec4e650d520f",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.007070708080808080,0.0,1.314526780808080]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.007070708080808080},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.003070808080808080},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "student",
+    "sample_id": "708f7e403db6f51337c89c2288ecf514",
+    "strict_status": "generation_or_parse_failure",
+    "strict_reason": "answer_envelope",
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.127808080808080,0.0,1.3308080808080]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.128707035242626},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.12870808080808080},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  },
+  {
+    "method": "codi_inspired_t5_distillation",
+    "branch": "teacher",
+    "sample_id": "708f7e403db6f51337c89c2288ecf514",
+    "strict_status": "success",
+    "strict_reason": null,
+    "EOS_terminated": true,
+    "envelope_keys": [
+      "explanation",
+      "targets"
+    ],
+    "expected_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "emitted_ids": [
+      "load:position",
+      "load:swing_angle",
+      "load:angular_velocity",
+      "load:boundary_crossed"
+    ],
+    "omitted_ids": [],
+    "duplicated_ids": {},
+    "binding_errors": [],
+    "raw_text": "{\"explanation\":\"Named readouts in the recorded reference state support the answer; no causal derivation is asserted.\",\"targets\":[{\"answer_type\":\"vector\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"position\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:position\",\"unit\":\"m\",\"value\":[0.127808080808080,0.0,1.3308080808080]},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"swing_angle\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:swing_angle\",\"unit\":\"rad\",\"value\":0.128707035242626},{\"answer_type\":\"number\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"angular_velocity\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:angular_velocity\",\"unit\":\"rad/s\",\"value\":0.12870808080808080},{\"answer_type\":\"boolean\",\"end_time\":1.0,\"entity_id\":\"load\",\"frame\":\"world\",\"quantity\":\"boundary_crossed\",\"query_kind\":\"at_time\",\"start_time\":1.0,\"target_id\":\"load:boundary_crossed\",\"unit\":\"1\",\"value\":false}]}\n",
+    "diagnostic_only_no_rescoring": true
+  }
+]

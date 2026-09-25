@@ -1,4 +1,31 @@
-# Current learning-pilot status — 25 September 2026
+# Current follow-up status — 25 September 2026
+
+Completed the [offline P08 diagnosis](reviews/Post_P08_diagnosis.md), then the
+[clarification v1 implementation](reviews/P09_clarification_completion.md), with
+separate evidence and reports. P08 is closed as a completed bounded pilot;
+learning quality and research claims remain unresolved. No additional training,
+paid calls or model generation occurred in these follow-ups.
+
+Diagnosis found near-constant primary derivatives with heavily saturated tanh
+layers, time/index dominance in both loss and gradients, no post-event training
+transitions, CODI student teacher-envelope outputs and duplicate Coconut targets.
+These measurements do not establish causal explanations or justify an objective
+change. Original strict scores, checkpoints and P07/P08 evidence are preserved.
+
+Clarification now supports one structured question, an actual attributed reply,
+recorded human reply review, conservative routing and at most one frozen-answer
+refinement. Unreviewed replies remain unresolved. No calibrated OOD alarm,
+automatic reforecasting or unsupported-value invention is implemented. Mock
+traces verify software behavior; effectiveness and independently reviewed live
+evaluation remain pending. The historical
+[P08 clarification proposal](reviews/P08_clarification_correction_and_proposal.md)
+is unchanged; its proposal-only restriction is superseded by the user's latest
+approval and the [active scope](decisions/Post_P08_and_P09_scope.md).
+
+Base implementation revision: `c6922b16a254a72be58482773e3410fa6eecd0c8`.
+Follow-up changes are local; the agent has not committed or pushed them.
+
+## Historical P08 learning-pilot status
 
 P08 completed the user-approved [revised pilot](reviews/Post_P07_next_pilot_revision.md)
 within every cap. The [completion report](reviews/P08_completion.md) includes

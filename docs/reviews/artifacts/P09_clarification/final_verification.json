@@ -1,0 +1,38 @@
+{
+  "source_commit": "c6922b16a254a72be58482773e3410fa6eecd0c8",
+  "branch": "full-phi-jepa-from-dataset",
+  "command": [
+    "/home/aashraf/phi-jepa/.venvs/phi-core/bin/python",
+    "-m",
+    "unittest",
+    "test_post_p08_diagnosis",
+    "test_clarification",
+    "test_p04a",
+    "test_p04b",
+    "-v"
+  ],
+  "exit_code": 0,
+  "seconds": 2.9577951259999997,
+  "original_P08_export_files_verified": 465,
+  "diagnosis_source_files_reverified": 94,
+  "mock_trace_files_verified": 118,
+  "source_files": {
+    "src/phi_jepa/inference/clarification.py": "fb62d1329bf7751c76fe74bad203474ac55738166097079658ca1dbcf236bb94",
+    "src/phi_jepa/providers/clarification.py": "2fc916c90a662afc5d4ebac574207930020d750f033836330327d9fdbdb470b4",
+    "src/phi_jepa/clarification_evaluation.py": "0242a361f615e95f9786a80b3d6296f1ba6675de53dc9807e33712d478004483",
+    "docs/assets/clarification_v1.json": "4bf316ccdf34dd5ffe33f14e319c9752476d86f30c3c44b19cf11d1ec3a819e7",
+    "tools/clarification_reply.py": "a4b9f983f0f816df1356a45409ee67bad75af9ff10d29b79e6f8ab75185086e8",
+    "tools/diagnose_post_p08.py": "92dfa5027dccaf4e989059bb02a046859ed59e4a6b25305d56ed59aa71954ea3",
+    "tools/report_post_p08_diagnosis.py": "67bcd262184583cee75b09081c9f855480b8e2682bb416ab3a2110f4088bc5ac",
+    "tools/review_clarification_fixtures.py": "beb3962affbaf5eea35e53ee14441f0d4270d78831d8409d93e596687c4febdf",
+    "tools/verify_post_p08_p09.py": "78c67083ebdc4b00cc1bad7e358d5c6d94cb133fcd65c217426190f4097e5e8e",
+    "tests/test_clarification.py": "27b861e1dbf67a5ece971f038d375fbacd7c3ffd735f9e98e30c2d6c23d65a16",
+    "tests/test_post_p08_diagnosis.py": "d862a8ed52202a8525966ce7eb5fdc8733dacdc6095d334503c111a001be2c69"
+  },
+  "tests_log_sha256": "94d180b34a546da2d2ada7bc3b2588612cd3e9acb4c6272c0360e2ba67535364",
+  "training_updates": 0,
+  "paid_calls": 0,
+  "new_model_generations": 0,
+  "original_reports_and_checkpoints_preserved": true,
+  "compile_check": "passed"
+}
