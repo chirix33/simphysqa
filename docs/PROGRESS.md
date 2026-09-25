@@ -1,5 +1,9 @@
 # Active P02a status — 24 September 2026
 
+Implementation/evidence commit: `cd6497856a94b3d01e0500ac54134a844e01e003`.
+43 offline tests passed; final export audit 188.131772 seconds.
+All three P02a policy choices are settled; next-stage work remains unlaunched.
+
 Stage 1/P02a offline implementation and real-export validation are complete on `full-phi-jepa-from-dataset`, starting HEAD
 `4f7d3e6b53009627b0b4223b2138ec5993c93726`, initially clean. Current user
 decisions supersede contract 1.1.0 and older endpoint-only architectures. See

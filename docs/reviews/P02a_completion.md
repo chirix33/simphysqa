@@ -179,3 +179,20 @@ sanitized notebook reference. Original notebook contents are not included.
 Boolean/event update (24 September 2026): the user selected a separate mechanism
 proposal for later review. No Boolean casting, new head or objective is implemented
 here. See `docs/docs/P02a_boolean_event_proposal.md` from the repository root.
+
+## Committed source and artifact identity
+
+Implementation/evidence commit: `cd6497856a94b3d01e0500ac54134a844e01e003`. The subsequent report-only commit
+records this identity; it does not change tested implementation or configuration.
+The audit ran on the inspected base HEAD with the exact new source bytes, which
+were checked against the staged Git blobs before commit.
+
+Final export-audit SHA-256:
+`b64c5aa892e276bd822596876fa3812da4b9c901bf64646c8c19d03332954281`.
+Compact evidence CHECKSUMS.json SHA-256:
+`616c684617a2369972973157ee64a1cfda50b86ee3bc850cabf875b7a14dc77c`.
+Compact evidence totals 337,036 bytes. No model checkpoint was produced.
+
+All three user choices are recorded. P02a is complete for offline implementation
+and real-export verification; the next model/provider phase and separate Boolean/
+event mechanism remain unlaunched and require their own review/qualification.
