@@ -5,6 +5,7 @@ metacognition_results/
 scratch_smoke_results/
 results/
 .env
+OPENAI_KEY.txt
 .venv/
 phi_jepa_try.ipynb
 *.zip
@@ -26,3 +27,4 @@ dist/
 *.egg-info/
 DATASET_CODEX_PROMPT.md
 Phi_JEPA_Final_+_Baselines.ipynb
+Phi_JEPA_Codex_Implementation_Plan.md

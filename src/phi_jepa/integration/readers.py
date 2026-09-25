@@ -138,7 +138,10 @@ def forecast_states(problem, reference):
     return states
 
 def make_pairs(problem, reference, identity, layout, provenance, multiplicities,
-               *, context_mode='public_base_for_offline_audit', enrichment=None):
+               *, context_mode='public_base_for_offline_audit', enrichment=None,
+               duplicate_policy='inverse_transition_multiplicity'):
+    if duplicate_policy not in ('inverse_transition_multiplicity', 'equal_question_pairs'):
+        raise ValueError('explicit supported weighting required')
     if identity.split != 'train': raise ValueError('recorded supervised pairs require training partition')
     inp = problem.input
     states = forecast_states(problem,reference)
@@ -157,12 +160,15 @@ def make_pairs(problem, reference, identity, layout, provenance, multiplicities,
         if type(count) is not int or count < 1: raise ValueError('invalid transition multiplicity')
         pair_id = digest((identity.sample_id,transition,layout_sha,context_sha))
         yield RecordedPair(identity,pair_id,transition,a['timestamp'],b['timestamp'],a['state_id'],b['state_id'],
-            vectors[i],vectors[i+1],context,layout_sha,provenance,1/count,context_mode)
+            vectors[i],vectors[i+1],context,layout_sha,provenance,
+            1.0 if duplicate_policy == 'equal_question_pairs' else 1/count,context_mode)
 
 class TrainingSequenceReader:
     def __init__(self, catalog, domain, layout, *, duplicate_policy,
                  context_mode, enrichments=None):
-        if duplicate_policy != 'inverse_transition_multiplicity': raise ValueError('explicit supported weighting required')
+        if duplicate_policy not in ('inverse_transition_multiplicity', 'equal_question_pairs'):
+            raise ValueError('explicit supported weighting required')
+        self.duplicate_policy = duplicate_policy
         self.catalog, self.domain, self.layout = catalog,domain,layout
         if context_mode not in ('enriched','public_base_for_offline_audit'): raise ValueError('explicit context mode required')
         if context_mode == 'enriched' and enrichments is None: raise ValueError('enrichment required; no fallback')
@@ -175,13 +181,14 @@ class TrainingSequenceReader:
             for a,b in zip(states,states[1:]):
                 multiplicities[digest((identity.domain,identity.group_id,a['timestamp'],b['timestamp']))] += 1
         provenance = digest({'release':self.catalog.identity,'files':self.catalog.files(self.domain,'train'),
-            'layout':self.layout.sha256,'window':'cutoff_then_reference','weight':'inverse_transition_multiplicity',
+            'layout':self.layout.sha256,'window':'cutoff_then_reference','weight':self.duplicate_policy,
             'reader_source_sha256':file_hash(__file__)})
         for problem,ref,identity in self.catalog.records(self.domain,'train'):
             enrichment = None if self.enrichments is None else self.enrichments.get(problem.sample_id)
             enriched_provenance = digest({'source':provenance,'context_mode':self.context_mode,'enrichment':enrichment})
             yield from make_pairs(problem,ref,identity,self.layout,enriched_provenance,multiplicities,
-                                  context_mode=self.context_mode,enrichment=enrichment)
+                                  context_mode=self.context_mode,enrichment=enrichment,
+                                  duplicate_policy=self.duplicate_policy)
 
 class EvaluatorTruthReader:
     mode = 'recorded_state_diagnostic_not_autonomous_forecasting'

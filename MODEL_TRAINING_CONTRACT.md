@@ -1,5 +1,14 @@
 # Active model-training contract — 2.0.0-candidate.1
 
+**Implementation update, 24 September 2026:** Stage 2 is validated with frozen
+Qwen/Qwen3-Embedding-0.6B and separately recorded public-only OpenAI gpt-5.6-sol
+notes. Stage 3 implements the settled computation below. The user selected
+**equal weight per question-conditioned pair**, superseding the inverse-
+multiplicity proposal below for active training. A capped 20-pair/200-update
+correctness fit is complete; full training remains disabled. Earlier statements
+that providers/models are unimplemented or all training is disabled describe
+P02a history. See `docs/reviews/P02b_completion.md` and `P03_completion.md`.
+
 24 September 2026. Authority: the user's Stage 1/P02a revision-3 instructions and
 confirmed adjacent-pair/full-feedback decisions. This is a separately versioned
 training contract. `MODEL_DATA_CONTRACT.md` 1.1.0, dataset schema 1.0.0, export

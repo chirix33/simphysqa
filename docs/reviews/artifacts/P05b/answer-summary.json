@@ -1,0 +1,1 @@
+{"attempts":3,"input_tokens":44555,"output_tokens":1271,"results":{"constant_context_text_ode":"success","constant_context_text_rnn":"success","fixed_projection_lr":"success"},"unpriced_attempts":0,"usage_priced_cost_usd":0.20364}

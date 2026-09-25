@@ -1,3 +1,92 @@
+# Active sequential-plan status — 24 September 2026
+
+Stage 8/P07 is **complete for the user-approved bounded correctness/resource
+evidence package**. Existing seed-11 tether selections/checkpoints and limits are
+preserved. 119 tests pass. All 6,702 training metadata records exclude the entire
+validation scenario. Actual target round trips, EOS shift, padding/loss masking,
+stopping settings and failure parsing pass; two invalid completed outputs and four
+token-cap/missing-EOS outputs remain failures, with 2/2 hybrid fallback attempts
+and 0/2 recoveries. No new training/generation/API calls or altered limits. Immutable
+export, runtime controls/no-op labels and resource evidence are in the
+[P07 report](reviews/P07_completion.md). Full study, convergence/generalization and
+performance claims remain pending. The [broader budget](reviews/P07_next_budget_proposal.md)
+is proposed only, not launched. All implementation changes remain uncommitted.
+
+Stage 7 is complete for bounded implementation/correctness validation. 118 tests
+pass; both independently trained custom T5 models pass longest-selected-input
+forward/backward, checkpoint resume and fresh-process generation. All generated
+answers fail after two updates; the 0/1 complete-answer result per condition and
+split is retained. Original eager-attention timeout and the equivalent query-block
+memory correction are documented. See [P06 report](reviews/P06_completion.md) and
+[decisions](decisions/P06_custom_baselines.md). Stage 8 now uses the existing bounded
+one-domain profile as correctness/resource evidence, without additional tuning or
+full-study expansion; a broader pilot was offered for user clarification.
+
+Stage 6 is now complete for the approved comparisons, runtime controls and explicit
+`no_enrichment`/`no_text_conditioning` retraining variants. Both extra independent
+fits ran 200 updates, replay exactly, and preserve negative/no-benefit evidence.
+No undefined no-schema variant is added; it is not a blocker. Whole Stage 6 answer
+cost USD 0.342580. See the updated [P05b report](reviews/P05b_completion.md).
+Stage 7 alignment/target/inference policies are approved and recorded in the task;
+Stage 7 is next. Full study remains unlaunched.
+
+Stage 6/P05b approved independent ODE/LR/RNN comparisons and runtime controls are
+implemented and correctness-validated: 104 tests pass, all checkpoint/answer
+replays exact, 200 updates per neural method and one LR fit. LR reporting recovery
+did not repeat the fit. Large LR and RNN forecast failures remain recorded. Three
+answer calls cost USD 0.203640. Context/schema retraining-ablation scope remains
+pending user clarification; Stage 7 has not started. See
+[P05b report](reviews/P05b_completion.md).
+
+Stage 5/P04b–P05a is complete for implementation and bounded development validation.
+97 offline tests pass. Training-only full-2d reference assessment and exact V1
+judge ran on one tether validation question. Combined assessment remains partial
+and uncalibrated because typed contract coverage is empty; no threshold decision
+or numerical replacement. One judge call cost USD 0.025868. See
+[P04b completion](reviews/P04b_completion.md). Stage 6 comparator definitions and
+optional LR/RNN selection are pending user replies; Stage 6+ has not started.
+
+Stage 4/P04a is complete for the approved initial deterministic readout and bounded
+answer diagnostic. Named physical forecasts remain separate from full augmented
+states and LLM answers. Target-specific support checks retain unsupported contact
+outcomes and full failure denominators. Three live validation answer calls cost
+USD 0.196584; exact cached replay passes. The answer model uses the supplied
+forecasts, but public-only numeric estimates are more accurate on this single
+question; no forecasting-benefit claim. See [P04a completion](reviews/P04a_completion.md).
+The user approved Stage 5 full-2d development familiarity assessment; Stage 5 is
+next. No Stage 6+ work or full training has launched.
+
+Stage 3/P03 is complete for bounded correctness validation. User-approved equal
+question-pair weights, adjacent-pair full-vector loss, both P gradient paths,
+complete predicted feedback and atomic training/deployment checkpoints are
+implemented. A 20-pair tether fit ran 200 CPU updates in 2.8435 s, with exact
+checkpoint continuation/replay. Autonomous error is high and tested numeric
+forecast sensitivity to Q is near zero; no performance claim is made. See
+[P03 completion](reviews/P03_completion.md). Stage 4 output-only Boolean/readout
+policy and gpt-5.6-sol answer model are now explicitly authorized. Stage 4 is next;
+no Stage 5+ work or full training has launched.
+
+Stage 2/P02b is complete with declared API snapshot/semantic-audit limitations.
+User replaced MiniLM with pinned `Qwen/Qwen3-Embedding-0.6B`, authorized downloads
+and live calls without a current spending limit, and selected a dotenv key-file
+reference. 36 offline tests pass (zero skips); 8038 base contexts fit; eight live
+enrichments and their GPU encodings pass; usage-priced cost USD 0.266964.
+See [completion](reviews/P02b_completion.md). Stage 3 is next, with user-confirmed
+**equal weight per question-conditioned pair**. Model training has not begun.
+
+## Historical initial P02b status — superseded above
+
+Revision-4 sequential implementation is authorized by the user. P02a/Stage 1
+remains complete. P02b/Stage 2 is **in progress**: offline provider/context/cache
+boundaries implemented; tensor and real-model validation pending. User selected
+`sentence-transformers/all-MiniLM-L6-v2` and OpenAI `gpt-5.6-sol`. Download/live
+budgets, core runtime preparation and MiniLM full-context policy remain pending.
+12 new offline tests passed, 3 tensor tests skipped; 15 P02a regressions passed.
+No live inference, model downloads, training or later-stage launch occurred.
+See [P02b interim report](reviews/P02b_completion.md) and
+[decisions](decisions/P02b_context.md). Work is uncommitted on
+`full-phi-jepa-from-dataset`, base `7f2553ca6591301de588bd3362e72838354169a0`.
+
 # Active P02a status — 24 September 2026
 
 Implementation/evidence commit: `cd6497856a94b3d01e0500ac54134a844e01e003`.

@@ -1,0 +1,11 @@
+{
+  "version": "development_r1_v1_full_2d_v1",
+  "alpha_contract": 0.5,
+  "lambda_json": 1.0,
+  "normalization": "none; raw full-vector cosine only",
+  "retrieval": "k1_cosine_frozen_public_context; exact domain/layout/cutoff/physical_grid; training scenario exclusion",
+  "high_score_numerical_replacement": false,
+  "calibration": {"split": "validation", "distribution": "id", "role": "calibration", "quantile": 0.95, "algorithm": "higher", "trigger": "strict_greater", "unit": "scenario_maximum", "minimum_scenarios": 20},
+  "physical_checks": {"quaternion_norm_tolerance": 0.001, "tether_length_tolerance_m": 0.001, "redundant_channel_tolerance": 0.000001},
+  "profile_budget": {"training_reference_questions": 1, "validation_questions": 1, "max_ode_solves": 200, "max_judge_attempts": 2, "max_output_tokens": 2048, "full_calibration": false, "full_study": false}
+}
