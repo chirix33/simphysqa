@@ -14,3 +14,8 @@ MODEL_DATA_CONTRACT.md -text
 configs/dataset_registries/** -text
 configs/dataset_sampling.json -text
 configs/dataset-bullet-linux.lock.txt -text
+# P02a derived contracts/evidence retain the audited byte identities.
+docs/reviews/artifacts/P02a/** -text
+configs/model_training_p02a.json -text
+MODEL_TRAINING_CONTRACT.md -text
+docs/references/P02a_notebook_sanitized_review.md -text

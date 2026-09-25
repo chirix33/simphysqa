@@ -8,8 +8,8 @@ These instructions govern implementation work for this project. The current user
 
 ## Scientific invariants
 
-- In the primary Phi-JEPA method, freeze the question/text encoder and prompted LLMs; train schema encoder, linear hybrid projection, latent ODE, linear physical readout and semantic reconstruction head. CoConuT/CODI separately train the backbones/adapters required by their own baseline definitions.
-- Physical MSE is terminal-only. Semantic regularization is separate and ablated. Do not add trajectory/derivative/EMA/EBM objectives to the primary method silently.
+- Active authority (24 September 2026): MODEL_TRAINING_CONTRACT.md 2.0.0-candidate.1. Freeze E; train P jointly with the ODE. Numerical width d implies p width d and ODE width 2d. Train on adjacent recorded states with the same current p on both sides, including target gradients; inference feeds back the complete predicted augmented vector. Custom Coconut-inspired/CODI-inspired baselines are intentional.
+- Adjacent-pair augmented-vector MSE supersedes terminal-only plans. Do not restore E(Q,C,A) targets, tree encoding, physical-readout/semantic-regularizer design, frozen targets, EMA, EBM or schema repair. Recorded training reference.states are legitimate supervision; deployment must never open reference data.
 - Preserve the adopted extraction, judge and answer prompt/schema originals. Input facts/schema are immutable. Unknown values are not physical zeros.
 - No trained EBM/DSM, Bregman, inference latent optimization/Langevin updates, prediction-driven schema repair, or hidden recovery/control claim.
 - Core prediction/inference must not import benchmark oracle dynamics, evaluator truths or PIN-specific residuals. Typed metadata is permitted; authored domain physics is disclosed and isolated.
@@ -28,7 +28,7 @@ Keep optimizer/solver states finite and shapes explicit. Count every solve/model
 
 ## Verification and claims
 
-Write targeted tests that check behavior: oracle accuracy, leakage, gradients, terminal-only loss, checkpoints, parsing, failure policy and cost accounting. Report commands actually run and their results. Do not count mock/fixture success as empirical model performance. A missing GPU/API prerequisite is `implemented_pending_validation` when code exists, not complete.
+Write targeted tests that check behavior: oracle accuracy, leakage, gradients, adjacent-pair alignment, full augmented feedback, checkpoints, parsing, failure policy and cost accounting. Report commands actually run and their results. Do not count mock/fixture success as empirical model performance. A missing GPU/API prerequisite is `implemented_pending_validation` when code exists, not complete.
 
 Independently train declared baselines. Label retraining ablations versus runtime interventions. PCVR checks physical predictions independently; provenance and empty check coverage are separate. No fabricated numbers, placeholders presented as measurements, or desired-outcome acceptance gate.
 

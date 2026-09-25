@@ -1,3 +1,5 @@
+> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
+
 # Codex workflow and escalation
 
 [Start](../README.md) · [Phases](06_phases.md) · [Review prompt](../prompts/REVIEW_PHASE.md) · [Blocker template](../prompts/BLOCKER_REPORT.md)

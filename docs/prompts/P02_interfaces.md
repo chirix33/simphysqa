@@ -1,10 +1,12 @@
+> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
+
 # Codex prompt: P02 - Frozen interfaces, schema semantics, and answer payloads
 
 Updated 2026-09-23 after independent P01 source review. Give this file to the existing Codex coding session. This authorizes one small P01 portability correction followed by P02 only, subject to the correction's tests passing.
 
 ---
 
-Implement P02 of Phi-JEPA, preserving the settled research design. Read applicable root/nested AGENTS.md, `docs/README.md`, `docs/PROGRESS.md`, `docs/reviews/P01_completion.md`, `docs/decisions/P01_data.md`, and `docs/docs/01_context.md`, `02_architecture.md`, `04_assessment_fallback.md`, `06_phases.md`, `07_workflow.md`, and `08_defaults_decisions.md`. Use the existing `docs/` handoff root; do not create `docs/implementation/`. Read the planner review supplied with this prompt if available; the required finding is reproduced below.
+Implement P02 of Phi-JEPA, preserving the settled research design. Read applicable root/nested AGENTS.md, `docs/README.md`, `docs/PROGRESS.md`, `docs/reviews/P01_completion.md`, `docs/decisions/P01_data.md`, and `docs/docs/01_context.md`, `02_architecture.md`, `04_assessment_fallback.md`, `06_phases.md`, `07_workflow.md`, and `08_defaults_decisions.md`. Use the existing `docs/` handoff root, not `docs/implementation/`. Read the planner review supplied with this prompt if available; the required finding is reproduced below.
 
 ## Starting state and research boundaries
 

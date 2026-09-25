@@ -1,3 +1,19 @@
+# Active P02a status — 24 September 2026
+
+Stage 1/P02a offline implementation and real-export validation are complete on `full-phi-jepa-from-dataset`, starting HEAD
+`4f7d3e6b53009627b0b4223b2138ec5993c93726`, initially clean. Current user
+decisions supersede contract 1.1.0 and older endpoint-only architectures. See
+[active training contract](../MODEL_TRAINING_CONTRACT.md),
+[supersession](decisions/P02a_supersession.md), and
+[state mapping](docs/P02a_state_mapping.md). Historical entries below retain their
+original dates and status; they do not override current authority.
+
+Verified 6,340 scenarios / 11,105 questions and 28,405 payload checksums.
+Training plan: 454,130 question-conditioned adjacent pairs / 334,890 unique
+physical transitions. User accepted state-plus-fixed-conditioning and public-only
+LLM enrichment. Separate Boolean/event mechanism proposal selected; training is disabled.
+See [P02a completion](reviews/P02a_completion.md).
+
 # Implementation progress
 
 Four-domain production generation and local export completed on 24 September 2026.
@@ -82,3 +98,7 @@ P00 branch: `codex/p00-bootstrap`; base/current HEAD `8e1cd56feb8f9fb0ec8aee92b0
 For every change: date, phase/substep, exact commit, actual checks, artifacts, remaining blockers and next step. Do not replace this with a list of aspirational completed checkboxes.
 
 P01: authorized by the user after planner acceptance of P00. Started at `dbff9573fa3d13adf4edafa42976afc2e5208e90` on `codex/p00-bootstrap` with only the expanded P01 prompt dirty; preserved it unchanged. P01 additions are uncommitted. See [P01 decisions](decisions/P01_data.md) and the completion report for exact checks, artifacts and limitations. No unresolved P01 blockers. Next: review P01; P02 requires separate authorization.
+
+Boolean/event update (24 September 2026): the user selected a separate mechanism
+proposal for later review. No Boolean casting, new head or objective is implemented
+here. See `docs/docs/P02a_boolean_event_proposal.md` from the repository root.

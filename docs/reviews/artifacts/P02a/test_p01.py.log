@@ -1,0 +1,25 @@
+test_config_limits_and_unknown_keys (test_p01.DatasetTests.test_config_limits_and_unknown_keys) ... ok
+test_correlated_views_and_complete_label_free_inputs (test_p01.DatasetTests.test_correlated_views_and_complete_label_free_inputs) ... ok
+test_deterministic_partitioning_support_and_outcomes (test_p01.DatasetTests.test_deterministic_partitioning_support_and_outcomes) ... ok
+test_train_only_scaling_and_constant_coordinates (test_p01.DatasetTests.test_train_only_scaling_and_constant_coordinates) ... ok
+test_validation_rejects_label_units_partition_and_truth_corruption (test_p01.DatasetTests.test_validation_rejects_label_units_partition_and_truth_corruption) ... ok
+test_duplicate_unknown_ids_rejected_and_row_order_irrelevant (test_p01.EvaluationTests.test_duplicate_unknown_ids_rejected_and_row_order_irrelevant) ... ok
+test_invalid_values_units_order_names_time_and_dimensions_count_as_failures (test_p01.EvaluationTests.test_invalid_values_units_order_names_time_and_dimensions_count_as_failures) ... ok
+test_missing_and_empty_physical_coverage_are_unavailable (test_p01.EvaluationTests.test_missing_and_empty_physical_coverage_are_unavailable) ... ok
+test_only_actual_compatible_trajectories_evaluated (test_p01.EvaluationTests.test_only_actual_compatible_trajectories_evaluated) ... ok
+test_oracle_and_corrupted_predictions_have_explicit_denominators (test_p01.EvaluationTests.test_oracle_and_corrupted_predictions_have_explicit_denominators) ... ok
+test_speed_gain_reversal_and_reachable_interval (test_p01.EvaluationTests.test_speed_gain_reversal_and_reachable_interval) ... ok
+test_wrong_but_weakly_compliant_is_not_correct_answer (test_p01.EvaluationTests.test_wrong_but_weakly_compliant_is_not_correct_answer) ... ok
+test_no_physics_imports_in_input_or_fixture_inference_and_recursive_hashes (test_p01.IntegrationTests.test_no_physics_imports_in_input_or_fixture_inference_and_recursive_hashes) ... ok
+test_offline_cli_generation_validation_evaluation_and_integrity (test_p01.IntegrationTests.test_offline_cli_generation_validation_evaluation_and_integrity) ... ok
+test_constant_closed_form_boundaries (test_p01.OracleTests.test_constant_closed_form_boundaries) ... ok
+test_events_before_at_after_stop_and_terminal (test_p01.OracleTests.test_events_before_at_after_stop_and_terminal) ... ok
+test_invalid_case_event_grid_and_step_budget (test_p01.OracleTests.test_invalid_case_event_grid_and_step_budget) ... ok
+test_numerical_is_independent_and_refines (test_p01.OracleTests.test_numerical_is_independent_and_refines) ... ok
+test_random_event_agreement_without_dataset_selection (test_p01.OracleTests.test_random_event_agreement_without_dataset_selection) ... ok
+test_state_continuity_and_sample_grid_invariance (test_p01.OracleTests.test_state_continuity_and_sample_grid_invariance) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 2.731s
+
+OK
