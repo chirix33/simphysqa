@@ -53,9 +53,18 @@ class TextCodec:
         return self.decode(self.tokenizer.decode(ids[:end],skip_special_tokens=False,clean_up_tokenization_spaces=False))
 
 
-def public_text(problem,enrichment):
+def public_text(problem,enrichment,*,branch=None):
     reject_private(enrichment)
-    return canonical({'instruction':'Predict the requested typed targets from these public facts. Return the configured JSON target format.',
+    instruction='Predict the requested typed targets from these public facts. Return the configured JSON target format.'
+    if branch is not None:
+        if branch not in ('teacher','student','coconut'): raise ValueError('unknown_output_instruction_branch')
+        envelope='exactly the key targets; no explanation key or prose outside JSON' if branch=='student' else 'exactly the keys explanation and targets; explanation is a concise description, not a verified causal derivation'
+        bindings=[{k:s[k] for k in BINDING} for s in problem.input['answer_spec']]
+        instruction=(f'Output branch: {branch}. Return one JSON object with {envelope}. '
+            f'Emit exactly {len(bindings)} target rows, one per target_id below, in this order. Never duplicate, omit or add a row. '
+            'Copy every binding unchanged, and add only the predicted typed value in each row. Preserve signs, decimals, vector dimensions and Boolean types. '
+            'Do not output a second version of a target. Required bindings: '+canonical(bindings).decode())
+    return canonical({'instruction':instruction,
         'public_input':problem.input,'public_enrichment':enrichment}).decode()
 
 

@@ -95,7 +95,7 @@ class CustomT5(nn.Module):
         extended_mask=torch.cat((attention_mask,attention_mask.new_ones(hidden.shape[0],self.settings.latents)),dim=1)
         return extended,extended_mask,latents
 
-    def training_losses(self,input_ids,attention_mask,*,teacher_labels,student_labels=None):
+    def training_losses(self,input_ids,attention_mask,*,teacher_labels,student_labels=None,teacher_input_ids=None,teacher_attention_mask=None):
         eos=self.t5.config.eos_token_id; eos_positions(teacher_labels,eos)
         if self.settings.method=='coconut_inspired_t5_gru':
             enc,mask,latents=self.enhanced_encoder(input_ids,attention_mask)
@@ -104,7 +104,10 @@ class CustomT5(nn.Module):
             return {'loss':out.loss+self.settings.smoothness_weight*smooth,'ce_loss':out.loss,'smoothness_loss':smooth,'latents':latents}
         if student_labels is None: raise ValueError('student_training_labels_required')
         eos_positions(student_labels,eos)
-        teacher=self.t5(input_ids=input_ids,attention_mask=attention_mask,labels=teacher_labels,output_hidden_states=True,return_dict=True,use_cache=False)
+        if (teacher_input_ids is None)!=(teacher_attention_mask is None): raise ValueError('teacher_instruction_ids_and_mask_required_together')
+        teacher=self.t5(input_ids=input_ids if teacher_input_ids is None else teacher_input_ids,
+            attention_mask=attention_mask if teacher_attention_mask is None else teacher_attention_mask,
+            labels=teacher_labels,output_hidden_states=True,return_dict=True,use_cache=False)
         teacher_hidden=teacher.decoder_hidden_states[-1]
         teacher_final,teacher_pos=post_answer_hidden(teacher_hidden,teacher_labels,eos)
         target=self.teacher_proj(teacher_final).detach()

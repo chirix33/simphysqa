@@ -87,7 +87,9 @@ def load_checkpoint(directory, *, layout, context_identity, training):
     projection = manifest['model']['projection']
     settings = ProjectionSettings(**{key: projection[key] for key in (
         'embedding_width', 'seed', 'initialization', 'precision', 'sharing')})
-    model = AugmentedODE(layout, settings, ODESettings(**manifest['model']['ode']))
+    from phi_jepa.models.conditioning import NumericalConditioning
+    conditioning=NumericalConditioning(manifest['model']['conditioning']) if 'conditioning' in manifest['model'] else None
+    model = AugmentedODE(layout, settings, ODESettings(**manifest['model']['ode']), conditioning)
     if digest(model.manifest()) != digest(manifest['model']):
         raise ValueError('model implementation/settings mismatch')
     if not finite_tree(bundle):

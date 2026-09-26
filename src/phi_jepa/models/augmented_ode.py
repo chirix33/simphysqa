@@ -19,11 +19,14 @@ class ODESettings:
 
 
 class AugmentedODE(nn.Module):
-    def __init__(self, layout, projection_settings: ProjectionSettings, ode_settings: ODESettings):
+    def __init__(self, layout, projection_settings: ProjectionSettings, ode_settings: ODESettings, conditioning=None):
         super().__init__()
         self.layout = layout
         self.projection = ContextProjection(layout, projection_settings)
         self.ode_settings = ode_settings
+        self.conditioning = conditioning
+        if conditioning is not None and (len(conditioning.center)!=layout.d or conditioning.manifest()['layout_sha256']!=layout.sha256):
+            raise ValueError('conditioning_layout_mismatch')
         width, hidden = 2 * layout.d, ode_settings.hidden_width
         with torch.random.fork_rng(devices=[]):
             torch.manual_seed(ode_settings.seed)
@@ -41,10 +44,14 @@ class AugmentedODE(nn.Module):
             raise ValueError('expected batch by 2d augmented state')
         if time.shape != (augmented.shape[0], 1):
             raise ValueError('time must be batch by one')
-        return self.field(torch.cat((augmented, time), dim=-1))
+        numerical=augmented[:,:self.layout.d]
+        if self.conditioning is not None: numerical=self.conditioning(numerical)
+        return self.field(torch.cat((numerical,augmented[:,self.layout.d:],time),dim=-1))
 
     def manifest(self):
-        return {'format_version': 1, 'contract': '2.0.0-candidate.1',
+        result = {'format_version': 1, 'contract': '2.0.0-candidate.1',
                 'layout': self.layout.manifest(), 'layout_sha256': self.layout.sha256,
                 'projection': self.projection.manifest(), 'ode': asdict(self.ode_settings),
                 'time': 'absolute_seconds_no_internal_rescaling', 'precision': 'float32'}
+        if self.conditioning is not None: result['conditioning']=self.conditioning.manifest()
+        return result

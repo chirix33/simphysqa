@@ -56,7 +56,9 @@ def load_checkpoint(directory,*,layout,context_identity,method,training):
     if manifest['kind']!=('training' if training else 'deployment') or manifest['context_identity']!=context_identity: raise ValueError('checkpoint_role_or_context')
     settings=BaselineSettings(**manifest['model']['settings'])
     if settings.method!=method or manifest['model']['layout_sha256']!=layout.sha256: raise ValueError('checkpoint_method_or_layout')
-    model=NumericalComparator(layout,settings)
+    from phi_jepa.models.conditioning import NumericalConditioning
+    conditioning=NumericalConditioning(manifest['model']['conditioning']) if 'conditioning' in manifest['model'] else None
+    model=NumericalComparator(layout,settings,conditioning)
     if digest(model.manifest())!=digest(manifest['model']) or not finite_tree(bundle): raise ValueError('checkpoint_manifest_or_values')
     model.load_state_dict(bundle['state'],strict=True); model.eval()
     trainer=None

@@ -1,4 +1,27 @@
-# Current follow-up status — 25 September 2026
+# P10 integrated qualification — bounded execution complete, 25 September 2026
+
+The latest user instruction authorizes the integrated workflow and a new budget,
+superseding the earlier follow-up's offline-only restriction. See the
+[active prompt](prompts/P10_integrated_qualification.md),
+[recorded decisions](decisions/P10_qualification.md), and
+[executable workflow](P10_pipeline.md). Current base commit is `5a375bd` on
+`full-phi-jepa-from-dataset`. P10 changes are local and have not been committed or
+pushed by the agent. The earlier P09 changes were committed by the user before
+this run; the historical status below describes their original execution time.
+
+The integrated pipeline ran through independent training, selected-checkpoint
+deployment, separate evaluation, assessment, budgeted answers and export. See
+[completion](reviews/P10_completion.md), [measured benchmark](reviews/P10_benchmark_report.md)
+and [the unexecuted full-study proposal](reviews/P10_next_full_study.md).
+103 targeted tests pass. The two-question numerical fitting check succeeds;
+validation load forecasting improves over hold-last, but primary complete-answer
+success is only 1/8. Selected Coconut/CODI outputs parse on 8/8 validation questions;
+complete-answer accuracy remains 1/8 and 2/8 respectively. The public-only control
+is stronger on common numerical targets. No primary-method superiority,
+four-domain performance, calibrated OOD detection or convergence is claimed.
+All original evidence, failed attempts and unsupported components are preserved.
+
+## Historical P08/P09 follow-up status — 25 September 2026
 
 Completed the [offline P08 diagnosis](reviews/Post_P08_diagnosis.md), then the
 [clarification v1 implementation](reviews/P09_clarification_completion.md), with

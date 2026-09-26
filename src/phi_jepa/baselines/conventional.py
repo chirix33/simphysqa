@@ -30,8 +30,11 @@ class BaselineSettings:
 
 
 class NumericalComparator(nn.Module):
-    def __init__(self,layout,settings):
+    def __init__(self,layout,settings,conditioning=None):
         super().__init__(); self.layout=layout; self.settings=settings
+        self.conditioning=conditioning
+        if conditioning is not None and (settings.method not in ('constant_context_text_ode','no_text_conditioning') or len(conditioning.center)!=layout.d or conditioning.manifest()['layout_sha256']!=layout.sha256):
+            raise ValueError('conditioning_only_for_matching_numerical_ODE')
         self.projection=(None if settings.method=='no_text_conditioning' else
                          ContextProjection(layout,ProjectionSettings(settings.embedding_width,seed=settings.seed)))
         d,h=layout.d,settings.hidden_width
@@ -52,22 +55,24 @@ class NumericalComparator(nn.Module):
                 self.register_buffer('fitted',torch.tensor(False))
 
     def manifest(self):
-        return {'version':'p05b-v1','settings':asdict(self.settings),'layout':self.layout.manifest(),
+        result = {'version':'p05b-v1','settings':asdict(self.settings),'layout':self.layout.manifest(),
             'layout_sha256':self.layout.sha256,'projection':self.projection.manifest() if self.projection is not None else None,
             'projection_trainable':self.projection is not None and self.settings.method!='fixed_projection_lr','loss':'raw_numerical_next_state_mse_equal_transitions',
             'output':'complete_n_only','context_feedback':'absent_numerical_only_component_ablation' if self.projection is None else 'initial_p_reused_constant',
             'initialization':'last_public_observation; RNN zero hidden; no earlier-history warmup',
             'precision':'float32 neural; float64 least_squares_coefficients'}
+        if self.conditioning is not None: result['conditioning']=self.conditioning.manifest()
+        return result
 
     def next_state(self,n,p,start,end,*,solver,stats,hidden=None):
         if n.ndim!=2 or n.shape[1]!=self.layout.d or not torch.isfinite(n).all(): raise ValueError('numerical_shape_or_value')
         method=self.settings.method
         if method=='no_text_conditioning':
             if p is not None: raise ValueError('numerical_only_rejects_context')
-            return rk4(lambda time,value:self.field(torch.cat((value,time),dim=-1)),n,start,end,solver,stats),None
+            return rk4(lambda time,value:self.field(torch.cat((self.conditioning(value) if self.conditioning is not None else value,time),dim=-1)),n,start,end,solver,stats),None
         if p is None or n.shape!=p.shape or not torch.isfinite(p).all(): raise ValueError('context_shape_or_value')
         if method=='constant_context_text_ode':
-            def field(time,value): return self.field(torch.cat((value,p,time),dim=-1))
+            def field(time,value): return self.field(torch.cat((self.conditioning(value) if self.conditioning is not None else value,p,time),dim=-1))
             return rk4(field,n,start,end,solver,stats),None
         dt=torch.as_tensor(end)-torch.as_tensor(start)
         if not torch.all(torch.abs(dt-self.settings.interval_seconds)<1e-7): raise ValueError('discrete_model_requires_0.02_seconds')

@@ -26,7 +26,11 @@ class PilotBudget:
 
     def read(self): return json.loads(self.path.read_text())
 
-    def size(self): return sum(p.stat().st_size for p in self.root.rglob('*') if p.is_file())
+    def size(self):
+        # Resume symlinks reference already counted content-addressed checkpoints.
+        # Charge their link bytes, not a second copy of the target weights.
+        return sum(p.lstat().st_size if p.is_symlink() else p.stat().st_size
+                   for p in self.root.rglob('*') if p.is_file() or p.is_symlink())
 
     def check(self, reserve_bytes=0):
         state = self.read()

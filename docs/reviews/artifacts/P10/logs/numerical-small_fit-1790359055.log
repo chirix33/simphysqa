@@ -1,0 +1,3 @@
+{"variant": "small_fit", "update": 1000, "validation_or_fit_score": 4.85061710015798, "loss": 0.2020980417728424}
+{"variant": "small_fit", "update": 2000, "validation_or_fit_score": 4.849912230316104, "loss": 0.10323979705572128}
+{"variant": "small_fit", "update": 4000, "validation_or_fit_score": 4.852255683630823, "loss": 0.0140140475705266}

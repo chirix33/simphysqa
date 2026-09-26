@@ -1,0 +1,1 @@
+{"conditioning":true,"context_identity":{"encoder":null,"mode":"public_base_for_offline_audit","variant":"biasinit_no_text_conditioning"},"full_interval":true,"method":"no_text_conditioning","output_bias_initialization":"training_mean_adjacent_derivative","primary":false,"variant":"biasinit_no_text_conditioning"}

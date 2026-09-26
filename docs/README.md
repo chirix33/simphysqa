@@ -2,6 +2,12 @@
 
 # Phi-JEPA: Codex implementation handoff
 
+**Current implementation entry point:** [P10 executable pipeline](P10_pipeline.md)
+and [progress](PROGRESS.md). The following installation-package description is
+preserved as historical context; it is not a statement that the current repository
+has no implementation. The user's latest learning-qualification scope supersedes
+earlier phase-only execution restrictions within its explicit budget.
+
 Prepared 23 September 2026. **This is a specification and phase-prompt package, not an implemented system.** It incorporates the active manuscript, September 22 meetings, professor's later correction, reviewed demo/source, CoConuT/CODI requirements, and workstation progress.
 
 ## Start here
