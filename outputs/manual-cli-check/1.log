@@ -1,0 +1,74 @@
+{
+  "output": "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/outputs/manual-cli-check/driving.json",
+  "sample_id": "1b17551c57d38101163d56c0cd8a7aaa",
+  "elapsed_seconds": 0.3276355266571045,
+  "results": {
+    "phi_jepa": {
+      "status": "success",
+      "reason": null,
+      "readout": [
+        {
+          "target_id": "car:forward_position",
+          "entity_id": "car",
+          "quantity": "forward_position",
+          "answer_type": "number",
+          "unit": "m",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 2.0,
+          "end_time": 2.0,
+          "status": "supported",
+          "value": 3.874626398086548,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            2.0,
+            2.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "car:forward_velocity",
+          "entity_id": "car",
+          "quantity": "forward_velocity",
+          "answer_type": "number",
+          "unit": "m/s",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 2.0,
+          "end_time": 2.0,
+          "status": "supported",
+          "value": 1.423494577407837,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            2.0,
+            2.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "car:stopped_by_T",
+          "entity_id": "car",
+          "quantity": "stopped_by_T",
+          "answer_type": "boolean",
+          "unit": "1",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 2.0,
+          "end_time": 2.0,
+          "status": "supported",
+          "value": false,
+          "reason": null,
+          "source": "sampled_public_rule",
+          "evidence": [
+            0.0,
+            2.0
+          ],
+          "rule_sha256": "81a42fc53a9422f7e7a07ac61f5c0cd106c8a31b754dce0439d5c56fc84e79e1"
+        }
+      ],
+      "answer": null
+    }
+  }
+}

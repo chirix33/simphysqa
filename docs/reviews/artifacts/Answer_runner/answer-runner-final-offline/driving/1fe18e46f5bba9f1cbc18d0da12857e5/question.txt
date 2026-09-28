@@ -1,0 +1,1 @@
+At 2 seconds from the initialized state, what are car forward_position (m), car forward_velocity (m/s), car stopped_by_T (1), under the public model, control law and scheduled intervention?

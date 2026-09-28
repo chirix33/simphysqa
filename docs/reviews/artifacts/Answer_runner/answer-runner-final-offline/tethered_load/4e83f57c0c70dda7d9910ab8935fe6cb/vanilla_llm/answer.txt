@@ -1,0 +1,1 @@
+At t=1.0 s, the predicted load position is [-0.0408, 0, 1.4474] m, swing angle is -0.0834 rad, angular velocity is 0.6547 rad/s, and the boundary has not been crossed.

@@ -1,0 +1,2335 @@
+# Cached GPT-5.6 Sol driving example
+
+Sample: 1b17551c57d38101163d56c0cd8a7aaa. Direct vanilla-LLM condition. This is a readable export of saved artifacts, not a new model call. JSON below is pretty-printed without intentionally omitting fields.
+
+## Exact instruction prompt
+
+Answer the original dynamical-system question using only the supplied public problem. Attempt every requested answer component, including Boolean outcomes, as your own prediction. No forecast or evaluator reference is supplied. Preserve every target binding, units, signs, vector dimensions and Boolean distinctions. Return exactly one row for each requested target, without duplicates. For a prediction use status supported, the correctly typed value and reason null. If you cannot produce a prediction, use status unsupported, value null and a specific reason. Do not treat an unavailable external forecast or rule-based Boolean readout as a requirement of this direct-LLM condition. Do not claim access to hidden simulator state or observed future outcomes. Keep plain_text_answer concise. Return only the required JSON envelope.
+
+## Request settings
+
+```json
+{
+  "max_output_tokens": 4096,
+  "model": "gpt-5.6-sol",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "store": false
+}
+```
+
+## Complete model input
+
+This is the decoded JSON string supplied in payload.input. It includes all eleven public observations, full model description, controller, intervention and answer specification. No gold values or future forecast are provided.
+
+```json
+{
+  "output_readout": [],
+  "physical_forecast": null,
+  "public_problem": {
+    "input": {
+      "answer_spec": [
+        {
+          "absolute_tolerance": 0.01,
+          "answer_type": "number",
+          "end_time": 2.0,
+          "entity_id": "car",
+          "frame": "world",
+          "quantity": "forward_position",
+          "query_kind": "at_time",
+          "relative_tolerance": 0.0,
+          "rule_definition": "Read the named channel at the requested absolute time. Unwrapped angles; quaternion xyzw compared by sign-invariant rotation angle; other vectors by Euclidean norm.",
+          "rule_id": "terminal_readout_v1",
+          "start_time": 2.0,
+          "target_id": "car:forward_position",
+          "unit": "m"
+        },
+        {
+          "absolute_tolerance": 0.02,
+          "answer_type": "number",
+          "end_time": 2.0,
+          "entity_id": "car",
+          "frame": "world",
+          "quantity": "forward_velocity",
+          "query_kind": "at_time",
+          "relative_tolerance": 0.0,
+          "rule_definition": "Read the named channel at the requested absolute time. Unwrapped angles; quaternion xyzw compared by sign-invariant rotation angle; other vectors by Euclidean norm.",
+          "rule_id": "terminal_readout_v1",
+          "start_time": 2.0,
+          "target_id": "car:forward_velocity",
+          "unit": "m/s"
+        },
+        {
+          "absolute_tolerance": 0.0,
+          "answer_type": "boolean",
+          "end_time": 2.0,
+          "entity_id": "car",
+          "frame": "world",
+          "quantity": "stopped_by_T",
+          "query_kind": "at_time",
+          "relative_tolerance": 0.0,
+          "rule_definition": "Absolute forward speed <0.02 m/s and planar speed <0.03 m/s for 0.2s; earliest qualifying interval end <=T.",
+          "rule_id": "terminal_readout_v1",
+          "start_time": 2.0,
+          "target_id": "car:stopped_by_T",
+          "unit": "1"
+        }
+      ],
+      "controller": {
+        "controls": [],
+        "description": "Memoryless law evaluated before each integration step; events use [start,end).",
+        "equations": [
+          "After onset, each axle uses a zero-velocity brake with maximum torque 0.25 N*m; PyBullet VELOCITY_CONTROL targetVelocity=0 opposes wheel motion. Braking remains engaged through T."
+        ],
+        "initial_internal_state": [],
+        "mode": "fully_specified_feedback",
+        "parameters": [
+          {
+            "entity_id": "car",
+            "frame": "world",
+            "name": "friction",
+            "unit": "1",
+            "value": 0.5929020734881056
+          },
+          {
+            "entity_id": "car",
+            "frame": "world",
+            "name": "brake_torque_limit",
+            "unit": "N*m",
+            "value": 0.25
+          },
+          {
+            "entity_id": "car",
+            "frame": "world",
+            "name": "wheel_contact_stiffness",
+            "unit": "N/m",
+            "value": 10000.0
+          },
+          {
+            "entity_id": "car",
+            "frame": "world",
+            "name": "wheel_contact_damping",
+            "unit": "N*s/m",
+            "value": 100.0
+          }
+        ],
+        "update_interval_s": 0.0001
+      },
+      "coordinate_convention": "Right-handed world x-forward/y-left/z-up; quaternion xyzw; unwrapped right-hand joint angles; all channels SI.",
+      "domain": "driving",
+      "entities": [
+        {
+          "entity_id": "car",
+          "properties": [
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_-1_mass",
+              "unit": "kg",
+              "value": 9.503505961797496
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_-1_friction",
+              "unit": "engine_specific",
+              "value": 0.5
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_-1_inertia_diagonal",
+              "unit": "kg*m^2",
+              "value": [
+                0.0826805018676382,
+                0.29650938600808185,
+                0.356381473567406
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_-1_inertial_position",
+              "unit": "m",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_-1_inertial_quaternion_xyzw",
+              "unit": "1",
+              "value": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_0_mass",
+              "unit": "kg",
+              "value": 0.2851051788539249
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_0_friction",
+              "unit": "engine_specific",
+              "value": 0.5929020734881056
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_0_inertia_diagonal",
+              "unit": "kg*m^2",
+              "value": [
+                0.0007507769709820022,
+                0.0007507769709820022,
+                0.0014255258942696247
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_0_inertial_position",
+              "unit": "m",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_0_inertial_quaternion_xyzw",
+              "unit": "1",
+              "value": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_1_mass",
+              "unit": "kg",
+              "value": 0.2851051788539249
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_1_friction",
+              "unit": "engine_specific",
+              "value": 0.5929020734881056
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_1_inertia_diagonal",
+              "unit": "kg*m^2",
+              "value": [
+                0.0007507769709820022,
+                0.0007507769709820022,
+                0.0014255258942696247
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_1_inertial_position",
+              "unit": "m",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_1_inertial_quaternion_xyzw",
+              "unit": "1",
+              "value": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_2_mass",
+              "unit": "kg",
+              "value": 0.2851051788539249
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_2_friction",
+              "unit": "engine_specific",
+              "value": 0.5929020734881056
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_2_inertia_diagonal",
+              "unit": "kg*m^2",
+              "value": [
+                0.0007507769709820022,
+                0.0007507769709820022,
+                0.0014255258942696247
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_2_inertial_position",
+              "unit": "m",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_2_inertial_quaternion_xyzw",
+              "unit": "1",
+              "value": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_3_mass",
+              "unit": "kg",
+              "value": 0.2851051788539249
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_3_friction",
+              "unit": "engine_specific",
+              "value": 0.5929020734881056
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_3_inertia_diagonal",
+              "unit": "kg*m^2",
+              "value": [
+                0.0007507769709820022,
+                0.0007507769709820022,
+                0.0014255258942696247
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_3_inertial_position",
+              "unit": "m",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "body_local",
+              "name": "body_0_link_3_inertial_quaternion_xyzw",
+              "unit": "1",
+              "value": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            }
+          ],
+          "type": "four_wheel_vehicle"
+        },
+        {
+          "entity_id": "wheel_0",
+          "properties": [],
+          "type": "wheel"
+        },
+        {
+          "entity_id": "wheel_1",
+          "properties": [],
+          "type": "wheel"
+        },
+        {
+          "entity_id": "wheel_2",
+          "properties": [],
+          "type": "wheel"
+        },
+        {
+          "entity_id": "wheel_3",
+          "properties": [],
+          "type": "wheel"
+        }
+      ],
+      "global_context": "Deterministic SI simulation. Full public model prior: <robot name=\"phi_car_v1\"><link name=\"car\"><inertial><origin xyz=\"0 0 0\"/><mass value=\"9.503505961797496\"/><inertia ixx=\"0.0826805018676382\" ixy=\"0\" ixz=\"0\" iyy=\"0.29650938600808185\" iyz=\"0\" izz=\"0.356381473567406\"/></inertial><collision><origin xyz=\"0 0 0\"/><geometry><box size=\"0.6 0.3 0.12\"/></geometry></collision></link><link name=\"wheel_0\"><inertial><origin xyz=\"0 0 0\"/><mass value=\"0.2851051788539249\"/><inertia ixx=\"0.0007507769709820022\" ixy=\"0\" ixz=\"0\" iyy=\"0.0007507769709820022\" iyz=\"0\" izz=\"0.0014255258942696247\"/></inertial><collision><origin xyz=\"0 0 0\"/><geometry><cylinder radius=\"0.1\" length=\"0.04\"/></geometry></collision></link><joint name=\"axle_0\" type=\"continuous\"><parent link=\"car\"/><child link=\"wheel_0\"/><origin xyz=\"0.22 0.2 -0.07\" rpy=\"-1.5707963267948966 0 0\"/><axis xyz=\"0 0 1\"/><dynamics damping=\"0\" friction=\"0\"/></joint><link name=\"wheel_1\"><inertial><origin xyz=\"0 0 0\"/><mass value=\"0.2851051788539249\"/><inertia ixx=\"0.0007507769709820022\" ixy=\"0\" ixz=\"0\" iyy=\"0.0007507769709820022\" iyz=\"0\" izz=\"0.0014255258942696247\"/></inertial><collision><origin xyz=\"0 0 0\"/><geometry><cylinder radius=\"0.1\" length=\"0.04\"/></geometry></collision></link><joint name=\"axle_1\" type=\"continuous\"><parent link=\"car\"/><child link=\"wheel_1\"/><origin xyz=\"0.22 -0.2 -0.07\" rpy=\"-1.5707963267948966 0 0\"/><axis xyz=\"0 0 1\"/><dynamics damping=\"0\" friction=\"0\"/></joint><link name=\"wheel_2\"><inertial><origin xyz=\"0 0 0\"/><mass value=\"0.2851051788539249\"/><inertia ixx=\"0.0007507769709820022\" ixy=\"0\" ixz=\"0\" iyy=\"0.0007507769709820022\" iyz=\"0\" izz=\"0.0014255258942696247\"/></inertial><collision><origin xyz=\"0 0 0\"/><geometry><cylinder radius=\"0.1\" length=\"0.04\"/></geometry></collision></link><joint name=\"axle_2\" type=\"continuous\"><parent link=\"car\"/><child link=\"wheel_2\"/><origin xyz=\"-0.22 0.2 -0.07\" rpy=\"-1.5707963267948966 0 0\"/><axis xyz=\"0 0 1\"/><dynamics damping=\"0\" friction=\"0\"/></joint><link name=\"wheel_3\"><inertial><origin xyz=\"0 0 0\"/><mass value=\"0.2851051788539249\"/><inertia ixx=\"0.0007507769709820022\" ixy=\"0\" ixz=\"0\" iyy=\"0.0007507769709820022\" iyz=\"0\" izz=\"0.0014255258942696247\"/></inertial><collision><origin xyz=\"0 0 0\"/><geometry><cylinder radius=\"0.1\" length=\"0.04\"/></geometry></collision></link><joint name=\"axle_3\" type=\"continuous\"><parent link=\"car\"/><child link=\"wheel_3\"/><origin xyz=\"-0.22 -0.2 -0.07\" rpy=\"-1.5707963267948966 0 0\"/><axis xyz=\"0 0 1\"/><dynamics damping=\"0\" friction=\"0\"/></joint></robot> Infinite ground plane z=0, friction=1. No rolling/spinning friction or drag. Wheel contacts stiffness=10000 N/m, damping=100 N*s/m, frictionAnchor=1.",
+      "known_events": [
+        {
+          "description": "Known scheduled intervention; the controller definition specifies direction and application point.",
+          "end_time": 2.0,
+          "event_id": "775fac513ecd42cf88064c2b72b4b90e",
+          "parameters": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "magnitude",
+              "unit": "N*m",
+              "value": 0.25
+            }
+          ],
+          "start_time": 0.5564,
+          "type": "scheduled_intervention"
+        }
+      ],
+      "observation_cutoff": 0.2,
+      "question": "At 2 seconds from the initialized state, what are car forward_position (m), car forward_velocity (m/s), car stopped_by_T (1), under the public model, control law and scheduled intervention?",
+      "states": [
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.0,
+                0.0,
+                0.17
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.6984591452074245,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.0
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.6984591452074245
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 0.0
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.984591452074245
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 0.0
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.984591452074245
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 0.0
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.984591452074245
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 0.0
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.984591452074245
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "dc543a0e3b83d472698c7aebcc9193d4",
+          "step_index": 0,
+          "timestamp": 0.0
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.0539335592796284,
+                -8.88746375167155E-06,
+                0.16949890932134715
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                2.5867389626586808E-05,
+                2.1725793782150317E-05,
+                -4.5564225349837385E-08,
+                0.999999999429433
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.6932582924517114,
+                0.0005862550524117189,
+                -0.042334456167072584
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                -0.003476698082007925,
+                0.005144818837885593,
+                1.2849735518381303E-06
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.0539335592796284
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.6932582924517114
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 0.5346185160359191
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.701034289040376
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 0.5345740638967249
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.701111710948513
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 0.5345990052848236
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.701067639153294
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 0.5345717060094192
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.701114178109318
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "24802a4c0142c6ea6e98d72587c08b1c",
+          "step_index": 200,
+          "timestamp": 0.02
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.1077500622229453,
+                6.647879259804419E-06,
+                0.16840079893129095
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                -1.958793006863748E-05,
+                5.603352987154756E-05,
+                -5.6475787882139773E-08,
+                0.9999999982382767
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.6890714828088695,
+                0.0023481137396850964,
+                -0.05008362887306051
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                -0.013811745102775977,
+                -0.0016057832305974074,
+                3.007424586611619E-06
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.1077500622229453
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.6890714828088695
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 1.0681678136158836
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.725610892314783
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 1.0681196903118992
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.72393266035498
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 1.068140333698207
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.724794948444917
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 1.0681103838927326
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.723872874203302
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "1abb63dc19ecd3cb0975b23ee9acc69b",
+          "step_index": 400,
+          "timestamp": 0.04
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.1614631995875929,
+                1.1296410706819698E-06,
+                0.16790498145324004
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                -3.4251605932582836E-06,
+                4.3691509510101365E-05,
+                -6.400168686115568E-08,
+                0.9999999990396581
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.6829399620408494,
+                -0.002867288804141442,
+                -0.0025034675920680024
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                0.01676915003134275,
+                -0.0010478755247483988,
+                5.172288725473449E-07
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.1614631995875929
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.6829399620408494
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 1.6009266397304511
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.578138895419922
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 1.6008792080534673
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.57812080642646
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 1.6008975103083674
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.57812451823337
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 1.6008687942930089
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.578109301621158
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "a9c2155811a8774e8fe2e2eb5dc378b7",
+          "step_index": 600,
+          "timestamp": 0.06
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.21507499769709748,
+                -5.184394288496664E-06,
+                0.16809912141489616
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                1.5024084397618772E-05,
+                3.4420367189167946E-05,
+                -6.607562058665396E-08,
+                0.9999999992947554
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.677298691907873,
+                0.0007254442461046523,
+                0.018864829378446614
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                -0.004258385446220324,
+                0.0014782905392604182,
+                5.965562002167747E-07
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.21507499769709748
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.677298691907873
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 2.1327644542288766
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.519071134857423
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 2.1327176091701086
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.519110022360593
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 2.132731636865848
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.519096651505908
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 2.1327047287733265
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.51911958409324
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "06ab34fb270f05ab7bd542d2e9ef5a1d",
+          "step_index": 800,
+          "timestamp": 0.08
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.26857790779302687,
+                5.509273903925017E-06,
+                0.16837189742032674
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                -1.627433500547682E-05,
+                4.12304922825581E-05,
+                -7.426347745497716E-08,
+                0.9999999990175935
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.672530256754447,
+                0.0020614037401210494,
+                0.0007637927106490014
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                -0.012054221839444766,
+                0.0006594482790832066,
+                -8.98306742307179E-06
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.26857790779302687
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.672530256754447
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 2.6633756714600922
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.56266539728593
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 2.6633251514039675
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.562665891992324
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 2.6633376045529236
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.562711771973813
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 2.6633087502323423
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.562720379674985
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "cd71bf9aa79d242a4c53237853b0fd6e",
+          "step_index": 1000,
+          "timestamp": 0.1
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.32196737637109846,
+                -2.205764382013839E-07,
+                0.16842436831332802
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                4.832761649203329E-07,
+                4.869279903919064E-05,
+                -8.182265711356993E-08,
+                0.9999999988143855
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.6670832718239166,
+                -0.0030332193420089817,
+                -0.0017965086558938148
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                0.01775281503818122,
+                -0.00041926624916510853,
+                1.2427953425340289E-06
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.32196737637109846
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.6670832718239166
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 3.1927445670997328
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.442434064072476
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 3.1926961611615643
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.442400955921542
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 3.1927030132856893
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.442393545239035
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 3.192675589092543
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.442369175283805
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "4023f01ae008946db716bbf23dbcb559",
+          "step_index": 1200,
+          "timestamp": 0.12
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.3752492301765137,
+                -6.186960245059897E-06,
+                0.1683152269104107
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                1.7864542554825188E-05,
+                4.5541912356913444E-05,
+                -9.423031595078991E-08,
+                0.9999999988033917
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.660942008761411,
+                0.0018896117614899718,
+                0.0017123238958091092
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                -0.01105963289470649,
+                0.0002947289103130211,
+                8.417166190118287E-07
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.3752492301765137
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.660942008761411
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 3.721256616808278
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.350450944328824
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 3.721208785710392
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.350465650559386
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 3.721209219264897
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.35046324620589
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 3.72118780739206
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.350472633014736
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "33e253fbbe53821b48c351d60b664e81",
+          "step_index": 1400,
+          "timestamp": 0.14
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.4284215392030581,
+                7.539742445615971E-06,
+                0.16827045458560616
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                -2.230994197397204E-05,
+                4.191240421527315E-05,
+                -1.1010556192756596E-07,
+                0.9999999988728023
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.655663737209158,
+                0.0009262942824857697,
+                -0.0020769349704749607
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                -0.005380358001971648,
+                6.727580959359729E-05,
+                -4.380356881529061E-07
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.4284215392030581
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.655663737209158
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 4.248689188042542
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.364318782047242
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 4.2486407551672025
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.364401782734934
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 4.248638259232165
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.364411931548187
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 4.248615321587784
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.364451376166173
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "83c99f7ef76875c4a1e7ce460dc25548",
+          "step_index": 1600,
+          "timestamp": 0.16
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.4814809377700794,
+                -2.325736916746811E-06,
+                0.1683046230916707
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                6.545254073421226E-06,
+                4.3672456368132525E-05,
+                -1.1689984592297447E-07,
+                0.9999999990249312
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.650773961454023,
+                -0.0027063733957692097,
+                0.0018257391739682576
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                0.01585590182676721,
+                -0.0009134037850935201,
+                -3.171046904583785E-06
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.4814809377700794
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.650773961454023
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 4.774797488257336
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.29836356529852
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 4.774748419416978
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.299232008524967
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 4.77474246728349
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.298538892503135
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 4.774722553825301
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.29828653714589
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "ac93ff7ed09d6f67ecb78e6036ff9082",
+          "step_index": 1800,
+          "timestamp": 0.18
+        },
+        {
+          "context": "Measured simulator state at the stated timestamp.",
+          "measurements": [
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "position",
+              "unit": "m",
+              "value": [
+                0.5344325446235992,
+                -4.556972313270059E-06,
+                0.16831299422522467
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "orientation",
+              "unit": "1",
+              "value": [
+                1.3009008797222062E-05,
+                4.3863428317436216E-05,
+                -1.2033251287571766E-07,
+                0.9999999989533754
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "velocity",
+              "unit": "m/s",
+              "value": [
+                2.6445024176847167,
+                0.0018348894377870771,
+                0.0038198193420113796
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": [
+                -0.010735691056776313,
+                0.0008826754075188044,
+                5.729590768631764E-07
+              ]
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_position",
+              "unit": "m",
+              "value": 0.5344325446235992
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "forward_velocity",
+              "unit": "m/s",
+              "value": 2.6445024176847167
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 5.300013791389428
+            },
+            {
+              "entity_id": "wheel_0",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.185488291554314
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 5.2999670421977125
+            },
+            {
+              "entity_id": "wheel_1",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.185490518156637
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 5.299954615012786
+            },
+            {
+              "entity_id": "wheel_2",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.18549107384793
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angle",
+              "unit": "rad",
+              "value": 5.299937907343154
+            },
+            {
+              "entity_id": "wheel_3",
+              "frame": "joint_local",
+              "name": "angular_velocity",
+              "unit": "rad/s",
+              "value": 26.185494081244364
+            },
+            {
+              "entity_id": "car",
+              "frame": "world",
+              "name": "stopped_by_T",
+              "unit": "1",
+              "value": false
+            }
+          ],
+          "relations": [],
+          "state_id": "ce2abcebf3a280aec8e7276a228be631",
+          "step_index": 2000,
+          "timestamp": 0.2
+        }
+      ],
+      "task_type": "future_state_prediction"
+    },
+    "sample_id": "1b17551c57d38101163d56c0cd8a7aaa",
+    "schema_version": "1.0.0"
+  }
+}
+```
+
+## Exact structured-output schema
+
+```json
+{
+  "format": {
+    "name": "named_physical_answer",
+    "schema": {
+      "additionalProperties": false,
+      "properties": {
+        "plain_text_answer": {
+          "type": "string"
+        },
+        "targets": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "answer_type": {
+                    "enum": [
+                      "number"
+                    ],
+                    "type": "string"
+                  },
+                  "end_time": {
+                    "enum": [
+                      2.0
+                    ],
+                    "type": "number"
+                  },
+                  "entity_id": {
+                    "enum": [
+                      "car"
+                    ],
+                    "type": "string"
+                  },
+                  "frame": {
+                    "enum": [
+                      "world"
+                    ],
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "enum": [
+                      "forward_position"
+                    ],
+                    "type": "string"
+                  },
+                  "query_kind": {
+                    "enum": [
+                      "at_time"
+                    ],
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start_time": {
+                    "enum": [
+                      2.0
+                    ],
+                    "type": "number"
+                  },
+                  "status": {
+                    "enum": [
+                      "supported",
+                      "unsupported"
+                    ],
+                    "type": "string"
+                  },
+                  "target_id": {
+                    "enum": [
+                      "car:forward_position"
+                    ],
+                    "type": "string"
+                  },
+                  "unit": {
+                    "enum": [
+                      "m"
+                    ],
+                    "type": "string"
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "target_id",
+                  "entity_id",
+                  "quantity",
+                  "answer_type",
+                  "unit",
+                  "frame",
+                  "query_kind",
+                  "start_time",
+                  "end_time",
+                  "status",
+                  "value",
+                  "reason"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "answer_type": {
+                    "enum": [
+                      "number"
+                    ],
+                    "type": "string"
+                  },
+                  "end_time": {
+                    "enum": [
+                      2.0
+                    ],
+                    "type": "number"
+                  },
+                  "entity_id": {
+                    "enum": [
+                      "car"
+                    ],
+                    "type": "string"
+                  },
+                  "frame": {
+                    "enum": [
+                      "world"
+                    ],
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "enum": [
+                      "forward_velocity"
+                    ],
+                    "type": "string"
+                  },
+                  "query_kind": {
+                    "enum": [
+                      "at_time"
+                    ],
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start_time": {
+                    "enum": [
+                      2.0
+                    ],
+                    "type": "number"
+                  },
+                  "status": {
+                    "enum": [
+                      "supported",
+                      "unsupported"
+                    ],
+                    "type": "string"
+                  },
+                  "target_id": {
+                    "enum": [
+                      "car:forward_velocity"
+                    ],
+                    "type": "string"
+                  },
+                  "unit": {
+                    "enum": [
+                      "m/s"
+                    ],
+                    "type": "string"
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "target_id",
+                  "entity_id",
+                  "quantity",
+                  "answer_type",
+                  "unit",
+                  "frame",
+                  "query_kind",
+                  "start_time",
+                  "end_time",
+                  "status",
+                  "value",
+                  "reason"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "answer_type": {
+                    "enum": [
+                      "boolean"
+                    ],
+                    "type": "string"
+                  },
+                  "end_time": {
+                    "enum": [
+                      2.0
+                    ],
+                    "type": "number"
+                  },
+                  "entity_id": {
+                    "enum": [
+                      "car"
+                    ],
+                    "type": "string"
+                  },
+                  "frame": {
+                    "enum": [
+                      "world"
+                    ],
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "enum": [
+                      "stopped_by_T"
+                    ],
+                    "type": "string"
+                  },
+                  "query_kind": {
+                    "enum": [
+                      "at_time"
+                    ],
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "start_time": {
+                    "enum": [
+                      2.0
+                    ],
+                    "type": "number"
+                  },
+                  "status": {
+                    "enum": [
+                      "supported",
+                      "unsupported"
+                    ],
+                    "type": "string"
+                  },
+                  "target_id": {
+                    "enum": [
+                      "car:stopped_by_T"
+                    ],
+                    "type": "string"
+                  },
+                  "unit": {
+                    "enum": [
+                      "1"
+                    ],
+                    "type": "string"
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "target_id",
+                  "entity_id",
+                  "quantity",
+                  "answer_type",
+                  "unit",
+                  "frame",
+                  "query_kind",
+                  "start_time",
+                  "end_time",
+                  "status",
+                  "value",
+                  "reason"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "plain_text_answer",
+        "targets"
+      ],
+      "type": "object"
+    },
+    "strict": true,
+    "type": "json_schema"
+  }
+}
+```
+
+## Cached answer
+
+The parsed response content, including every target field:
+
+```json
+{
+  "plain_text_answer": "At t=2.0 s, the car is predicted at 4.00 m with forward velocity 1.01 m/s and has not stopped.",
+  "targets": [
+    {
+      "answer_type": "number",
+      "end_time": 2,
+      "entity_id": "car",
+      "frame": "world",
+      "quantity": "forward_position",
+      "query_kind": "at_time",
+      "reason": null,
+      "start_time": 2,
+      "status": "supported",
+      "target_id": "car:forward_position",
+      "unit": "m",
+      "value": 4.0
+    },
+    {
+      "answer_type": "number",
+      "end_time": 2,
+      "entity_id": "car",
+      "frame": "world",
+      "quantity": "forward_velocity",
+      "query_kind": "at_time",
+      "reason": null,
+      "start_time": 2,
+      "status": "supported",
+      "target_id": "car:forward_velocity",
+      "unit": "m/s",
+      "value": 1.01
+    },
+    {
+      "answer_type": "boolean",
+      "end_time": 2,
+      "entity_id": "car",
+      "frame": "world",
+      "quantity": "stopped_by_T",
+      "query_kind": "at_time",
+      "reason": null,
+      "start_time": 2,
+      "status": "supported",
+      "target_id": "car:stopped_by_T",
+      "unit": "1",
+      "value": false
+    }
+  ]
+}
+```
+
+## Cache provenance and original usage
+
+```json
+{
+  "boolean_policy": "direct_prediction",
+  "cache": {
+    "metadata": {
+      "request_sha256": "84c00fea729b89266660445a3fa1c73db5692b653df235d50973a2afbd9cc83d",
+      "response_id": "resp_099cc9d0e062232c016ab71f66db7487d2b5c275cd7cd61eba",
+      "returned_model": "gpt-5.6-sol",
+      "usage": {
+        "cost_usd": 0.086052,
+        "input_tokens": 10233,
+        "output_tokens": 2256
+      }
+    },
+    "path": "/home/aashraf/phi-jepa/p11-tonight-01/answer_cache/84c00fea729b89266660445a3fa1c73db5692b653df235d50973a2afbd9cc83d.json"
+  },
+  "condition": "direct_llm",
+  "elapsed_seconds": 0.006419897999876412,
+  "origin": "validated_cache",
+  "provider_profile": {
+    "max_attempts_per_request": 1,
+    "max_output_tokens": 4096,
+    "max_total_attempts": 6,
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "timeout_seconds": 120
+  },
+  "requested_answer_mode": "prefer_cache",
+  "response_metadata": [],
+  "status": "success"
+}
+```
+
+## Gold values: evaluator only, never part of the request
+
+```json
+{
+  "domain": "driving",
+  "public_sha256": "f0fdbb6622e07a6c1f0d0c3fef320b30f37d16516e8be7deedcc43b261e5fbb4",
+  "purpose": "Evaluator reference for comparison after inference; never model input",
+  "sample_id": "1b17551c57d38101163d56c0cd8a7aaa",
+  "scenario_id": "d2b5ec3f1c208b39618c6961045dd913",
+  "source": "/home/aashraf/phi-jepa/p11-tonight-01/private/driving/test_id-references.json",
+  "source_sha256": "6511ffdfc6ea90b61cda2a1edee20789e12c3641522243269bd10dab9339817f",
+  "split": "test_id",
+  "targets": [
+    {
+      "absolute_tolerance": 0.01,
+      "answer_type": "number",
+      "end_time": 2.0,
+      "entity_id": "car",
+      "frame": "world",
+      "quantity": "forward_position",
+      "query_kind": "at_time",
+      "relative_tolerance": 0.0,
+      "start_time": 2.0,
+      "target_id": "car:forward_position",
+      "unit": "m",
+      "value": 4.039476433946182
+    },
+    {
+      "absolute_tolerance": 0.02,
+      "answer_type": "number",
+      "end_time": 2.0,
+      "entity_id": "car",
+      "frame": "world",
+      "quantity": "forward_velocity",
+      "query_kind": "at_time",
+      "relative_tolerance": 0.0,
+      "start_time": 2.0,
+      "target_id": "car:forward_velocity",
+      "unit": "m/s",
+      "value": 1.0863504657328382
+    },
+    {
+      "absolute_tolerance": 0.0,
+      "answer_type": "boolean",
+      "end_time": 2.0,
+      "entity_id": "car",
+      "frame": "world",
+      "quantity": "stopped_by_T",
+      "query_kind": "at_time",
+      "relative_tolerance": 0.0,
+      "start_time": 2.0,
+      "target_id": "car:stopped_by_T",
+      "unit": "1",
+      "value": false
+    }
+  ]
+}
+```
+
+Position absolute error: 0.039476433946182 m (tolerance 0.01 m): fail. Velocity absolute error: 0.0763504657328382 m/s (tolerance 0.02 m/s): fail. stopped_by_T=false: pass. Complete success: false; 1/3 targets correct.
+
+Source request: artifacts/Answer_runner_gold/driving/1b17551c57d38101163d56c0cd8a7aaa/vanilla_llm/request.json
+Source answer: artifacts/Answer_runner_gold/driving/1b17551c57d38101163d56c0cd8a7aaa/vanilla_llm/answer.json

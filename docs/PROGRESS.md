@@ -1,3 +1,42 @@
+# Question-to-answer WSL runner — post-P11 follow-up
+
+Selection follow-up: counts beyond P11's 12 held-out questions/domain now expand
+to the original release partition, preserving scenario separation. The same
+checkpoint runs after budgeted public enrichment and frozen Qwen cache
+preparation in a new run-local directory. Added no-execution `--dry-run` and
+explicit inventory controls; actual insufficient populations produce CLI errors.
+The USD 5 cap is unchanged. See
+[expanded inventory verification](reviews/Answer_runner_inventory_completion.md).
+
+Gold comparison follow-up: the evaluator now exports requested typed gold
+answers to `evaluation/private/gold_answers.json`, with binding/tolerance/source
+provenance, and adds side-by-side gold/predicted values to `report.md` and terminal
+output. Inference inputs and scoring are unchanged. Existing run directories can
+be upgraded using the separate `evaluate` command without new generation.
+See [verification](reviews/Answer_runner_gold_completion.md).
+
+Added [end-to-end answer commands](Run_answers_WSL.md): existing per-domain
+checkpoints, three matching held-out questions/domain, final prose, typed output,
+forecasts, prompts, separate evaluation, usage and a readable report. The user's
+approved defaults are fresh vanilla-LLM requests and a shared USD 5 per-run cap;
+Phi final answers may reuse exact caches after fresh numerical inference.
+Missing checkpoints are unavailable; training is explicit. 29 offline tests
+pass. A zero-spend four-domain check produced 12 valid Phi answers, eight valid
+cached vanilla answers and four retained cache misses. Sequential custom local
+generation ran and preserved both strict-parser failures. No new training or
+paid calls were launched. See [completion](reviews/Answer_runner_completion.md).
+
+# Manual WSL interface — post-P11 follow-up
+
+Added [manual commands](Manual_WSL.md) for all four domains: fresh selected
+Phi-JEPA checkpoint replay, optional custom Coconut/CODI generation, saved LLM
+outputs, and separate per-domain conventional-baseline preparation/training.
+Historical P10/P11 runs remain read-only. Four-domain Phi replay exactly matched
+saved trajectories/readouts; all six P10 numerical replays succeeded; four
+offline interface tests passed. Cache preparation preflight passed for all
+four domains. No training or paid calls were launched. See
+[interface verification](reviews/Manual_WSL_completion.md).
+
 # P11 deadline study — bounded execution complete, 25 September 2026
 
 The [deadline prompt](prompts/P11_deadline_study.md), [frozen decisions](decisions/P11_deadline_study.md)

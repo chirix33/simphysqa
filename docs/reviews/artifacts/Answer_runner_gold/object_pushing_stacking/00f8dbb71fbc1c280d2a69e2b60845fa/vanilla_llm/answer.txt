@@ -1,0 +1,1 @@
+At 1.0 s, block_1 has moved only slightly in +x; block_2 remains stationary and unstacked on the table.

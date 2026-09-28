@@ -1,0 +1,553 @@
+{
+  "output": "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/outputs/manual-cli-check/p10-baselines.json",
+  "sample_id": "1bbb33b715cd2013a19bb6530cf530a0",
+  "elapsed_seconds": 0.8283290863037109,
+  "results": {
+    "phi_jepa": {
+      "status": "success",
+      "reason": null,
+      "readout": [
+        {
+          "target_id": "load:position",
+          "entity_id": "load",
+          "quantity": "position",
+          "answer_type": "vector",
+          "unit": "m",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": [
+            0.00013772386591881514,
+            -3.290789027232677e-05,
+            1.3811023235321045
+          ],
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:swing_angle",
+          "entity_id": "load",
+          "quantity": "swing_angle",
+          "answer_type": "number",
+          "unit": "rad",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": -0.02715512365102768,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:angular_velocity",
+          "entity_id": "load",
+          "quantity": "angular_velocity",
+          "answer_type": "number",
+          "unit": "rad/s",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": 0.10267464071512222,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:boundary_crossed",
+          "entity_id": "load",
+          "quantity": "boundary_crossed",
+          "answer_type": "boolean",
+          "unit": "1",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": false,
+          "reason": null,
+          "source": "sampled_public_rule",
+          "evidence": [
+            0.2,
+            1.0
+          ],
+          "rule_sha256": "6e2cc3552ea0c8a366215e9e8f71caec94fa77291c0b897fc95c5e1268d32159"
+        }
+      ],
+      "answer": null
+    },
+    "text_ode": {
+      "status": "success",
+      "reason": null,
+      "readout": [
+        {
+          "target_id": "load:position",
+          "entity_id": "load",
+          "quantity": "position",
+          "answer_type": "vector",
+          "unit": "m",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": [
+            -0.010724501684308052,
+            0.0002774652384687215,
+            1.3793333768844604
+          ],
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:swing_angle",
+          "entity_id": "load",
+          "quantity": "swing_angle",
+          "answer_type": "number",
+          "unit": "rad",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": -0.019696258008480072,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:angular_velocity",
+          "entity_id": "load",
+          "quantity": "angular_velocity",
+          "answer_type": "number",
+          "unit": "rad/s",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": 0.10092257708311081,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:boundary_crossed",
+          "entity_id": "load",
+          "quantity": "boundary_crossed",
+          "answer_type": "boolean",
+          "unit": "1",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": false,
+          "reason": null,
+          "source": "sampled_public_rule",
+          "evidence": [
+            0.2,
+            1.0
+          ],
+          "rule_sha256": "6e2cc3552ea0c8a366215e9e8f71caec94fa77291c0b897fc95c5e1268d32159"
+        }
+      ],
+      "answer": null
+    },
+    "lr": {
+      "status": "success",
+      "reason": null,
+      "readout": [
+        {
+          "target_id": "load:position",
+          "entity_id": "load",
+          "quantity": "position",
+          "answer_type": "vector",
+          "unit": "m",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": [
+            -0.09185703843832016,
+            0.0,
+            1.383686900138855
+          ],
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:swing_angle",
+          "entity_id": "load",
+          "quantity": "swing_angle",
+          "answer_type": "number",
+          "unit": "rad",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": -0.08311207592487335,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:angular_velocity",
+          "entity_id": "load",
+          "quantity": "angular_velocity",
+          "answer_type": "number",
+          "unit": "rad/s",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": -0.006619778927415609,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:boundary_crossed",
+          "entity_id": "load",
+          "quantity": "boundary_crossed",
+          "answer_type": "boolean",
+          "unit": "1",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": false,
+          "reason": null,
+          "source": "sampled_public_rule",
+          "evidence": [
+            0.2,
+            1.0
+          ],
+          "rule_sha256": "6e2cc3552ea0c8a366215e9e8f71caec94fa77291c0b897fc95c5e1268d32159"
+        }
+      ],
+      "answer": null
+    },
+    "rnn": {
+      "status": "success",
+      "reason": null,
+      "readout": [
+        {
+          "target_id": "load:position",
+          "entity_id": "load",
+          "quantity": "position",
+          "answer_type": "vector",
+          "unit": "m",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": [
+            0.051688507199287415,
+            0.0008251635008491576,
+            1.2718180418014526
+          ],
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:swing_angle",
+          "entity_id": "load",
+          "quantity": "swing_angle",
+          "answer_type": "number",
+          "unit": "rad",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": 0.055690839886665344,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:angular_velocity",
+          "entity_id": "load",
+          "quantity": "angular_velocity",
+          "answer_type": "number",
+          "unit": "rad/s",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": -0.02490229904651642,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:boundary_crossed",
+          "entity_id": "load",
+          "quantity": "boundary_crossed",
+          "answer_type": "boolean",
+          "unit": "1",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": true,
+          "reason": null,
+          "source": "sampled_public_rule",
+          "evidence": [
+            0.2,
+            1.0
+          ],
+          "rule_sha256": "6e2cc3552ea0c8a366215e9e8f71caec94fa77291c0b897fc95c5e1268d32159"
+        }
+      ],
+      "answer": null
+    },
+    "no_enrichment": {
+      "status": "success",
+      "reason": null,
+      "readout": [
+        {
+          "target_id": "load:position",
+          "entity_id": "load",
+          "quantity": "position",
+          "answer_type": "vector",
+          "unit": "m",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": [
+            -0.002371002919971943,
+            7.1673030106467195e-06,
+            1.3801039457321167
+          ],
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:swing_angle",
+          "entity_id": "load",
+          "quantity": "swing_angle",
+          "answer_type": "number",
+          "unit": "rad",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": -0.02682647854089737,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:angular_velocity",
+          "entity_id": "load",
+          "quantity": "angular_velocity",
+          "answer_type": "number",
+          "unit": "rad/s",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": 0.10848096758127213,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:boundary_crossed",
+          "entity_id": "load",
+          "quantity": "boundary_crossed",
+          "answer_type": "boolean",
+          "unit": "1",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": false,
+          "reason": null,
+          "source": "sampled_public_rule",
+          "evidence": [
+            0.2,
+            1.0
+          ],
+          "rule_sha256": "6e2cc3552ea0c8a366215e9e8f71caec94fa77291c0b897fc95c5e1268d32159"
+        }
+      ],
+      "answer": null
+    },
+    "no_text_conditioning": {
+      "status": "success",
+      "reason": null,
+      "readout": [
+        {
+          "target_id": "load:position",
+          "entity_id": "load",
+          "quantity": "position",
+          "answer_type": "vector",
+          "unit": "m",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": [
+            -0.016436144709587097,
+            -0.0008034085622057319,
+            1.374042272567749
+          ],
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:swing_angle",
+          "entity_id": "load",
+          "quantity": "swing_angle",
+          "answer_type": "number",
+          "unit": "rad",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": -0.015713056549429893,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:angular_velocity",
+          "entity_id": "load",
+          "quantity": "angular_velocity",
+          "answer_type": "number",
+          "unit": "rad/s",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": 0.1940910965204239,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:boundary_crossed",
+          "entity_id": "load",
+          "quantity": "boundary_crossed",
+          "answer_type": "boolean",
+          "unit": "1",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": false,
+          "reason": null,
+          "source": "sampled_public_rule",
+          "evidence": [
+            0.2,
+            1.0
+          ],
+          "rule_sha256": "6e2cc3552ea0c8a366215e9e8f71caec94fa77291c0b897fc95c5e1268d32159"
+        }
+      ],
+      "answer": null
+    }
+  }
+}

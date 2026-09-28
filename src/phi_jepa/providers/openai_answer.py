@@ -78,7 +78,7 @@ def parse_answer(problem, text, outcomes, *, boolean_policy='readout'):
 
 class OpenAIAnswer(OpenAIEnrichment):
     """Shares credential/transport/accounting code, never enrichment semantics."""
-    def answer(self, problem, forecast, outcomes, *, condition, boolean_policy='readout'):
+    def answer(self, problem, forecast, outcomes, *, condition, boolean_policy='readout', request_sink=None):
         if boolean_policy == 'direct_prediction' and (forecast is not None or outcomes):
             raise ValueError('direct_prediction_requires_public_only_inputs')
         if boolean_policy not in ('readout','direct_prediction'):
@@ -97,6 +97,8 @@ class OpenAIAnswer(OpenAIEnrichment):
         identity = {'kind': 'final_answer', 'implementation': 'p04a-answer-v1', 'endpoint': ENDPOINT,
                     'asset': self.asset, 'config': self.config, 'condition': condition, 'payload': payload}
         if boolean_policy != 'readout': identity['boolean_policy'] = boolean_policy
+        if request_sink is not None:
+            request_sink(identity)  # Public request only; never transport credentials.
         validate = lambda text: parse_answer(problem, text, outcomes, boolean_policy=boolean_policy)
         cached = self.cache.read(identity) if self.cache is not None else None
         if cached is not None:

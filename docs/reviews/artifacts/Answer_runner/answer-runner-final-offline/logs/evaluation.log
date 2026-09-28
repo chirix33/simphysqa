@@ -1,0 +1,257 @@
+{
+  "methods": [
+    {
+      "method": "phi_jepa",
+      "questions": 12,
+      "valid_answers": 12,
+      "statuses": {
+        "success": 12
+      },
+      "complete_successes": 2,
+      "unsupported_targets": 6
+    },
+    {
+      "method": "vanilla_llm",
+      "questions": 12,
+      "valid_answers": 8,
+      "statuses": {
+        "success": 8,
+        "cache_miss": 4
+      },
+      "complete_successes": 6,
+      "unsupported_targets": 0
+    }
+  ],
+  "provider_attempts": 0,
+  "charged_usd": 0,
+  "charged_input_tokens": 0,
+  "charged_output_tokens": 0,
+  "cost_basis": "Existing conservative provider accounting; estimates, not an invoice",
+  "local_operations": [
+    {
+      "elapsed_seconds": 2.373036109000168,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1b17551c57d38101163d56c0cd8a7aaa-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.26556191800000306,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1b17551c57d38101163d56c0cd8a7aaa-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.26562102000025334,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1b17551c57d38101163d56c0cd8a7aaa-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.3704949610000767,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1fe18e46f5bba9f1cbc18d0da12857e5-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.26538383299975976,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1fe18e46f5bba9f1cbc18d0da12857e5-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.26599330500039287,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1fe18e46f5bba9f1cbc18d0da12857e5-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.4726140060001853,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "405ccb429d10a4e5a9acc28ad0299b8d-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.3158568949997971,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "405ccb429d10a4e5a9acc28ad0299b8d-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.2658877469998515,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "405ccb429d10a4e5a9acc28ad0299b8d-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.3713416199998392,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "00f8dbb71fbc1c280d2a69e2b60845fa-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.3158216529996025,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "00f8dbb71fbc1c280d2a69e2b60845fa-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.2656591599998137,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "00f8dbb71fbc1c280d2a69e2b60845fa-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.3219113370000741,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "0ddf0f310b2c9574f2360c3685a75c88-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.26585899700012305,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "0ddf0f310b2c9574f2360c3685a75c88-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.2660227940000368,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "0ddf0f310b2c9574f2360c3685a75c88-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.3715888990000167,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "13e3010fe7015400ed940c026fb73c46-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.2660009670003092,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "13e3010fe7015400ed940c026fb73c46-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.26609174700024596,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "13e3010fe7015400ed940c026fb73c46-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.4213910389999,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "0c065579c6abe4545b3d9a491308c982-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.26616905600030805,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "0c065579c6abe4545b3d9a491308c982-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.2664036159999341,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "0c065579c6abe4545b3d9a491308c982-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.3725533050001104,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1106cfc41a5cb3feee37de48eff42c2b-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.2660852859999068,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1106cfc41a5cb3feee37de48eff42c2b-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.2160089720000542,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1106cfc41a5cb3feee37de48eff42c2b-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.4721740079999108,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1c3be88d25644692348082004d98aa77-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.2661112939999839,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1c3be88d25644692348082004d98aa77-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.26641628799961836,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "1c3be88d25644692348082004d98aa77-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.4230481250001503,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "337b9ff1f5c00610845cea856af91c3d-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.266448882000077,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "337b9ff1f5c00610845cea856af91c3d-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.2664174120000098,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "337b9ff1f5c00610845cea856af91c3d-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.370811304000199,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "3ef2c2fd13bee92be2971a2e1a152484-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.26646595800002615,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "3ef2c2fd13bee92be2971a2e1a152484-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.26657262299977447,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "3ef2c2fd13bee92be2971a2e1a152484-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 1.4227859309999076,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "4e83f57c0c70dda7d9910ab8935fe6cb-phi_jepa-forecast"
+    },
+    {
+      "elapsed_seconds": 0.2666124590000436,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "4e83f57c0c70dda7d9910ab8935fe6cb-phi_jepa-answer"
+    },
+    {
+      "elapsed_seconds": 0.2666935620000004,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "4e83f57c0c70dda7d9910ab8935fe6cb-vanilla_llm-answer"
+    },
+    {
+      "elapsed_seconds": 0.26685049199977584,
+      "environment": "phi-core",
+      "exit_code": 0,
+      "name": "evaluation"
+    }
+  ],
+  "assessment": "not_recomputed_underlying_system_partial_uncalibrated",
+  "evaluation": "complete"
+}
+Questions and answers: /home/aashraf/phi-jepa/manual-outputs/answer-runner-final-offline/report.md
