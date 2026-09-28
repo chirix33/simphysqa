@@ -1,0 +1,1 @@
+{"checkpoint":{"file":"3fb002d1429477c816a4d7c29a035ccfe85386e2be49986f8dcd7ee8e387d306.pt","manifest_sha256":"e7f47742d51ec2b7a9947a7f207a45e5d7fbc6c6076e81cba74bbec1c5587cd8","sha256":"3fb002d1429477c816a4d7c29a035ccfe85386e2be49986f8dcd7ee8e387d306"},"directory":"checkpoints/20000/deployment","score":null,"selection_split":"fixed_final_no_heldout_selection","update":20000}

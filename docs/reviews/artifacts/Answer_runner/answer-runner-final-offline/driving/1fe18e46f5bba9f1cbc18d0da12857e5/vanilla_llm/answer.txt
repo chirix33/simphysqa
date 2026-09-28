@@ -1,0 +1,1 @@
+At t=2.0 s: forward position ≈3.50 m, forward velocity ≈0.74 m/s, and the car has not stopped.

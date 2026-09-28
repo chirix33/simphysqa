@@ -1,0 +1,1 @@
+At t = 1.0 s, the autonomous numerical forecast gives joint_1 = 3.331106 rad at -14.014019 rad/s, joint_2 = 0.268348 rad at 56.474358 rad/s, and tip position = [-0.645769, 0.001811, 0.120873] m. The sampled public-rule readout reports joint_limit_by_T = true.

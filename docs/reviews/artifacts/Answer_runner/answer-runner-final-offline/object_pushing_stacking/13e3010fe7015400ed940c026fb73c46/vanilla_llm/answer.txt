@@ -1,0 +1,1 @@
+At t=1.0 s, block 1 is predicted to have shifted slightly in +x without contacting block 2; both blocks remain upright on the table.

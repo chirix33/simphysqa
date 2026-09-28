@@ -1,0 +1,1 @@
+At t=1.0 s, the numerical forecast gives joint_1 angle 3.95936 rad and angular velocity -14.48846 rad/s; joint_2 angle 0.47976 rad and angular velocity 54.79391 rad/s; and tip position [-0.750647, 0.002106, -0.323395] m. The sampled public-rule readout reports that a joint limit was reached by T: true.

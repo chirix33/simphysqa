@@ -1,0 +1,138 @@
+{
+  "output": "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/outputs/manual-cli-check/robotic_arm.json",
+  "sample_id": "1106cfc41a5cb3feee37de48eff42c2b",
+  "elapsed_seconds": 0.31664085388183594,
+  "results": {
+    "phi_jepa": {
+      "status": "success",
+      "reason": null,
+      "readout": [
+        {
+          "target_id": "joint_1:angle",
+          "entity_id": "joint_1",
+          "quantity": "angle",
+          "answer_type": "number",
+          "unit": "rad",
+          "frame": "joint_local",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": 3.959359645843506,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "joint_1:angular_velocity",
+          "entity_id": "joint_1",
+          "quantity": "angular_velocity",
+          "answer_type": "number",
+          "unit": "rad/s",
+          "frame": "joint_local",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": -14.488459587097168,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "joint_2:angle",
+          "entity_id": "joint_2",
+          "quantity": "angle",
+          "answer_type": "number",
+          "unit": "rad",
+          "frame": "joint_local",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": 0.4797596335411072,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "joint_2:angular_velocity",
+          "entity_id": "joint_2",
+          "quantity": "angular_velocity",
+          "answer_type": "number",
+          "unit": "rad/s",
+          "frame": "joint_local",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": 54.79391098022461,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "tip:position",
+          "entity_id": "tip",
+          "quantity": "position",
+          "answer_type": "vector",
+          "unit": "m",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": [
+            -0.7506473064422607,
+            0.0021062553860247135,
+            -0.3233947157859802
+          ],
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "arm:joint_limit_by_T",
+          "entity_id": "arm",
+          "quantity": "joint_limit_by_T",
+          "answer_type": "boolean",
+          "unit": "1",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": true,
+          "reason": null,
+          "source": "sampled_public_rule",
+          "evidence": [
+            0.0,
+            1.0
+          ],
+          "rule_sha256": "808f67b825d2fa99f8581fe3e83ed70a4fbf064345c59c841f2313ebef38717b"
+        }
+      ],
+      "answer": null
+    }
+  }
+}

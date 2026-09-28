@@ -1,3 +1,74 @@
+# Question-to-answer WSL runner — post-P11 follow-up
+
+Selection follow-up: counts beyond P11's 12 held-out questions/domain now expand
+to the original release partition, preserving scenario separation. The same
+checkpoint runs after budgeted public enrichment and frozen Qwen cache
+preparation in a new run-local directory. Added no-execution `--dry-run` and
+explicit inventory controls; actual insufficient populations produce CLI errors.
+The USD 5 cap is unchanged. See
+[expanded inventory verification](reviews/Answer_runner_inventory_completion.md).
+
+Gold comparison follow-up: the evaluator now exports requested typed gold
+answers to `evaluation/private/gold_answers.json`, with binding/tolerance/source
+provenance, and adds side-by-side gold/predicted values to `report.md` and terminal
+output. Inference inputs and scoring are unchanged. Existing run directories can
+be upgraded using the separate `evaluate` command without new generation.
+See [verification](reviews/Answer_runner_gold_completion.md).
+
+Added [end-to-end answer commands](Run_answers_WSL.md): existing per-domain
+checkpoints, three matching held-out questions/domain, final prose, typed output,
+forecasts, prompts, separate evaluation, usage and a readable report. The user's
+approved defaults are fresh vanilla-LLM requests and a shared USD 5 per-run cap;
+Phi final answers may reuse exact caches after fresh numerical inference.
+Missing checkpoints are unavailable; training is explicit. 29 offline tests
+pass. A zero-spend four-domain check produced 12 valid Phi answers, eight valid
+cached vanilla answers and four retained cache misses. Sequential custom local
+generation ran and preserved both strict-parser failures. No new training or
+paid calls were launched. See [completion](reviews/Answer_runner_completion.md).
+
+# Manual WSL interface — post-P11 follow-up
+
+Added [manual commands](Manual_WSL.md) for all four domains: fresh selected
+Phi-JEPA checkpoint replay, optional custom Coconut/CODI generation, saved LLM
+outputs, and separate per-domain conventional-baseline preparation/training.
+Historical P10/P11 runs remain read-only. Four-domain Phi replay exactly matched
+saved trajectories/readouts; all six P10 numerical replays succeeded; four
+offline interface tests passed. Cache preparation preflight passed for all
+four domains. No training or paid calls were launched. See
+[interface verification](reviews/Manual_WSL_completion.md).
+
+# P11 deadline study — bounded execution complete, 25 September 2026
+
+The [deadline prompt](prompts/P11_deadline_study.md), [frozen decisions](decisions/P11_deadline_study.md)
+and [commands](P11_pipeline.md) supersede the unexecuted large custom-study
+proposal. Starting commit `d2e9fe3daba63cc0b5295fa108177628c4319098` contains the
+user-committed P10 implementation/evidence. The historical status below is
+preserved. P11 additions are local; no commit or push is authorized.
+
+Main: 60 trajectories/domain (48 train, 12 sealed test), plus eight separate
+selection scenarios/domain. Matched appendix: 20/domain (16 train, four test),
+fresh custom models with two complete passes and independent matching-data
+Phi-JEPA. Exact IDs are frozen before held-out outcomes. The 399-second timing
+probe covered all domains and longer inputs. 37 targeted offline tests passed.
+The frozen execution finished before the deadline; new artifacts are separate.
+Learning quality and research claims remain unresolved. See the
+[completion report](reviews/P11_completion.md) and
+[measured benchmark](reviews/P11_benchmark_report.md).
+
+P11 final execution (September 25 evening): all eight main/appendix numerical
+fits are complete. All 344 planned paid requests finished at USD 24.001850,
+3,997,538 input and 200,708 output tokens. Main complete-answer results are
+9/48 for Phi-JEPA and 22/48 for direct gpt-5.6-sol, retaining 12 direct-generation
+failures. Coconut and CODI each completed two full passes (128 updates, 64
+questions used exactly twice) and all 16 held-out generations. Matched appendix
+complete-answer success is 0/16 for all three methods; typed validity is 16/16
+for Phi-JEPA, 1/16 for Coconut and 4/16 for CODI student. All failures remain in
+the denominators. Source/checkpoint hashes, scenario separation, pair exposure,
+two complete text passes and evaluation denominators passed verification.
+The run used about 120 GPU-worker minutes; CPU/export accounting is in the
+report and operation records. Assessment remains partial; calibration, OOD
+recognition, clarification efficacy and larger-scale comparisons remain pending.
+
 # P10 integrated qualification — bounded execution complete, 25 September 2026
 
 The latest user instruction authorizes the integrated workflow and a new budget,

@@ -2,7 +2,10 @@
 
 # Phi-JEPA: Codex implementation handoff
 
-**Current implementation entry point:** [P10 executable pipeline](P10_pipeline.md)
+**Questions and final answers in WSL:** [end-to-end comparison commands](Run_answers_WSL.md).
+**Lower-level checkpoint replay:** [manual commands for all four domains](Manual_WSL.md).
+**Current deadline study:** [P11 executable plan](P11_pipeline.md).
+**General implementation entry point:** [P10 executable pipeline](P10_pipeline.md)
 and [progress](PROGRESS.md). The following installation-package description is
 preserved as historical context; it is not a statement that the current repository
 has no implementation. The user's latest learning-qualification scope supersedes

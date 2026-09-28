@@ -1,0 +1,98 @@
+{
+  "output": "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/outputs/manual-cli-check/tethered_load.json",
+  "sample_id": "337b9ff1f5c00610845cea856af91c3d",
+  "elapsed_seconds": 0.28516387939453125,
+  "results": {
+    "phi_jepa": {
+      "status": "success",
+      "reason": null,
+      "readout": [
+        {
+          "target_id": "load:position",
+          "entity_id": "load",
+          "quantity": "position",
+          "answer_type": "vector",
+          "unit": "m",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": [
+            0.05461813881993294,
+            -1.346789940726012e-05,
+            1.4274728298187256
+          ],
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:swing_angle",
+          "entity_id": "load",
+          "quantity": "swing_angle",
+          "answer_type": "number",
+          "unit": "rad",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": 0.08463044464588165,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:angular_velocity",
+          "entity_id": "load",
+          "quantity": "angular_velocity",
+          "answer_type": "number",
+          "unit": "rad/s",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": -0.46267205476760864,
+          "reason": null,
+          "source": "numeric_forecast",
+          "evidence": [
+            1.0,
+            1.0
+          ],
+          "rule_sha256": "e8a7bb29c1d0e6dc3515dfefa2cf53f56eff8e846a1ef2cbb3384218bb75d1ac"
+        },
+        {
+          "target_id": "load:boundary_crossed",
+          "entity_id": "load",
+          "quantity": "boundary_crossed",
+          "answer_type": "boolean",
+          "unit": "1",
+          "frame": "world",
+          "query_kind": "at_time",
+          "start_time": 1.0,
+          "end_time": 1.0,
+          "status": "supported",
+          "value": false,
+          "reason": null,
+          "source": "sampled_public_rule",
+          "evidence": [
+            0.2,
+            1.0
+          ],
+          "rule_sha256": "6e2cc3552ea0c8a366215e9e8f71caec94fa77291c0b897fc95c5e1268d32159"
+        }
+      ],
+      "answer": null
+    }
+  }
+}

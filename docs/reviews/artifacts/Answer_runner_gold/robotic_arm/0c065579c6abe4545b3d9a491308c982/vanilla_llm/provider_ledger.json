@@ -1,0 +1,1 @@
+{"cache_hits_this_process":0,"events":[{"attempt":1,"failure":"invalid_output","request_sha256":"ab0e63ed4766679b5d39c3dc8af5068f39143858a71136fd9b4787fc496b4614","usage":{"cost_usd":null,"input_tokens":null,"output_tokens":null},"wall_seconds":6.375900011335034e-05}],"responses":[]}

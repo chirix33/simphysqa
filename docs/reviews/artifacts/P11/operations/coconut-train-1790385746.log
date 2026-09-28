@@ -1,0 +1,16 @@
+{"method": "coconut", "updates": 8, "loss": 1.3804264068603516, "seconds": 124.1010160446167}
+{"method": "coconut", "updates": 16, "loss": 0.9540355205535889, "seconds": 257.8615765571594}
+{"method": "coconut", "updates": 24, "loss": 0.765307605266571, "seconds": 384.1862003803253}
+{"method": "coconut", "updates": 32, "loss": 0.6150630712509155, "seconds": 528.0433921813965}
+{"method": "coconut", "updates": 40, "loss": 0.48039689660072327, "seconds": 695.5874869823456}
+{"method": "coconut", "updates": 48, "loss": 0.5140079855918884, "seconds": 836.4721384048462}
+{"method": "coconut", "updates": 56, "loss": 0.4802984297275543, "seconds": 956.3496928215027}
+{"method": "coconut", "updates": 64, "loss": 0.43296265602111816, "seconds": 1049.2884378433228}
+{"method": "coconut", "updates": 72, "loss": 0.478308767080307, "seconds": 1232.0495166778564}
+{"method": "coconut", "updates": 80, "loss": 0.40243270993232727, "seconds": 1340.65496134758}
+{"method": "coconut", "updates": 88, "loss": 0.28489238023757935, "seconds": 1445.4107418060303}
+{"method": "coconut", "updates": 96, "loss": 0.24390019476413727, "seconds": 1574.682739496231}
+{"method": "coconut", "updates": 104, "loss": 0.2545175850391388, "seconds": 1713.3261847496033}
+{"method": "coconut", "updates": 112, "loss": 0.3609543740749359, "seconds": 1792.7462751865387}
+{"method": "coconut", "updates": 120, "loss": 0.5538603067398071, "seconds": 1940.1501746177673}
+{"method": "coconut", "updates": 128, "loss": 0.24638377130031586, "seconds": 2081.397305727005}

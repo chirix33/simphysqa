@@ -1,0 +1,1 @@
+At t=1.0 s, both blocks remain essentially at their initial resting poses; block_2 is not stacked, has not lost support, and remains on the table.

@@ -1,0 +1,1 @@
+At 1 seconds from the initialized state, what are joint_1 angle (rad), joint_1 angular_velocity (rad/s), joint_2 angle (rad), joint_2 angular_velocity (rad/s), tip position (m), arm joint_limit_by_T (1), under the public model, control law and scheduled intervention?

@@ -1,0 +1,1 @@
+At t = 1.0 s, the forecast gives load position [-0.0699091, -2.55709e-7, 1.3113737] m, swing angle -0.112357 rad, and angular velocity 0.325737 rad/s. The sampled public-rule readout reports boundary_crossed = false.
