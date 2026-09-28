@@ -30,7 +30,9 @@ def answer_schema(problem):
             'required': ['plain_text_answer', 'targets'], 'additionalProperties': False}
 
 
-def parse_answer(problem, text, outcomes):
+def parse_answer(problem, text, outcomes, *, boolean_policy='readout'):
+    if boolean_policy not in ('readout', 'direct_prediction'):
+        raise ValueError('unknown_boolean_policy')
     try: result = strict_json(text)
     except (ValueError, json.JSONDecodeError): raise AnswerParseFailure('malformed_json') from None
     if not isinstance(result, dict) or set(result) != {'plain_text_answer', 'targets'} or type(result['plain_text_answer']) is not str or not isinstance(result['targets'], list):
@@ -63,7 +65,7 @@ def parse_answer(problem, text, outcomes):
                 valid = len(observed) == 1 and isinstance(observed[0], list) and isinstance(value, list) and len(value) == len(observed[0]) and all(map(finite, value))
             else: valid = False
             if not valid: raise AnswerParseFailure('value_type_or_shape')
-        if spec['answer_type'] == 'boolean':
+        if spec['answer_type'] == 'boolean' and boolean_policy == 'readout':
             rule = rules.get(ident)
             if rule is None: raise AnswerParseFailure('missing_boolean_policy')
             if row['status'] != rule['status'] or row['value'] != rule['value']:
@@ -76,7 +78,11 @@ def parse_answer(problem, text, outcomes):
 
 class OpenAIAnswer(OpenAIEnrichment):
     """Shares credential/transport/accounting code, never enrichment semantics."""
-    def answer(self, problem, forecast, outcomes, *, condition):
+    def answer(self, problem, forecast, outcomes, *, condition, boolean_policy='readout'):
+        if boolean_policy == 'direct_prediction' and (forecast is not None or outcomes):
+            raise ValueError('direct_prediction_requires_public_only_inputs')
+        if boolean_policy not in ('readout','direct_prediction'):
+            raise ValueError('unknown_boolean_policy')
         if forecast is not None and canonical(read_targets(problem, forecast)) != canonical(outcomes):
             raise ValueError('output readout must match supplied public forecast')
         schema = answer_schema(problem)
@@ -90,7 +96,8 @@ class OpenAIAnswer(OpenAIEnrichment):
             'text': {'format': {'type': 'json_schema', 'name': 'named_physical_answer', 'strict': True, 'schema': schema}}}
         identity = {'kind': 'final_answer', 'implementation': 'p04a-answer-v1', 'endpoint': ENDPOINT,
                     'asset': self.asset, 'config': self.config, 'condition': condition, 'payload': payload}
-        validate = lambda text: parse_answer(problem, text, outcomes)
+        if boolean_policy != 'readout': identity['boolean_policy'] = boolean_policy
+        validate = lambda text: parse_answer(problem, text, outcomes, boolean_policy=boolean_policy)
         cached = self.cache.read(identity) if self.cache is not None else None
         if cached is not None:
             self.cache_hits += 1
