@@ -1,0 +1,3 @@
+{"variant": "biasinit_raw_early", "update": 1000, "validation_or_fit_score": 15.315475214874315, "loss": 1.4958497729367082e-07}
+{"variant": "biasinit_raw_early", "update": 2000, "validation_or_fit_score": 13.635014896705044, "loss": 1.405510516860886e-07}
+{"variant": "biasinit_raw_early", "update": 4000, "validation_or_fit_score": 6.788585814070452, "loss": 1.6455833247164264e-06}

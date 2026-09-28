@@ -1,0 +1,20 @@
+test_bool_unit_frame_vector_length_types (test_p02a.P02aTests.test_bool_unit_frame_vector_length_types) ... ok
+test_dynamic_categorical_relations_do_not_change_numeric_layout (test_p02a.P02aTests.test_dynamic_categorical_relations_do_not_change_numeric_layout) ... ok
+test_enrichment_required_without_fallback (test_p02a.P02aTests.test_enrichment_required_without_fallback) ... ok
+test_fixed_scope_and_full_feedback (test_p02a.P02aTests.test_fixed_scope_and_full_feedback) ... ok
+test_forbidden_fields_and_immutable_enrichment (test_p02a.P02aTests.test_forbidden_fields_and_immutable_enrichment) ... ok
+test_missing_extra_duplicate_and_null_never_zero (test_p02a.P02aTests.test_missing_extra_duplicate_and_null_never_zero) ... ok
+test_pair_target_depends_on_recorded_future (test_p02a.P02aTests.test_pair_target_depends_on_recorded_future) ... ok
+test_public_reader_independent_of_reference_payload (test_p02a.P02aTests.test_public_reader_independent_of_reference_payload) ... ok
+test_question_conditioning_and_provenance_identity (test_p02a.P02aTests.test_question_conditioning_and_provenance_identity) ... ok
+test_reference_integer_prediction_float (test_p02a.P02aTests.test_reference_integer_prediction_float) ... ok
+test_release_catalog_excludes_development_quarantine_and_quad (test_p02a.P02aTests.test_release_catalog_excludes_development_quarantine_and_quad) ... ok
+test_semantic_order_vectors_and_digit_strings (test_p02a.P02aTests.test_semantic_order_vectors_and_digit_strings) ... ok
+test_split_isolation_and_registry_fit (test_p02a.P02aTests.test_split_isolation_and_registry_fit) ... ok
+test_strict_json_and_domains (test_p02a.P02aTests.test_strict_json_and_domains) ... ok
+test_time_order_horizon_and_context (test_p02a.P02aTests.test_time_order_horizon_and_context) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.017s
+
+OK

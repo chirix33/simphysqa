@@ -128,3 +128,8 @@ These are known implementation TODOs, not missing Professor decisions. The full 
 - `Phi_JEPA_Baseline_Runbook.md` — official baseline setup, proposed experiment settings, and workstation prerequisites.
 
 For future sessions: retrieve the latest ledger and runbook rather than assuming any proposed setting has been tested. Update this ledger when the user supplies a newer paper, meeting correction, workstation specification, selected configuration, or actual run result. Never replace measured results with manuscript estimates.
+
+
+## Installation correction — 2026-09-23 P00
+
+The historical import destination above is superseded by the user: the installed handoff root is `docs/`, with root `AGENTS.md`. Current paths are `docs/README.md`, `docs/PROGRESS.md`, `docs/docs/`, `docs/prompts/`, `docs/assets/`, and `docs/references/`. The original paragraph remains historical evidence.

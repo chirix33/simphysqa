@@ -1,0 +1,23 @@
+{
+  "protocol_version": "fixed-clock-ofat-1",
+  "controller_period_s": 0.001,
+  "trace_interval_s": 0.001,
+  "timesteps_s": [0.001, 0.0005, 0.00025],
+  "optional_finer_timestep_s": 0.000125,
+  "max_simulations": 28,
+  "max_wall_seconds": 2400,
+  "max_disk_gib": 2,
+  "minimum_free_disk_gib": 200,
+  "nominal_parameters": {"body_payload_fraction": 0.0, "contact_friction_coefficient": 0.8, "joint_reference_frequency_hz": 1.0},
+  "event_start_s": 4.0,
+  "candidates": [
+    {"name": "baseline", "overrides": {}},
+    {"name": "solver_newton", "overrides": {"solver": "Newton"}},
+    {"name": "solver_iterations_100", "overrides": {"iterations": 100}},
+    {"name": "contact_time_004", "overrides": {"contact_time_constant_s": 0.04}},
+    {"name": "contact_time_001", "overrides": {"contact_time_constant_s": 0.01}},
+    {"name": "contact_damping_2", "overrides": {"contact_damping_ratio": 2.0}},
+    {"name": "hip_amplitude_02", "overrides": {"hip_amplitude_rad": 0.2}},
+    {"name": "gait_kd_4", "overrides": {"kd": 4.0}}
+  ]
+}

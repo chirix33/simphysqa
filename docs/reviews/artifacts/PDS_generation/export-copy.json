@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "files": 28406,
+  "bytes": 3184522867,
+  "verification_seconds": 7.26600000000326,
+  "wall_seconds": 671.3775494098663,
+  "timing_definition": "Staging-directory creation through native Windows checksum verification",
+  "native_export": "/var/tmp/phi-jepa-release-a8920b2/dataset-runs/release-four-domain-v1",
+  "verified_staging_export": "C:\\Users\\aashraf\\Desktop\\Work\\phi-jepa\\phi-jepa\\dataset-runs\\release-four-domain-v1-export-staging",
+  "preserved_original_files_verified": 3085,
+  "checksums_sha256": "a30ec578272a2c3764aee9e1f99db5d9f5806cf60d34aacbb704adcc4e2b4c13",
+  "method": "copy_export.py copied all files; verify_windows_export.py independently verified all target checksums and original history; redundant slow WSL verification stopped after pass"
+}

@@ -1,0 +1,1586 @@
+{
+  "status": "historical_development_only_not_release_eligible",
+  "root": "C:\\Users\\aashraf\\Desktop\\Work\\phi-jepa\\phi-jepa",
+  "files": [
+    {
+      "path": "dataset-runs/gait-development.json",
+      "bytes": 2870,
+      "sha256": "ca01282aa11ae300de6026b0a7bb5573630e6c6136c051bd763df8e685b35cb2"
+    },
+    {
+      "path": "dataset-runs/mjx-batch-profile.json",
+      "bytes": 1752,
+      "sha256": "6821021e8ee4dde1b2eefd8f69b1f039b08932116b1e965626b242f0f569d091"
+    },
+    {
+      "path": "dataset-runs/mjx-profile.log",
+      "bytes": 1827,
+      "sha256": "5481431802221a149f669040960b81f3d2cc314376751292f017ac54cc7cb1b5"
+    },
+    {
+      "path": "dataset-runs/quadruped-clock-audit.json",
+      "bytes": 156832,
+      "sha256": "162947f3983e245cc67af8de85c820c5de9598acebf7798c09787436a837c669"
+    },
+    {
+      "path": "dataset-runs/quadruped-clock-audit.log",
+      "bytes": 170,
+      "sha256": "56f0212f80a395274164dacfe6a5d1374f92ef6a1a72c093a0060082cb27a1d6"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/assets/3af47a94d5b18bb90d01b8da09cdb146f05a05596a4f65dbe6f8bc371ad6aec0.xml",
+      "bytes": 2488,
+      "sha256": "3af47a94d5b18bb90d01b8da09cdb146f05a05596a4f65dbe6f8bc371ad6aec0"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/config.json",
+      "bytes": 3948,
+      "sha256": "0ffd34c4bd03a976b41232701e9d8a14327fb02db8927091c7807fc6a07b5fc6"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/diagnostics/ea78bb216b5e4f488522f12bcb6fb962.json",
+      "bytes": 1569,
+      "sha256": "493a6eb66f96171c0bb72b12e02f94bb5fb4be40d60334b4cc12ca71f52fef02"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/environment.json",
+      "bytes": 524,
+      "sha256": "f20c31e905334ad5c8f48c20d3b0e91e22e80520e28400b15b3cf1377ded8254"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/evaluator.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/identity.json",
+      "bytes": 235,
+      "sha256": "b277618ff340ce8a5c54daaf2af994b3d147a8d2e82a98ed6fdfe6572bf9b6c5"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/inputs.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/manifest.json",
+      "bytes": 4781,
+      "sha256": "ce0a7fb15751229eba215c015a2f77da9b4551a2cea8d90804fb856ff0ef8cb6"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/partitions.json",
+      "bytes": 338,
+      "sha256": "01e5df3df129e58a0f15ce6a49bb844d16a100a7ed4a8eca134a0430455edfa7"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/quarantine/ea78bb216b5e4f488522f12bcb6fb962.jsonl",
+      "bytes": 721521,
+      "sha256": "53ab0711bbcf8cd95e9f18ffdd5f89eff42f58a6249542c14ac4f3ca799c136c"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/receipts/ea78bb216b5e4f488522f12bcb6fb962.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/references.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/rejections.jsonl",
+      "bytes": 471,
+      "sha256": "9f5141b98ed2f7d3b7a35298ffe20a06773ea45453c64cd730d453329af02f8c"
+    },
+    {
+      "path": "dataset-runs/quadruped-debug/source.json",
+      "bytes": 2895,
+      "sha256": "5bfe90faa7fdd0d9e0f882f849207c2e641716d0762c52768e2d0fec23af461a"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal/endpoint-repeat-errors.json",
+      "bytes": 1584,
+      "sha256": "e7a8d3a6f76cab51046536c462a67f1ccc0d4e67857822eadb4f7895d86d37e5"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal/independent-trace-audit.json",
+      "bytes": 352,
+      "sha256": "24bc32be303997cb7fe90947d464783f8e1eb57f7a6ea628e66bde0efe8daf41"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal/initial-state-audit-windows.json",
+      "bytes": 2964,
+      "sha256": "2adc192079ba05a46c3e2a6867d8019a646b9faca4a75383b39d1b448301661d"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal/initial-state-audit.json",
+      "bytes": 3036,
+      "sha256": "fe51bf7bf72329ead38d962cc55f034de1fbb132ceef5e39910463566dc41134"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal/plan.json",
+      "bytes": 8445,
+      "sha256": "9b7ba870ae50cc0981d62966f61fb5e001dafb2b52b3d55c04833cf7da45d418"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal/repeat-0.json",
+      "bytes": 3880459,
+      "sha256": "d41bb2fb3fa57517ce80516424a202b817bde2ecf89213a818a5bad61210072d"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal/repeat-1.json",
+      "bytes": 3879795,
+      "sha256": "8770fe6e6444696e7f9e35eca88cfc93e45f55330a58c3cb5c61dbad0e3f6a20"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal/summary.json",
+      "bytes": 7887,
+      "sha256": "41fc3313fe59bcf780ec365c3f24323df29b62cf9f3b9b3fc822899180fa4ebf"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal/synchronized-comparisons.json",
+      "bytes": 3696,
+      "sha256": "b6a2510c6242f1f1e30ba860ba4c96e90c4c53b21f3ca3f83c76833ef435123c"
+    },
+    {
+      "path": "dataset-runs/quadruped-finer-nominal.log",
+      "bytes": 232,
+      "sha256": "67cc8ffd7b10b5d9cf674f2041a69e4c91424fe5fd9726b58b04175a5cd97823"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-environment.log",
+      "bytes": 624,
+      "sha256": "c1cbf469272681d640ad77ab41e35337043141def5ca2310486d8d0435c7a715"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/baseline-0.0002500.json",
+      "bytes": 3851818,
+      "sha256": "3379161c56e28f1e80056eea61760de198d249ae8614d2e3574353528eb59905"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/baseline-0.0005000.json",
+      "bytes": 3851603,
+      "sha256": "d1458fb3648f2b46ffb3da09878e30d88412b1ec1d8332a939435860ace94158"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/baseline-0.0010000.json",
+      "bytes": 3841075,
+      "sha256": "08a98157c92a1e10df38e6649d8b8f1a94dfb0a0324370b953818aaf74f22c9e"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/contact_damping_2-0.0002500.json",
+      "bytes": 3857669,
+      "sha256": "0d2f818aeb66a176390a4901eea2e993ebc809bfc05eb874ba8c0bcfa83729f2"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/contact_damping_2-0.0005000.json",
+      "bytes": 3858442,
+      "sha256": "c8af3827a6d2d655f7ddbc2d744ee04e16c0211b565697bf824155090ac87495"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/contact_damping_2-0.0010000.json",
+      "bytes": 3858434,
+      "sha256": "e5c449219fc7e7d52b781ef4681ea28de85795aacc5d5c227538f6bf4e3c2bfe"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/contact_time_001-0.0002500.json",
+      "bytes": 3831471,
+      "sha256": "dfbf3ffceba630bb10d21b0a47ec74fa0f1dbd799bec295948f7ccca9f7ac9a1"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/contact_time_001-0.0005000.json",
+      "bytes": 3833071,
+      "sha256": "3f30016ce75e48c67359a8b6abe0490e025c1d73abc969f42fea07b399f0c2c7"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/contact_time_001-0.0010000.json",
+      "bytes": 3833892,
+      "sha256": "3c547e38d2348bad40e2111eaa8481aba349988c6388b0db153af05927c8594a"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/contact_time_004-0.0002500.json",
+      "bytes": 3852885,
+      "sha256": "08fa20763627a8b62b16ad72835e88a9420ecaf770837da98def5617a3b5f834"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/contact_time_004-0.0005000.json",
+      "bytes": 3855312,
+      "sha256": "2ae6abc4581735eb32689572ac4e9bc2365c7adf42905f1ac04928d3ad158e0a"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/contact_time_004-0.0010000.json",
+      "bytes": 3857712,
+      "sha256": "559797c75d1ad6e59e6834eb2f76c9d697ac353f927bce4012e08eaf0fa446d3"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/environment.json",
+      "bytes": 524,
+      "sha256": "ac5feef2ea46cc7424465b09996d496e56d1c31eecf8f0c4d86c55e9d7381e5d"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/gait_kd_4-0.0002500.json",
+      "bytes": 3850721,
+      "sha256": "57a38bcf4adb44aad5c588f271084ca7b245178d3eacfe8313547de77bfb6449"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/gait_kd_4-0.0005000.json",
+      "bytes": 3851240,
+      "sha256": "68d8afc0570484bf043f23024e234fa6bd5cee9d81e1ba6fd1c1989343574306"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/gait_kd_4-0.0010000.json",
+      "bytes": 3839243,
+      "sha256": "d81348eeb2c13080ae825620928eb8fb335b97640cf8fa2ce05a319b935b913c"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/hip_amplitude_02-0.0002500.json",
+      "bytes": 3880226,
+      "sha256": "714f53dc6f04d1ef76c82f67bdbbdafe0c9f59cc5de02a3eddae963b15c4f6b2"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/hip_amplitude_02-0.0005000.json",
+      "bytes": 3880246,
+      "sha256": "826f4f7bbea2186ed71e7ff5ff1d6a9a478e65e3354d2dfbe8559bd5bba6d20f"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/hip_amplitude_02-0.0010000.json",
+      "bytes": 3880435,
+      "sha256": "a58d74074d7fdda2f35cd59ecfaa326ee46b275e28cfbb83ba2b360d17837103"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/independent-trace-audit.json",
+      "bytes": 4582,
+      "sha256": "47800af0fe0fea5f77251b1c7e77883f270bd9b713112c66f3686dfa66e070ed"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/mjx.py",
+      "bytes": 10006,
+      "sha256": "f8792ded54970cda535efb194725898d4ecb2ca5c7f669eee0a51481b5360681"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/plan.json",
+      "bytes": 8525,
+      "sha256": "46522adcfb355d8feda0c40b80e6a656a55f80dc03f1ac1197a7f97552ab4676"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/quadruped.py",
+      "bytes": 5393,
+      "sha256": "63604adb713054bb49bf379ec4b212cf47bda7b0040a2e1e2b9bd48ade298ffa"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/qualification-status.json",
+      "bytes": 414,
+      "sha256": "e5442b404074becc0dbb79e6180b5f7ecb96ae3b3082fa4f5a33feb26497ecf7"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/qualified-pilot-config.json",
+      "bytes": 4052,
+      "sha256": "6e400c35761dd1f6d1185b6cf2c10cc0af52b9bab1a5336ec4a33761e929a1ea"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/scenes.py",
+      "bytes": 4182,
+      "sha256": "c3655ab31e78e3933f9872de17e3d26396537f4e64085333b722c2d105f59c66"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/solver_iterations_100-0.0002500.json",
+      "bytes": 3851128,
+      "sha256": "ae2de5db8f2e760420336c031205c02caa4105dcea495e908a24fd4bed3f422f"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/solver_iterations_100-0.0005000.json",
+      "bytes": 3852114,
+      "sha256": "25556fa129d6d2cb573c447a06f9bc165d48b5f29c73eb07c89936a03a016391"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/solver_iterations_100-0.0010000.json",
+      "bytes": 3844303,
+      "sha256": "a97bbb0a31806a94054f37ab265ecec15f6966583f013f7d51fe160f5f6dca5a"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/solver_newton-0.0002500.json",
+      "bytes": 3851547,
+      "sha256": "e263c8ef79fd241b8e7bf91e693cdc82098f468534a1747743e6198773e04488"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/solver_newton-0.0005000.json",
+      "bytes": 3852428,
+      "sha256": "551a49b63f6a7a737d42915942702aca03823b8e4affbe7912eb3f769c0443a0"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/solver_newton-0.0010000.json",
+      "bytes": 3852814,
+      "sha256": "327f7330c142f885d2d62fa96f25addedd064e3e2906f394baf9bb3718cf3605"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/study_dataset_quadruped.py",
+      "bytes": 6825,
+      "sha256": "ebc5e3c69e4f299a203d19816e8bd505b60e466faae1b21233b3ebae5575ef2e"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study/summary.json",
+      "bytes": 61519,
+      "sha256": "28abca84da9b7a547c059278f811d1dc3a5b5d0470a593b76bc561878dcbdad2"
+    },
+    {
+      "path": "dataset-runs/quadruped-fixed-clock-study.log",
+      "bytes": 1278,
+      "sha256": "f591530ecbd7b85144bac244efe6fd6453d85cd2830f69bbd923c8444aaa7cc3"
+    },
+    {
+      "path": "dataset-runs/quadruped-nominal-check.json",
+      "bytes": 7301,
+      "sha256": "cda118b965bec5fceec65a1aa024b235faea89fc9fc827fa62c1def4a51d73e0"
+    },
+    {
+      "path": "dataset-runs/quadruped-nominal.log",
+      "bytes": 8036,
+      "sha256": "7b8866f32a9f198ffa4512ec562b53b911baa6add1d94bb4cc12b3ac7db6ea68"
+    },
+    {
+      "path": "dataset-runs/quadruped-pilot-handoff-outcome.json",
+      "bytes": 496,
+      "sha256": "c7039ba637ae6034f2632f8bf3b5f794c036f53da893a4a63004199d4ffa810f"
+    },
+    {
+      "path": "dataset-runs/quadruped-pilot-handoff.json",
+      "bytes": 358,
+      "sha256": "e9d40922a04b0e9694e4ae4673228ab8edaf6d7029851fc648bf29888f865121"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/nominal-evidence.json",
+      "bytes": 189,
+      "sha256": "aa1ddd41505c2bc883008fec976aa773d98dea46425f7e209a89d5a63ee170c9"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/1e81caeadd698b309058527d61a39cbc241db372e25ffc5a9f4420cdbc9cbb0a.xml",
+      "bytes": 2540,
+      "sha256": "1e81caeadd698b309058527d61a39cbc241db372e25ffc5a9f4420cdbc9cbb0a"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/206a6656effa0e52f5b664938a50b095d7c7af7d14685ccad6a9f55ced1114d6.xml",
+      "bytes": 2540,
+      "sha256": "206a6656effa0e52f5b664938a50b095d7c7af7d14685ccad6a9f55ced1114d6"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/3b336580c3c47ff98ff8a5fccd7de42821f980c66ada1c153658191da1c61c03.xml",
+      "bytes": 2539,
+      "sha256": "3b336580c3c47ff98ff8a5fccd7de42821f980c66ada1c153658191da1c61c03"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/47efea03af990a76aa3a39ca70d0265f874291c391859853e81c3c4aa4490d64.xml",
+      "bytes": 2534,
+      "sha256": "47efea03af990a76aa3a39ca70d0265f874291c391859853e81c3c4aa4490d64"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/524f406b7f078e26e675ab951a2927e3371462fa32cc89de7ec8c2169873d390.xml",
+      "bytes": 2540,
+      "sha256": "524f406b7f078e26e675ab951a2927e3371462fa32cc89de7ec8c2169873d390"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/5a46c9a36a71e3de7022ba271dd7a81e3ccf04b8fcc423409f314a141c9c04bd.xml",
+      "bytes": 2540,
+      "sha256": "5a46c9a36a71e3de7022ba271dd7a81e3ccf04b8fcc423409f314a141c9c04bd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/5bd652deb3221f5dbc08b6fe3c6376c0e5c036d0a90b6c37da2bec5ae3bcfcfd.xml",
+      "bytes": 2539,
+      "sha256": "5bd652deb3221f5dbc08b6fe3c6376c0e5c036d0a90b6c37da2bec5ae3bcfcfd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/6fbe1652c4820f867176342966d82f24e9986d2b2357b818b55193b684019df1.xml",
+      "bytes": 2540,
+      "sha256": "6fbe1652c4820f867176342966d82f24e9986d2b2357b818b55193b684019df1"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/8937c98fb0df5bc70e1ba19c8591f7514893cbfb5e89593380e75255c9f7dcc3.xml",
+      "bytes": 2540,
+      "sha256": "8937c98fb0df5bc70e1ba19c8591f7514893cbfb5e89593380e75255c9f7dcc3"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/8c2dbe56a877bbb67aac3ce5af7536d58a4ea98f2720c9888ac7ac6f03496a45.xml",
+      "bytes": 2539,
+      "sha256": "8c2dbe56a877bbb67aac3ce5af7536d58a4ea98f2720c9888ac7ac6f03496a45"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/a47ca10ed2193292e7a41fe411c75bb76313ec0cdc3333994befdc213932ebc2.xml",
+      "bytes": 2534,
+      "sha256": "a47ca10ed2193292e7a41fe411c75bb76313ec0cdc3333994befdc213932ebc2"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/b198b4a096a800c664f40b5f959fd13a561b3c14027f1d9b061642745ff87910.xml",
+      "bytes": 2534,
+      "sha256": "b198b4a096a800c664f40b5f959fd13a561b3c14027f1d9b061642745ff87910"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/b26704f0b4363eea8cad7639d54175c79f5255c435bac4415e28ff98cd130bc1.xml",
+      "bytes": 2540,
+      "sha256": "b26704f0b4363eea8cad7639d54175c79f5255c435bac4415e28ff98cd130bc1"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/b974d2ac0bd207c2c06855b00aa25e7b58b3d1603ca79ed9f4047265237078e9.xml",
+      "bytes": 2540,
+      "sha256": "b974d2ac0bd207c2c06855b00aa25e7b58b3d1603ca79ed9f4047265237078e9"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/c0cb08acf1777679ef0a9cb7b441fe97574cde7f6960309b4863b27c2900ac6e.xml",
+      "bytes": 2539,
+      "sha256": "c0cb08acf1777679ef0a9cb7b441fe97574cde7f6960309b4863b27c2900ac6e"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/dd90371712019271b1c09fd931817c6c596db275404be3778cb235a12e685820.xml",
+      "bytes": 2535,
+      "sha256": "dd90371712019271b1c09fd931817c6c596db275404be3778cb235a12e685820"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/e5de1150d86e1131af041a51665efe0e39705e21bff3bae028e2f4c5e5fda351.xml",
+      "bytes": 2541,
+      "sha256": "e5de1150d86e1131af041a51665efe0e39705e21bff3bae028e2f4c5e5fda351"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/f5ea80e7cd5903cdd01f353c841693f8fccbd16cebbe83f7cd3454b48b1eb456.xml",
+      "bytes": 2539,
+      "sha256": "f5ea80e7cd5903cdd01f353c841693f8fccbd16cebbe83f7cd3454b48b1eb456"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/f9a3f6d5255edd7a01b0f90a56595064268f1438eb368be916ec38f133af9748.xml",
+      "bytes": 2540,
+      "sha256": "f9a3f6d5255edd7a01b0f90a56595064268f1438eb368be916ec38f133af9748"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/assets/fa703292671c2913acfde3ff3ed04363745271c34390161acc08a23098b2f018.xml",
+      "bytes": 2539,
+      "sha256": "fa703292671c2913acfde3ff3ed04363745271c34390161acc08a23098b2f018"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/config.json",
+      "bytes": 5048,
+      "sha256": "8c339abf89ed2eafd0c4dde89634a1032728b68ff28f0773ee1d450485a16cfd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/0acfcaed76620c73271ef57dab337d4e.json",
+      "bytes": 2108,
+      "sha256": "75da37aeabbbfda17dd55175e2e38eece15a6f30fb12ee54ebf9d98132182d19"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/0f1c03b4f4d8c5be555536a9f03ed265.json",
+      "bytes": 2131,
+      "sha256": "ce8030226f8a158232fec3eb11e4bfffe7bc9f520262c8eb16b0afc3b0267673"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/17324cffdead79b5f4c0f5a3cf4be66f.json",
+      "bytes": 2096,
+      "sha256": "29d8caaa40f6e638863ad7ed731174d65198a4b43a05f2d0a4733a5576d5c817"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/1df2ac7a1431ed5937a6c99f47b36ee4.json",
+      "bytes": 2132,
+      "sha256": "054ee84570797c71d8a742d45d11b4b71efe979dd48ef6bc7cc953360c22fa4f"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/241031ae25f501a35d3ce179a95f7b5e.json",
+      "bytes": 2109,
+      "sha256": "f2fd6cec35dae998c222f589d8e04a607042997f7c752c2bd912c818b2938186"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/32651d2b8f0a06e701397de67d4c513a.json",
+      "bytes": 2115,
+      "sha256": "14fb1388d5a39352b5c2dbe48bc95caaab6c70e75a773d51eace39572d0af11b"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/531be9e81408f024cb39efb44bd6d699.json",
+      "bytes": 2112,
+      "sha256": "08f16207abcafc1a595db549a4f6f30db40d7e6f3d51d963c6c56b9e99f76126"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/5478e9974dbe5e22288c865e0970d1ce.json",
+      "bytes": 2113,
+      "sha256": "8f7c2668559d4241b32d3b4632e60af4b2286e6c69f0f32debb2b4f3bef3b592"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/75dd4e7e70e8793597fffafcae2d332a.json",
+      "bytes": 2128,
+      "sha256": "81bd2407d264be6af407bd700be69c5059d351bcef0eacb280c70335a2e5422f"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/87c3d5b23db4c7146db174775f97a358.json",
+      "bytes": 2125,
+      "sha256": "5b7d7769fef29b3a98c454e3594318478de521943c832ff2337f27c10c2d2ebc"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/90d4bd2a8d93a2618739068de4add305.json",
+      "bytes": 2126,
+      "sha256": "04d669b64bd2a7d81ea24f4b865a9bd8d708ec15c1b56d8c997b970df2fbbdbf"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/93343516e0046bafb2358dafdaf57527.json",
+      "bytes": 2119,
+      "sha256": "8ec52ee224e4334a239eb93c9d44c4b6768a58ec294c25e581ed69caf1d27587"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/953261004ef7191d8b0dffe4302389da.json",
+      "bytes": 2122,
+      "sha256": "c5b09029592967ce49c59641ddea88d0ef18864f0c1d8f274467e853f21081dd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/a74df9dc133279afea6bd710496b2f10.json",
+      "bytes": 2114,
+      "sha256": "277fac0dd783baea1d7ad8a93a6be9bb974e79b2a2fecc20714a2ff22223bba3"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/c02f9ca902161f718b4b9aefd29fe8b1.json",
+      "bytes": 2107,
+      "sha256": "d64701b9e97966711ed210fcfaa7dac056852a3d6aa026514d729e1c870c82df"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/cc756c10b7e78f905cf2fbb8c18a2d30.json",
+      "bytes": 2108,
+      "sha256": "500091bad3068cc0e13b1e695c8cc6cd1eceabf61a7317e703704efc80f7ec9c"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/df04917c6e22d38868a3f90dfc73d61e.json",
+      "bytes": 2133,
+      "sha256": "2901a52d7368e0ee269d1b774deffe4c2d875d9a2e1ab2a104e4cfbadbaf14aa"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/e7f1f9e3558f972915f69f1b29ab49b9.json",
+      "bytes": 2112,
+      "sha256": "17da68da61a2c3b7fff191ce944c768f13e1b1728a78e33ae92199b2e70d3195"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/ea78bb216b5e4f488522f12bcb6fb962.json",
+      "bytes": 2112,
+      "sha256": "8cbbbbe97d7b8ee01fa450bec092a3a8e6c2db362e4eb612860883a70515f8c9"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/diagnostics/fa4cc990c95ec0cbdf022b4763bfd82c.json",
+      "bytes": 2119,
+      "sha256": "8a7d81afea5dfef3f2f891d8afb9e817f8c203aec436d5328493a28103392031"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/environment.json",
+      "bytes": 524,
+      "sha256": "4eb3fea43250ed949cdad67242887f391b717f6f70f847772b2a34dea1e0f55f"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/evaluator.jsonl",
+      "bytes": 51346,
+      "sha256": "8c32aab086f1e2e05a77ac28e493025cffc763a15eb06d224b5d65a0e1fd71a9"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/extracted-adapter.json",
+      "bytes": 205796,
+      "sha256": "14568699fb1c89b7902a3c38a586726345855ccf5f5438fd807bfbc5d675e480"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/identity.json",
+      "bytes": 279,
+      "sha256": "ef5e15f656a0855a9c5d42e2c2ca567f9adeb99bb811cf0e045bb2e1c568bfaa"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/inputs.jsonl",
+      "bytes": 474448,
+      "sha256": "4305a9217d53f06b25f045f75b4680d36a09e831b8085c4a9b9b461078f42a63"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/manifest.json",
+      "bytes": 18734,
+      "sha256": "9312c632f5a1c759f221432952cf5a791ac30d7df48321f2da9cb6aef6678ba4"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/nominal-gate.json",
+      "bytes": 303,
+      "sha256": "7cecd2a0e8b0ce216d2bfd1cc5e73bcafcc2e1b2e45fc6ad73e82acfbb5cb41b"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/partitions.json",
+      "bytes": 6928,
+      "sha256": "4a721c17a40e9485455b3cb482005ec2ee28c553885fede718dc1295ef89e6a1"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/0acfcaed76620c73271ef57dab337d4e.jsonl",
+      "bytes": 961039,
+      "sha256": "7b478a9e1efb05ed84a7f3249c2b10d41f52e2f2b3032ad5a765862c74c45c35"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/0f1c03b4f4d8c5be555536a9f03ed265.jsonl",
+      "bytes": 960411,
+      "sha256": "5c268e0732d9a6a1b1dffc8cb7800416207a553efd4d01713bbad3c5f422b45c"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/17324cffdead79b5f4c0f5a3cf4be66f.jsonl",
+      "bytes": 960843,
+      "sha256": "9e13880ca40436b44306754e0cf3e39346706d04798cb14e7930ef4654c3be4c"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/1df2ac7a1431ed5937a6c99f47b36ee4.jsonl",
+      "bytes": 959979,
+      "sha256": "0e311e2f65b73133832efbb0971c82f08a4d82830a6d643258fb4e5de58ec4bc"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/241031ae25f501a35d3ce179a95f7b5e.jsonl",
+      "bytes": 961287,
+      "sha256": "ba5219c491f5d3790745cc701acee9daf86a18acb6bd369d4b258633cf5b73a2"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/531be9e81408f024cb39efb44bd6d699.jsonl",
+      "bytes": 961311,
+      "sha256": "75b35c9f5763393aad436fca958131f15db504a147e97871fb0ca396705f265d"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/5478e9974dbe5e22288c865e0970d1ce.jsonl",
+      "bytes": 960591,
+      "sha256": "6849525840b65a9c72a22788f25944b24c42b211acdf9c25aa665e0489f2ca2f"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/90d4bd2a8d93a2618739068de4add305.jsonl",
+      "bytes": 962253,
+      "sha256": "d4c2771d323d8f402a3857ed8e7707d4951d09b547815d67e1004d35456bab27"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/953261004ef7191d8b0dffe4302389da.jsonl",
+      "bytes": 961429,
+      "sha256": "fbcee9b27c513fb6d917175aa7592bc38bd2771403a3f27a95f1e5d1dc76657e"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/a74df9dc133279afea6bd710496b2f10.jsonl",
+      "bytes": 572580,
+      "sha256": "3fb36cd7f487a9f0b9f9e50f5d3414253d824000e9940aec79d120c58d18f554"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/c02f9ca902161f718b4b9aefd29fe8b1.jsonl",
+      "bytes": 572382,
+      "sha256": "b4ec80d89e2ce9043cdbd96f2ded8b0fa1ebb887b3908bca0ff6ebab4e5f0670"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/cc756c10b7e78f905cf2fbb8c18a2d30.jsonl",
+      "bytes": 960104,
+      "sha256": "9dc32d4223d210b072865e10de26661836855f4538d6d415450ba83505f06cea"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/e7f1f9e3558f972915f69f1b29ab49b9.jsonl",
+      "bytes": 960341,
+      "sha256": "eb9390045735969f83b685d95587b2f197cb7c489961733aad612d96e7d1159e"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/ea78bb216b5e4f488522f12bcb6fb962.jsonl",
+      "bytes": 961322,
+      "sha256": "f37b6e105237383d5db1d0919f9dee304165b056f576890aeba94774ba5a17b9"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/quarantine/fa4cc990c95ec0cbdf022b4763bfd82c.jsonl",
+      "bytes": 961009,
+      "sha256": "46cc96f29831bfd95843bd8795f344e68cbe41bbed662957a55f255fd29edec1"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/0acfcaed76620c73271ef57dab337d4e.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/0f1c03b4f4d8c5be555536a9f03ed265.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/17324cffdead79b5f4c0f5a3cf4be66f.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/1df2ac7a1431ed5937a6c99f47b36ee4.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/241031ae25f501a35d3ce179a95f7b5e.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/32651d2b8f0a06e701397de67d4c513a.json",
+      "bytes": 118,
+      "sha256": "03caafc13e3841d846712e7cde46e51daad3137ac0997131c93d07afc4310e5d"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/531be9e81408f024cb39efb44bd6d699.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/5478e9974dbe5e22288c865e0970d1ce.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/75dd4e7e70e8793597fffafcae2d332a.json",
+      "bytes": 118,
+      "sha256": "b646e206056641b9b9aceb2c112c5397791029f23b2c7ce9d70e1f162d0daad3"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/87c3d5b23db4c7146db174775f97a358.json",
+      "bytes": 118,
+      "sha256": "d220b6f2ad6059440b53dd84a75c8061e545497e15561836686be2bf09b6add3"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/90d4bd2a8d93a2618739068de4add305.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/93343516e0046bafb2358dafdaf57527.json",
+      "bytes": 118,
+      "sha256": "25c18d92d547b00bc14cda16535c212c8481a0b50ed9dd8894eca35f8df44a02"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/953261004ef7191d8b0dffe4302389da.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/a74df9dc133279afea6bd710496b2f10.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/c02f9ca902161f718b4b9aefd29fe8b1.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/cc756c10b7e78f905cf2fbb8c18a2d30.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/df04917c6e22d38868a3f90dfc73d61e.json",
+      "bytes": 118,
+      "sha256": "df126a5962d1701d1ca813997a6a47390f6ed41969c543b4be3e138bcaeaae77"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/e7f1f9e3558f972915f69f1b29ab49b9.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/ea78bb216b5e4f488522f12bcb6fb962.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/receipts/fa4cc990c95ec0cbdf022b4763bfd82c.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/references.jsonl",
+      "bytes": 3892516,
+      "sha256": "2349c9cc6fbcdfee9f5a6757d414a2fac09e79dd6318a5122c7a9c52295209fb"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/registry.json",
+      "bytes": 233062,
+      "sha256": "b260c537497764ee5b24955aad4ecdaababf26205ac61fe815b95ad73fca13e5"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/rejections.jsonl",
+      "bytes": 7220,
+      "sha256": "01b40bea6db442f5a189307e6729d38962f3c89cbb27bbedf9df3c717d2c3ee2"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/review-bundle.json",
+      "bytes": 1923869,
+      "sha256": "675d07e88ce4dc55e0a0abd81e8918d833437ca9efe80486b815b99ec08565d5"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/shards/32651d2b8f0a06e701397de67d4c513a.jsonl",
+      "bytes": 961191,
+      "sha256": "42e420c367c2af182d93e2eb1a1ff8b6fd7557ad51d0b431d8005e99c1b40a86"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/shards/75dd4e7e70e8793597fffafcae2d332a.jsonl",
+      "bytes": 962623,
+      "sha256": "5c409a6967a39cfc23756fab48dd7d143be562f9ffc38bcf083922b15b1b59f8"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/shards/87c3d5b23db4c7146db174775f97a358.jsonl",
+      "bytes": 959630,
+      "sha256": "0008a11bad6737e29190ea8843a7ab5dddab18563bc9982399ebbb9826ad83e0"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/shards/93343516e0046bafb2358dafdaf57527.jsonl",
+      "bytes": 572993,
+      "sha256": "ff72def114b557cc3cf0b7bd3729655d7c9bd01652ffb0f8e694ab83518b924d"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/shards/df04917c6e22d38868a3f90dfc73d61e.jsonl",
+      "bytes": 960991,
+      "sha256": "0bd90957942a91c62aa7263333237dfc1da63a745c98f6730fa320b281875f58"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source.json",
+      "bytes": 3081,
+      "sha256": "6812ad6df2e8ba0ca13556d12c9c97eb4f346ca31df48557a93de0273f472f2d"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/__init__.py",
+      "bytes": 99,
+      "sha256": "2d5a66507cc10220b648c2b1ce46b9df163548f03aaeea254f954958bd46f6b1"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/__main__.py",
+      "bytes": 51,
+      "sha256": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/artifacts.py",
+      "bytes": 4040,
+      "sha256": "636e8bec8a2e50675e4f4fcada6659ba7d40f5b54c875877ea9eca36ddf643e8"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/benchmarks/__init__.py",
+      "bytes": 86,
+      "sha256": "8da6232a447938aa5d895f356f69fef95476dfb09b728c7fec9416ba09103f63"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/benchmarks/config.py",
+      "bytes": 2624,
+      "sha256": "464ff1dbb16052446ad19b9beb44fd7aaf0a0bac7d36259cd2cedc410312e85c"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/benchmarks/dataset.py",
+      "bytes": 17707,
+      "sha256": "679e988a6e1d6984bb43a86d4cdbd76232023288797d83a05e08b95021363592"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/benchmarks/physical_checks.py",
+      "bytes": 1454,
+      "sha256": "e4e89395a31bcbb0793dd137f8196900e44121a890488c2d8ffd61e835a688f4"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/benchmarks/stopping.py",
+      "bytes": 5494,
+      "sha256": "3ff1aefec2c7e135bf2ca0e8cf7e9ff82f6e19ebbf345510f78f94be4f9725ea"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/cli.py",
+      "bytes": 2964,
+      "sha256": "c4407102ab7540c4caed90c6688e9285d127f087281c42f75c16369fd36c0720"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/config.py",
+      "bytes": 1441,
+      "sha256": "f35630b188aac1833173ada4b173c8fe3c6511013a5513334fd2084e5f46d9dc"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/contracts.py",
+      "bytes": 2432,
+      "sha256": "3349943118b754ef6f333ef412cfa2b8b9564df3de3272daf750ebb0de82711b"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/data.py",
+      "bytes": 5082,
+      "sha256": "8c9cb217f9222b0fab7ddb43a52754abc64fe7ba6526d21764f10f453dfeef15"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/evaluation.py",
+      "bytes": 11322,
+      "sha256": "3c9cb335029c389e47a1a80c0f9816156b276802802c35239d8dc0ce5a255c39"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/fixture.py",
+      "bytes": 1799,
+      "sha256": "d43752b9c10f4eeba0786602bfccfce1eaf3629ac11ac7b1ec8d64d3b59b7271"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/pyproject.toml",
+      "bytes": 466,
+      "sha256": "1faa8d2155de1e82463ece13c7f23c88c944e1dfd838e9bf68edd0e638b34afc"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/__init__.py",
+      "bytes": 84,
+      "sha256": "46d4193b717b606704049de60713e9cc1314196a6946abca6a69a697760f1c38"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/bullet.py",
+      "bytes": 14831,
+      "sha256": "8de1441963585a07758e8e94c60cef3c0d6041671229ec7f7436790cef8746fe"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/cli.py",
+      "bytes": 3136,
+      "sha256": "8f8dcb3db0d9cda4969cde68c57c64fcf052d659d5c43575b5585e55770f458f"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/common.py",
+      "bytes": 1644,
+      "sha256": "446fa197872f6718730f9a679a1828d5c44258326c4c81d658b8a7cf94111a0b"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/diagnostics.py",
+      "bytes": 1936,
+      "sha256": "0a0c21d056a202beaab278774adae074220320e0291ce1a46395d570d93904b6"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/engines.py",
+      "bytes": 10095,
+      "sha256": "49a8a57aa7647e1d4e151e53523f72111edaf2522c3d5e119c222845540a7fed"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/environment.py",
+      "bytes": 2007,
+      "sha256": "7c498641984bf8df01862761355faf926111d6b4ec0293a78a71288759e87e9f"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/extracted.py",
+      "bytes": 4422,
+      "sha256": "389807bffef84377ff16ff639c9c7d815af222f59e0047cbea5d8ab81709f0db"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/mjx.py",
+      "bytes": 10006,
+      "sha256": "f8792ded54970cda535efb194725898d4ecb2ca5c7f669eee0a51481b5360681"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/numeric.py",
+      "bytes": 6380,
+      "sha256": "384956201c250ff6c23a4871a629f0008a08a35b4a3f73763d4ed757104bea0e"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/pipeline.py",
+      "bytes": 15145,
+      "sha256": "7a55708ebd11b44919d545bc92b4c866e7de6402dde92e844a056ed0f2f88af7"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/quadruped.py",
+      "bytes": 5393,
+      "sha256": "63604adb713054bb49bf379ec4b212cf47bda7b0040a2e1e2b9bd48ade298ffa"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/records.py",
+      "bytes": 6800,
+      "sha256": "62d27b4505238d4102016145683d4de5b1a8ca37e72f9941f2b105d7adbd3659"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/release.py",
+      "bytes": 3348,
+      "sha256": "2b335004180ed06c326f304524466e1b2b755be5ede5c8322883f0ff846c3925"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/sampling.py",
+      "bytes": 2784,
+      "sha256": "1ee4e863c9e69bf34e6b1c8f3f4375d16cd7ea98d50b437ec8476a5b9d106c01"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/scenes.py",
+      "bytes": 4182,
+      "sha256": "c3655ab31e78e3933f9872de17e3d26396537f4e64085333b722c2d105f59c66"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/simulation/validation.py",
+      "bytes": 8082,
+      "sha256": "22451e971d6e63d3b9a5a7c304ec02af682136191de556817c97107b69f5bbe0"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/source_snapshot/validation.py",
+      "bytes": 2480,
+      "sha256": "7148587d4372183c3cd63b0c697dc10328b534adf051da754c4629af1967ef47"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/target-texts.jsonl",
+      "bytes": 1293819,
+      "sha256": "9472d603cb15ed2f253c1dede787d93958b14b67baa067306962ec7b123572f7"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots/smoke/text-size.json",
+      "bytes": 210,
+      "sha256": "7e3648e7df49249d3a14bf4ab2e60bb9e8d29129ea6f45776b522db6669df672"
+    },
+    {
+      "path": "dataset-runs/quadruped-qualified-pilots.log",
+      "bytes": 4010,
+      "sha256": "c99ceded8ab9b487a498314d4d24a358af01ab1a0f948b949ded71c6037a33c3"
+    },
+    {
+      "path": "dataset-runs/quadruped-refinement-linux-tests-final.log",
+      "bytes": 8578,
+      "sha256": "3117c0d30a97b1d04e040a777bc2ddac5170ac694952d2d0869bf91047955b79"
+    },
+    {
+      "path": "dataset-runs/quadruped-refinement-linux-tests.log",
+      "bytes": 7886,
+      "sha256": "f17e19eb6e50c1fa14a669f180a931ae35b62ab2b733c9ea840721ebda0b0ba7"
+    },
+    {
+      "path": "dataset-runs/quadruped-refinement-tests.log",
+      "bytes": 8099,
+      "sha256": "cc3629ca14d3b4c60a3354de2dcee726d5c259efd0d82283a7bc2bbde7c2705f"
+    },
+    {
+      "path": "dataset-runs/quadruped-refinement-windows-tests-final.log",
+      "bytes": 8796,
+      "sha256": "5de5145fa848c9b11563c33f2895e2a4e6becb84c21781db983a230c5e028a9c"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/09b5ff682cded1d949283d71b361fd68b7067c2929d4f5cc6ad16716e5f3c188.xml",
+      "bytes": 2503,
+      "sha256": "09b5ff682cded1d949283d71b361fd68b7067c2929d4f5cc6ad16716e5f3c188"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/0b2347957468dde2b8c2161b6022872f1c96c5469ab4727bc3497eff67239127.xml",
+      "bytes": 2503,
+      "sha256": "0b2347957468dde2b8c2161b6022872f1c96c5469ab4727bc3497eff67239127"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/0e038d4b81606c0345fc64853402c820c4b444d044586b5634284867f4101554.xml",
+      "bytes": 2497,
+      "sha256": "0e038d4b81606c0345fc64853402c820c4b444d044586b5634284867f4101554"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/1b0d45303688daf4a50f6d3612a295e322f9e54fd6f756e02237ab8f1473f2f3.xml",
+      "bytes": 2503,
+      "sha256": "1b0d45303688daf4a50f6d3612a295e322f9e54fd6f756e02237ab8f1473f2f3"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/2fae8edade39f213f6c122e66250bdebaaa7f0c8fdbff50fd96e454105e06de2.xml",
+      "bytes": 2502,
+      "sha256": "2fae8edade39f213f6c122e66250bdebaaa7f0c8fdbff50fd96e454105e06de2"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/3f9517cdcf596cdb3c749a27934c0d6040e859be9e4debd285860f47b5a58570.xml",
+      "bytes": 2497,
+      "sha256": "3f9517cdcf596cdb3c749a27934c0d6040e859be9e4debd285860f47b5a58570"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/4096c635f5129c2769377bb43c969e5c9bd69a005955da03f262edbfb3376868.xml",
+      "bytes": 2502,
+      "sha256": "4096c635f5129c2769377bb43c969e5c9bd69a005955da03f262edbfb3376868"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/4d44e1e0d0cfb69f272b8e140fb9ade06dfe109c70b328ce2645b6308f0b11c6.xml",
+      "bytes": 2502,
+      "sha256": "4d44e1e0d0cfb69f272b8e140fb9ade06dfe109c70b328ce2645b6308f0b11c6"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/4e957108508b1653b64aecfc8495e91794adc53926719c40542b951db7e915ea.xml",
+      "bytes": 2502,
+      "sha256": "4e957108508b1653b64aecfc8495e91794adc53926719c40542b951db7e915ea"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/647bf0b65779a391f41641114b531321d8673f92138b6bfee20a10ea895ef312.xml",
+      "bytes": 2502,
+      "sha256": "647bf0b65779a391f41641114b531321d8673f92138b6bfee20a10ea895ef312"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/66554f94351112f8f39633a074efb5450aa8e592449cfc4d57a3dd30843247e8.xml",
+      "bytes": 2503,
+      "sha256": "66554f94351112f8f39633a074efb5450aa8e592449cfc4d57a3dd30843247e8"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/67037e2076c2b5039850c703f991123d51514d04ef90c2f5dbf42a365c1d9d00.xml",
+      "bytes": 2503,
+      "sha256": "67037e2076c2b5039850c703f991123d51514d04ef90c2f5dbf42a365c1d9d00"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/941fa04bb287b2a0e3f3933cf249e2c94a8d6b8056ea165b58cdaaaf6fd04978.xml",
+      "bytes": 2504,
+      "sha256": "941fa04bb287b2a0e3f3933cf249e2c94a8d6b8056ea165b58cdaaaf6fd04978"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/9dd7b1363ebc7972bbf5d45648bfbea85708c65534fd76ff2e03575d6a687cc4.xml",
+      "bytes": 2497,
+      "sha256": "9dd7b1363ebc7972bbf5d45648bfbea85708c65534fd76ff2e03575d6a687cc4"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/b00aee0cd89c57c89266f9c9f433ca93394aaa75e87d8f6d1732fb0e2b27f8e9.xml",
+      "bytes": 2498,
+      "sha256": "b00aee0cd89c57c89266f9c9f433ca93394aaa75e87d8f6d1732fb0e2b27f8e9"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/b1f948206c6f9e7921930b419bf8670bec1f8ee8f714b8175d2aff00ecc4fbc2.xml",
+      "bytes": 2503,
+      "sha256": "b1f948206c6f9e7921930b419bf8670bec1f8ee8f714b8175d2aff00ecc4fbc2"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/ba8c447d779b1c24aa10ac01519becd830131ab21e0d19529de50a2077e97f1b.xml",
+      "bytes": 2503,
+      "sha256": "ba8c447d779b1c24aa10ac01519becd830131ab21e0d19529de50a2077e97f1b"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/cb885282638918b6b43f21a6eb499a2ed9cf0108b4f3e08d0c0a4d61c9d10c33.xml",
+      "bytes": 2503,
+      "sha256": "cb885282638918b6b43f21a6eb499a2ed9cf0108b4f3e08d0c0a4d61c9d10c33"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/e2dfea4a0c7f4c2b5f96bfde21495e87af49abc480a8c207395acab734173ef1.xml",
+      "bytes": 2503,
+      "sha256": "e2dfea4a0c7f4c2b5f96bfde21495e87af49abc480a8c207395acab734173ef1"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/assets/e34cbbd770892d08e04bae64e23433420e42386a8414e49cfdf477d0986c9f34.xml",
+      "bytes": 2502,
+      "sha256": "e34cbbd770892d08e04bae64e23433420e42386a8414e49cfdf477d0986c9f34"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/config.json",
+      "bytes": 3948,
+      "sha256": "0ffd34c4bd03a976b41232701e9d8a14327fb02db8927091c7807fc6a07b5fc6"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/0acfcaed76620c73271ef57dab337d4e.json",
+      "bytes": 1623,
+      "sha256": "6934f6ded837695dfc91ad30ddfa0e363a3d64e66074c44741c17044fa2dfd9d"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/0f1c03b4f4d8c5be555536a9f03ed265.json",
+      "bytes": 1708,
+      "sha256": "cce88a2f470e1eb56d884ec81db221a318df9c9f0689d236ea82194d2cf4bc0a"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/17324cffdead79b5f4c0f5a3cf4be66f.json",
+      "bytes": 1606,
+      "sha256": "551a3b48613f98cbf4e7566eeddbc076382398bcdf583596c9ea77096a4d4300"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/1df2ac7a1431ed5937a6c99f47b36ee4.json",
+      "bytes": 1639,
+      "sha256": "b784e690212fc916cc5c60d7512c91c269ddc7d5aa60eeeaa141cf5431daf7bc"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/241031ae25f501a35d3ce179a95f7b5e.json",
+      "bytes": 1667,
+      "sha256": "6787455ce42c6718ca23ba6d8ca8a5c4e6971c7135950806a2fe88fb7b12413e"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/32651d2b8f0a06e701397de67d4c513a.json",
+      "bytes": 1691,
+      "sha256": "6657c15c811efed28cb949d3e7f7875f4abb0c13f6af878b4810444793dda8eb"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/531be9e81408f024cb39efb44bd6d699.json",
+      "bytes": 1638,
+      "sha256": "3e6c19108cbbef92ebe6856bedd843df2456b057753e734c6e8ac48b9f9d12fd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/5478e9974dbe5e22288c865e0970d1ce.json",
+      "bytes": 1697,
+      "sha256": "347cf35b938c8556d519f66bcbdcbf7a362440664d2233899b6252064f06cc0e"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/75dd4e7e70e8793597fffafcae2d332a.json",
+      "bytes": 1641,
+      "sha256": "806994b06dbfa48aed365ddc3918c3c06eb065982b5f97569f46abfbd004c0f3"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/87c3d5b23db4c7146db174775f97a358.json",
+      "bytes": 1706,
+      "sha256": "3d1edf8d2a367bfb2be3ffd96fd6be1ec5e0aae5554f27505ee94ce737ca90a2"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/90d4bd2a8d93a2618739068de4add305.json",
+      "bytes": 1639,
+      "sha256": "7ff1a847620a68f1aec1973a66a6a075283d8e3ca4336cde1896211b25533f76"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/93343516e0046bafb2358dafdaf57527.json",
+      "bytes": 1703,
+      "sha256": "c2ccddb09c8f378ca02e957856abf92ac3e30bfa1474ebd9eaea0b0dd77e7472"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/953261004ef7191d8b0dffe4302389da.json",
+      "bytes": 1676,
+      "sha256": "9939ae5d55c0dfa024a67722ff99225973dee0765353f70ef3bdc7ea15b2309d"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/a74df9dc133279afea6bd710496b2f10.json",
+      "bytes": 1713,
+      "sha256": "4a144ffd1c545eb3fe22e0577c83fccd2f7d0bdb706324a6b84de8e33e6b66d4"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/c02f9ca902161f718b4b9aefd29fe8b1.json",
+      "bytes": 1716,
+      "sha256": "ebe93c0382dffb947db48af31cee3945c3e569dbccff5ca9d57a5e26233dd69f"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/cc756c10b7e78f905cf2fbb8c18a2d30.json",
+      "bytes": 1619,
+      "sha256": "33d9de2cd84192ee42768978e2d9a40613ed740bba1be20c142dee05dd9fd368"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/df04917c6e22d38868a3f90dfc73d61e.json",
+      "bytes": 1643,
+      "sha256": "fba01dfd214e147356ae986f29e3d1debe83a97e2cb90b76c73269302ccd036d"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/e7f1f9e3558f972915f69f1b29ab49b9.json",
+      "bytes": 1693,
+      "sha256": "d1cb5e697ae9080eacf5005957afc3a9a0ec95fb4c7413e75b5cf8232d611223"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/ea78bb216b5e4f488522f12bcb6fb962.json",
+      "bytes": 1620,
+      "sha256": "692be68686f9ac582a2aa59f8d8b961759358aa6c3b65dcf7f2cd5b972ce77d4"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/diagnostics/fa4cc990c95ec0cbdf022b4763bfd82c.json",
+      "bytes": 1678,
+      "sha256": "cfde1c1e72f1f035b421aef3c4cafb57aea5332b3a34e046153129f21244f444"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/environment.json",
+      "bytes": 524,
+      "sha256": "170b6abed0fddacdc1e48695b6f4b4b9f748e0b868fb59ec2afbe6f9eb04b2ec"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/evaluator.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/identity.json",
+      "bytes": 279,
+      "sha256": "de2ee7470bf79a8a2e07904f4753c0466906e0a7817db6292afd144c6da9f09a"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/inputs.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/manifest.json",
+      "bytes": 14398,
+      "sha256": "05e6547cba1401e725fa624dc79743c433cf5eb049b6a817cd3760dd8160c061"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/partitions.json",
+      "bytes": 6918,
+      "sha256": "1b2ccbdd1c088dc2ed88c6154d15adac3ddbbbf258a24ddfe77faffcc4638d82"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/0acfcaed76620c73271ef57dab337d4e.jsonl",
+      "bytes": 729339,
+      "sha256": "603f746bf78fca1229e4941a92ff47730adec06100f60bcfbdc6618161b0ca9a"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/0f1c03b4f4d8c5be555536a9f03ed265.jsonl",
+      "bytes": 731112,
+      "sha256": "7a3ddf9a10588106cd690b328afd3c624c9c454fac6e1af6f4c4b46580a7d1a8"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/17324cffdead79b5f4c0f5a3cf4be66f.jsonl",
+      "bytes": 728975,
+      "sha256": "33b0520d5d7a400426416968a9a3d35e2650d49c37b0f72a1156dfb029a3e8a1"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/1df2ac7a1431ed5937a6c99f47b36ee4.jsonl",
+      "bytes": 730182,
+      "sha256": "f761d1704e8eb863ff72e646ed105ad258f11fe28bd76a79cdfa6a8f05b580b3"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/241031ae25f501a35d3ce179a95f7b5e.jsonl",
+      "bytes": 728611,
+      "sha256": "f419638faf2fed855a062cca214c75dee2c5d91f315c95d6ab76d86db63f9c1d"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/32651d2b8f0a06e701397de67d4c513a.jsonl",
+      "bytes": 728865,
+      "sha256": "b62f647e8f7445b296c37119e216bb35f9e0e152e2a73473e76921b064440e9c"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/531be9e81408f024cb39efb44bd6d699.jsonl",
+      "bytes": 730344,
+      "sha256": "62290f363feace97a9ca8c40a76b60132eb8933824dc88eff60a189c4d3f0dc0"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/5478e9974dbe5e22288c865e0970d1ce.jsonl",
+      "bytes": 729990,
+      "sha256": "cfd6506dec9226405f131160b05ca17c12f43c3f000de29539f6a0339f60429d"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/75dd4e7e70e8793597fffafcae2d332a.jsonl",
+      "bytes": 730303,
+      "sha256": "21c4b78c6e16b09f0aff186f5946c131ec29472c952a21e765dc38462c89b2f2"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/87c3d5b23db4c7146db174775f97a358.jsonl",
+      "bytes": 730632,
+      "sha256": "2d5c91171c31faa09c59469310f5c8c01dd9b537924a0211f701d7bae229691b"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/90d4bd2a8d93a2618739068de4add305.jsonl",
+      "bytes": 729496,
+      "sha256": "75f9a7df61a082de3c2a3b328bae5b25e1fb99e0e7e888f286c858daaae30ffe"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/93343516e0046bafb2358dafdaf57527.jsonl",
+      "bytes": 434671,
+      "sha256": "93e6415ade935f59474e5811d1a8cde95d936d9e71369955a2438d10340e5d6d"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/953261004ef7191d8b0dffe4302389da.jsonl",
+      "bytes": 729726,
+      "sha256": "74a8c26bc7af028e5967546abecec9359f36f74f15d5698e24c3345ee63a83e3"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/a74df9dc133279afea6bd710496b2f10.jsonl",
+      "bytes": 433743,
+      "sha256": "166813ec80ac84abbddfece5668397706abf1275348bdbc6b8d024a572471701"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/c02f9ca902161f718b4b9aefd29fe8b1.jsonl",
+      "bytes": 433777,
+      "sha256": "74f8418734455ce453f0c5197adc8c4b2ca3bd2a9bdce823f5cf1d714761b586"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/cc756c10b7e78f905cf2fbb8c18a2d30.jsonl",
+      "bytes": 729654,
+      "sha256": "72a8e05fd9cb514a4773bdc0026f38fe9ee3b623d4b7ed0adb70f712d3ac34ea"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/df04917c6e22d38868a3f90dfc73d61e.jsonl",
+      "bytes": 730824,
+      "sha256": "0ee9b158261eb1114f595e372190bbe5e31c04944fd32aaca27afa49bfb2d5b1"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/e7f1f9e3558f972915f69f1b29ab49b9.jsonl",
+      "bytes": 728966,
+      "sha256": "a209b3cf5d074783f602ee163ae815a6a7f528f86c18860a84ae2a19f745d08e"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/ea78bb216b5e4f488522f12bcb6fb962.jsonl",
+      "bytes": 728887,
+      "sha256": "ca241f81eb895ffecbcd570bf7788ef9c4085f367a08fff1138039d3bbc09856"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/quarantine/fa4cc990c95ec0cbdf022b4763bfd82c.jsonl",
+      "bytes": 728666,
+      "sha256": "d3516c634b9f446da59acb86251e3e9c8a86e8ded83850a81f8458bab5ff3513"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/0acfcaed76620c73271ef57dab337d4e.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/0f1c03b4f4d8c5be555536a9f03ed265.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/17324cffdead79b5f4c0f5a3cf4be66f.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/1df2ac7a1431ed5937a6c99f47b36ee4.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/241031ae25f501a35d3ce179a95f7b5e.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/32651d2b8f0a06e701397de67d4c513a.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/531be9e81408f024cb39efb44bd6d699.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/5478e9974dbe5e22288c865e0970d1ce.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/75dd4e7e70e8793597fffafcae2d332a.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/87c3d5b23db4c7146db174775f97a358.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/90d4bd2a8d93a2618739068de4add305.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/93343516e0046bafb2358dafdaf57527.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/953261004ef7191d8b0dffe4302389da.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/a74df9dc133279afea6bd710496b2f10.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/c02f9ca902161f718b4b9aefd29fe8b1.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/cc756c10b7e78f905cf2fbb8c18a2d30.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/df04917c6e22d38868a3f90dfc73d61e.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/e7f1f9e3558f972915f69f1b29ab49b9.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/ea78bb216b5e4f488522f12bcb6fb962.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/receipts/fa4cc990c95ec0cbdf022b4763bfd82c.json",
+      "bytes": 135,
+      "sha256": "a1ab6891f76a68398a1736b3bcc9d82f1a3ac05aef32c349e787b4d431e859cd"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/references.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/rejections.jsonl",
+      "bytes": 9626,
+      "sha256": "28849fe7bd549ff0b97cde2cd69b67c32a31d419547c75e6e8576dee36c284b8"
+    },
+    {
+      "path": "dataset-runs/quadruped-smoke-v2/source.json",
+      "bytes": 2988,
+      "sha256": "7d9360204b76a6b542145d5e18f0ab50c638d52abf1467510d3f65f5a6223fda"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/config.json",
+      "bytes": 3948,
+      "sha256": "0ffd34c4bd03a976b41232701e9d8a14327fb02db8927091c7807fc6a07b5fc6"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/environment.json",
+      "bytes": 524,
+      "sha256": "f820d9ed2c07d6f5cac69a59f5727b77099e0e4cd122904df8500e58fbd92d74"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/evaluator.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/identity.json",
+      "bytes": 278,
+      "sha256": "0d69575d77dc9d433cc1e468a369e624beeff869ca69d0b66f3df810fb23d280"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/inputs.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/manifest.json",
+      "bytes": 4533,
+      "sha256": "f1ff6c7b8bef08448bf02a758b687e17d679a8a264fe8edddd5f6f3a86880728"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/partitions.json",
+      "bytes": 338,
+      "sha256": "01e5df3df129e58a0f15ce6a49bb844d16a100a7ed4a8eca134a0430455edfa7"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/receipts/ea78bb216b5e4f488522f12bcb6fb962.json",
+      "bytes": 728,
+      "sha256": "78e707906afde64ef2218d1c5d5942ac0c2a9e3ea784febe082c2e7687e18264"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/references.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/rejections.jsonl",
+      "bytes": 1064,
+      "sha256": "661b8d072c9f9c60eaa8e42f1b8d2d513f8c3b90af1051660c717fbb1a650d36"
+    },
+    {
+      "path": "dataset-runs/quadruped-tuned-debug/source.json",
+      "bytes": 2988,
+      "sha256": "6c7a2036fcde9094a85ed912aabca9d6f35c7b3e25c29004e2f0e911b3012bc6"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/0/0e38880006e0b4e1a0d5c12546af014365ba42d7f47005fc5316478bcc77f898.json",
+      "bytes": 566201,
+      "sha256": "9570d9aba863ccebd3029e3f302615c46b71d0bb9f7663022a617c4258884445"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/0/0e38880006e0b4e1a0d5c12546af014365ba42d7f47005fc5316478bcc77f898.receipt.json",
+      "bytes": 210,
+      "sha256": "19f0ef58be9df7408fdde7c7c15dc8c979a009a2e33a84ca487908a16b269a21"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/0/7e660b7eaa73b1cfdf1bcafdbc705ad60e9a1d22c8e4c20330f189de5b974d64.json",
+      "bytes": 566247,
+      "sha256": "9642ab3a47307967a0048c12b07107142d4ec37446cd7b225b4ccb4ae7ba19a4"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/0/7e660b7eaa73b1cfdf1bcafdbc705ad60e9a1d22c8e4c20330f189de5b974d64.receipt.json",
+      "bytes": 211,
+      "sha256": "59c5296920f505329ae7f51ec7a6449dc25ebdfc36883c90c9521089c727a093"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/1/0e38880006e0b4e1a0d5c12546af014365ba42d7f47005fc5316478bcc77f898.json",
+      "bytes": 566181,
+      "sha256": "f9ed6c2baab26ad44e1725594383387cf82fa2872ccb93e1ad38dcd15dac18e4"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/1/0e38880006e0b4e1a0d5c12546af014365ba42d7f47005fc5316478bcc77f898.receipt.json",
+      "bytes": 210,
+      "sha256": "9f9f8000a7ff5d987571c69686c8ea00fa37e8879aeaf308d9dbe300769d78a6"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/1/7e660b7eaa73b1cfdf1bcafdbc705ad60e9a1d22c8e4c20330f189de5b974d64.json",
+      "bytes": 566311,
+      "sha256": "69fc6088a8265beb3ef4b0aa90f947e7fa9685715fb95894796835d0b1f2f0d3"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/1/7e660b7eaa73b1cfdf1bcafdbc705ad60e9a1d22c8e4c20330f189de5b974d64.receipt.json",
+      "bytes": 211,
+      "sha256": "48e3b104e09bc7d1a89853f8f50d2b066de30c8cf4666b4423221eb78088c23b"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/label-replay-audit.json",
+      "bytes": 3768,
+      "sha256": "bfac37fe67c26849d3680a7da1a91263f7e47e467f2f6b428658856570081226"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay/summary.json",
+      "bytes": 1575,
+      "sha256": "7c0f2e7b179b239ed555f4c0303c4e1bbaa89bbc345ad6f57758237c0384617e"
+    },
+    {
+      "path": "dataset-runs/quadruped-worker-replay.log",
+      "bytes": 766,
+      "sha256": "8e30035bb7ee7e1651e621d10e7276b640e1eedef1a594b2e19cb5c9347754c2"
+    }
+  ]
+}

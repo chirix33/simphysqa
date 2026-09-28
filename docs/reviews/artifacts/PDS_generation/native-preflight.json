@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "root": "/var/tmp/phi-jepa-release-a8920b2",
+  "source_sha256": "3a54bd9d838564216feca961a0377b6b9c9649aa1f1174eb02f2af3eaa3168eb",
+  "gate_seconds": 50.52660854700025,
+  "checks": [
+    "clean checkout",
+    "frozen files and runtime",
+    "licenses",
+    "historical calibration",
+    "exact resume source identity"
+  ]
+}

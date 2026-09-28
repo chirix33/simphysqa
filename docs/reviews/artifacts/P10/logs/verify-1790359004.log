@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_worker.py", line 19, in <module>
+    getattr(module,stage)(run,job)
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_benchmark.py", line 14, in verify
+    if result.returncode: raise RuntimeError('targeted_tests_failed_see_tests.log')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: targeted_tests_failed_see_tests.log

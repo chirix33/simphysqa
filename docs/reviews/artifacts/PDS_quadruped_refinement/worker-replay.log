@@ -1,0 +1,12 @@
+Failed to import warp: No module named 'warp'
+Failed to import mujoco_warp: No module named 'warp'
+Failed to import warp: No module named 'warp'
+Failed to import mujoco_warp: No module named 'warp'
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/verify_quadruped_workers.py", line 52, in <module>
+    if __name__=="__main__": main()
+                             ^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/verify_quadruped_workers.py", line 48, in main
+    if not passed: raise AssertionError("concurrent replay exceeded audit tolerance")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: concurrent replay exceeded audit tolerance

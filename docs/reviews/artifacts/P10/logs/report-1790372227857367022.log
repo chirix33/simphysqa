@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_worker.py", line 41, in <module>
+    getattr(module,stage)(run,job)
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_report.py", line 14, in report
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'

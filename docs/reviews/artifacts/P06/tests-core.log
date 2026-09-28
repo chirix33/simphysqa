@@ -1,0 +1,191 @@
+..................................................................................................................................E.E.......E.....EEEEEEEEEEEE.....sss.
+======================================================================
+ERROR: test_rejected_draws_are_preserved_without_replacement_or_retry (test_release_freeze.FreezeTests.test_rejected_draws_are_preserved_without_replacement_or_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_release_freeze.py", line 19, in test_rejected_draws_are_preserved_without_replacement_or_retry
+    first = run(config, "tethered_load", 2, Path(tmp))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/pipeline.py", line 124, in run
+    provenance=code_provenance(); env=inspect_environment(output)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/environment.py", line 11, in inspect_environment
+    import psutil
+ModuleNotFoundError: No module named 'psutil'
+
+======================================================================
+ERROR: test_exact_four_domains_and_disabled_generation (test_release_scope.ReleaseScopeTests.test_exact_four_domains_and_disabled_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/importlib/metadata/__init__.py", line 397, in from_name
+    return next(cls.discover(name=name))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_release_scope.py", line 23, in test_exact_four_domains_and_disabled_generation
+    release_gates(ROOT / "configs/dataset_release_four_domain.json")
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/release.py", line 13, in release_gates
+    verify_freeze(config)
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/freeze.py", line 47, in verify_freeze
+    if importlib.metadata.version(name) != version:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/metadata/__init__.py", line 889, in version
+    return distribution(distribution_name).version
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/metadata/__init__.py", line 862, in distribution
+    return Distribution.from_name(distribution_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/metadata/__init__.py", line 399, in from_name
+    raise PackageNotFoundError(name)
+importlib.metadata.PackageNotFoundError: No package metadata was found for jsonschema
+
+======================================================================
+ERROR: test_illustrative_rejected_by_admission (test_simulation.ContractTests.test_illustrative_rejected_by_admission)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 85, in test_illustrative_rejected_by_admission
+    r=read(ROOT/"example_record.json"); validator().validate(r)
+                                        ^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/validation.py", line 9, in validator
+    from jsonschema import Draft202012Validator
+ModuleNotFoundError: No module named 'jsonschema'
+
+======================================================================
+ERROR: test_coverage_ambiguity_and_null (test_simulation.ExtractedTests.test_coverage_ambiguity_and_null) (kind='missing')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 138, in test_coverage_ambiguity_and_null
+    with self.subTest(kind=kind),self.assertRaises(ValueError): self.adapter.flatten(e)
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/extracted.py", line 49, in flatten
+    from jsonschema import Draft202012Validator
+ModuleNotFoundError: No module named 'jsonschema'
+
+======================================================================
+ERROR: test_coverage_ambiguity_and_null (test_simulation.ExtractedTests.test_coverage_ambiguity_and_null) (kind='duplicate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 138, in test_coverage_ambiguity_and_null
+    with self.subTest(kind=kind),self.assertRaises(ValueError): self.adapter.flatten(e)
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/extracted.py", line 49, in flatten
+    from jsonschema import Draft202012Validator
+ModuleNotFoundError: No module named 'jsonschema'
+
+======================================================================
+ERROR: test_coverage_ambiguity_and_null (test_simulation.ExtractedTests.test_coverage_ambiguity_and_null) (kind='unexpected')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 138, in test_coverage_ambiguity_and_null
+    with self.subTest(kind=kind),self.assertRaises(ValueError): self.adapter.flatten(e)
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/extracted.py", line 49, in flatten
+    from jsonschema import Draft202012Validator
+ModuleNotFoundError: No module named 'jsonschema'
+
+======================================================================
+ERROR: test_coverage_ambiguity_and_null (test_simulation.ExtractedTests.test_coverage_ambiguity_and_null) (kind='null')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 138, in test_coverage_ambiguity_and_null
+    with self.subTest(kind=kind),self.assertRaises(ValueError): self.adapter.flatten(e)
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/extracted.py", line 49, in flatten
+    from jsonschema import Draft202012Validator
+ModuleNotFoundError: No module named 'jsonschema'
+
+======================================================================
+ERROR: test_observations_reorder_by_identity (test_simulation.ExtractedTests.test_observations_reorder_by_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 145, in test_observations_reorder_by_identity
+    first=adapter.flatten(e); e["observations"].reverse()
+          ^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/extracted.py", line 49, in flatten
+    from jsonschema import Draft202012Validator
+ModuleNotFoundError: No module named 'jsonschema'
+
+======================================================================
+ERROR: test_original_hashes_and_root (test_simulation.ExtractedTests.test_original_hashes_and_root)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 127, in test_original_hashes_and_root
+    self.assertEqual(self.adapter.flatten(self.extraction),[.3,.1])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/extracted.py", line 49, in flatten
+    from jsonschema import Draft202012Validator
+ModuleNotFoundError: No module named 'jsonschema'
+
+======================================================================
+ERROR: test_arm_gravity_and_torque_sign (test_simulation.NativePhysicsTests.test_arm_gravity_and_torque_sign)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 159, in test_arm_gravity_and_torque_sign
+    import mujoco
+ModuleNotFoundError: No module named 'mujoco'
+
+======================================================================
+ERROR: test_arm_true_zero_and_deterministic_replay (test_simulation.NativePhysicsTests.test_arm_true_zero_and_deterministic_replay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 153, in test_arm_true_zero_and_deterministic_replay
+    r=MujocoAdapter().simulate(s,self.c,.002); rr=MujocoAdapter().simulate(s,self.c,.002)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/engines.py", line 27, in simulate
+    import mujoco as mj
+ModuleNotFoundError: No module named 'mujoco'
+
+======================================================================
+ERROR: test_atomic_resume_integrity_and_no_duplicates (test_simulation.NativePhysicsTests.test_atomic_resume_integrity_and_no_duplicates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 203, in test_atomic_resume_integrity_and_no_duplicates
+    path=Path(temp); first=run(self.c,"tethered_load",2,path)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/pipeline.py", line 124, in run
+    provenance=code_provenance(); env=inspect_environment(output)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/environment.py", line 11, in inspect_environment
+    import psutil
+ModuleNotFoundError: No module named 'psutil'
+
+======================================================================
+ERROR: test_semantic_endpoint_and_evidence_mutations (test_simulation.NativePhysicsTests.test_semantic_endpoint_and_evidence_mutations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 189, in test_semantic_endpoint_and_evidence_mutations
+    s=sample(self.c,"tethered_load",0); r=MujocoAdapter().simulate(s,self.c,.002)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/engines.py", line 27, in simulate
+    import mujoco as mj
+ModuleNotFoundError: No module named 'mujoco'
+
+======================================================================
+ERROR: test_tether_control_has_no_pre_onset_effect (test_simulation.NativePhysicsTests.test_tether_control_has_no_pre_onset_effect)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 183, in test_tether_control_has_no_pre_onset_effect
+    a=MujocoAdapter().simulate(s,self.c,.002)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/engines.py", line 27, in simulate
+    import mujoco as mj
+ModuleNotFoundError: No module named 'mujoco'
+
+======================================================================
+ERROR: test_tether_small_angle_period_and_length (test_simulation.NativePhysicsTests.test_tether_small_angle_period_and_length)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tests/test_simulation.py", line 171, in test_tether_small_angle_period_and_length
+    r=MujocoAdapter().simulate(replace(s,parameters=p),self.c,.002)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/src/phi_jepa/simulation/engines.py", line 27, in simulate
+    import mujoco as mj
+ModuleNotFoundError: No module named 'mujoco'
+
+----------------------------------------------------------------------
+Ran 164 tests in 16.968s
+
+FAILED (errors=15, skipped=3)

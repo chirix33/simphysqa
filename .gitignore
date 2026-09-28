@@ -5,6 +5,7 @@ metacognition_results/
 scratch_smoke_results/
 results/
 .env
+OPENAI_KEY.txt
 .venv/
 phi_jepa_try.ipynb
 *.zip
@@ -12,3 +13,18 @@ Phi_JEPA_Baseline_Runbook.md
 Phi_JEPA_September_22_Demo_Review_and_Decisions.md
 Phi_JEPA_Implementation_Review_and_TODOs.md
 docs/references/sources/
+
+# P00 local build and isolated CPU verification
+.p00-venv/
+.dataset-venv/
+.dataset-wsl-venv/
+.dataset-bullet-venv/
+dataset-install.log
+dataset-bullet-install.log
+dataset-runs/
+build/
+dist/
+*.egg-info/
+DATASET_CODEX_PROMPT.md
+Phi_JEPA_Final_+_Baselines.ipynb
+Phi_JEPA_Codex_Implementation_Plan.md

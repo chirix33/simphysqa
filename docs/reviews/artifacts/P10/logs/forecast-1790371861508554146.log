@@ -1,0 +1,6 @@
+{"forecast_complete": "continued_biasinit_conditioned_full", "queries": 40}
+{"forecast_complete": "continued_biasinit_constant_context_text_ode", "queries": 40}
+{"forecast_complete": "fixed_projection_lr", "queries": 40}
+{"forecast_complete": "continued_constant_context_text_rnn", "queries": 40}
+{"forecast_complete": "continued_biasinit_no_enrichment", "queries": 40}
+{"forecast_complete": "continued_biasinit_no_text_conditioning", "queries": 40}

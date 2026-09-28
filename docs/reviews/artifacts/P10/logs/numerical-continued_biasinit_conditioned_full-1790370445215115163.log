@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_worker.py", line 39, in <module>
+    getattr(module,stage)(run,job)
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_numerical.py", line 202, in numerical
+    if trainer.updates in c['checkpoint_milestones']: checkpoint(trainer.updates)
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_numerical.py", line 183, in checkpoint
+    measured=diagnostic(run,model,solver,settings,selected_rows,selected_refs,save_folder=folder/'milestones'/str(update))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_numerical.py", line 37, in diagnostic
+    label='.'.join(str(v) for k,v in path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_numerical.py", line 37, in <genexpr>
+    label='.'.join(str(v) for k,v in path)
+                              ^^^
+ValueError: too many values to unpack (expected 2)

@@ -1,0 +1,9 @@
+{
+  "status": "staged_without_production_outputs",
+  "source": "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa",
+  "target": "/var/tmp/phi-jepa-release-a8920b2",
+  "revision": "a8920b23dfbdb089b95cee5c00a47758b942d4ce",
+  "tracked_files_byte_verified": 289,
+  "staging_wall_seconds": 18.64338815100018,
+  "native_free_bytes": 1011337392128
+}

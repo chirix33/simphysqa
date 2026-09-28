@@ -1,3 +1,5 @@
+> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
+
 # Codex workflow and escalation
 
 [Start](../README.md) · [Phases](06_phases.md) · [Review prompt](../prompts/REVIEW_PHASE.md) · [Blocker template](../prompts/BLOCKER_REPORT.md)
@@ -6,7 +8,7 @@ The user sends one phase prompt to the coding agent. Codex reads the listed docu
 
 ## Import and repository discipline
 
-Place this complete package under `docs/implementation/`. Merge its AGENTS policy into the repository-root file without discarding existing applicable instructions. If existing rules conflict with the latest user decisions, explain the exact conflict. Inspect dirty state; preserve unrelated work. Prefer a dedicated phase branch or worktree when needed. Never reset/clean the checkout, remove historical artifacts, or overwrite a working implementation merely to match this proposed tree.
+This complete package is installed directly under `docs/`, with its policy at repository-root `AGENTS.md`. Preserve existing applicable instructions. If existing rules conflict with the latest user decisions, explain the exact conflict. Inspect dirty state; preserve unrelated work. Prefer a dedicated phase branch or worktree when needed. Never reset/clean the checkout, remove historical artifacts, or overwrite a working implementation merely to match this proposed tree.
 
 Phase commits are useful review units. Follow the user's current coding-session instructions for local commits. Do not push, merge, publish or message collaborators solely because a phase completed. This handoff does not grant unspecified paid API/training budgets. Local code edits, reversible fixes and bounded CPU tests are within an implementation phase; live/long runs need a supplied cap and credentials.
 
@@ -30,7 +32,7 @@ The blocker report must state: phase/substep; exact expected versus observed beh
 6. Remaining blocked/pending items, impact and a filled blocker report if needed.
 7. Smallest next authorized step; stop at the phase boundary.
 
-Write the durable report at `docs/reviews/PXX_completion.md`, update `docs/implementation/PROGRESS.md`, and record consequential decisions in `docs/decisions/` with date, alternatives, evidence and superseded decision IDs. Do not overwrite the supplied source transcripts or silently revise historical audit findings.
+Write the durable report at `docs/reviews/PXX_completion.md`, update `docs/PROGRESS.md`, and record consequential decisions in `docs/decisions/` with date, alternatives, evidence and superseded decision IDs. Do not overwrite the supplied source transcripts or silently revise historical audit findings.
 
 ## Reviewer behavior
 
@@ -40,4 +42,4 @@ The planning assistant reviews evidence and code/diffs supplied by the user; a C
 
 Run the tests needed to cover the changed behavior and required gates. Examples: analytic oracle comparison, leakage boundary, gradient flow, checkpoint round trip, one real model smoke, profile. Do not inflate test counts with assertions mirroring constants or repeat full training to prove a doc-only change. Once evidence resolves the remaining risk, stop optional tests and report.
 
-All generated figures/tables derive from raw saved records. A scheduler config, fixture result or expected range is not a measured experiment. The user's hardware report is evidence of WSL/NVIDIA visibility only; CUDA FP32/BF16 validation remains pending until returned.
+All generated figures/tables derive from raw saved records. A scheduler config, fixture result or expected range is not a measured experiment. The active P00 prompt records the user-reported CUDA FP32/BF16 validation pass. This is not agent-executed evidence or model-specific baseline validation.

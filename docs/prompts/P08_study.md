@@ -1,10 +1,12 @@
+> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
+
 # Codex prompt: P08 — Multidomain experiments and evidence
 
 Copy the text below into the coding session, or ask Codex to read this file after importing the package.
 
 ---
 
-You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/implementation/README.md and PROGRESS.md, then these package documents: [docs/01_context.md](../docs/01_context.md); [docs/03_data_evaluation.md](../docs/03_data_evaluation.md); [docs/04_assessment_fallback.md](../docs/04_assessment_fallback.md); [docs/05_baselines.md](../docs/05_baselines.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/implementation/; preserve equivalent paths if the user placed it elsewhere.
+You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/README.md and docs/PROGRESS.md, then these package documents: [docs/01_context.md](../docs/01_context.md); [docs/03_data_evaluation.md](../docs/03_data_evaluation.md); [docs/04_assessment_fallback.md](../docs/04_assessment_fallback.md); [docs/05_baselines.md](../docs/05_baselines.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/; preserve equivalent paths if the user placed it elsewhere.
 
 Implement/execute only the approved P08 matrix after reviewing P07 and the user's resource authorization. Independently validate added domain oracles, observable layouts and OOD mechanisms. Keep mechanical proxy and event-shift labels honest; a genuine fluid/topology claim needs corresponding data evidence.
 

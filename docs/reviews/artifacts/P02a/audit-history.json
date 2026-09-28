@@ -1,0 +1,28 @@
+{
+  "attempts": [
+    {
+      "status": "failed",
+      "reason": "Categorical contact relation cardinality treated as fixed layout; corrected without dataset edits."
+    },
+    {
+      "status": "passed_intermediate",
+      "wall_seconds": 136.77078160000383
+    },
+    {
+      "status": "historical intermediate audit; superseded for final source provenance",
+      "wall_seconds": 159.32651990000159,
+      "counts": {
+        "held_out": 3067,
+        "train": 6702,
+        "validation": 1336
+      },
+      "scenarios": 6340,
+      "reason": "Subsequent user enrichment decision changed interfaces; final audit reruns against stable source/config."
+    },
+    {
+      "status": "passed_superseded_configuration",
+      "wall_seconds": 190.00771480001276,
+      "reason": "Final user Boolean/event policy recorded and audit repeated against final config."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+test_deterministic_no_network_artifacts_and_exclusive_writes (test_p00.P00Tests.test_deterministic_no_network_artifacts_and_exclusive_writes) ... ok
+test_duplicate_json_rejected (test_p00.P00Tests.test_duplicate_json_rejected) ... ok
+test_input_is_deeply_immutable_and_unknown_stays_unknown (test_p00.P00Tests.test_input_is_deeply_immutable_and_unknown_stays_unknown) ... ok
+test_invalid_config (test_p00.P00Tests.test_invalid_config) ... ok
+test_label_and_truth_rejected_at_boundary (test_p00.P00Tests.test_label_and_truth_rejected_at_boundary) ... ok
+test_live_validates_but_never_falls_back (test_p00.P00Tests.test_live_validates_but_never_falls_back) ... ok
+test_numeric_layout_and_nested_types (test_p00.P00Tests.test_numeric_layout_and_nested_types) ... ok
+test_writer_rejects_traversal_and_nonfinite_before_writing (test_p00.P00Tests.test_writer_rejects_traversal_and_nonfinite_before_writing) ... ok
+test_config_limits_and_unknown_keys (test_p01.DatasetTests.test_config_limits_and_unknown_keys) ... ok
+test_correlated_views_and_complete_label_free_inputs (test_p01.DatasetTests.test_correlated_views_and_complete_label_free_inputs) ... ok
+test_deterministic_partitioning_support_and_outcomes (test_p01.DatasetTests.test_deterministic_partitioning_support_and_outcomes) ... ok
+test_train_only_scaling_and_constant_coordinates (test_p01.DatasetTests.test_train_only_scaling_and_constant_coordinates) ... ok
+test_validation_rejects_label_units_partition_and_truth_corruption (test_p01.DatasetTests.test_validation_rejects_label_units_partition_and_truth_corruption) ... ok
+test_duplicate_unknown_ids_rejected_and_row_order_irrelevant (test_p01.EvaluationTests.test_duplicate_unknown_ids_rejected_and_row_order_irrelevant) ... ok
+test_invalid_values_units_order_names_time_and_dimensions_count_as_failures (test_p01.EvaluationTests.test_invalid_values_units_order_names_time_and_dimensions_count_as_failures) ... ok
+test_missing_and_empty_physical_coverage_are_unavailable (test_p01.EvaluationTests.test_missing_and_empty_physical_coverage_are_unavailable) ... ok
+test_only_actual_compatible_trajectories_evaluated (test_p01.EvaluationTests.test_only_actual_compatible_trajectories_evaluated) ... ok
+test_oracle_and_corrupted_predictions_have_explicit_denominators (test_p01.EvaluationTests.test_oracle_and_corrupted_predictions_have_explicit_denominators) ... ok
+test_speed_gain_reversal_and_reachable_interval (test_p01.EvaluationTests.test_speed_gain_reversal_and_reachable_interval) ... ok
+test_wrong_but_weakly_compliant_is_not_correct_answer (test_p01.EvaluationTests.test_wrong_but_weakly_compliant_is_not_correct_answer) ... ok
+test_no_physics_imports_in_input_or_fixture_inference_and_recursive_hashes (test_p01.IntegrationTests.test_no_physics_imports_in_input_or_fixture_inference_and_recursive_hashes) ... ok
+test_offline_cli_generation_validation_evaluation_and_integrity (test_p01.IntegrationTests.test_offline_cli_generation_validation_evaluation_and_integrity) ... ok
+test_constant_closed_form_boundaries (test_p01.OracleTests.test_constant_closed_form_boundaries) ... ok
+test_events_before_at_after_stop_and_terminal (test_p01.OracleTests.test_events_before_at_after_stop_and_terminal) ... ok
+test_invalid_case_event_grid_and_step_budget (test_p01.OracleTests.test_invalid_case_event_grid_and_step_budget) ... ok
+test_numerical_is_independent_and_refines (test_p01.OracleTests.test_numerical_is_independent_and_refines) ... ok
+test_random_event_agreement_without_dataset_selection (test_p01.OracleTests.test_random_event_agreement_without_dataset_selection) ... ok
+test_state_continuity_and_sample_grid_invariance (test_p01.OracleTests.test_state_continuity_and_sample_grid_invariance) ... ok
+test_control_and_event_clocks_are_physical (test_quadruped_refinement.RefinementTests.test_control_and_event_clocks_are_physical) ... ok
+test_exact_experiment_identity_excludes_only_timestep (test_quadruped_refinement.RefinementTests.test_exact_experiment_identity_excludes_only_timestep) ... ok
+test_invalid_configuration_fails_explicitly (test_quadruped_refinement.RefinementTests.test_invalid_configuration_fails_explicitly) ... ok
+test_reference_derivative_and_order (test_quadruped_refinement.RefinementTests.test_reference_derivative_and_order) ... ok
+test_synchronized_first_divergence_and_quaternion_sign (test_quadruped_refinement.RefinementTests.test_synchronized_first_divergence_and_quaternion_sign) ... ok
+test_collision_free_paths_and_booleans (test_simulation.ContractTests.test_collision_free_paths_and_booleans) ... ok
+test_duplicate_quantity_rejected (test_simulation.ContractTests.test_duplicate_quantity_rejected) ... ok
+test_fixture_encoder_once_each_and_width (test_simulation.ContractTests.test_fixture_encoder_once_each_and_width) ... ok
+test_illustrative_rejected_by_admission (test_simulation.ContractTests.test_illustrative_rejected_by_admission) ... ok
+test_missing_extra_null_nonfinite_units_frames_rejected (test_simulation.ContractTests.test_missing_extra_null_nonfinite_units_frames_rejected) ... ok
+test_numeric_order_and_identity (test_simulation.ContractTests.test_numeric_order_and_identity) ... ok
+test_private_isolation_and_equal_numeric_blocks (test_simulation.ContractTests.test_private_isolation_and_equal_numeric_blocks) ... ok
+test_registry_cannot_fit_test_or_private (test_simulation.ContractTests.test_registry_cannot_fit_test_or_private) ... ok
+test_structural_change_fails (test_simulation.ContractTests.test_structural_change_fails) ... ok
+test_coverage_ambiguity_and_null (test_simulation.ExtractedTests.test_coverage_ambiguity_and_null) ... ok
+test_observations_reorder_by_identity (test_simulation.ExtractedTests.test_observations_reorder_by_identity) ... ok
+test_original_hashes_and_root (test_simulation.ExtractedTests.test_original_hashes_and_root) ... ok
+test_arm_gravity_and_torque_sign (test_simulation.NativePhysicsTests.test_arm_gravity_and_torque_sign) ... ok
+test_arm_true_zero_and_deterministic_replay (test_simulation.NativePhysicsTests.test_arm_true_zero_and_deterministic_replay) ... ok
+{"domain": "tethered_load", "index": 1, "total": 2, "accepted": 1, "rejected": 0}
+{"domain": "tethered_load", "index": 2, "total": 2, "accepted": 2, "rejected": 0}
+test_atomic_resume_integrity_and_no_duplicates (test_simulation.NativePhysicsTests.test_atomic_resume_integrity_and_no_duplicates) ... ok
+test_semantic_endpoint_and_evidence_mutations (test_simulation.NativePhysicsTests.test_semantic_endpoint_and_evidence_mutations) ... ok
+test_tether_control_has_no_pre_onset_effect (test_simulation.NativePhysicsTests.test_tether_control_has_no_pre_onset_effect) ... ok
+test_tether_small_angle_period_and_length (test_simulation.NativePhysicsTests.test_tether_small_angle_period_and_length) ... ok
+test_allocations (test_simulation.SamplingTests.test_allocations) ... ok
+test_grid_rejects_rounding (test_simulation.SamplingTests.test_grid_rejects_rounding) ... ok
+test_ood_support_and_balanced_quadrants (test_simulation.SamplingTests.test_ood_support_and_balanced_quadrants) ... ok
+test_release_fails_closed (test_simulation.SamplingTests.test_release_fails_closed) ... ok
+test_replay_key_order_and_group_disjointness (test_simulation.SamplingTests.test_replay_key_order_and_group_disjointness) ... ok
+test_gravity_limit (test_simulation_bullet.BulletPhysicsTests.test_gravity_limit) ... skipped 'PyBullet not installed in this isolated environment'
+test_stationary_brakes_do_not_propel (test_simulation_bullet.BulletPhysicsTests.test_stationary_brakes_do_not_propel) ... skipped 'PyBullet not installed in this isolated environment'
+test_unforced_stack_and_initial_state (test_simulation_bullet.BulletPhysicsTests.test_unforced_stack_and_initial_state) ... skipped 'PyBullet not installed in this isolated environment'
+test_exact_float_boundary_and_interval_end (test_simulation_bullet.SchedulerTests.test_exact_float_boundary_and_interval_end) ... ok
+
+----------------------------------------------------------------------
+Ran 60 tests in 5.983s
+
+OK (skipped=3)

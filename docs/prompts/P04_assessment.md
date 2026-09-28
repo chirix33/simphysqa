@@ -1,10 +1,12 @@
+> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
+
 # Codex prompt: P04 — Fixed assessment and bounded inference
 
 Copy the text below into the coding session, or ask Codex to read this file after importing the package.
 
 ---
 
-You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/implementation/README.md and PROGRESS.md, then these package documents: [docs/02_architecture.md](../docs/02_architecture.md); [docs/04_assessment_fallback.md](../docs/04_assessment_fallback.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/implementation/; preserve equivalent paths if the user placed it elsewhere.
+You are implementing Phi-JEPA in the user's repository. Read the applicable root/nested AGENTS.md, docs/README.md and docs/PROGRESS.md, then these package documents: [docs/02_architecture.md](../docs/02_architecture.md); [docs/04_assessment_fallback.md](../docs/04_assessment_fallback.md); [docs/06_phases.md](../docs/06_phases.md); [docs/08_defaults_decisions.md](../docs/08_defaults_decisions.md). Read the active phase in the phase specification and the last completed phase report. File paths here assume this package was installed under docs/; preserve equivalent paths if the user placed it elsewhere.
 
 Implement only P04's explicitly labeled development_r1_v1 path: immutable training-reference bank, k=1 retrieval, normalized-cosine latent score, generic supported contract severity, exact V1 scenario/schema judge interface, separate ID calibration, missing-component handling and the bounded fallback/output policy.
 

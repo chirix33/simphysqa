@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_worker.py", line 19, in <module>
+    getattr(module,stage)(run,job)
+  File "/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p10_numerical.py", line 85, in numerical
+    folder=run.root/'numerical'/variant; folder.mkdir(parents=True,exist_ok=True)
+           ~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+TypeError: unsupported operand type(s) for /: 'PosixPath' and 'NoneType'

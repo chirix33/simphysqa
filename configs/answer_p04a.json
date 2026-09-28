@@ -1,0 +1,22 @@
+{
+  "version": "p04a-v1",
+  "model": "gpt-5.6-sol",
+  "immutable_snapshot": null,
+  "reasoning_effort": "medium",
+  "max_output_tokens": 4096,
+  "max_attempts_per_request": 2,
+  "max_total_attempts": 6,
+  "timeout_seconds": 120,
+  "profile": {
+    "split": "validation",
+    "questions": 1,
+    "selection": "same distinct tether validation question as P03 correctness run",
+    "conditions": ["public_only", "predicted", "reversed_forecast"],
+    "control": "Reverse order of complete predicted measurement vectors while retaining physical timestamps, then recompute output readout; no truth access.",
+    "user_spending_limit": null,
+    "live_authorized": true,
+    "full_study": false
+  },
+  "sampling": {"interval_seconds": 0.02, "interpolation": "none"},
+  "contact_outputs": "unsupported_pending_sufficient_evidence_mechanism"
+}

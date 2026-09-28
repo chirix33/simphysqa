@@ -1,0 +1,41 @@
+test_bool_unit_frame_vector_length_types (test_p02a.P02aTests.test_bool_unit_frame_vector_length_types) ... ok
+test_dynamic_categorical_relations_do_not_change_numeric_layout (test_p02a.P02aTests.test_dynamic_categorical_relations_do_not_change_numeric_layout) ... ok
+test_enrichment_required_without_fallback (test_p02a.P02aTests.test_enrichment_required_without_fallback) ... ok
+test_fixed_scope_and_full_feedback (test_p02a.P02aTests.test_fixed_scope_and_full_feedback) ... ok
+test_forbidden_fields_and_immutable_enrichment (test_p02a.P02aTests.test_forbidden_fields_and_immutable_enrichment) ... ok
+test_missing_extra_duplicate_and_null_never_zero (test_p02a.P02aTests.test_missing_extra_duplicate_and_null_never_zero) ... ok
+test_pair_target_depends_on_recorded_future (test_p02a.P02aTests.test_pair_target_depends_on_recorded_future) ... ok
+test_public_reader_independent_of_reference_payload (test_p02a.P02aTests.test_public_reader_independent_of_reference_payload) ... ok
+test_question_conditioning_and_provenance_identity (test_p02a.P02aTests.test_question_conditioning_and_provenance_identity) ... ok
+test_reference_integer_prediction_float (test_p02a.P02aTests.test_reference_integer_prediction_float) ... ok
+test_release_catalog_excludes_development_quarantine_and_quad (test_p02a.P02aTests.test_release_catalog_excludes_development_quarantine_and_quad) ... ok
+test_semantic_order_vectors_and_digit_strings (test_p02a.P02aTests.test_semantic_order_vectors_and_digit_strings) ... ok
+test_split_isolation_and_registry_fit (test_p02a.P02aTests.test_split_isolation_and_registry_fit) ... ok
+test_strict_json_and_domains (test_p02a.P02aTests.test_strict_json_and_domains) ... ok
+test_time_order_horizon_and_context (test_p02a.P02aTests.test_time_order_horizon_and_context) ... ok
+test_both_gradient_paths_and_projection_recomputed (test_p02b.ProjectionTests.test_both_gradient_paths_and_projection_recomputed) ... ok
+test_frozen_encoder_stays_eval_through_parent_train (test_p02b.ProjectionTests.test_frozen_encoder_stays_eval_through_parent_train) ... ok
+test_layout_mismatch_and_initialization_reproducibility (test_p02b.ProjectionTests.test_layout_mismatch_and_initialization_reproducibility) ... ok
+test_cache_binds_exact_question_settings_and_content (test_p02b.ProviderTests.test_cache_binds_exact_question_settings_and_content) ... ok
+test_corrupt_cache_fails_without_reencoding (test_p02b.ProviderTests.test_corrupt_cache_fails_without_reencoding) ... ok
+test_enrichment_cannot_modify_original_input_or_add_numeric_slots (test_p02b.ProviderTests.test_enrichment_cannot_modify_original_input_or_add_numeric_slots) ... ok
+test_invalid_embedding_never_cached (test_p02b.ProviderTests.test_invalid_embedding_never_cached) ... ok
+test_notes_json_failures_and_missing_enrichment_have_no_fallback (test_p02b.ProviderTests.test_notes_json_failures_and_missing_enrichment_have_no_fallback) ... ok
+test_overlength_measured_before_model_call (test_p02b.ProviderTests.test_overlength_measured_before_model_call) ... ok
+test_pre_cutoff_context_rejected_before_tokenization (test_p02b.ProviderTests.test_pre_cutoff_context_rejected_before_tokenization) ... ok
+test_public_serialization_retains_facts_without_metadata (test_p02b.ProviderTests.test_public_serialization_retains_facts_without_metadata) ... ok
+test_retry_accounting_unknown_usage_and_exhaustion (test_p02b.ProviderTests.test_retry_accounting_unknown_usage_and_exhaustion) ... ok
+test_success_after_timeout_and_no_retry_on_content_failure (test_p02b.ProviderTests.test_success_after_timeout_and_no_retry_on_content_failure) ... ok
+test_terminal_failures_count_once_and_sanitize_exceptions (test_p02b.ProviderTests.test_terminal_failures_count_once_and_sanitize_exceptions) ... ok
+test_unpinned_or_missing_encoder_settings_fail (test_p02b.ProviderTests.test_unpinned_or_missing_encoder_settings_fail) ... ok
+test_bad_notes_fail_once_and_do_not_cache (test_p02b_live_boundaries.LiveBoundaryTests.test_bad_notes_fail_once_and_do_not_cache) ... ok
+test_dotenv_references_key_without_environment_mutation (test_p02b_live_boundaries.LiveBoundaryTests.test_dotenv_references_key_without_environment_mutation) ... ok
+test_refusal_and_incomplete_keep_usage (test_p02b_live_boundaries.LiveBoundaryTests.test_refusal_and_incomplete_keep_usage) ... ok
+test_request_only_contains_public_context_and_no_tools (test_p02b_live_boundaries.LiveBoundaryTests.test_request_only_contains_public_context_and_no_tools) ... ok
+test_resume_retains_attempts_and_dispatch_is_durable (test_p02b_live_boundaries.LiveBoundaryTests.test_resume_retains_attempts_and_dispatch_is_durable) ... ok
+test_schema_prompt_and_revision_changes_invalidate_enrichment_cache (test_p02b_live_boundaries.LiveBoundaryTests.test_schema_prompt_and_revision_changes_invalidate_enrichment_cache) ... ok
+
+----------------------------------------------------------------------
+Ran 36 tests in 2.801s
+
+OK

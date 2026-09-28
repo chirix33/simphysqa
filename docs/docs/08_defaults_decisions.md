@@ -1,3 +1,5 @@
+> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
+
 # Development defaults and decision register
 
 [Start](../README.md) · [Architecture](02_architecture.md) · [Assessment](04_assessment_fallback.md)
@@ -32,7 +34,7 @@ These settings make implementation concrete. They are proposed plan defaults, no
 
 **Q4 — Genuine topology and fluid claims.** Current proxy/timed-parameter cases do not establish these claims. Choose validated implementations or narrow the paper claim. Do not silently relabel an event as topology or a pendulum as a fluid simulation.
 
-The immediate user action remains returning the PyTorch GPU-check output when available. Ubuntu/WSL/NVIDIA visibility is already confirmed; do not ask for BIOS setup again.
+The active P00 prompt records the user-reported PyTorch GPU-check pass. Ubuntu/WSL/NVIDIA visibility and FP32/BF16 forward/backward are confirmed by that report; model-specific baseline checks remain pending. Do not ask for BIOS setup again.
 
 ## Contradiction handling
 

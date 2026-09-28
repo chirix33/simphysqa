@@ -1,0 +1,18 @@
+{
+  "version": "p05b-retraining-v1",
+  "methods": ["no_enrichment", "no_text_conditioning"],
+  "context_mode": "public_base_for_offline_audit",
+  "context_mode_note": "Historical cache identifier reused for original public Q/C; authorized for no_enrichment training in Stage 6",
+  "hidden_width": 128,
+  "seed": 11,
+  "max_pairs": 20,
+  "max_updates_per_method": 200,
+  "max_seconds_per_method": 900,
+  "weighting": "equal_question_pairs",
+  "learning_rate": 0.001,
+  "gradient_clip": 1.0,
+  "solver": {"substeps": 1, "method": "rk4"},
+  "answer_profile": {"model": "gpt-5.6-sol", "max_total_attempts": 4, "max_attempts_per_request": 2, "max_output_tokens": 4096, "timeout_seconds": 120, "reasoning_effort": "medium"},
+  "undefined_no_schema": "not_implemented_not_a_blocker",
+  "full_training": false
+}

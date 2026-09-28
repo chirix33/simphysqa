@@ -1,0 +1,3 @@
+{"variant": "raw_full", "update": 1000, "validation_or_fit_score": 16.10546302263197, "loss": 0.20352719724178314}
+{"variant": "raw_full", "update": 2000, "validation_or_fit_score": 17.6058678005284, "loss": 0.10436511784791946}
+{"variant": "raw_full", "update": 4000, "validation_or_fit_score": 19.234765776206025, "loss": 0.014343159273266792}

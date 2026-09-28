@@ -1,0 +1,11 @@
+{
+  "status": "intentionally_interrupted_for_storage_relocation",
+  "finished_utc": "2026-09-24T14:52:54.750661+00:00",
+  "wall_seconds": 4537.712536,
+  "attempted": 711,
+  "admitted": 544,
+  "rejected": 167,
+  "phase": "budget scan before next simulation",
+  "log_sha256": "da69d42f2dc7b593649897d392aa67906b787048dbbbaf6a63d55bc76bf5271e",
+  "exit_capture_note": "Original shell exit-status interpolation was invalid; the retained traceback confirms KeyboardInterrupt in budget(), and migration verified process exit before copying."
+}

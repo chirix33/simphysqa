@@ -8,7 +8,7 @@ Windows 11 Enterprise; one NVIDIA RTX 5090 with 32,607 MiB dedicated capacity; W
 
 C: has 1,887,890,018,304 bytes free (about 1.89 TB/1.72 TiB) of 2,025,740,824,576 bytes. Earlier RAM counters account for about 64 GB, but exact installed capacity and CPU/core count are unconfirmed. Intel shared graphics memory is not additional NVIDIA VRAM. The screenshot's 1,585 MiB GPU usage was one moment, not a permanent reserved amount.
 
-**Pending:** the user will return the PyTorch 2.7.1+cu128 FP32/BF16 forward/backward check. Baseline model loading, FSDP behavior, physics training and performance remain unverified. Codex must not mark these complete on the basis of nvidia-smi alone.
+**User-reported PASS (active P00 prompt, 2026-09-23):** PyTorch 2.7.1+cu128, CUDA runtime 12.8, NVIDIA GeForce RTX 5090, capability (12, 0), BF16 supported; FP32 and BF16 forward/backward both passed. The coding agent did not run this check. Baseline model loading, FSDP behavior, physics training and performance remain unverified. Codex must not mark these complete on the basis of nvidia-smi alone.
 
 ## Implementation can start now
 
