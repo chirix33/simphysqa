@@ -1,0 +1,1 @@
+{"context_limit":32768,"dummy_grammar_paths":16,"maximum_input_plus_output":21743,"model_calls":0,"only_setting_changes":["max_new_tokens","max_seconds"],"prior_development_budget_sha256":"119ffe54915a00c7d1ad2cb4b8d647af9b540ce623cf6400f8676dfd145133bd","request_checks":8,"scientific_source_sha256":"4e7da84dd47b8ba4a858307a31a8d3896685e3211c6f258bb5e26125f684a4ee"}

@@ -1,0 +1,19 @@
+{
+  "version": "p12-expanded-qualification-v1",
+  "run_root": "/home/aashraf/phi-jepa/p12-expanded-qualification-01",
+  "seed": 11,
+  "paid_api_calls": 0,
+  "full_study_enabled": false,
+  "qualification": {"validation_scenarios_per_domain": 2, "updates_per_batch_probe": 10, "batch_pairs": [64,256,1024], "numerical_seconds": 600, "local_generation_seconds_per_request": 120, "maximum_generation_requests": 24, "output_tokens": 1024, "thinking_output_tokens": 2048, "download_seconds": 2700, "download_bytes": 40000000000, "gpu_seconds": 3600},
+  "models": [
+    {"condition":"qwen3_8b_direct","model":"Qwen/Qwen3-8B","enable_thinking":false,"temperature":0.7,"top_p":0.8,"top_k":20},
+    {"condition":"qwen3_8b_thinking","model":"Qwen/Qwen3-8B","enable_thinking":true,"temperature":0.6,"top_p":0.95,"top_k":20},
+    {"condition":"llama31_8b_direct","model":"meta-llama/Llama-3.1-8B-Instruct","enable_thinking":null,"temperature":0.6,"top_p":0.9,"top_k":50}
+  ],
+  "precision":"bfloat16",
+  "quantization":"none",
+  "attention":"sdpa",
+  "context_limit":32768,
+  "baseline_input":"complete original public problem plus target JSON schema; no enrichment, forecasts, references, tools or retrieval",
+  "proposed_study":{"passes":10,"batch_pairs":256,"validation_every_pass":1,"seed":11,"checkpoint_selection":"validation only; minimum tolerance-normalized numerical error; earliest on ties","maximum_hours":24,"enabled":false}
+}

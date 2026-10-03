@@ -1,0 +1,4 @@
+{
+  "version": "p11-direct-public-all-components-v1",
+  "prompt": "Answer the original dynamical-system question using only the supplied public problem. Attempt every requested answer component, including Boolean outcomes, as your own prediction. No forecast or evaluator reference is supplied. Preserve every target binding, units, signs, vector dimensions and Boolean distinctions. Return exactly one row for each requested target, without duplicates. For a prediction use status supported, the correctly typed value and reason null. If you cannot produce a prediction, use status unsupported, value null and a specific reason. Do not treat an unavailable external forecast or rule-based Boolean readout as a requirement of this direct-LLM condition. Do not claim access to hidden simulator state or observed future outcomes. Keep plain_text_answer concise. Return only the required JSON envelope."
+}

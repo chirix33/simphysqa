@@ -1,0 +1,5 @@
+{'verified_domain': 'driving', 'scenarios': 740, 'questions': 740, 'pairs': 66600}
+{'verified_domain': 'object_pushing_stacking', 'scenarios': 1000, 'questions': 2000, 'pairs': 130000}
+{'verified_domain': 'robotic_arm', 'scenarios': 981, 'questions': 1962, 'pairs': 127530}
+{'verified_domain': 'tethered_load', 'scenarios': 1000, 'questions': 2000, 'pairs': 130000}
+{"plan_version": "p12-complete-context-training-v2", "prepared_plan_sha256": "13cc4b3cbe8578abe22ebe8faa0987b2de2b3309639bf5e7a9988f4e0542add3", "eligible_questions": 8038, "missing_identity_verified_contexts": 0, "integrity_failures": 0, "data_ready": true, "training_authorized": false, "can_train": false, "evaluation_enabled": false, "training_started": false, "model_calls": 0, "optimizer_updates": 0, "paid_calls": 0, "checks": "manifest and file hashes, full population membership, group splits, provider origins, frozen vectors", "seconds": 10.671328275002452, "plan": "/home/aashraf/phi-jepa/p12-training-plan-01/proposed-training-plan.json"}

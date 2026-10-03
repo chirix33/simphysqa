@@ -1,0 +1,9 @@
+# Isolated additive decoder dependencies; base core environment remains unchanged.
+xgrammar==0.1.19
+pydantic==2.13.5
+pydantic-core==2.46.5
+annotated-types==0.8.0
+typing-inspection==0.4.4
+sentencepiece==0.2.2
+tiktoken==0.14.0
+ninja==1.13.2

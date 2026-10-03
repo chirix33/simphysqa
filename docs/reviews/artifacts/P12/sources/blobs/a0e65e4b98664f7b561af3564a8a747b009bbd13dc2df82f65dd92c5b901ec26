@@ -1,0 +1,130 @@
+"""Expanded-study preflight and bounded CPU trainer. Disabled until separately authorized."""
+from p12_common import *
+import argparse
+import math
+import time
+from collections import Counter
+
+def plan():
+    audit=load(OUT/'audit.json');batch=CONFIG['proposed_study']['batch_pairs'];passes=CONFIG['proposed_study']['passes'];domains={}
+    for key,value in audit['partitions'].items():
+        if not key.endswith('/train'):continue
+        n=value['pairs'];updates=math.ceil(passes*n/batch)
+        domains[key.split('/')[0]]={'scenarios':value['scenarios'],'questions':value['questions'],'pairs_per_pass':n,
+            'complete_passes':passes,'batch_pairs':batch,'optimizer_updates':updates,'actual_pair_exposure':updates*batch,
+            'extra_pairs_in_next_cycle':updates*batch-passes*n,'checkpoints':[math.ceil(p*n/batch) for p in range(1,passes+1)]}
+    result={'enabled':False,'new_budget_required':True,'study_root':str(NATIVE/'p12-expanded-study-seed11'),
+            'training_wall_seconds_cap':14400,'artifact_bytes_cap':16000000000,'seed':11,'domains':domains,'implementation_sha256':implementation_identity(),
+            'cache_audit_sha256':file_hash(OUT/'cache-coverage.json'),'selection_sha256':file_hash(OUT/'selection.json'),
+            'enrichment_origin_sha256':file_hash(OUT/'enrichment-origin-audit.json'),
+            'confirmation_cohort_sha256':file_hash(OUT/'confirmation-cohort.json'),
+            'confirmation_public_sha256':file_hash(OUT/'confirmation-public.json'),
+            'evaluation_limits':{'maximum_generation_requests':1500,'gpu_seconds':72000,'retries':0,'paid_calls':0},
+            'validation':'all original validation questions each completed pass; tolerance-normalized numeric endpoint error, fixed failure penalty 1e12; earliest checkpoint on ties',
+            'full_study_model_calls':0,'paid_calls':0,'meaning':'training-only proposal; local baseline evaluation requires separate frozen budget'}
+    save(OUT/'proposed-training-plan.json',result);return result
+
+def preflight(proposal):
+    rows=load(OUT/'selection.json');coverage={r['sample_id']:r for r in load(OUT/'cache-coverage.json')}
+    origins={r['sample_id']:r for r in load(OUT/'enrichment-origin-audit.json')['records']}
+    missing=[r['sample_id'] for r in rows if not coverage[r['sample_id']]['embedding_path'] or origins.get(r['sample_id'],{}).get('status')!='verified']
+    report={'eligible_questions':len(rows),'missing_identity_verified_contexts':len(missing),'missing_sample_ids':missing,
+            'can_train':not missing and proposal['enabled'],'paid_calls':0,'no_dropped_samples':True}
+    save(OUT/'training-preflight.json',report)
+    return report
+
+def train(proposal,domain):
+    if not proposal.get('enabled') or not proposal.get('authorization'):
+        raise ValueError('separate full-run authorization and explicit new budget required')
+    if not preflight(proposal)['can_train']:raise ValueError('incomplete context coverage; no subset fallback')
+    if implementation_identity()!=proposal['implementation_sha256']:raise ValueError('implementation differs from frozen plan')
+    for key,name in (('selection_sha256','selection.json'),('cache_audit_sha256','cache-coverage.json'),('enrichment_origin_sha256','enrichment-origin-audit.json')):
+        if file_hash(OUT/name)!=proposal[key]:raise ValueError('frozen plan identity changed')
+    import torch
+    from phi_jepa.integration.layout import StateLayout
+    from phi_jepa.integration.readers import make_pairs,forecast_states
+    from phi_jepa.models.augmented_ode import AugmentedODE,ODESettings
+    from phi_jepa.models.context_projection import ProjectionSettings
+    from phi_jepa.models.conditioning import NumericalConditioning
+    from phi_jepa.training.pairs import PairTrainer,TrainingSettings
+    from phi_jepa.training.sampling import fixed_pair_batches
+    from phi_jepa.training.checkpoint import write_checkpoint,load_checkpoint
+    from phi_jepa.solvers.rk4 import SolverSettings,SolveStats
+    from phi_jepa.inference.rollout import rollout
+    from phi_jepa.inference.readout import named_forecast,read_targets
+    from phi_jepa.typed_evaluation import evaluate_targets
+    torch.set_num_threads(2);cat=catalog();budget_start=time.monotonic();source=snapshot('study-training-'+domain)
+    folder=Path(proposal['study_root'])/domain
+    if not folder.resolve().is_relative_to(NATIVE) or folder.resolve().is_relative_to(OUT):raise ValueError('separate native study directory required')
+    folder.mkdir(parents=True,exist_ok=True)
+    import atexit
+    prior=load(folder/'cost.json')['seconds'] if (folder/'cost.json').exists() else 0
+    def charge():save(folder/'cost.json',{'seconds':prior+time.monotonic()-budget_start})
+    atexit.register(charge)
+    def guard():
+        if time.monotonic()-budget_start+prior>=proposal['training_wall_seconds_cap']/len(proposal['domains']):raise TimeoutError('domain training wall cap')
+    def artifact_guard():
+        if sum(p.stat().st_size for p in folder.rglob('*') if p.is_file())>=proposal['artifact_bytes_cap']/len(proposal['domains'])-100000000:
+            raise ValueError('domain artifact cap; checkpoint reserve exhausted')
+    settings=proposal['domains'][domain];coverage={r['sample_id']:r for r in load(OUT/'cache-coverage.json')}
+    m=load(ROOT/f'docs/reviews/artifacts/P02a/{domain}.state_plus_fixed_conditioning.json');layout=StateLayout.from_manifest(m,digest(m))
+    pairs=[];embeddings={};validation=[]
+    def context(p):
+        from phi_jepa.integration.contracts import enriched_context
+        row=coverage[p.sample_id];notes=load(row['enrichment_path']);e=load(row['embedding_path'])
+        if file_hash(row['embedding_path'])!=row['embedding_file_sha256'] or file_hash(row['enrichment_path'])!=row['enrichment_file_sha256']:
+            raise ValueError('cached context content changed since coverage audit')
+        if e['request_sha256']!=row['embedding_request_sha256'] or e['context_sha256']!=digest(enriched_context(p,notes,p.input['observation_cutoff'])):
+            raise ValueError('stale context during preparation')
+        embeddings[p.sample_id]=torch.tensor(e['values']);return notes
+    for problem,ref,identity in cat.records(domain,'train'):
+        guard()
+        states=forecast_states(problem,ref);counts=Counter({digest((domain,identity.group_id,a['timestamp'],b['timestamp'])):1 for a,b in zip(states,states[1:])})
+        pairs.extend(make_pairs(problem,ref,identity,layout,cat.identity,counts,context_mode='enriched',enrichment=context(problem),duplicate_policy='equal_question_pairs'))
+    if len(pairs)!=settings['pairs_per_pass']:raise ValueError('full training pair count changed')
+    for problem,ref,identity in cat.records(domain,'validation'):
+        guard();context(problem);validation.append((problem,ref,identity))
+    ctx={'encoder':load(NATIVE/'p11-tonight-01/encoding-report.json')['settings'],'mode':'enriched','run':'p12-expanded-seed11'}
+    provenance={'source':source,'plan':digest(proposal),'pair_population':digest([p.pair_id for p in pairs]),'release':cat.identity}
+    if (folder/'resume/latest.json').exists():
+        trainer,sampler,old=load_checkpoint(folder/'resume',layout=layout,context_identity=ctx,training=True)
+        if old['plan']!=provenance['plan'] or old['pair_population']!=provenance['pair_population']:raise ValueError('resume population/config mismatch')
+    else:
+        transform=NumericalConditioning.fit([p.n_current for p in pairs],layout_sha256=layout.sha256,
+            provenance={'split':'train','sample_ids':sorted({p.identity.sample_id for p in pairs}),'scenario_ids':sorted({p.identity.scenario_id for p in pairs})})
+        model=AugmentedODE(layout,ProjectionSettings(1024,seed=11),ODESettings(seed=11),transform)
+        with torch.no_grad():model.field[-1].bias[:layout.d].copy_(torch.tensor([[(b-a)/p.dt for a,b in zip(p.n_current,p.n_next)] for p in pairs]).mean(0));model.field[-1].bias[layout.d:].zero_()
+        trainer=PairTrainer(model,SolverSettings(),TrainingSettings())
+        save(folder/'initialization.json',{'fresh':True,'seed':11,'diagnostic_weights_used':False,'manifest':model.manifest()})
+    def checkpoint():
+        artifact_guard()
+        save(folder/'cost.json',{'seconds':prior+time.monotonic()-budget_start,'updates':trainer.updates,'pair_exposure':trainer.updates*settings['batch_pairs']})
+        return write_checkpoint(folder/'resume',trainer,context_identity=ctx,provenance=provenance,sampler_state={'next_update':trainer.updates})
+    for index,ids in enumerate(fixed_pair_batches(pairs,settings['batch_pairs'],settings['optimizer_updates'],11)):
+        if index<trainer.updates:continue
+        guard();batch=[pairs[k] for k in ids];record=trainer.step(batch,torch.stack([embeddings[p.identity.sample_id] for p in batch]))
+        with (folder/'history.jsonl').open('ab') as f:f.write(canonical({**record,'pair_ids_sha256':digest([p.pair_id for p in batch])})+b'\n')
+        if trainer.updates%100==0:checkpoint()
+        if trainer.updates in settings['checkpoints']:
+            scores=[];records=[];started=time.perf_counter()
+            for p,ref,identity in validation:
+                guard();a=p.input['observation_cutoff'];b=max(s['end_time'] for s in p.input['answer_spec']);times=[round(a+0.02*i,8) for i in range(round((b-a)/0.02)+1)]
+                try:
+                    stats=SolveStats();prediction=rollout(trainer.model,p,embeddings[p.sample_id][None],times,trainer.solver,stats)
+                    result=evaluate_targets(p,ref,read_targets(p,named_forecast(p,layout,prediction)),method='Phi-JEPA numerical/readout')
+                    nums=[t for t in result['targets'] if t['answer_type']!='boolean']
+                    score=sum(t['error']/max(t.get('tolerance',0),1e-12) if t['status']=='valid' else 1e12 for t in nums)/len(nums)
+                except (ValueError,RuntimeError,OverflowError) as exc:score=1e12;result={'failure':type(exc).__name__}
+                scores.append(score);records.append({'sample_id':p.sample_id,'score':score,'result':result,'stats':stats.manifest()})
+            score=sum(scores)/len(scores);checkpoint()
+            pointer=write_checkpoint(folder/'checkpoints'/str(trainer.updates),trainer,context_identity=ctx,provenance=provenance,sampler_state={},deployment=True)
+            save(folder/'validation'/f'{trainer.updates}.json',{'score':score,'seconds':time.perf_counter()-started,'records':records})
+            if not (folder/'selected.json').exists() or score<load(folder/'selected.json')['score']:
+                save(folder/'selected.json',{'update':trainer.updates,'score':score,'checkpoint':pointer,'split':'validation'})
+    checkpoint();save(folder/'complete.json',{'updates':trainer.updates,'pair_exposure':trainer.updates*settings['batch_pairs'],'complete_passes':trainer.updates*settings['batch_pairs']//len(pairs),'convergence_claimed':False})
+
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('command',choices=['plan','preflight','train']);parser.add_argument('--approved-plan',type=Path);parser.add_argument('--domain')
+    args=parser.parse_args();proposal=load(args.approved_plan) if args.approved_plan else plan()
+    if args.command=='train':train(proposal,args.domain)
+    else:print(json.dumps({k:v for k,v in preflight(proposal).items() if k!='missing_sample_ids'}|{'plan':str(OUT/'proposed-training-plan.json')}))

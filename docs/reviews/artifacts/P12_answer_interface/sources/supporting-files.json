@@ -1,0 +1,13 @@
+{
+  "purpose": "Supplementary unchanged imports and evaluator/report sources; distinct from generation implementation identity",
+  "files": {
+    "configs/qualification_p12.json": "ba70584c6257baf363dea05efbdedb9bcdfa1b5194d7825b774b65db33bbce49",
+    "configs/model_training_p02a.json": "2e0b97e829f17d2b708b4db55c0e029fb0eaae3d1796914cd320a9d7099b5eb6",
+    "tools/p12_evaluate.py": "6eed4284c1ed8be8dbf215e0c9b719e40b47c56c992815b6ddd76b21e269378d",
+    "tests/test_p04a.py": "c60c893228b2e6d3285c18f9b422d7f7f432e4796b2597472e646378826a08bd",
+    "tests/test_p12.py": "0b345499daf6aeec9781e60aa0b7320ed3af062347429622093bdfff3df78e84",
+    "tests/test_p11.py": "19bdfd449c089c958246b68e196e5a79ad001e68b1fef2e15d5a08ffbc557fb0",
+    "tools/p12_answer_interface_audit.py": "d1b234c29d83be0e6987612522062fc457937163639fdff9c87ed84d8c47c6ff",
+    "tools/p12_answer_interface_report.py": "7d22901f4b8e30a03b6bdf7997ff6407dcfe282022ec1ab904d6c7dea50cc598"
+  }
+}

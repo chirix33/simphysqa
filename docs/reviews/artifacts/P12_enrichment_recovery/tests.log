@@ -1,0 +1,13 @@
+test_authorized_scope_and_caps (test_enrichment_recovery.RecoveryTests.test_authorized_scope_and_caps) ... ok
+test_confirmation_and_additional_or_substituted_records_rejected (test_enrichment_recovery.RecoveryTests.test_confirmation_and_additional_or_substituted_records_rejected) ... ok
+test_attempt_cap_and_resume_cannot_reset_spending (test_p12_enrichment.BudgetTests.test_attempt_cap_and_resume_cannot_reset_spending) ... ok
+test_full_run_requires_separate_authorization_before_credentials (test_p12_enrichment.BudgetTests.test_full_run_requires_separate_authorization_before_credentials) ... ok
+test_incomplete_success_still_charged_and_raw_response_retained (test_p12_enrichment.BudgetTests.test_incomplete_success_still_charged_and_raw_response_retained) ... ok
+test_pre_dispatch_money_reservation_and_unknown_usage_hold (test_p12_enrichment.BudgetTests.test_pre_dispatch_money_reservation_and_unknown_usage_hold) ... ok
+test_price_tier_and_tools_fail_closed_before_dispatch (test_p12_enrichment.BudgetTests.test_price_tier_and_tools_fail_closed_before_dispatch) ... ok
+test_scope_caps_share_global_ledger (test_p12_enrichment.BudgetTests.test_scope_caps_share_global_ledger) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.148s
+
+OK

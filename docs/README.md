@@ -2,6 +2,10 @@
 
 # Phi-JEPA: Codex implementation handoff
 
+**Latest numerical study:** [P12 training completion, curves and checkpoints](reviews/P12_training_completion.md).
+All four ten-pass fits are complete; confirmation evaluation and local-baseline
+generation remain disabled pending their separate finalized plan.
+
 **Questions and final answers in WSL:** [end-to-end comparison commands](Run_answers_WSL.md).
 **Lower-level checkpoint replay:** [manual commands for all four domains](Manual_WSL.md).
 **Current deadline study:** [P11 executable plan](P11_pipeline.md).

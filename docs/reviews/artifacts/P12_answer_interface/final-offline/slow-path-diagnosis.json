@@ -1,0 +1,7 @@
+{
+  "model_calls": 0,
+  "initial_check": "Interrupted during GrammarMatcher.accept_token on the all-unsupported seven-target object scenario after more than 90 seconds; first two driving checks completed.",
+  "old_pattern": ".*\\S.*",
+  "final_pattern": "\\S[\\s\\S]*",
+  "resolution": "All 24 actual-tokenizer request checks and both branch paths completed after simplification; canonical parser unchanged."
+}

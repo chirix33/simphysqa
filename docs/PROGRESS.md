@@ -1,3 +1,269 @@
+# P12 Qwen completion-budget qualification complete — 1 October 2026
+
+Ran all eight original development cases once with Qwen thinking-on at 8,192 total
+output tokens/360 seconds; all other scientific settings and v1.1 interface stayed
+unchanged. **8/8 EOS-completed, syntax-valid and strict-valid**, with no truncation,
+boundary failure, timeout, runtime failure, retry or repair. Total shared-window
+time was **14.91 minutes** including setup. The former failures completed at 4,171
+and 4,940 tokens. All eight prior token sequences were preserved as exact prefixes;
+the six previously complete sequences were unchanged.
+
+Coverage is 34/40, numerical correctness 14/28 (23 evaluated), Boolean correctness
+7/12 (11 evaluated), and whole-answer correctness remains 1/8. Thirty-eight tests
+passed; every input plus output reserve fit (maximum 21,743/32,768). Other baselines
+had zero new calls. Llama **prompted CoT** retains 5/8 nonempty reasoning compliance
+separately from 8/8 final validity, with all responses included.
+
+Selected 8,192/360 for the **disabled, frozen fresh-validation v2 proposal** using
+completion only. Existing scenario-disjoint cohort and other conditions are
+unchanged. Proposed budget: 32 requests, 112-minute worst-case request sum,
+150-minute shared window including 38 minutes overhead. No fresh generation,
+confirmation outcomes or expanded study occurred. See the [completion report](reviews/P12_qwen_completion_budget_completion.md)
+and [disabled fresh proposal](../configs/p12_answer_interface_fresh_validation_v2.proposed.json).
+
+# P12 32-request development qualification complete — 30 September 2026
+
+Executed the user-authorized frozen four-condition v1.1 qualification once, on the
+same eight development cases. All 32 attempts returned; EOS/syntax/strict-contract
+counts were **8/8 Qwen off, 6/8 Qwen on, 8/8 Llama direct, 8/8 Llama prompted CoT**.
+Both failures were Qwen's 4,096-token cap: one missing native boundary and one JSON
+truncation after the boundary. Llama CoT's boundary worked in all eight, but three
+responses skipped reasoning prose. No timeouts, runtime failures, retries or repairs.
+
+Whole-answer correctness was 1/8, 1/8, 0/8 and 0/8 respectively; hold-last was 1/8.
+Supported-target coverage was 100%, 70%, 70% and 80%. Llama direct abstained on all
+Boolean targets. The shared model window used **18.28 minutes**, including 44.06
+seconds of setup/other overhead. Thirty-six offline tests passed; all 32 token
+streams and all 30 valid adapter outputs replayed exactly. Resume was a zero-call
+no-op. Frozen scientific settings and all historical artifacts are preserved.
+
+Interface status remains **partially resolved**. Fresh validation is still disabled
+and unexecuted; no confirmation outcomes or expanded study were accessed. See the
+[completion report](reviews/P12_development_qualification_completion.md) for full
+denominators, repetition, timing/memory, artifacts and remaining decisions.
+
+# P12 four-condition interface proposal frozen, execution disabled — 29 September 2026
+
+Prepared all four conditions with final v1.1: Qwen off and Llama direct at
+1,024 tokens/120 seconds; Qwen on and explicit Llama CoT at 4,096 total output
+tokens/240 seconds. The proposed 32 requests reserve 96 minutes plus 24 minutes
+loading/setup/overhead within two hours. Llama's explicit final delimiter is
+qualified with the actual pinned tokenizer, including tokens spanning the
+boundary; reasoning remains unmasked and missing boundaries fail.
+
+32 offline tests passed; 64 frozen requests and 128 dummy grammar paths passed.
+Eight scenario-disjoint fresh validation cases and a separate disabled budget
+are prepared, excluding 56 known inspected/development identities. They are
+fresh to the interface check, not to numerical checkpoint selection. No new
+model generation or reference/confirmation inspection occurred. Both execution
+plans await separate authorization; fresh validation and expanded-study freeze
+remain outstanding. Historical results and existing training work are preserved.
+See the [completion report](reviews/P12_answer_interface_followup_completion.md)
+and [decision](decisions/P12_four_condition_qualification.md).
+
+# P12 authorized numerical training complete — 29 September 2026
+
+The user approved proposal SHA-256
+`13cc4b3cbe8578abe22ebe8faa0987b2de2b3309639bf5e7a9988f4e0542add3`.
+Its separate authorized copy passed fresh preflight with zero missing contexts
+and zero integrity failures. All four sequential fits completed **ten passes**:
+**17,742 updates, 4,541,952 pair presentations and 40 full validation sweeps**.
+The run took **3,270.541 seconds (54.51 minutes)**, within the four-hour total and
+one-hour/domain limits. Native artifacts plus the evidence export occupy about
+0.719 GB, below the 16 GB cap. Paid calls, retries and runtime failures were zero.
+
+The frozen numerical implementation is unchanged. Twenty-eight offline tests
+passed; all **255 checkpoint blobs** verified, and all selected deployment models
+and final optimizer/RNG checkpoints reloaded without new updates or rollouts.
+Validation selected driving update 781 (pass 3), arm 4,982 (pass 10), objects 508
+(pass 1), and tether 508 (pass 1). Validation accuracy remains weak/uneven; the
+object contact targets remain unsupported. No convergence claim is made.
+
+See the [completion report and curves](reviews/P12_training_completion.md).
+Logs and checkpoints remain under `/home/aashraf/phi-jepa/p12-training-execution-01`
+and `/home/aashraf/phi-jepa/p12-expanded-study-seed11`. A nonblocking strict-history
+resume-parser issue is documented; no restart was needed and the frozen source
+was preserved. Repeating the completed wrapper made zero optimizer updates.
+
+Confirmation evaluation, local-baseline generation and paid calls remain disabled.
+The future evaluation must include Llama direct and prompted CoT alongside Qwen
+thinking-off/on; this does not activate or alter the current training-only plan.
+See [execution decisions](decisions/P12_training_execution.md). Earlier preparation
+and diagnostic entries below retain their historical status at the time written.
+
+# P12 shared local answer-interface debug complete — 29 September 2026
+
+**Partially resolved; not ready for expanded-study freeze.** The compact public-only
+prompt, metadata adapter and XGrammar final-answer constraints are implemented.
+Across the same eight validation cases, the corrected model round produced:
+Qwen thinking-off 8/8 contract-valid, 1/8 complete correct; Llama direct 8/8
+contract-valid, 0/8 complete correct. Both supplied all 40 targets with no
+abstentions. Qwen thinking-on exhausted all eight 2,048-token budgets before
+its final marker. Hold-last was 1/8 complete correct.
+
+All 32 attempts across two rounds remain recorded, including eight initial
+missing-C-compiler decoder failures. The model window was 14.12 minutes; paid
+calls, automatic retries and output repairs were zero. The final order-preserving
+schema transport and simplified abstention regex passed 26 regression tests and
+24 actual-tokenizer checks (48 supported/unsupported paths), without a third
+model round. Their empirical validation remains pending. Scientific scoring,
+enrichment, original model lock, selections and paper are unchanged.
+
+The user selected planning a separate larger-thinking-budget qualification;
+then added Llama CoT as a fourth baseline, separate from Llama direct. The proposal
+now lists 32 requests and remains disabled; Llama CoT's prompt/boundary and budget
+are pending, and the proposed two-hour window has not been enlarged. See the
+[conclusion report](reviews/P12_answer_interface_completion.md) and
+[decisions](decisions/P12_answer_interface.md). Full study remains unlaunched.
+
+# P12 training-run preparation complete — 29 September 2026
+
+Regenerated a separate **disabled** plan bound to the completed embedding and
+enrichment-origin manifests. Fresh audit confirms 3,721 training scenarios,
+6,702 questions and 454,130 adjacent pairs. Preflight verifies all 8,038
+train/validation and 500 confirmation contexts with zero missing/integrity
+failures: **data ready; training unauthorized; numerical training not started**.
+
+The unchanged ten-pass proposal totals 17,742 updates and 4,541,952 pair
+presentations. Twenty-six offline tests passed. A disabled CLI launch was
+rejected before creating the study directory; executed expanded updates remain
+zero. The old proposal is unchanged. New plan, scoped source identity, budgets,
+resume safeguards and commands are in [training preparation](reviews/P12_training_preparation.md).
+Numerical-training approval is separate from pending answer-interface/evaluation
+decisions; the user's diagnostic files remain untouched.
+
+# P12 frozen embedding preparation complete — 29 September 2026
+
+All **8,038 training/validation and 500 confirmation** embeddings passed the
+final identity/provenance audit: **224 reused, 8,314 new, zero missing, zero
+failures or retries**. Encoding took 1,193.655 seconds; generation wall time was
+20.76 minutes. Peak allocated GPU memory was 1.544 GiB. Twelve offline tests
+passed, and completed-run resume made zero model calls. Paid cost was $0.
+
+The accepted encoder, historical caches and Llama diagnostics are unchanged.
+Full numerical training remains unstarted. Its new configuration must bind the
+complete preparation manifests and final agreed answer conditions; the original
+disabled plan remains historical. See [completion and evidence](reviews/P12_embedding_preparation.md).
+
+# P12 Llama runtime qualification complete with answer failures — 29 September 2026
+
+Approved HF access resolved the checkpoint gate. The pinned Llama direct-answer
+condition completed all eight validation requests on the RTX 5090: 85.454 s
+generation, 17.35 GiB peak allocated memory, no truncation, runtime failure or
+cap termination. **0/8 outputs passed the frozen JSON parser**; every response
+began with a Markdown fence. All failures and raw tokens remain recorded.
+
+Fifteen offline tests passed. Exact-cache resume made zero model calls. The
+separate run and model-lock update preserve the previous blocked result and
+unchanged Qwen entries. See [Llama completion](reviews/P12_llama_qualification.md)
+and [decisions](decisions/P12_llama_qualification.md). No paid calls were made.
+Enrichment is complete; frozen-encoder preparation/re-audit remain. Full study
+execution is still disabled. Entries below preserve earlier stage status.
+
+# P12 enrichment coverage complete — 29 September 2026
+
+The user approved a new bounded two-record recovery window. Both missing
+tethered-load training records succeeded in two requests, zero retries, for
+**$0.057444**. Coverage is now **8,038/8,038 train/validation and 500/500
+confirmation**. All earlier compatible cache hashes were verified unchanged.
+Full workload plus recovery charges/reservations are **$313.142965 / $475**;
+the separate pilot brings the total to $314.427644. Prior unknown holds remain.
+
+Eight offline tests passed; completed-run resume made zero additional calls.
+See [recovery completion and evidence](reviews/P12_enrichment_recovery.md).
+Frozen-encoder preparation and Llama qualification remain; full study is unstarted.
+The entries below preserve historical incomplete-coverage and restart evidence.
+
+# P12 enrichment finished with two unresolved records — 29 September 2026
+
+Audited the completed worker: **8,273 new successful outputs**, including all
+500 confirmation records. Two tethered-load training records were interrupted
+by workstation restarts and remain unresolved. Full compatible coverage is
+**8,036/8,038 train/validation and 500/500 confirmation**.
+
+Known full-run usage cost is $312.474511; conservative unknown holds are $0.611010,
+for **$313.085521 charged/reserved against $475**. The $1.284679 pilot remains
+separate. No new paid calls occurred in the audit. The original execution window
+has expired; a disabled two-record recovery proposal requests a new 30-minute
+window, at most six attempts and $2 from the existing remaining allowance.
+
+See [completion audit and next gate](reviews/P12_enrichment_completion.md).
+Numerical training and outcome evaluation remain unstarted.
+
+# P12 enrichment restart recovery — 29 September 2026
+
+Second interruption at the next status check: 5,988 successes survived. Charges
+and conservative reserves totaled $241.692681 after adding a $0.30570 hold for
+one more unknown request. Two unresolved requests are retained explicitly.
+Resumed again under the same caps and deadline. A new read-only
+`python tools/enrichment_live_status.py` command detects stale running labels
+using actual process identity and locks. Windows logs show repeated unexpected
+shutdowns; their cause remains undetermined.
+
+Workstation restart stopped the worker after 5,568 saved successes. Verified
+all saved response charges and cache checksums: $228.820201. One extra provider
+attempt has unknown dispatch/completion state; reserved $0.30531 conservatively,
+counted it against the attempt cap and retained a failure without replay. Resumed
+remaining work under unchanged approval, source, caps and deadline. The original
+state is archived. See [recovery evidence and live status](reviews/P12_enrichment_full.md).
+
+# P12 full enrichment approved — 28 September 2026
+
+The user approved **$475 additional maximum for both scopes**: $425 for 7,775
+remaining training/validation requests and $50 for 500 frozen confirmation
+public requests. Caps include retries and share a durable ledger. A separate
+native run preserves all pilot/historical artifacts and the unchanged provider.
+The sequential supervisor has a persisted 20-hour wall deadline and writes live
+status and a completion record automatically. This approval is for enrichment;
+expanded training and evaluation have not been started.
+
+See [approved execution and live status](reviews/P12_enrichment_full.md).
+The following entry preserves the pilot's pre-approval measurements and proposal.
+
+# P12 separately authorized enrichment pilot — 28 September 2026
+
+Completed the user's $5 / 32-attempt pilot: **32/32 success, zero retries,
+$1.284679 usage-based cost**, 228,743 input and 7,053 output tokens. Reused all
+231 compatible prior records first. No confirmation request was generated.
+The attempt cap is exhausted; verified resume dispatches zero new requests.
+
+Current gaps: **7,775 train/validation enrichment records plus 500 confirmation**;
+embedding gaps remain 7,814 plus 500. A new full-preparation proposal is disabled
+pending approval of **$475 additional maximum** ($425 train/validation, $50
+confirmation), with separate scope limits, 9,517 attempted requests maximum and
+conservative pre-dispatch reservations. Pilot charges are separate. Training,
+full comparison and Llama's gated-model qualification remain pending.
+
+See [pilot measurements and cap proposal](reviews/P12_enrichment_pilot.md),
+[decisions](decisions/P12_enrichment_pilot.md) and
+[resume commands](P12_enrichment_pipeline.md). The following qualification entry
+records the earlier no-paid-calls stage; its original measurements are preserved.
+
+# P12 expanded experimentation — initial qualification, 28 September 2026
+
+Verified the full admitted training population: **3,721 scenarios, 6,702
+questions, 454,130 adjacent pairs**. Reconciled exact local P11 and 40-question
+comparison source snapshots; preserved historical runs. Frozen unused
+confirmation cohort: **320 simulations / 500 questions**, zero overlap with
+48 previously inspected test simulations.
+
+Implemented local Qwen3-8B direct/thinking and Llama-3.1-8B-Instruct direct
+backends. Qwen completed eight validation diagnostics per condition with all
+failures retained; Llama is **implemented_pending_validation** because gated
+checkpoint access is unavailable. CPU/CUDA numerical and frozen-encoder profiles
+ran with discarded diagnostic weights. No full study or paid API call ran.
+
+Training/validation lacks **7,807 enrichment records / 7,814 embeddings**;
+confirmation needs another 500 of each. Broad training is blocked before fitting,
+with no subset fallback. The disabled proposal is ten full passes at batch 256,
+17,742 updates and 4,541,952 actual pair presentations, with full validation after
+each pass. This is an initial exposure budget, not a convergence claim.
+
+See [completion and precise blockers](reviews/P12_completion.md),
+[bounded full-run plan](reviews/P12_full_run_plan.md),
+[decisions](decisions/P12_expanded_qualification.md), and
+[resume commands](P12_pipeline.md). Paper rewriting remains deferred.
+
 # Question-to-answer WSL runner — post-P11 follow-up
 
 Selection follow-up: counts beyond P11's 12 held-out questions/domain now expand
@@ -370,3 +636,7 @@ P01: authorized by the user after planner acceptance of P00. Started at `dbff957
 Boolean/event update (24 September 2026): the user selected a separate mechanism
 proposal for later review. No Boolean casting, new head or objective is implemented
 here. See `docs/docs/P02a_boolean_event_proposal.md` from the repository root.
+
+## P12 validation answer export — 29 September 2026
+
+User-requested replay of the four selected checkpoints completed for all 1,336 validation questions in 144.910 seconds. All typed results exactly match the historical selected-checkpoint records. Searchable questions/predictions/references and raw trajectories are under docs/reviews/artifacts/P12_validation_answers/. Zero training, paid calls, runtime failures or confirmation access. See docs/reviews/P12_validation_answers_completion.md. Parent-thread work and historical artifacts remain preserved.

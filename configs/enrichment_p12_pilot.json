@@ -1,0 +1,26 @@
+{
+  "run_root": "/home/aashraf/phi-jepa/p12-enrichment-pilot-01",
+  "authorization": "User authorized this session: enrichment profiling only, USD 5 total and 32 attempted provider requests including retries; remaining workload requires a separately approved cap.",
+  "enabled": true,
+  "scope": "missing training and validation public records only",
+  "provider_config": "configs/model_context_p02b.json",
+  "provider_settings_unchanged": true,
+  "usd_cap": 5,
+  "attempt_cap": 32,
+  "wall_seconds_cap": 4200,
+  "artifact_bytes_cap": 1000000000,
+  "selection": {"seed": 11, "domains": 4, "splits": ["train", "validation"], "per_domain_split": 4, "length_quantiles": [0.125, 0.375, 0.625, 1.0]},
+  "pricing": {
+    "verified_date": "2026-09-28",
+    "sources": ["https://developers.openai.com/api/docs/models/gpt-5.6-sol", "https://developers.openai.com/api/docs/pricing"],
+    "model": "gpt-5.6-sol",
+    "standard_usd_per_million": {"input": 4, "cached_input": 0.4, "output": 20, "cache_write": 5},
+    "fast_usd_per_million": {"input": 8, "cached_input": 0.8, "output": 40, "cache_write": 10},
+    "short_context_input_limit": 272000,
+    "reservation_input_usd_per_million": 10,
+    "reservation_output_usd_per_million": 40,
+    "reservation_policy": "Complete UTF-8 payload bytes plus 4096 framing tokens; reserve all input at fast cache-write rate and the full 2048 output allowance. Reject upper bounds above 272000. Unknown usage retains the full reservation. No tools, region endpoint, explicit cache writes or fast-mode request."
+  },
+  "full_enrichment_enabled": false,
+  "confirmation_pilot_allowed": false
+}

@@ -1,0 +1,50 @@
+"""Sequential eight-validation-question local qualification; never opens reference files."""
+from p12_common import *
+import time
+from dataclasses import asdict
+from importlib.metadata import version
+from phi_jepa.providers.local_answer import LocalAnswerSettings,LocalAnswerBackend,prepare_tokens
+from phi_jepa.integration.contracts import PublicProblem
+
+def main(condition):
+    import torch
+    from transformers import AutoTokenizer,AutoModelForCausalLM
+    from p10_common import guard_deployment_io
+    guard_deployment_io();torch.set_num_threads(2)
+    cfg=next(c for c in CONFIG['models'] if c['condition']==condition);acquisition=load(OUT/'model-acquisition.json')[cfg['model']]
+    folder=OUT/'local'/condition;folder.mkdir(parents=True,exist_ok=True)
+    if acquisition['status']!='available':
+        save(folder/'qualification.json',{'status':'blocked','reason':acquisition.get('failure_type','model_unavailable')});return
+    source=snapshot('local-'+condition)
+    tokenizer=AutoTokenizer.from_pretrained(cfg['model'],revision=acquisition['revision'],cache_dir=str(NATIVE/'model-cache'),local_files_only=True,trust_remote_code=False)
+    settings=LocalAnswerSettings(cfg['model'],acquisition['revision'],acquisition['revision'],digest(tokenizer.chat_template),
+        tuple((k,version(k)) for k in ('torch','transformers','tokenizers','safetensors')),cfg['enable_thinking'],
+        max_new_tokens=CONFIG['qualification']['thinking_output_tokens'] if cfg['enable_thinking'] else CONFIG['qualification']['output_tokens'],
+        max_seconds=CONFIG['qualification']['local_generation_seconds_per_request'],temperature=cfg['temperature'],top_p=cfg['top_p'],top_k=cfg['top_k'])
+    instruction=load(ROOT/'docs/assets/p11_direct_answer_v1.json')['prompt']
+    rows=load(OUT/'diagnostic-public.json')
+    if len(rows)>8 or any(r['split']!='validation' for r in rows):raise ValueError('qualification cohort must be validation only, <=8')
+    preflight=[]
+    for row in rows:
+        try:
+            ids=prepare_tokens(tokenizer,PublicProblem.parse(row['public']),instruction,settings)
+            preflight.append({'sample_id':row['sample_id'],'domain':row['domain'],'input_tokens':len(ids),'status':'eligible'})
+        except ValueError as exc:preflight.append({'sample_id':row['sample_id'],'domain':row['domain'],'status':'rejected','reason':str(exc)})
+    save(folder/'preflight.json',{'settings':asdict(settings),'rows':preflight,'source':source,'template':tokenizer.chat_template})
+    start=time.perf_counter()
+    model=AutoModelForCausalLM.from_pretrained(cfg['model'],revision=acquisition['revision'],cache_dir=str(NATIVE/'model-cache'),
+        local_files_only=True,trust_remote_code=False,use_safetensors=True,torch_dtype=torch.bfloat16,attn_implementation='sdpa').to('cuda')
+    load_seconds=time.perf_counter()-start;backend=LocalAnswerBackend(model,tokenizer,settings,instruction)
+    outputs=[]
+    for row,flight in zip(rows,preflight):
+        path=folder/(row['sample_id']+'.json')
+        if path.exists():outputs.append(load(path));continue
+        if flight['status']!='eligible':result={**flight,'status':'input_rejected','failure':flight['reason'],'answer':None}
+        else:result=backend.answer(PublicProblem.parse(row['public']))
+        result.update(domain=row['domain'],split='validation',scenario_id=row['scenario_id'],condition=condition)
+        save(path,result);outputs.append(result);print(json.dumps({k:result.get(k) for k in ('domain','sample_id','status','latency_seconds','input_tokens','output_tokens')}),flush=True)
+    save(folder/'qualification.json',{'status':'complete_with_recorded_failures' if any(r['status']!='success' for r in outputs) else 'complete',
+                                     'settings':asdict(settings),'load_seconds':load_seconds,'requests':len(outputs),'seconds':time.perf_counter()-start,
+                                     'valid_answers':sum(r['status']=='success' for r in outputs),'diagnostic_only':True,'source':source})
+
+if __name__=='__main__':main(sys.argv[1])

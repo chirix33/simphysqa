@@ -1,0 +1,52 @@
+{
+  "phase": "P02b",
+  "status": "stage2_validated",
+  "contract_version": "2.0.0-candidate.1",
+  "encoder": {
+    "model": "Qwen/Qwen3-Embedding-0.6B",
+    "model_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "tokenizer_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "pooling": "last_nonpadding_token",
+    "normalization": "l2_float32",
+    "max_length": 32768,
+    "embedding_width": 1024,
+    "precision": "bfloat16",
+    "instruction": "none; full public document serialization",
+    "attention": "sdpa",
+    "runtime_versions": {"torch": "2.7.1+cu128", "transformers": "4.51.3", "tokenizers": "0.21.1", "safetensors": "0.5.3"},
+    "local_files_only": true
+  },
+  "enrichment_provider": {
+    "provider": "openai",
+    "model": "gpt-5.6-sol",
+    "immutable_snapshot": null,
+    "snapshot_status": "user-selected service name; returned model recorded; immutable version not exposed in documentation",
+    "reasoning_effort": "medium",
+    "transport": "responses_api_via_stdlib_https_no_hidden_retries",
+    "max_output_tokens": 2048,
+    "max_attempts_per_request": 3,
+    "max_total_attempts": 24,
+    "timeout_seconds": 120
+  },
+  "live_budget": {"user_authorization": "no limits as at now; model downloads and API credential file authorized", "user_usd_limit": null, "user_token_limit": null, "profile_samples": 8, "profile_scope": "one train and one validation public record per domain", "profile_max_attempts": 24},
+  "live_enabled": true,
+  "downloads_enabled": true,
+  "training_enabled": false,
+  "context_mode": "enriched",
+  "serialization": "P02a-Q-C-enrichment-v1",
+  "overlength_policy": "reject_without_truncation",
+  "projection": {
+    "implementation": "linear",
+    "sharing": "one_instance_per_layout",
+    "initialization": "xavier_uniform_zero_bias",
+    "seed": 11,
+    "precision": "float32",
+    "output_width": "layout.d",
+    "cache_projection": false
+  },
+  "enrichment_operation": "separate_public_notes_only",
+  "enrichment_asset": "docs/assets/p02b_enrichment_v1.json",
+  "unknown_slot_filling": false,
+  "extraction": "not_selected; preserve original assets",
+  "next_stage_enabled": false
+}

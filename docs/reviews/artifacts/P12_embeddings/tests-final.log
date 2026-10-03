@@ -1,0 +1,17 @@
+test_enrichment_reuse_checks_public_identity_model_and_cache_hash (test_p12_embeddings.EmbeddingPreparationTests.test_enrichment_reuse_checks_public_identity_model_and_cache_hash) ... ok
+test_request_binds_encoder_text_tokens_and_enriched_mode (test_p12_embeddings.EmbeddingPreparationTests.test_request_binds_encoder_text_tokens_and_enriched_mode) ... ok
+test_scope_counts_and_scenario_group_isolation (test_p12_embeddings.EmbeddingPreparationTests.test_scope_counts_and_scenario_group_isolation) ... ok
+test_status_detects_stale_worker_label_and_counts_saved_outputs (test_p12_embeddings.EmbeddingPreparationTests.test_status_detects_stale_worker_label_and_counts_saved_outputs) ... ok
+test_time_and_call_reservations_fail_closed (test_p12_embeddings.EmbeddingPreparationTests.test_time_and_call_reservations_fail_closed) ... ok
+test_vector_requires_exact_identity_shape_finiteness_and_normalization (test_p12_embeddings.EmbeddingPreparationTests.test_vector_requires_exact_identity_shape_finiteness_and_normalization) ... ok
+test_bad_notes_fail_once_and_do_not_cache (test_p02b_live_boundaries.LiveBoundaryTests.test_bad_notes_fail_once_and_do_not_cache) ... ok
+test_dotenv_references_key_without_environment_mutation (test_p02b_live_boundaries.LiveBoundaryTests.test_dotenv_references_key_without_environment_mutation) ... ok
+test_refusal_and_incomplete_keep_usage (test_p02b_live_boundaries.LiveBoundaryTests.test_refusal_and_incomplete_keep_usage) ... ok
+test_request_only_contains_public_context_and_no_tools (test_p02b_live_boundaries.LiveBoundaryTests.test_request_only_contains_public_context_and_no_tools) ... ok
+test_resume_retains_attempts_and_dispatch_is_durable (test_p02b_live_boundaries.LiveBoundaryTests.test_resume_retains_attempts_and_dispatch_is_durable) ... ok
+test_schema_prompt_and_revision_changes_invalidate_enrichment_cache (test_p02b_live_boundaries.LiveBoundaryTests.test_schema_prompt_and_revision_changes_invalidate_enrichment_cache) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.065s
+
+OK

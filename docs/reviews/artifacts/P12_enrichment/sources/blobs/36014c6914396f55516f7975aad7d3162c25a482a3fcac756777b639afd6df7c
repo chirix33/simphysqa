@@ -1,0 +1,134 @@
+"""Public-only cache inventory and newly authorized, money-capped enrichment pilot."""
+from p12_common import *
+from collections import defaultdict,Counter
+from phi_jepa.integration.contracts import PublicProblem
+from phi_jepa.integration.readers import PublicInputReader
+from phi_jepa.providers.cache import FrozenOutputCache
+from phi_jepa.providers.context import parse_notes
+from phi_jepa.providers.enrichment_budget import EnrichmentBudget,atomic_json,reservation
+import time
+
+PILOT_CONFIG=load(ROOT/'configs/enrichment_p12_pilot.json')
+PILOT=Path(PILOT_CONFIG['run_root'])
+
+def policy():
+    cfg=load(ROOT/PILOT_CONFIG['provider_config']);return cfg['enrichment_provider'],load(ROOT/cfg['enrichment_asset'])
+
+def request_identity(problem,config,asset):
+    payload={'model':config['model'],'store':False,'instructions':asset['prompt'],'input':problem.context(problem.input['observation_cutoff']),
+             'reasoning':{'effort':config['reasoning_effort']},'max_output_tokens':config['max_output_tokens'],
+             'text':{'format':{'type':'json_schema','name':'public_context_notes','strict':True,'schema':asset['schema']}}}
+    identity={'kind':'public_enrichment','implementation':'p02b-responses-v1','endpoint':'https://api.openai.com/v1/responses',
+              'asset':asset,'config':config,'payload':payload}
+    return identity
+
+def cache_index():
+    result=defaultdict(list)
+    for p in NATIVE.glob('**/*cache/*.json'):result[p.name].append(p.parent)
+    return result
+
+def compatible(problem,config,asset,index):
+    for attempts in (config['max_attempts_per_request'],1):
+        identity=request_identity(problem,{**config,'max_attempts_per_request':attempts},asset)
+        for root in index[digest(identity)+'.json']:
+            output=FrozenOutputCache(root).read(identity)
+            if not output or output.get('metadata',{}).get('returned_model')!=config['model']:continue
+            try:
+                notes=parse_notes(problem,output['text'])
+                if len(notes['notes'])>4 or any(len(n)>400 for n in notes['notes']):continue
+            except (ValueError,KeyError,TypeError):continue
+            return notes,{'cache_file':str(root/(digest(identity)+'.json')),'cache_sha256':file_hash(root/(digest(identity)+'.json')),'request_sha256':digest(identity)}
+    return None,None
+
+def public_population():
+    cat=catalog();metadata={r['sample_id']:r for r in load(OUT/'selection.json')}
+    for domain,split in sorted(cat.partitions):
+        if split not in ('train','validation'):continue
+        path=cat.verified_file(domain,split,'inputs.jsonl')
+        for problem in PublicInputReader(path,file_hash(path)):yield metadata[problem.sample_id],problem
+    for row in load(OUT/'confirmation-public.json'):yield {k:v for k,v in row.items() if k!='public'},PublicProblem.parse(row['public'])
+
+def inventory():
+    config,asset=policy();index=cache_index();records=[]
+    for meta,p in public_population():
+        identity=request_identity(p,config,asset);notes,origin=compatible(p,config,asset,index)
+        record={**meta,'scope':'train_validation' if meta['split'] in ('train','validation') else 'confirmation',
+                'request_sha256':digest(identity),'payload_bytes':len(canonical(identity['payload'])),'compatible_origin':origin}
+        records.append(record)
+        if notes is not None:atomic_json(PILOT/'enrichment'/f'{p.sample_id}.json',notes)
+    return records
+
+def prepare():
+    PILOT.mkdir(parents=True,exist_ok=True)
+    if (PILOT/'pilot-selection.json').exists():
+        print('Pilot selection already frozen; use report to refresh remaining counts.');return
+    records=inventory();atomic_json(PILOT/'inventory-before.json',records)
+    selected=[]
+    for domain in sorted({r['domain'] for r in records}):
+        used=set()
+        for split in ('train','validation'):
+            pool=sorted((r for r in records if r['domain']==domain and r['split']==split and not r['compatible_origin']),key=lambda r:(r['payload_bytes'],r['sample_id']))
+            for stratum,q in enumerate(PILOT_CONFIG['selection']['length_quantiles']):
+                center=round(q*(len(pool)-1));order=sorted(range(len(pool)),key=lambda i:(abs(i-center),digest([11,pool[i]['sample_id']])))
+                item=next(pool[i] for i in order if pool[i]['scenario_id'] not in used);used.add(item['scenario_id'])
+                selected.append(item|{'length_stratum':stratum,'selection_quantile':q})
+    # Long records in every domain/split first; then interleave remaining lengths.
+    selected.sort(key=lambda r:((3,0,2,1).index(r['length_stratum']),r['domain'],r['split']))
+    lookup={r['sample_id']:r for r in selected};public=[]
+    for _,p in public_population():
+        if p.sample_id in lookup:public.append(lookup[p.sample_id]|{'public':{'sample_id':p.sample_id,'schema_version':p.schema_version,'input':p.input}})
+    by_id={r['sample_id']:r for r in public};public=[by_id[r['sample_id']] for r in selected]
+    atomic_json(PILOT/'pilot-selection.json',public)
+    config,asset=policy();atomic_json(PILOT/'frozen-policy.json',{'provider':config,'asset':asset,'pilot_config':PILOT_CONFIG,'selection_sha256':file_hash(PILOT/'pilot-selection.json'),
+                    'missing_by_scope':dict(Counter(r['scope'] for r in records if not r['compatible_origin'])),'reused_by_scope':dict(Counter(r['scope'] for r in records if r['compatible_origin']))})
+    print({'pilot_questions':len(public),'scope_counts':dict(Counter(r['scope'] for r in records if not r['compatible_origin'])),'reused':sum(r['compatible_origin'] is not None for r in records),
+           'reservation_usd_range':[min(reservation(request_identity(PublicProblem.parse(r['public']),config,asset)['payload'],PILOT_CONFIG['pricing'])[2] for r in public)/1e9,
+                                    max(reservation(request_identity(PublicProblem.parse(r['public']),config,asset)['payload'],PILOT_CONFIG['pricing'])[2] for r in public)/1e9]})
+
+def run():
+    import fcntl
+    from phi_jepa.providers.credentials import load_openai_key
+    from phi_jepa.providers.openai_enrichment import OpenAIEnrichment
+    from p10_common import guard_deployment_io
+    config,asset=policy();frozen=load(PILOT/'frozen-policy.json')
+    if not PILOT_CONFIG['enabled'] or PILOT_CONFIG['usd_cap']>5 or PILOT_CONFIG['attempt_cap']>32:raise ValueError('pilot authorization exceeded')
+    if frozen['provider']!=config or frozen['asset']!=asset or frozen['pilot_config']!=PILOT_CONFIG:raise ValueError('frozen enrichment policy changed')
+    if file_hash(PILOT/'pilot-selection.json')!=frozen['selection_sha256']:raise ValueError('frozen pilot selection changed')
+    rows=load(PILOT/'pilot-selection.json')
+    if any(r['split'] not in ('train','validation') for r in rows):raise ValueError('confirmation excluded from pilot')
+    if (PILOT/'spend-ledger.json').exists():
+        state=load(PILOT/'spend-ledger.json')
+        if state['config_sha256']!=digest(PILOT_CONFIG):raise ValueError('budget configuration changed on resume')
+        if state['stopped'] or len(state['attempts'])>=PILOT_CONFIG['attempt_cap']:
+            print({'status':'pilot_closed','attempts':len(state['attempts']),'additional_requests':0});return
+    source=snapshot('enrichment-pilot',output=PILOT)
+    execution={'source':source,'pilot_config':PILOT_CONFIG,'config_sha256':file_hash(ROOT/'configs/enrichment_p12_pilot.json')}
+    atomic_json(PILOT/'executions'/f'{source}.json',execution)
+    if not (PILOT/'execution.json').exists():atomic_json(PILOT/'execution.json',execution)
+    key=load_openai_key(ROOT/'.env');guard_deployment_io();wall_start=time.perf_counter()
+    with (PILOT/'worker.lock').open('a') as lock:
+        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        budget=EnrichmentBudget(PILOT,PILOT_CONFIG);cache=FrozenOutputCache(PILOT/'context_cache');index=cache_index()
+        for row in rows:
+            state=budget.read()
+            if state['stopped'] or len(state['attempts'])>=PILOT_CONFIG['attempt_cap']:break
+            p=PublicProblem.parse(row['public']);path=PILOT/'results'/f'{p.sample_id}.json'
+            if path.exists():continue
+            notes,origin=compatible(p,config,asset,index)
+            if notes is not None:
+                atomic_json(PILOT/'enrichment'/f'{p.sample_id}.json',notes);atomic_json(path,{'sample_id':p.sample_id,'status':'cache_reused','origin':origin});continue
+            ledger=PILOT/'provider_ledgers'/f'{p.sample_id}.json';started=time.perf_counter()
+            provider=OpenAIEnrichment(key,config,asset,cache,event_sink=lambda v:atomic_json(ledger,v),ledger=load(ledger) if ledger.exists() else None)
+            provider.transport=budget.transport(provider._http)
+            try:
+                notes=provider.enrich(p,p.input['observation_cutoff']);atomic_json(PILOT/'enrichment'/f'{p.sample_id}.json',notes)
+                result={'status':'success','failure':None}
+            except Exception as exc:result={'status':'failure','failure':str(exc) if type(exc).__name__=='ProviderFailure' else type(exc).__name__}
+            atomic_json(path,result|{'sample_id':p.sample_id,'domain':row['domain'],'split':row['split'],'length_stratum':row['length_stratum'],
+                        'latency_seconds':time.perf_counter()-started,'provider_events':provider.runner.events,'request_sha256':row['request_sha256']})
+            print({'sample_id':p.sample_id,'domain':row['domain'],'split':row['split'],**result,'attempts':len(budget.read()['attempts']),
+                   'charged_usd':sum(r['charged_nano_usd'] for r in budget.read()['attempts'])/1e9},flush=True)
+        atomic_json(PILOT/'run-cost.json',{'wall_seconds':time.perf_counter()-wall_start,'attempts':len(budget.read()['attempts']),
+                    'charged_usd':sum(r['charged_nano_usd'] for r in budget.read()['attempts'])/1e9,'source':source})
+
+if __name__=='__main__':globals()[sys.argv[1]]()

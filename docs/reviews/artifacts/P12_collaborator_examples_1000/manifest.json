@@ -1,0 +1,22 @@
+{
+  "question_count": 1000,
+  "counts": {
+    "robotic_arm": 388,
+    "driving": 148,
+    "object_pushing_stacking": 232,
+    "tethered_load": 232
+  },
+  "scenario_groups": 574,
+  "source_sha256": "1b4b73a71b40b28805d53cf53e7eac5c06a042844ea237f864c92bcf678629e2",
+  "selection": "sorted scenario groups within domain; whole groups; independent of outcomes",
+  "files": {
+    "model-predictions-and-errors.jsonl": "9a611dc11a9ce20f4ee4475b23ecefcce8560b50c2c3e864612e720fd5fb37ca",
+    "preview-6-comparisons.jsonl": "24f36dffe1b6f7e3abc6bb8d2c555ff72d6f1d008424e6defe8810c4c0943101",
+    "preview.html": "c8a322df50e1b2183d786bda272313bf0e1019bd63ecf1109e1bfe30c6206b53",
+    "preview.txt": "f51e29fb9562d2b08cc6bda50711ce8c1535387cc7c03fec9244ef83c5fe3a5d",
+    "questions-and-public-inputs.jsonl": "82703b3ef68643160a39309335588fdf869a53af4b75ab44d3822b352154dc38",
+    "README.txt": "b9a4050861d8b4f9e3852af10f64a93591eaac23f8e9392ab8f116ff99991a17",
+    "reference-answers.jsonl": "44cb5cb89e2f8757ad4df675e60eb0c91324f134b24bb771a08b7bf051491095",
+    "robotic-arm-388-comparisons.jsonl": "1ceb76d585631f912474068719545cd676fb40ef39afc471db689205c335fd64"
+  }
+}

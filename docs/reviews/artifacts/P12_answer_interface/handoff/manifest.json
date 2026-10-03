@@ -1,0 +1,8 @@
+{
+  "docs/reviews/P12_answer_interface_completion.md": "b223456ffa5bbbb786904461229c3042906d5661a876cdce4418b056476d2f90",
+  "docs/decisions/P12_answer_interface.md": "76a2e24b1f3721a7164129d4b839cc26bc24434ff47cf888f6d0c40c4d8fe9f1",
+  "docs/prompts/P12_answer_interface.md": "ab4817a08ff101e9ef3ee70da6a15d274a5d03fdd7f14030f5d7f3437897840f",
+  "configs/p12_answer_interface_followup.proposed.json": "eecdef551bc70ba823fb23d0914d06672ef7fd332776d18d6cb6e40e431dfd7b",
+  "tools/p12_answer_interface_report.py": "8540856a67f1c527175f4190c04905279e1c31db42b19ec754fe465e15db38ae",
+  "tools/p12_answer_interface_verify_final.py": "286cbe46854385da63c81df27b948116ce901f02dbd3c36d3ecff6e95778dd94"
+}
