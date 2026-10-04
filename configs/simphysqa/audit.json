@@ -1,0 +1,51 @@
+{
+  "version": "simphysqa-audit-plan/0.1.0",
+  "reviewers": [
+    "R1",
+    "R2",
+    "R3"
+  ],
+  "same_records_all_reviewers": true,
+  "calibration_records": 20,
+  "formal_records": 140,
+  "records_per_reviewer": 160,
+  "calibration_ratings": 60,
+  "formal_ratings": 420,
+  "seed": 20261004,
+  "power_planning": {
+    "nominal_confidence": 0.8,
+    "two_sided_alpha": 0.2,
+    "target_power": 0.8,
+    "expected_acceptable_prevalence": 0.9,
+    "kappa_null": 0.6,
+    "kappa_alternative": 0.8,
+    "original_calculation": "not supplied or found in targeted retained docs; pending source/formula/variance assumptions",
+    "passing_threshold": null
+  },
+  "analysis": {
+    "primary": "acceptable/material_error",
+    "planned_agreement": "unweighted Fleiss kappa for three complete original ratings per formal record",
+    "estimator_status": "provisional_until_original_power_calculation_reconciled",
+    "uncertainty": "80% percentile bootstrap by physical trajectory, all three ratings kept together; report prevalence and missingness",
+    "power": "not_recalculated_or_claimed",
+    "subgroups": "descriptive_not_individually_powered"
+  },
+  "readiness": {
+    "annotation_version": null,
+    "release_population_manifest": null,
+    "rubric_version": "draft/0.1",
+    "formal_export_enabled": false
+  },
+  "selection": {
+    "frame": "explicit versioned release subset",
+    "unit": "split_group_then_one_question",
+    "allocation": "random pooled group-balanced; record realized domain/question counts",
+    "excluded_prior_groups": [],
+    "formal_ids_export": "disabled"
+  },
+  "ratings": {
+    "originals": "exclusive-create independent imports",
+    "adjudication": "separate table linked to original hashes",
+    "corrections": "new annotation versions preserve originals"
+  }
+}

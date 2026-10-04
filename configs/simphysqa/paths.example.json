@@ -1,0 +1,13 @@
+{
+  "version": "simphysqa-paths/0.1.0",
+  "data_root": "SET_EXTERNAL_RELEASE_ROOT",
+  "annotation_root": "SET_EXTERNAL_ANNOTATION_ROOT",
+  "output_root": "SET_EXTERNAL_OUTPUT_ROOT",
+  "model_root": "SET_EXTERNAL_MODEL_ROOT",
+  "cache_root": "SET_EXTERNAL_CACHE_ROOT",
+  "environment": {
+    "SIMPHYSQA_OUTPUT_ROOT": "alternative to --output"
+  },
+  "existing_local_release": "C:/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/dataset-runs/release-four-domain-v1",
+  "policy": "existing source checkout data read-only; all new artifacts outside active worktree"
+}

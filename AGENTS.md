@@ -1,39 +1,76 @@
-# Phi-JEPA coding-agent instructions
+# SimPhysQA coding-agent instructions
 
-## Installation and scope
+## Active direction and authority
+The explicit 4 October 2026 project pivot supersedes Phi-JEPA phase prompts,
+MODEL_TRAINING_CONTRACT, training/ODE/EBM/CODI/Coconut requirements and legacy
+human-reply approval rules. SimPhysQA targets NAACL Resources, Benchmarks, and
+Evaluation: (A) simulator-grounded structured and language-enriched trajectories,
+QA, evidence and reproducible annotation; (B) evaluation across models, domains
+and question types. Learned dynamics and latent-baseline training are outside scope.
 
-The handoff is installed directly in `docs/`; this repository-root file is the applicable policy. Read [the package index](docs/README.md), `docs/PROGRESS.md`, the active prompt in `docs/prompts/` and relevant specifications in `docs/docs/`. Preserve applicable existing instructions and the original assets/references. Do not duplicate the handoff into another directory.
+Read docs/README.md, docs/PROGRESS.md, docs/prompts/SPQ00_bootstrap.md and relevant
+docs/simphysqa specifications. Historical docs/assets/references remain original
+evidence, not implementation authority. Do not duplicate the handoff. Inspect
+nested instructions and git status. Work on simphysqa-naacl in the simphysqa
+worktree; preserve main, unrelated work, source assets and generated datasets.
 
-These instructions govern implementation work for this project. The current user instruction and newest explicit professor clarification take precedence over older drafts/prototype code. Report conflicts and preserve unrelated work.
+## Data and annotation contract
+Current domains: robotic_arm, driving, object_pushing_stacking, tethered_load.
+Start from actual current schema/data. Preserve source/sample/trajectory IDs,
+all numerical/Boolean references, units, frames, controls, event definitions and
+simulation provenance. Unknown is not zero. Never execute extracted formulas.
+Schema development is iterative creation, enrichment and human revision;
+do not call it few-shot schema generation. Human review is a research activity,
+not a mandatory generation-software approval gate.
 
-## Scientific invariants
+Track meaningful trajectory and timestamp descriptions, direct, predictive,
+counterfactual, explanation and clarification QA, and question-specific evidence.
+Generic timestamp context is incomplete. Do not create QA families by relabeling.
+Counterfactual truth needs matched interventions or verified re-simulation.
+Causal explanation needs evidence beyond temporal association. Clarification
+needs a genuine information gap and justified requested information.
+Predictive public language uses observed states and declared controls and must
+not reveal realized future outcomes. Auditors can see private evidence;
+answering models cannot. Keep references separate from generated prose.
 
-- Active authority (24 September 2026): MODEL_TRAINING_CONTRACT.md 2.0.0-candidate.1. Freeze E; train P jointly with the ODE. Numerical width d implies p width d and ODE width 2d. Train on adjacent recorded states with the same current p on both sides, including target gradients; inference feeds back the complete predicted augmented vector. Custom Coconut-inspired/CODI-inspired baselines are intentional.
-- Adjacent-pair augmented-vector MSE supersedes terminal-only plans. Do not restore E(Q,C,A) targets, tree encoding, physical-readout/semantic-regularizer design, frozen targets, EMA, EBM or schema repair. Recorded training reference.states are legitimate supervision; deployment must never open reference data.
-- Preserve the adopted extraction, judge and answer prompt/schema originals. Input facts/schema are immutable. Unknown values are not physical zeros.
-- No trained EBM/DSM, Bregman, inference latent optimization/Langevin updates, prediction-driven schema repair, or hidden recovery/control claim.
-- Core prediction/inference must not import benchmark oracle dynamics, evaluator truths or PIN-specific residuals. Typed metadata is permitted; authored domain physics is disclosed and isolated.
-- Keep original numerical predictions separate from LLM prose/JSON and fallback outputs. A generated answer cannot silently replace numerical truth for metrics.
-- Respect R1/V1 development scope and pending scientific decisions. Do not invent a ground-truth latent encoder or pretend V1 judges a different task.
+Annotation model is configurable; exact model identity, prompt/schema versions,
+settings, failures, every attempt, retry and repair are required provenance.
+Keep an alternative-source matched/blinded comparison protocol separate from the
+main audit. Document its model/subset/instructions; pending choices stay pending.
 
-## Engineering conduct
+## Human audit
+Three independent reviewers review the same 20 calibration plus same 140 fresh
+formal records: 160 each; 60 calibration and 420 formal ratings. Keep phases and
+physical groups disjoint; prefer one record per trajectory. Keep originals,
+adjudication and corrections separate. Primary acceptable/material_error judgment
+has criterion findings and error categories. Preserve planning assumptions:
+80% nominal confidence, two-sided alpha .20, 80% power, .90 expected acceptable
+prevalence, kappa .60 versus .80. These are neither results nor passing thresholds.
+The inherited power calculation/estimator source is pending; do not fabricate it.
+Formal sampling machinery may preview; do not freeze/export the definitive formal
+sample before annotation version, release population and rubric are ready.
+No claim that the pooled sample powers domain-by-question-type subgroups.
 
-Inspect actual checkout, nested instructions and git status. Preserve user changes and legacy source/results. Implement only the authorized phase; stop with a reviewable report. Resolve routine reversible choices autonomously. Do not reset/clean the repository or replace the whole project because the package suggests different module names.
+## Evaluation and engineering
+Workstation-only tool-free answering-model experiments. Annotation and private
+simulation may use tools. Preserve the five-model/nine-condition plan in
+configs/simphysqa/evaluation.json. Planned artifacts remain planned until locally
+qualified; pin revisions, tokenizer/runtime/quantization settings before runs.
+Public annotations must be included in baseline requests. Report counts and
+task-appropriate metrics/uncertainty by model/domain/question type, with missing
+or invalid answers retained as failures. No invented empirical results.
 
-Keep provider/network operations at explicit boundaries, use typed inputs, content-hashed caches and reproducible configs. No network in offline tests. No automatic fixture fallback for a failed live scientific run. No credentials in code/logs/manifests. Never execute extracted formulas as code.
-
-Use separate core/CoConuT/CODI environments. Pin source/model/data revisions. The RTX 5090 requires a compatible CUDA build; use the documented starting profile and verify it. WSL2 GPU visibility and the PyTorch 2.7.1+cu128 FP32/BF16 forward/backward check are user-reported passed in the active P00 prompt; model-specific validation remains pending. CPU work may proceed independently.
-
-Keep optimizer/solver states finite and shapes explicit. Count every solve/model call/retry; preserve units, time grids and train-only scaling. Do not suppress failed cases or silently substitute thresholds/scorers.
-
-## Verification and claims
-
-Write targeted tests that check behavior: oracle accuracy, leakage, gradients, adjacent-pair alignment, full augmented feedback, checkpoints, parsing, failure policy and cost accounting. Report commands actually run and their results. Do not count mock/fixture success as empirical model performance. A missing GPU/API prerequisite is `implemented_pending_validation` when code exists, not complete.
-
-Independently train declared baselines. Label retraining ablations versus runtime interventions. PCVR checks physical predictions independently; provenance and empty check coverage are separate. No fabricated numbers, placeholders presented as measurements, or desired-outcome acceptance gate.
-
-Live/long runs require an explicit configured budget and authorized credentials in the coding session. Do not push/merge/publish or message others unless requested. Local phase implementation and bounded CPU verification can proceed without repeated confirmation.
+New data/weights/cache/run outputs must use configurable external roots and
+versioned content-hashed manifests. Existing historical tracked artifacts are
+preserved; do not move large archives or delete generated data.
+Keep provider/network calls explicit, no credentials in code/logs/manifests,
+no network in offline tests and no automatic fixture fallback after live failure.
+Live/long runs require a configured budget and authorized credentials.
+Do not push/merge/publish/message others unless requested.
+Bounded CPU verification and reversible local choices may proceed autonomously.
 
 ## Durable handoff
-
-For each phase, update `docs/PROGRESS.md`, write `docs/reviews/PXX_completion.md`, and record consequential choices in `docs/decisions/`. Include branch/commit, changed behavior, tests/artifacts, deviations, pending gates and next step. For blockers use the package's precise blocker template, attempt bounded safe diagnosis, and continue independent authorized work. The user will relay unresolved questions to the planning assistant.
+Update docs/PROGRESS.md, docs/reviews/SPQ00_completion.md and docs/decisions/
+with base/branch/source hashes, changed behavior, actual commands/results,
+artifacts, deviations, pending validation and next step. For blockers use
+docs/prompts/BLOCKER_REPORT.md. Stop at the authorized initial milestone.

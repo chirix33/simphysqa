@@ -1,3 +1,13 @@
+# Active SimPhysQA handoff
+
+Start with [root instructions](../AGENTS.md), [runnable entry points](../README.md),
+[progress](PROGRESS.md), [SPQ00 prompt](prompts/SPQ00_bootstrap.md) and
+[SPQ00 completion](reviews/SPQ00_completion.md). Active contracts:
+[annotation](simphysqa/annotation.md), [human audit](simphysqa/audit.md),
+[evaluation](simphysqa/evaluation.md), [remaining decisions](simphysqa/pending.md).
+Original Phi-JEPA package follows as historical evidence.
+> Historical Phi-JEPA handoff. The 4 October 2026 SimPhysQA pivot in root AGENTS.md and docs/simphysqa supersedes training/phase instructions here. Original evidence is retained.
+
 > **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
 
 # Phi-JEPA: Codex implementation handoff

@@ -28,3 +28,11 @@ dist/
 DATASET_CODEX_PROMPT.md
 Phi_JEPA_Final_+_Baselines.ipynb
 Phi_JEPA_Codex_Implementation_Plan.md
+
+# SimPhysQA: new artifacts use external roots; local accidental outputs are ignored.
+.simphysqa-venv/
+simphysqa-runs/
+model-cache/
+cache/
+outputs/
+.worktrees/

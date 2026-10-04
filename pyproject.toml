@@ -3,18 +3,23 @@ requires = ["setuptools==84.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "phi-jepa"
-version = "0.0.1"
-description = "Phi-JEPA phase P00 offline contracts and provenance"
+name = "simphysqa"
+version = "0.1.0"
+description = "Simulator-grounded trajectories, QA and human annotation auditing"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["jsonschema==4.26.0"]
+
+[project.optional-dependencies]
+simulator = ["numpy==2.4.6", "mujoco==3.14.0", "psutil==7.2.2"]
+bullet = ["pybullet==3.2.7"]
 
 [project.scripts]
-phi-jepa = "phi_jepa.cli:main"
-phi-dataset = "phi_jepa.simulation.cli:main"
+simphysqa = "simphysqa.cli:main"
+simphysqa-simulator = "phi_jepa.simulation.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
+simphysqa = ["py.typed", "record.schema.json"]
 phi_jepa = ["py.typed"]

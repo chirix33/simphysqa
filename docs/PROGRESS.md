@@ -1,3 +1,24 @@
+# SPQ00 SimPhysQA bootstrap — 4 October 2026
+
+Active direction is the SimPhysQA NAACL dataset/evaluation pivot. The historical
+Phi-JEPA entries below retain their original meaning and do not authorize training.
+Branch simphysqa-naacl in managed simphysqa worktree; base main commit
+7dd4a64e90cfb18be743503ac8345cabf2f6e28b. Main/data/assets/history are preserved.
+
+Initial package, lossless migration, public/private separation, target evidence,
+audit packets and three reviewer forms/original import, formal sample preview,
+nine-condition public requests and supplied-prediction scoring are implemented.
+Four real existing domain records passed smoke; 15 bounded offline behavioral tests
+passed. Human/model results remain pending; no generated annotations, collected
+ratings, agreement value, model call, simulation or benchmark run occurred.
+No definitive formal sample was exported. New outputs use external versioned roots.
+
+See [completion](reviews/SPQ00_completion.md), [active annotation contract](simphysqa/annotation.md),
+[audit plan](simphysqa/audit.md), [evaluation](simphysqa/evaluation.md), and
+[priorities/blocker](simphysqa/pending.md). The original agreement power calculation,
+annotation/release/rubric choices and additional local artifacts remain pending.
+
+---
 # P12 Qwen completion-budget qualification complete — 1 October 2026
 
 Ran all eight original development cases once with Qwen thinking-on at 8,192 total
