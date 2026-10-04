@@ -1,3 +1,34 @@
+# SPQ01 bounded annotation and verified direct QA — 4 October 2026
+
+Branch simphysqa-naacl; accepted SPQ00 parent 129155be63a44c8c3c31af1d69049ef0769548ac;
+original main/base 7dd4a64e90cfb18be743503ac8345cabf2f6e28b remains unchanged.
+Actual inventory: 11,105 admitted predictive QA / 6,340 trajectory groups.
+Selected 16 train trajectories, four/domain, seed20261004; all have 11 observed states
+and a .2-second cutoff. Persist 20 inspected groups as fresh-sampling exclusions.
+
+Live gpt-5.6-sol: 16 initial/total attempts, zero repairs/failures ; 16 automatically
+validated summaries and 176 timestamp descriptions, all human-unreviewed.
+Estimated token spend $.522767 includes implicit cache writes; original $.491492
+accounting and raw responses remain, with additive reconciliation. Exported 16
+verified direct QA plus 16 unchanged predictive items, 32 development audit packets
+and separate blank R1/R2/R3 forms. No collected ratings or answering-model results.
+27 offline tests passed; saved public views/references/direct answers verified;
+resume made zero new requests and preserved completed item hashes.
+
+Supplied PowerBinary source is recovered and reproduced:minimum 130, approximate
+power .82374 at 140. Conditional fixed-prevalence score simulation (200,000 draws
+each) gives type-I .199855 / power .879060, with MC uncertainty and exact enumeration.
+Report the discrepancy; preserve 20 calibration/ 140 formal allocation. Fleiss
+descriptive reporting is not the powered test. Final prevalence/estimator/missingness/
+interval choices remain scientific decisions. No definitive formal sample exported.
+
+See [SPQ01 completion/commands/artifacts](reviews/SPQ01_completion.md),
+[annotation](simphysqa/annotation.md), [audit](simphysqa/audit.md) and
+[remaining work](simphysqa/pending.md). Broader language/human revision,
+counterfactual/explanation/clarification QA, alternative comparison and qualified
+local answering evaluations remain pending. No further broad cleanup occurred.
+
+---
 # SPQ00 SimPhysQA bootstrap â€” 4 October 2026
 
 Active direction is the SimPhysQA NAACL dataset/evaluation pivot. The historical

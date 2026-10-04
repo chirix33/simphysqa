@@ -12,6 +12,8 @@ from simphysqa.cli import smoke
 from simphysqa.dataset import SourceLocation, attach_annotation, iter_source, load, migrate, public_record, restore, validate
 from simphysqa.evaluation import request
 from simphysqa.scoring import distance, score
+from test_spq01 import proposal
+from simphysqa.annotation import validate_generated
 from simphysqa.io import DOMAINS, ROOT, canonical, external, read
 
 class RealDataContractTests(unittest.TestCase):
@@ -69,15 +71,14 @@ class RealDataContractTests(unittest.TestCase):
     def test_public_annotation_import_and_provenance(self):
         record = self.records[0]
         result = {"sample_id": record["sample_id"], "annotation_version": "test-only/1",
-                  "annotations": {"trajectory": {"status": "generated_unreviewed", "text": "Synthetic test text",
-                      "bindings": ["/states/0/measurements/0"]}, "timestamps": []},
+                  "annotations": validate_generated(record, proposal(record)),
                   "provenance": {"status": "generated_unreviewed", "model_identity": "synthetic-test-only",
                       "prompt_version": "test-only/1", "schema_version": record["schema_version"],
                       "generation_settings": {"temperature": 0}, "validation_failures": [], "attempts": [{"test_only": True}],
                       "retries": 0, "repairs": 0}}
         enriched = attach_annotation(record, result)
         self.assertEqual(restore(enriched), restore(record))
-        self.assertIn("Synthetic test text", request(enriched, {"condition_id": "test-only", "reasoning": "direct"})["messages"][0]["content"])
+        self.assertIn("joint_1 angle", request(enriched, {"condition_id": "test-only", "reasoning": "direct"})["messages"][0]["content"])
         result["provenance"]["model_identity"] = None
         with self.assertRaises(ValueError):
             attach_annotation(record, result)
@@ -93,11 +94,11 @@ class RealDataContractTests(unittest.TestCase):
         # Same item in frame must fail rather than silently overrepresent its group.
         with self.assertRaises(ValueError):
             preview(self.records + [duplicated_group], 7)
-        report = preview(self.records, 7, 2, 2)
-        self.assertEqual(report, preview(self.records, 7, 2, 2))
+        report = preview(self.records, 7, 2, 2, include_development=True)
+        self.assertEqual(report, preview(self.records, 7, 2, 2, include_development=True))
         self.assertEqual(report["available_preview"], {"calibration": 2, "formal": 2})
         self.assertNotIn("formal_ids", report)
-        excluded = preview(self.records, 7, 2, 2, (self.records[0]["trajectory_id"],))
+        excluded = preview(self.records, 7, 2, 2, (self.records[0]["trajectory_id"],), include_development=True)
         self.assertEqual(excluded["eligible_groups"], 3)
         with tempfile.TemporaryDirectory() as tmp:
             with self.assertRaises(ValueError):

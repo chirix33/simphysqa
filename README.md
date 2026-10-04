@@ -1,72 +1,75 @@
 # SimPhysQA
 
-SimPhysQA is a dataset contribution and evaluation study for NAACL Resources,
-Benchmarks, and Evaluation: simulator-grounded structured/language trajectories,
-QA/evidence/reproducible annotation, and comparisons across models/domains/families.
+SimPhysQA is a dataset/evaluation contribution for NAACL Resources, Benchmarks,
+and Evaluation: simulator-grounded structured/language trajectories, QA/evidence
+and reproducible annotation, plus comparisons across models/domains/question types.
+Phi-JEPA/SCLD/EBM/learned dynamics/CODI/Coconut training is outside active scope.
 
-The bootstrap wraps actual admitted records without changing original IDs,
-references, controls, units, coordinate frames, events or provenance.
-Meaningful language and new QA families remain pending; generic timestamp context
-does not count as annotation. See [annotation contract](docs/simphysqa/annotation.md),
-[audit design](docs/simphysqa/audit.md), and [evaluation plan](docs/simphysqa/evaluation.md).
+SPQ01 delivers an actual release inventory, 16 live human-unreviewed public
+annotations, 16 verified direct QA plus 16 unchanged predictive QA, audit packets
+and separate blank forms. No human agreement/annotation-quality or answering-model
+result exists. See [SPQ01 report and exact executed commands](docs/reviews/SPQ01_completion.md),
+[annotation](docs/simphysqa/annotation.md), [audit method](docs/simphysqa/audit.md),
+[evaluation plan](docs/simphysqa/evaluation.md) and [remaining work](docs/simphysqa/pending.md).
 
 | Active directory | Role |
 | --- | --- |
-| src/simphysqa | Strict loading, reversible migration, schema, annotations interface, audit and public requests |
-| src/phi_jepa/simulation | Retained simulator generation/verification compatibility code; optional engine dependencies |
-| configs/simphysqa | Annotation/audit/evaluation plans, external path example and CPU dependency pins |
-| docs/simphysqa | Active scientific contracts and pending decisions |
-| docs/prompts/SPQ00_bootstrap.md | Authorized initial milestone |
-| tests/test_simphysqa.py | Real four-domain offline behavioral checks |
+| src/simphysqa | Loader/lineage schema; inventory/selection; provider/job; direct QA; audit/ power checks; public requests/scoring |
+| src/phi_jepa/simulation | Retained simulator generation/verification compatibility; optional engines |
+| configs/simphysqa | Annotation/budget settings, alternative-source draft, exclusions, audit/evaluation plans and pins |
+| docs/simphysqa | Current contracts, estimator/test reconciliation and pending decisions |
+| docs/prompts/SPQ01_annotations.md | Authorized bounded milestone |
+| docs/references/spq01_audit | Byte-preserved supplied audit package/provenance |
+| tests/test_simphysqa.py, tests/test_spq01.py | Existing-source offline checks and test-only transports |
 | dataset.schema.json, SPECIFICATION.md, VALIDATION.md, licenses | Preserved source contracts/licensing |
-| docs/assets, docs/references, docs/reviews/artifacts | Preserved originals and historical evidence; not new output destinations |
 
-Other historical configs/documents/results/notebook assets are retained for provenance,
-not active entry points. Unrelated learned-model source and launchers are removed
-only on this branch after tracing retained dependencies. Original work survives on
-main at the recorded base. New artifacts must be outside this source worktree.
-Existing large tracked historical outputs are grandfathered and untouched.
+Historical assets/work remain on main/history and retained directories. SPQ01 does
+no further cleanup. New data/cache/weights/run outputs use configurable external,
+versioned, content-hashed roots.
 
 ## Setup
 
-Requires Python >=3.11. Use a separate CPU environment and install editable so
-preserved root schema/assets remain available to retained simulator code:
+Python >=3.11; separate CPU environment; editable installation for retained root
+schema/assets. Existing SPQ00 environment can be reused. No GPU is needed here.
 
-```powershell
+~~~powershell
 python -m venv C:/path/outside-source/simphysqa-venv
 C:/path/outside-source/simphysqa-venv/Scripts/python.exe -m pip install -r configs/simphysqa/requirements.lock.txt
+C:/path/outside-source/simphysqa-venv/Scripts/python.exe -m pip install -r configs/simphysqa/audit-requirements.lock.txt
 C:/path/outside-source/simphysqa-venv/Scripts/python.exe -m pip install --no-build-isolation --no-deps -e .
-```
+~~~
 
-The actual bootstrap uses the existing dataset Python because Python is not on
-this session's PATH. Exact executed setup/smoke commands and paths are in
-[SPQ00 completion](docs/reviews/SPQ00_completion.md). No GPU/API is needed.
-Simulation requires separately installed pinned optional engines; full generation
-requires a new reviewed source freeze. Do not replay the legacy enabled full-release
-config blindly after source pruning.
+Actual interpreter/artifact paths and commands are in SPQ01_completion.md.
+Engines are optional/separate; annotation does not regenerate simulation.
+Legacy full-release freezes need requalification before new generation.
 
-## Entry points
+## Runnable bounded pipeline
 
-```powershell
-python -m simphysqa --help
-python -m simphysqa smoke --data-root EXTERNAL_RELEASE_ROOT --output EXTERNAL_NEW_SMOKE_DIR
-python -m simphysqa validate --input EXTERNAL_RELEASE_ROOT/driving/validation
-python -m simphysqa migrate --input EXTERNAL_RELEASE_ROOT/driving/validation --output EXTERNAL_NEW_MIGRATION_DIR
-python -m simphysqa sample-preview --input EXTERNAL_MIGRATION_DIR/records.jsonl --output EXTERNAL_PREVIEW_DIR --exclude-group PRIOR_GROUP
-python -m simphysqa audit-export --input EXTERNAL_MIGRATION_DIR/records.jsonl --output EXTERNAL_PACKET_DIR --phase development
-python -m simphysqa import-ratings --packets EXTERNAL_PACKET_DIR --form EXTERNAL_RETURNED_FORM.csv --output EXTERNAL_NEW_ORIGINAL.json
-python -m simphysqa baseline-requests --input EXTERNAL_MIGRATION_DIR/records.jsonl --output EXTERNAL_REQUEST_DIR
-python -m simphysqa score --input EXTERNAL_MIGRATION_DIR/records.jsonl --predictions EXTERNAL_PREDICTIONS.json --condition qwen3_8b_direct --output EXTERNAL_SCORES_DIR
-python -m simphysqa attach-annotation --input EXTERNAL_ONE_RECORD.json --result EXTERNAL_VERSIONED_RESULT.json --output EXTERNAL_ANNOTATION_DIR
-```
+~~~powershell
+python -m simphysqa.spq01 --help
+python -m simphysqa.spq01 inventory --data-root EXTERNAL_RELEASE_ROOT --output EXTERNAL_NEW_INVENTORY
+python -m simphysqa.spq01 select --inventory EXTERNAL_INVENTORY --exclusions configs/simphysqa/spq01_selection_exclusions.json --seed 20261004 --output EXTERNAL_NEW_SELECTION
+python -m simphysqa.spq01 audit-check --output EXTERNAL_NEW_POWER_CHECK --seed 20261004 --replicates 200000
+python -m simphysqa.spq01 dry-run --records EXTERNAL_SELECTION/predictive-records.jsonl --output EXTERNAL_NEW_DRY_RUN
+python -m simphysqa.spq01 annotate --records EXTERNAL_SELECTION/predictive-records.jsonl --output EXTERNAL_AUTHORIZED_JOB
+python -m simphysqa.spq01 export-development --records EXTERNAL_SELECTION/predictive-records.jsonl --job EXTERNAL_JOB --output EXTERNAL_NEW_DEVELOPMENT
+python -m simphysqa.spq01 verify-development --selection EXTERNAL_SELECTION --job EXTERNAL_JOB --development EXTERNAL_DEVELOPMENT --output EXTERNAL_NEW_CHECKS
+python -m simphysqa.spq01 compare-prepare --records EXTERNAL_SELECTION/predictive-records.jsonl --output EXTERNAL_NEW_COMPARISON
+~~~
 
-Audit export accepts development/calibration only; one item per physical group.
-Formal export is disabled until annotation/release/rubric readiness. Provider jobs,
-new QA construction, human ratings and answering-model runs are pending.
-Use --output or SIMPHYSQA_OUTPUT_ROOT; configure data/models/caches with explicit
-external paths (configs/simphysqa/paths.example.json). Existing data is read-only.
+Only annotate contacts the provider. SPQ01's authorized live run has completed;
+another job needs a new authorized budget. Identical jobs resume and preserve
+completed outputs; failures remain explicit without synthetic fallback.
+Formal export stays disabled. No mandatory human annotation-generation gate.
 
-```powershell
-$env:SIMPHYSQA_DATA_ROOT = "EXTERNAL_RELEASE_ROOT"
-python -m unittest discover -s tests -p test_simphysqa.py -v
-```
+Selection-prior exclusions reproduce engineering selection; fresh sampling
+separately enforces all 20 inspected groups from development_exclusions.json plus
+caller exclusions. Development direct/predictive pairs may share a group;
+calibration/formal avoid related records.
+
+Existing python -m simphysqa commands remain: smoke, validate, migrate,
+sample-preview, audit-export, import-ratings, baseline-requests, score and
+attach-annotation (use --help). Baseline requests include the public annotations
+under evaluation. Answering-model experiments remain workstation-only/tool-free.
+The five-model/nine-condition plan remains; artifact/runtime qualification and
+new-family metrics are pending.

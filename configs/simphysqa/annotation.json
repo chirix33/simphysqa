@@ -1,6 +1,6 @@
 {
   "version": "simphysqa-annotation-plan/0.1.0",
-  "status": "planned_no_jobs_enabled",
+  "status": "SPQ00_draft_superseded_for_bounded_SPQ01; full_release_generation_not_enabled",
   "schema_version": "simphysqa/0.1.0",
   "prompt_version": "simphysqa-public-enrichment/0.1-draft",
   "model_identity": null,
@@ -27,8 +27,8 @@
   "human_review": "research_activity_not_generation_approval_gate",
   "language_source": "public observed states and declared model/control only",
   "families": {
-    "direct": "pending_construction",
-    "predictive": "existing_reference_enrichment_pending",
+    "direct": "16_SPQ01_observed_readouts_automatically_verified_human_unreviewed",
+    "predictive": "16_SPQ01_original_references_exact_public_language_generated_human_unreviewed; release_wide_enrichment_pending",
     "counterfactual": "pending_matched_intervention_or_verified_resimulation",
     "explanation": "pending_claim_level_evidence",
     "clarification": "pending_genuine_information_gap"
@@ -38,5 +38,6 @@
     "model_identity": null,
     "matched_subset_manifest": null,
     "protocol": "docs/simphysqa/annotation.md"
-  }
+  },
+  "active_bounded_config": "configs/simphysqa/annotation_spq01.json"
 }

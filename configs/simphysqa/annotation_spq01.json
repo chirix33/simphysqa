@@ -1,0 +1,45 @@
+{
+  "version": "simphysqa-annotation-provider/1.0.0",
+  "model": "gpt-5.6-sol",
+  "immutable_snapshot": null,
+  "snapshot_status": "documented service ID; no distinct immutable snapshot listed; record every returned identity",
+  "endpoint": "https://api.openai.com/v1/responses",
+  "reasoning_effort": "medium",
+  "max_output_tokens": 2048,
+  "timeout_seconds": 120,
+  "temperature": "omitted_as_in_historical_configuration",
+  "store": false,
+  "tools": [],
+  "service_tier": "default",
+  "credential_reference_file": "C:/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/.env",
+  "historical_configuration": "configs/model_context_p02b.json",
+  "historical_provenance": "docs/reviews/artifacts/P02b/provider-ledger.json",
+  "prompt_version": "simphysqa-public-language/1.0.0",
+  "annotation_schema_version": "simphysqa-public-language/1.0.0",
+  "budget": {
+    "initial_requests": 16,
+    "total_attempts": 32,
+    "attempts_per_item": 2,
+    "usd_cap": 5,
+    "wall_seconds": 4200,
+    "total_input_tokens": 1000000,
+    "total_output_tokens": 65536,
+    "framing_token_reserve": 4096
+  },
+  "pricing": {
+    "verified_date": "2026-10-04",
+    "verified_sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+      "https://developers.openai.com/api/docs/pricing"
+    ],
+    "input_per_million": 4,
+    "cached_input_per_million": 0.4,
+    "output_per_million": 20,
+    "reserve_input_per_million": 10,
+    "reserve_output_per_million": 40,
+    "short_context_input_limit": 272000,
+    "reservation_policy": "complete request UTF8 bytes plus framing; conservative fast/cache-write input and fast output rates; unknown usage retains reservation; no tools or redirects"
+  },
+  "validation": "final exported view revalidated; structural/numeric/binding checks do not replace independent human judgments",
+  "scope": "16 initial engineering trajectories, not full release; no answering models"
+}

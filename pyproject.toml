@@ -12,6 +12,7 @@ dependencies = ["jsonschema==4.26.0"]
 [project.optional-dependencies]
 simulator = ["numpy==2.4.6", "mujoco==3.14.0", "psutil==7.2.2"]
 bullet = ["pybullet==3.2.7"]
+audit = ["numpy==2.5.3", "scipy==1.18.1"]
 
 [project.scripts]
 simphysqa = "simphysqa.cli:main"

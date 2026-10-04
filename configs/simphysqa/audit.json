@@ -1,5 +1,5 @@
 {
-  "version": "simphysqa-audit-plan/0.1.0",
+  "version": "simphysqa-audit-plan/0.2.0",
   "reviewers": [
     "R1",
     "R2",
@@ -19,15 +19,18 @@
     "expected_acceptable_prevalence": 0.9,
     "kappa_null": 0.6,
     "kappa_alternative": 0.8,
-    "original_calculation": "not supplied or found in targeted retained docs; pending source/formula/variance assumptions",
-    "passing_threshold": null
+    "original_calculation": "supplied audit_power_analysis.py; kappaSize 1.2 PowerBinary; preserved source/hash in docs/references/spq01_audit/source-package.json",
+    "passing_threshold": null,
+    "minimum_approximate_records": 130,
+    "approximate_power_at_140": 0.8237409136265488,
+    "finite_sample_check": "seed20261004 /200000 draws per hypothesis; fixed-p score test; type-I .199855, power .879060; material discrepancy reported; allocation unchanged"
   },
   "analysis": {
     "primary": "acceptable/material_error",
-    "planned_agreement": "unweighted Fleiss kappa for three complete original ratings per formal record",
-    "estimator_status": "provisional_until_original_power_calculation_reconciled",
-    "uncertainty": "80% percentile bootstrap by physical trajectory, all three ratings kept together; report prevalence and missingness",
-    "power": "not_recalculated_or_claimed",
+    "planned_agreement": "conditional fixed-prevalence agreement parameter/score test corresponding to planning approximation; secondary descriptive unweighted Fleiss kappa",
+    "estimator_status": "calculation/test reconciled; actual fixed-versus-estimated prevalence/reviewer model and confidence method pending scientific freeze",
+    "uncertainty": "actual agreement confidence method/replicates pending; MC95 intervals describe simulation only; trajectory-resampling retains all three independent judgments",
+    "power": "model-conditioned reproduction and finite-sample simulation, not observed human agreement or universal power guarantee",
     "subgroups": "descriptive_not_individually_powered"
   },
   "readiness": {
@@ -37,10 +40,10 @@
     "formal_export_enabled": false
   },
   "selection": {
-    "frame": "explicit versioned release subset",
+    "frame": "actual versioned release inventory (11105 QA/6340 groups); final annotation release frame pending",
     "unit": "split_group_then_one_question",
     "allocation": "random pooled group-balanced; record realized domain/question counts",
-    "excluded_prior_groups": [],
+    "excluded_prior_groups": "default durable union from configs/simphysqa/development_exclusions.json (20 SPQ00/SPQ01 groups), plus later development/calibration exclusions",
     "formal_ids_export": "disabled"
   },
   "ratings": {

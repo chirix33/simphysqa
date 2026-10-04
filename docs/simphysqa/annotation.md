@@ -1,60 +1,125 @@
-# Annotation contract and pending construction
+# Annotation contract and bounded SPQ01 implementation
 
-The two contributions are simulator-grounded structured/language trajectories,
-QA/evidence/reproducible annotation, and model/domain/question-type evaluation.
-Schema development means iterative creation, enrichment and human revision.
-The actual dataset.schema.json 1.0.0 and admitted four-domain export are the source.
-simphysqa/0.1.0 wraps rather than rewrites them. restore() is a lossless interface.
-Private references, simulation settings, controls, events, units and frames stay exact.
-Source file/record hashes, line, sample ID, scenario ID and split group survive migration.
+The paper contributes simulator-grounded structured/language trajectories,
+QA/evidence/reproducible annotation and model/domain/question-type evaluation.
+Schema development is iterative creation, enrichment and human revision.
+The actual dataset.schema.json 1.0.0 and four-domain release remain source truth.
 
-Existing QA is future_state_prediction. It asks multiple typed terminal readouts.
-The existing descriptive reference explanation does not establish causal claims.
-Generic 'Measured simulator state at the stated timestamp' context is retained as
-source data, with meaningful language explicitly pending. No new text is invented.
+Predictive wrapping stays simphysqa/0.1.0, preserving source ID/input/reference/
+metadata hashes and values. Direct records use simphysqa/0.2.0 with a new stable
+question ID and private original source_record plus deterministic derivation.
+restore() returns the original predictive source for either family. The direct
+adapter asks a new observed-state readout question and derives the exact numerical
+answer, units, frame and timestamp from the last observed state. It never relabels
+a predictive question. One original predictive question per selected trajectory
+and its reference are preserved exactly.
 
-| Component | Starting status | Required work |
+SPQ01 language is a bounded engineering pilot on 16 trajectories, four per domain.
+There is no designated development partition, so use train; leave validation,
+test_id and OOD partitions unused by this pilot. Seed 20261004 selects an initial
+group, then normalized public-feature farthest-point diversity, one earliest
+predictive horizon per group. Source physical/control/event timing variation is
+recorded in selection.json; no private realized outcome influences selection.
+All selected examples have 11 timestamps / a .2-second observation cutoff.
+They do not represent an unbiased annotation-quality sample.
+
+## Provider and grounded views
+
+Use configs/simphysqa/annotation_spq01.json and python -m simphysqa.spq01.
+The historical identity resolves from configs/model_context_p02b.json and
+docs/reviews/artifacts/P02b/provider-ledger.json to callable gpt-5.6-sol.
+The prior enrichment_p12_pilot configuration supplies pricing/reservation
+precedent. The old bootstrap annotation.json values were an inactive draft,
+not evidence of a previously used model/temperature/seed.
+
+The [official model documentation](https://developers.openai.com/api/docs/models/gpt-5.6-sol)
+supports Responses and structured outputs with this exact service ID. No distinct
+immutable snapshot is listed. Record the exact returned identity on every call;
+this run returned gpt-5.6-sol throughout. Do not infer immutable weights from an
+alias. Settings retain medium reasoning, 2,048 max output tokens, 120-second
+timeout and omitted temperature/seed; SPQ01 specifies default service tier,
+store=false, tools=[] and no automatic transport retries or redirects.
+
+Prompt/schema version simphysqa-public-language/1.0.0 and their hashes are retained.
+The prompt requests an observed-window summary and a meaningful sentence per
+timestamp. This initial compact view focuses on joint_1 angle, car
+forward_velocity, block_2 position and load swing_angle respectively, while making
+declared controls/schedules and coordinate convention available. Broader
+multi-entity/event descriptions remain development work; do not infer goals,
+contacts or causal claims. Full-trajectory/private language is not generated.
+
+The provider projection has no reference, future states, reference answer or
+verification metadata. Every timestamp ID/time must match observed input exactly.
+Claim bindings must resolve to whitelisted public measurement/timestamp/control
+fields. Final exported views are revalidated for coverage, binding resolution,
+numeric fidelity, observed units/frames, supported scalar direction and prohibited
+future/causal/contact wording. These checks are conservative and incomplete
+semantic tests: they do not establish all prose entailment or human acceptability.
+Each public annotation remains generated_unreviewed. Generic source contexts remain
+original data and are never counted as meaningful language.
+
+## Durable execution and budget
+
+Before calls print the resolved non-secret config, request count, input bytes,
+token bounds and reservations. Credential access is an explicit file-reference
+boundary; neither key nor unrelated environment values enter outputs.
+Hard limits: 16 initial requests, 32 total attempts, two attempts/item, $5 total
+retained estimated cost, 4,200 seconds, 1,000,000 input tokens / 65,536 output tokens.
+Each request is admitted only if charges plus its full reservation fit every limit.
+Unknown usage/interruption retains the full reservation. A failure never falls back
+to synthetic language. Authorization for a new output directory is not permission
+to start another live pilot automatically.
+
+Durable exclusive-created requests, reservations, raw responses, item results,
+attempt histories and additive summaries support resume under the same job identity.
+Completed item files are not overwritten. A process lock prevents concurrent jobs.
+HTTP access/model/pricing failures stop the job explicitly. Other malformed/incomplete
+outputs may get one controlled repair; all attempts and failures remain in organizer
+provenance. Model identity, record/config/prompt/schema hashes, usage, retries and
+repairs accompany output. No mandatory human software approval gate is added.
+
+[Pricing](https://developers.openai.com/api/docs/pricing) on 4 October 2026 is
+$4 ordinary input, $.40 cached reads, $5 cache writes and $20 output per million
+short-context tokens. Cache writes replace ordinary input pricing for those tokens,
+as specified by [prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching).
+The adapter derives the documented 1.25 write multiplier unless an explicit
+cache_write_per_million is configured. Conservative reservation rates are $10 input
+and $40 output; complete request UTF-8 bytes plus 4,096 framing tokens bound input.
+Initial full reservations total $3.20905. Reserving all 32 upfront would cost
+$6.41810, so repairs are conditional on remaining charged budget.
+
+The live run completed 16 initial requests / 16 total attempts, zero repairs and
+zero failures. It reported 31,323 input, 31,275 cache-write and 18,310 output tokens.
+Corrected token-based estimated spend is $.522767, not a confirmed invoice charge.
+The initial $.491492 estimate omitted implicit writes; immutable raw responses and
+initial summaries remain, with additive cache-write-aware reconciliation and final
+summary. Pre-call reserves covered the higher rate throughout. No answering-model
+experiment was run. Independent human judgments are still absent.
+
+## Separate alternative-source comparison
+
+The primary adapter does not depend on choosing an alternative generator.
+configs/simphysqa/annotation_alternative.proposed.json deliberately has model=null.
+compare-prepare writes matched physical inputs plus identical prompt/schema hashes
+and primary requests; alternative requests stay null until its exact model,
+access, comparable settings, subset and separate protocol are pinned.
+All 16 development physical inputs are available as a candidate frame, not a frozen
+comparison study subset. No live alternative calls or comparison results exist.
+
+Before running that separate study, pin reviewers/overlap, randomized anonymized
+source labels/order, budgets, failures in denominators, paired acceptability/criterion
+analysis and trajectory-based uncertainty. Keep identity mappings organizer-private.
+The main audit's 20/140 allocation does not power this comparison.
+
+## Remaining QA construction
+
+| Family | SPQ01 status | Required next work |
 | --- | --- | --- |
-| Trajectory descriptions | Pending | Describe observed motion, relations and declared schedule with public bindings |
-| Timestamp descriptions | Pending | State-specific meaningful observations, units/frames; observed timestamps only |
-| Direct QA | Pending | Construct observed-state questions and exact matching references |
-| Predictive QA | Existing typed simulator truth | Enrich questions/language; audit temporal leakage and validity |
-| Counterfactual QA | Pending | Matched alternative controls/interventions, shared initial conditions/seeds/model, or verified re-simulation and paired manifests |
-| Explanation QA | Pending | Claim-level support; causal claims require intervention/mechanistic verification; allow descriptive/uncertain claims |
-| Clarification QA | Pending | Genuine missing public information, underdetermination evidence, justified request; do not invent a reply |
-| Evidence bindings | Readout bindings implemented | Extend to each new question/claim/intervention/gap and test evidence sufficiency |
+| Direct | 16 deterministic observed readouts, automatically verified | Human assess wording/evidence; broaden entity/channel coverage |
+| Predictive | 16 original questions/references exact; public language generated | Human assess validity/leakage and enrich representative views |
+| Counterfactual | Pending; none fabricated | Matched interventions or verified re-simulation; paired initial state, seed, control and evidence manifests |
+| Explanation | Pending; none fabricated | Claim-level support; causal assertions need intervention/mechanistic verification beyond temporal association |
+| Clarification | Pending; none fabricated | Genuine missing public information, demonstrable underdetermination and justified requested clarification |
 
-Public exports are built from an allowlist and include the annotations actually
-under evaluation. Public timestamp evidence must resolve to observed source states.
-Public language bindings are JSON pointers into immutable public input only.
-References, future states, simulator validation details, source paths and annotation
-generator identity remain private. Pointer checks prevent structural leakage, but
-semantic leakage/meaningfulness in free text still needs language validation and
-human audit. The software does not pretend pointer existence proves entailment.
-
-Annotation jobs are not implemented/launched in this milestone. Configuration is
-configs/simphysqa/annotation.json. attach-annotation accepts a supplied, versioned
-result only with exact model identity, prompt/schema versions, settings, attempts,
-failures, retry/repair accounting. It imports language without modifying source
-facts or reference values. Content-hashed output manifests and provider/cache/budget
-boundaries must accompany the later provider adapter. Human review/revision is a
-research activity; it is not a mandatory software approval step for generation.
-
-## Alternative annotation-source comparison (separate from main audit)
-
-Pending exact primary/alternative model identities and versions, subset size,
-subset manifest and comparison protocol freeze. Use matched physical examples
-from the same versioned source release, identical allowed public inputs, requested
-annotation families, instructions, schema and comparable generation settings/budgets.
-Record model-specific settings when exact settings cannot match. Include invalid
-outputs/failures in denominators; retain every attempt and repair. Hash prompts,
-outputs and manifests. Do not conflate model-source comparison with a change in
-physical examples or prompt difficulty.
-
-Randomize anonymized source labels/order per reviewer and keep generator identity
-in an organizer-only key. Reviewers see equivalent references/private evidence and
-the fixed rubric; compare paired acceptability and criterion errors by physical
-example, with paired trajectory bootstrap uncertainty. Keep original judgments
-separate from adjudication. Define this comparison's reviewers, overlap rules and
-sample size independently; the main 20/140 design does not power this comparison.
-No generator is chosen and no comparison results exist yet.
+Release language enrichment and calibration/revision remain pending. Source
+simulations were not regenerated. Human review is research, not a generation gate.

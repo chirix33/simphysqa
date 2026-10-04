@@ -8,7 +8,7 @@ Evaluation: (A) simulator-grounded structured and language-enriched trajectories
 QA, evidence and reproducible annotation; (B) evaluation across models, domains
 and question types. Learned dynamics and latent-baseline training are outside scope.
 
-Read docs/README.md, docs/PROGRESS.md, docs/prompts/SPQ00_bootstrap.md and relevant
+Read docs/README.md, docs/PROGRESS.md, docs/prompts/SPQ01_annotations.md and relevant
 docs/simphysqa specifications. Historical docs/assets/references remain original
 evidence, not implementation authority. Do not duplicate the handoff. Inspect
 nested instructions and git status. Work on simphysqa-naacl in the simphysqa
@@ -46,7 +46,9 @@ adjudication and corrections separate. Primary acceptable/material_error judgmen
 has criterion findings and error categories. Preserve planning assumptions:
 80% nominal confidence, two-sided alpha .20, 80% power, .90 expected acceptable
 prevalence, kappa .60 versus .80. These are neither results nor passing thresholds.
-The inherited power calculation/estimator source is pending; do not fabricate it.
+The supplied audit_power_analysis.py is preserved under docs/references/spq01_audit.
+Reconcile its fixed-prevalence one-degree-of-freedom score approximation with
+finite-sample simulation; descriptive Fleiss kappa alone is not the powered test.
 Formal sampling machinery may preview; do not freeze/export the definitive formal
 sample before annotation version, release population and rubric are ready.
 No claim that the pooled sample powers domain-by-question-type subgroups.
@@ -70,7 +72,9 @@ Do not push/merge/publish/message others unless requested.
 Bounded CPU verification and reversible local choices may proceed autonomously.
 
 ## Durable handoff
-Update docs/PROGRESS.md, docs/reviews/SPQ00_completion.md and docs/decisions/
+Update docs/PROGRESS.md, docs/reviews/SPQ01_completion.md and docs/decisions/
 with base/branch/source hashes, changed behavior, actual commands/results,
 artifacts, deviations, pending validation and next step. For blockers use
-docs/prompts/BLOCKER_REPORT.md. Stop at the authorized initial milestone.
+docs/prompts/BLOCKER_REPORT.md. SPQ01 authorizes 16 initial requests, 32 total attempts including repairs, and
+$5 total estimated/recorded annotation spend. No full-release jobs, definitive
+formal export, answering-model evaluation or further broad cleanup.

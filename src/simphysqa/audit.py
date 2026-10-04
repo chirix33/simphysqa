@@ -27,9 +27,12 @@ Calibration feedback may revise the rubric before formal sampling; all three rev
 """
 
 def preview(records: list[dict], seed: int, calibration_n: int = 20, formal_n: int = 140,
-            excluded_groups: tuple[str, ...] = ()) -> dict:
+            excluded_groups: tuple[str, ...] = (), include_development: bool = False) -> dict:
     if calibration_n < 0 or formal_n < 0:
         raise ValueError("negative sample size")
+    if not include_development:
+        durable = read(ROOT / "configs/simphysqa/development_exclusions.json")["excluded_groups"]
+        excluded_groups = tuple(sorted(set(excluded_groups) | set(durable)))
     groups = defaultdict(list)
     ids = set()
     for record in records:
@@ -48,7 +51,7 @@ def preview(records: list[dict], seed: int, calibration_n: int = 20, formal_n: i
     formal = candidates[calibration_n:calibration_n + formal_n]
     def allocation(items):
         return dict(sorted(Counter(r["public"]["input"]["domain"] + "/" + r["question_type"] for r in items).items()))
-    return {"status": "preview_only_not_frozen", "seed": seed, "sampling_unit": "split_group_then_one_question",
+    return {"status": "engineering_preview_exclusions_bypassed" if include_development else "preview_only_not_frozen", "seed": seed, "sampling_unit": "split_group_then_one_question",
             "frame_sha256": digest(sorted((r["sample_id"], digest(r)) for r in records)),
             "frame_records": len(records), "eligible_groups": len(groups), "excluded_groups": list(excluded_groups),
             "requested": {"calibration": calibration_n, "formal": formal_n},
@@ -67,8 +70,12 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
         raise ValueError("empty audit packet set")
     if len({r["sample_id"] for r in records}) != len(records):
         raise ValueError("duplicate packet record")
-    if len({r["private"]["metadata"]["split_group_id"] for r in records}) != len(records):
-        raise ValueError("multiple closely related records; select one per physical group")
+    related = defaultdict(list)
+    for record in records:
+        related[record["private"]["metadata"]["split_group_id"]].append(record)
+    for group in related.values():
+        if len(group) > 1 and (phase != "development" or len(group) != 2 or {r["question_type"] for r in group} != {"direct", "predictive"}):
+            raise ValueError("related records allowed only as development direct/predictive pairs")
     for record in records:
         validate(record)
     output.mkdir(parents=True, exist_ok=False)
@@ -85,7 +92,8 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
                   "annotation_completion": record["completion"], "rubric_version": "draft/0.1"}
         # Annotation provider identity lives only in the organizer key.
         key.append({"packet_id": packet_id, "sample_id": record["sample_id"], "source": record["source"],
-                    "annotation_provenance": record["private"]["annotation_provenance"]})
+                    "annotation_provenance": record["private"]["annotation_provenance"],
+                    "generation_job": record["private"].get("generation_job")})
         write(output / "packets" / (packet_id + ".json"), packet)
         body = escape(canonical(packet).decode())
         html = '<!doctype html><meta charset="utf-8"><title>SimPhysQA auditor packet</title><style>body{max-width:1100px;margin:32px auto;font:16px system-ui}pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer}</style>'

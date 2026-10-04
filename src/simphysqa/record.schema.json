@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:simphysqa:record:0.1.0",
+  "$id": "urn:simphysqa:record:0.2.0",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -17,7 +17,10 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "simphysqa/0.1.0"
+      "enum": [
+        "simphysqa/0.1.0",
+        "simphysqa/0.2.0"
+      ]
     },
     "source_schema_version": {
       "const": "1.0.0"
@@ -203,7 +206,10 @@
                 "type": "string"
               },
               "kind": {
-                "const": "recorded_readout"
+                "enum": [
+                  "recorded_readout",
+                  "observed_readout"
+                ]
               },
               "state_ids": {
                 "type": "array",
@@ -285,6 +291,15 @@
               "minimum": 0
             }
           }
+        },
+        "source_record": {
+          "type": "object"
+        },
+        "derivation": {
+          "type": "object"
+        },
+        "generation_job": {
+          "type": "object"
         }
       }
     },
@@ -328,5 +343,29 @@
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "question_type": {
+            "const": "direct"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schema_version": {
+            "const": "simphysqa/0.2.0"
+          },
+          "private": {
+            "required": [
+              "source_record",
+              "derivation"
+            ]
+          }
+        }
+      }
+    }
+  ]
 }

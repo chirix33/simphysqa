@@ -1,0 +1,15 @@
+{
+  "version": "supplied-audit-package/1.0.0",
+  "source_archive": "C:\\Users\\aashraf\\Desktop\\SimPhysQA_Human_Audit_Overleaf_Insert.zip",
+  "zip_sha256": "1c2e4961c67fc6e0420469fd5f53908b33c2601ec635abbd7f33ed9a65f22695",
+  "files": {
+    "README.txt": "b1952c7cf87c1d11360d46a5109e042f977dc5ae37db140856da8a0391df03fa",
+    "audit_power_analysis.py": "da74f1eab11a1533509bfd71ce26f07ed182264f9f3551fd735b5653a77eac27",
+    "audit_references.bib": "da3933a36f2d665edf552ce3a554da31bc1962386f2a6193ec3bb6cb0629a69a",
+    "human_annotation_audit.tex": "d7cc94ed732b2cdd21da6029d8f074427b677ef8efe9269cb5cf5736d2db27e1",
+    "schema_revision_paragraph.tex": "9d8e212cd327cfe2986b1f1a9302bc80ef0cde85bfc18c02afd43dfc8abd735b"
+  },
+  "upstream_package": "kappaSize 1.2 (2018-11-25)",
+  "source": "https://cran.r-project.org/web/packages/kappaSize/refman/kappaSize.html",
+  "originals_preserved": true
+}

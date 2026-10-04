@@ -1,59 +1,47 @@
-# Prioritized annotation work and unresolved choices
+# Remaining work after SPQ01
 
-All items below are pending; no annotation/human/benchmark result is asserted.
+SPQ01 delivered a bounded runnable provider, 16 live automatically validated public
+annotations, 16 observed direct QA plus 16 unchanged predictive QA, development
+packets/blank forms, actual release inventory and audit-method reconciliation.
+Automatic checks are not human quality assessment. No independent ratings,
+agreement estimates or answering-model results exist.
 
-1. Pin primary annotation model identity/version and prompt; implement the budgeted
-provider/cache/attempt ledger, semantic language validation and generation adapter.
-Create meaningful observed-trajectory and timestamp descriptions. Current generic
-context remains incomplete.
-2. Construct direct QA from observed states. Enrich predictive QA and audit language
-for future-outcome leakage. Extend evidence bindings from readout IDs to relevant
-claims, controls and event definitions. Freeze a meaningful annotation version
-only after development/revision work.
-3. Construct matched counterfactual intervention/re-simulation records with paired
-initial conditions, seeds, model/control manifests and numerical verification.
-Add explanation questions with claim-level support and distinct causal/descriptive
-claims. Construct genuine clarification gaps and justified requests.
-4. Finalize release population/inclusion/allocation and rubric using the shared
-20-item calibration. Keep all inspected bootstrap physical groups out of fresh
-formal sampling. Do not freeze/export the 140 formal identities now.
-5. Obtain the original agreement power calculation and reconcile estimator/variance
-assumptions. Lock incomplete-rating policy, bootstrap seed/replicates and pooled
-estimand/weighting; no subgroup power claim.
-6. Select and document the separate alternative annotation-source model/subset,
-controlled instructions, source blinding, reviewers and paired analysis.
-7. Pin and locally qualify Qwen3-32B-AWQ, Gemma-3-27B-IT QAT, and a quantized
-DeepSeek-R1-Distill-Qwen-32B artifact. Requalify inherited Qwen/Llama interfaces on
-SimPhysQA public annotations/tasks and hardware. Implement qualified tool-free
-runners and new-family metrics/uncertainty, then request bounded experiment budgets.
+1. Human inspect the development packets and revise annotation scope/rubric/prompts.
+   This pilot describes one focal quantity per domain over an observed .2-second
+   window. Broader scenario/entity/control/event language and longer observations
+   need deliberate development. Preserve failed outputs in future pilots.
+2. Build counterfactual references from matched alternative interventions or verified
+   re-simulation, shared initial conditions/seeds and paired numerical evidence.
+   Build explanation QA with explicit claim evidence and separate causal from
+   descriptive claims. Build clarification QA from genuine missing information and
+   demonstrable underdetermination. No examples were fabricated in SPQ01.
+3. Freeze a release annotation version, population and rubric using the shared
+   calibration design. Exclude all 20 inspected SPQ00/SPQ01 groups and any subsequent
+   calibration/development groups from fresh formal sampling. Keep 20 calibration/
+   140 formal shared records; no definitive sample has been exported.
+4. The original PowerBinary calculation is recovered and reproduced. Fixed-prevalence
+   score simulation shows a material power-approximation discrepancy; allocation
+   stays unchanged. Decide prevalence nuisance handling, reviewer heterogeneity,
+   agreement estimator/test, incomplete-record policy and confidence-interval
+   method before formal analysis. Descriptive Fleiss kappa does not implement the
+   powered conditional score test. See audit.md for exact model/results.
+5. Pin the alternative annotation model, controlled comparison protocol, subset,
+   reviewers/blinding and paired analysis separately. The matched-input interface
+   is ready; no alternative live run is enabled.
+6. Pin/qualify local answering artifacts and runtimes for all nine conditions,
+   including Qwen3-32B-AWQ, Gemma-3-27B-IT QAT and a quantized
+   DeepSeek-R1-Distill-Qwen-32B. Test the new public annotations/task interfaces
+   locally before budgeted evaluations. No answering-model experiment is authorized
+   by this milestone.
 
-## Machine-specific pending decisions
+Machine-specific decisions remain: permanent external storage and portable paths;
+source schema/assets packaging beyond editable installs; fresh GPU/runtime
+qualification; unavailable distinct immutable gpt-5.6-sol snapshot. Exact service
+ID/returned identities and model-specific settings are recorded, but no immutable
+weight revision is invented. Pricing must be reverified before later live jobs.
 
-The dedicated Windows CPU environment is validated on Python 3.12.14. Exact
-dependency distributions were reused locally with hashes, not downloaded.
-No new CUDA, WSL, PyBullet/MuJoCo generation or model-specific validation occurred.
-Historical user-reported RTX 5090 CUDA/PyTorch qualification is not a new result.
-The main checkout release is the available read-only data root; a long-term external
-storage location, portable path convention and portable wheel packaging for retained
-root schema/assets are pending. Editable installation is the supported bootstrap.
-
-Historical enabled full-release configs carry old source hashes. Source pruning
-changes those hashes; re-freezing/qualification is necessary before new generation.
-No frozen simulator thresholds, source references or rejected cases were modified.
-
-## Scientific blocker: original agreement power calculation
-
-- Phase/substep and status: SPQ00 audit analysis; infrastructure complete, power reconciliation pending.
-- Branch/commit/files: simphysqa-naacl, base 7dd4a64e90cfb18be743503ac8345cabf2f6e28b; configs/simphysqa/audit.json and docs/simphysqa/audit.md.
-- Expected/source: preserve supplied 80% confidence/.20 two-sided alpha/.80 power/.90 prevalence/.60 vs .80 kappa settings and consistently use original calculation's estimator.
-- Minimal command: rg -n 'kappa|statistical power|two.sided alpha|acceptable.rating prevalence' docs/docs docs/prompts docs/decisions -g '*.md' -g '!SPQ*'
-- Observed: only historical generic seed-variability/power caveat; no original kappa formula, variance, estimator or calculation artifact. No software traceback.
-- Environment: Windows, Python 3.12.14, jsonschema 4.26.0; offline CPU.
-- Attempts: checked relevant data/evaluation specs, phase/power references and decision documents; retained supplied assumptions/counts in versioned config.
-- Root cause: missing original calculation artifact; its estimator/dependence assumptions cannot be inferred from counts alone.
-- Impact: blocks claiming achieved power or locking an estimator as consistent with the original calculation. Migration, packets, sampling preview and independent form imports are complete and may continue.
-- Option A: obtain original calculation, then reconcile provisional unweighted Fleiss kappa/three-rater analysis; preserves the stated planning provenance.
-- Option B: explicitly approve/document a new three-rater power analysis and any changes, preserving original assumptions separately; requires scientific choice and may alter design.
-- Recommendation: A; retain settled 20/140 counts and do not invent a formula or achieved power.
-- Smallest question to relay: What original source/formula/software, agreement estimator and variance/dependence assumptions produced the kappa .60 vs .80 power calculation?
-- Evidence to close: original calculation and estimator specification, independently reproducible calculation, and a matching locked analysis protocol.
+The previous SPQ00 missing-power-source blocker is closed by the supplied archive.
+The remaining audit analysis choices are scientific limitations, not provider
+blockers or annotation software approval gates. API access worked for this bounded
+run. No CUDA build, large download, simulator generation, broad repository cleanup
+or full benchmark run occurred.

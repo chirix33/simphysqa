@@ -1,8 +1,8 @@
 # Active SimPhysQA handoff
 
 Start with [root instructions](../AGENTS.md), [runnable entry points](../README.md),
-[progress](PROGRESS.md), [SPQ00 prompt](prompts/SPQ00_bootstrap.md) and
-[SPQ00 completion](reviews/SPQ00_completion.md). Active contracts:
+[progress](PROGRESS.md), [SPQ01 prompt](prompts/SPQ01_annotations.md) and
+[SPQ01 completion](reviews/SPQ01_completion.md) (SPQ00 remains accepted history). Active contracts:
 [annotation](simphysqa/annotation.md), [human audit](simphysqa/audit.md),
 [evaluation](simphysqa/evaluation.md), [remaining decisions](simphysqa/pending.md).
 Original Phi-JEPA package follows as historical evidence.

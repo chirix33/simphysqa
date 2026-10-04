@@ -18,8 +18,9 @@ These are preparation settings, not a newly authorized experiment.
 baseline-requests exports actual public structured inputs AND public language
 annotations to every condition. Requests have tools=[] and contain no references,
 future states, verification metadata, organizer/source paths or generator identity.
-The importer/exporter tracks annotation version and condition. Current language
-is pending, so these exports demonstrate transport only, not an enriched baseline.
+The importer/exporter tracks annotation version and condition. SPQ01 has generated human-unreviewed public language on the development subset.
+Release-wide language and answering-model evaluation remain pending. These requests
+provide transport, not empirical answering-model performance.
 
 Later result tables must cross model/condition, domain and question type with
 actual example/trajectory counts and failure denominators. For typed readouts:

@@ -1,0 +1,13 @@
+{
+  "version": "simphysqa-alternative-annotation/0.1.0",
+  "model": null,
+  "reasoning_effort": "medium",
+  "max_output_tokens": 2048,
+  "protocol_status": "pending_model_and_protocol_freeze",
+  "live_enabled": false,
+  "main_audit_allocation_changed": false,
+  "controlled": "same physical examples, public projections, instructions, schema; document settings differences, blinded reviewer order and organizer-only identities",
+  "comparison_reviewers": null,
+  "subset": null,
+  "quality_results": "pending"
+}

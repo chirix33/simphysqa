@@ -29,6 +29,8 @@ def iter_source(path: Path) -> Iterator[tuple[dict, SourceLocation]]:
                     yield parse(line), SourceLocation(str(file.resolve()), number, file_hash)
 
 def restore(record: dict) -> dict:
+    if record["question_type"] == "direct":
+        return deepcopy(record["private"]["source_record"])
     return {"schema_version": record["source_schema_version"], "sample_id": record["sample_id"],
             "input": deepcopy(record["public"]["input"]),
             "reference": deepcopy(record["private"]["reference"]),
@@ -90,9 +92,15 @@ def validate(record: dict) -> None:
     if record["trajectory_id"] != source["metadata"]["base_scenario_id"]:
         raise ValueError("trajectory identity changed")
     inp = record["public"]["input"]
+    if record["question_type"] == "direct":
+        from .direct import validate_direct
+        validate_direct(record, source)
+    elif record["question_type"] != "predictive" or record["sample_id"] != source["sample_id"]:
+        raise ValueError("unsupported family or changed source identity")
+    reference = record["private"]["reference"]
     state_ids = {s["state_id"] for s in source["input"]["states"] + source["reference"]["states"]}
-    event_ids = {e["event_id"] for e in source["reference"]["events"]}
-    evidence_ids = {e["evidence_id"] for e in source["reference"]["evidence"]}
+    event_ids = {e["event_id"] for e in reference["events"]}
+    evidence_ids = {e["evidence_id"] for e in reference["evidence"]}
     bindings = record["private"]["evidence_bindings"]
     if len(bindings) != len(inp["answer_spec"]) or {b["target_id"] for b in bindings} != {t["target_id"] for t in inp["answer_spec"]}:
         raise ValueError("question-specific evidence must cover each target once")
@@ -100,7 +108,7 @@ def validate(record: dict) -> None:
         if not set(binding["state_ids"]) <= state_ids or not set(binding["event_ids"]) <= event_ids or not set(binding["evidence_ids"]) <= evidence_ids:
             raise ValueError("unresolved private evidence binding")
         target = next(t for t in inp["answer_spec"] if t["target_id"] == binding["target_id"])
-        terminal = next(s["state_id"] for s in source["reference"]["states"] if s["timestamp"] == target["end_time"])
+        terminal = next(s["state_id"] for s in reference["states"] if s["timestamp"] == target["end_time"])
         if terminal not in binding["state_ids"]:
             raise ValueError("target readout evidence does not bind its requested time")
     language = record["public"]["annotations"]
@@ -115,8 +123,11 @@ def validate(record: dict) -> None:
             observed = next((s for s in inp["states"] if s["state_id"] == sentence["state_id"]), None)
             if observed is None or observed["timestamp"] != sentence["timestamp"]:
                 raise ValueError("public timestamp annotation references an unobserved state")
-    if record["question_type"] != "predictive":
-        raise ValueError("new QA families need versioned construction adapters; relabeling is forbidden")
+    generated = language["trajectory"]["status"] == "generated_unreviewed"
+    if generated:
+        from .annotation import validate_generated
+        validate_generated(record, {"summary": {k: v for k, v in language["trajectory"].items() if k != "status"},
+            "timestamps": [{k: v for k, v in s.items() if k != "status"} for s in language["timestamps"]]})
 
 def public_record(record: dict) -> dict:
     validate(record)
@@ -151,7 +162,7 @@ def attach_annotation(record: dict, result: dict) -> dict:
 def load(path: Path) -> Iterator[dict]:
     seen = set()
     for raw, location in iter_source(path):
-        record = raw if raw.get("schema_version") == VERSION else migrate(raw, location)
+        record = raw if raw.get("schema_version") in (VERSION, "simphysqa/0.2.0") else migrate(raw, location)
         validate(record)
         if record["sample_id"] in seen:
             raise ValueError("duplicate sample ID")
