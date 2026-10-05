@@ -1,0 +1,256 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:simphysqa:associations:1.0.1",
+  "type": "object",
+  "required": [
+    "states",
+    "known_events",
+    "between_state_associations"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "states": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "state_id",
+          "linked_events"
+        ],
+        "properties": {
+          "state_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "linked_events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "event_id",
+                "event_type",
+                "temporal_relationship",
+                "target_entity_ids",
+                "link_id",
+                "bindings"
+              ],
+              "properties": {
+                "event_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "event_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "target_entity_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "link_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "temporal_relationship": {
+                  "enum": [
+                    "scheduled_future",
+                    "scheduled_active",
+                    "scheduled_interval_ended",
+                    "scheduled_empty_interval",
+                    "declared_point_future",
+                    "declared_point_at_timestamp",
+                    "declared_point_past",
+                    "temporal_semantics_unresolved"
+                  ]
+                },
+                "bindings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^/"
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "known_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "linked_states"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "linked_states": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "state_id",
+                "temporal_relationship",
+                "link_id",
+                "bindings"
+              ],
+              "properties": {
+                "state_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "link_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "temporal_relationship": {
+                  "enum": [
+                    "scheduled_future",
+                    "scheduled_active",
+                    "scheduled_interval_ended",
+                    "scheduled_empty_interval",
+                    "declared_point_future",
+                    "declared_point_at_timestamp",
+                    "declared_point_past",
+                    "temporal_semantics_unresolved"
+                  ]
+                },
+                "bindings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^/"
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "between_state_associations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "event_id",
+          "event_type",
+          "link_id",
+          "temporal_relationship",
+          "target_entity_ids",
+          "bindings",
+          "endpoint_state_ids",
+          "entire_interval_between",
+          "scheduled_overlap",
+          "boundaries"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "event_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_entity_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "link_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bindings": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^/"
+            },
+            "uniqueItems": true
+          },
+          "temporal_relationship": {
+            "enum": [
+              "interval_between_saved_states",
+              "point_between_saved_states"
+            ]
+          },
+          "endpoint_state_ids": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "entire_interval_between": {
+            "type": "boolean"
+          },
+          "scheduled_overlap": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "boundaries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "timestamp",
+                "timestamp_decimal",
+                "sampled_state"
+              ],
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "onset",
+                    "end",
+                    "phase_boundary"
+                  ]
+                },
+                "timestamp": {
+                  "type": "number"
+                },
+                "timestamp_decimal": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sampled_state": {
+                  "const": false
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

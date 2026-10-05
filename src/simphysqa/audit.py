@@ -5,7 +5,7 @@ import csv
 from html import escape
 from pathlib import Path
 import random
-from .dataset import validate
+from .dataset import validate, public_record
 from .io import ROOT, canonical, digest, external, manifest, read, write
 
 REVIEWERS = ("R1", "R2", "R3")
@@ -62,7 +62,7 @@ def preview(records: list[dict], seed: int, calibration_n: int = 20, formal_n: i
             "population": "group-balanced physical trajectories in the supplied versioned release frame, random question within trajectory; pooled only",
             "formal_identity_export": "disabled_initial_milestone"}
 
-def export_packets(records: list[dict], output: Path, phase: str = "development") -> Path:
+def export_packets(records: list[dict], output: Path, phase: str = "development", *, association_version: str | None = None) -> Path:
     if phase not in ("development", "calibration"):
         raise ValueError("definitive formal sample export disabled until annotation/release/rubric readiness")
     output = external(output)
@@ -83,13 +83,19 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
     assignments = []
     key = []
     for index, record in enumerate(records, 1):
-        packet_id = "SPQ-" + digest({"phase": phase, "sample": record["sample_id"], "version": record["annotation_version"]})[:16]
+        view = public_record(record, association_version=association_version) if association_version else record["public"]
+        identity = {"phase": phase, "sample": record["sample_id"], "version": record["annotation_version"]}
+        if association_version:
+            identity["export_version"] = association_version
+        packet_id = "SPQ-" + digest(identity)[:16]
         packet = {"packet_id": packet_id, "phase": phase, "sample_id": record["sample_id"],
                   "annotation_version": record["annotation_version"], "question_type": record["question_type"],
-                  "structured_inputs": record["public"]["input"], "language_annotations": record["public"]["annotations"],
+                  "structured_inputs": view["input"], "language_annotations": view["annotations"],
                   "qa": {"question": record["public"]["input"]["question"], "reference": record["private"]["reference"]},
                   "verification": {"metadata": record["private"]["metadata"], "bindings": record["private"]["evidence_bindings"]},
                   "annotation_completion": record["completion"], "rubric_version": "draft/0.1"}
+        if association_version:
+            packet.update(export_version=view["export_version"], association_provenance=view["association_provenance"])
         # Annotation provider identity lives only in the organizer key.
         key.append({"packet_id": packet_id, "sample_id": record["sample_id"], "source": record["source"],
                     "annotation_provenance": record["private"]["annotation_provenance"],
@@ -116,7 +122,10 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
     manifest(output, {"purpose": "human_audit_" + phase, "rubric_sha256": digest(RUBRIC),
                       "annotation_versions": sorted({r["annotation_version"] for r in records}),
                       "assignments": assignments, "reviewers": list(REVIEWERS), "ratings_status": "blank_not_collected",
-                      "record_hashes": {r["sample_id"]: digest(r) for r in records}})
+                      "record_hashes": {r["sample_id"]: digest(r) for r in records},
+                      **({"export_version": association_version, "public_view_hashes": {
+                          r["sample_id"]: digest(public_record(r, association_version=association_version)) for r in records}}
+                         if association_version else {})})
     return output
 
 def import_ratings(packet_root: Path, form: Path, output: Path) -> dict:

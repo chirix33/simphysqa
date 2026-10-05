@@ -192,3 +192,9 @@ Final handoff check: inherited docs/README.md and docs/PROGRESS.md bodies were
 restored byte-for-byte from the accepted base after detecting locale-decoding
 changes. Only new SPQ01a entries remain; source code and annotation artifacts were
 unaffected. The follow-up preservation commit does not rewrite existing history.
+
+## Bidirectional export follow-up
+
+See [association export completion](SPQ01a_associations_completion.md) for the
+versioned compact bidirectional projection, refreshed packets/baseline inputs,
+preservation and 59-test verification. Original SPQ01a findings above are unchanged.

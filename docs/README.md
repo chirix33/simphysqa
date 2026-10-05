@@ -1,3 +1,10 @@
+# Latest SPQ01a follow-up: bidirectional public associations
+
+[Specification](simphysqa/associations.md) and
+[completion/examples/commands](reviews/SPQ01a_associations_completion.md).
+The projection versions exported state/event indexes without changing source data,
+canonical semantics or language. Existing historical reports remain below.
+
 # Current milestone: SPQ01a
 
 Read [SPQ01a prompt](prompts/SPQ01a_event_language.md),

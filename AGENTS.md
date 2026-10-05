@@ -95,3 +95,12 @@ allows zero new requests and shares the original SPQ01 budget/prior spend.
 Synthetic boundary fixtures are software tests only; report real overlap coverage
 gaps. Re-export all 32 development packets and nine-condition public inputs.
 Counterfactual/explanation/clarification QA and human results remain pending.
+
+## Bidirectional association export follow-up
+Read docs/simphysqa/associations.md. Version derived public association indexes
+separately from source/annotation schemas. Both directions must come from canonical
+SPQ01a links and agree on relationship/link ID/evidence. Keep full event definitions
+and compact nonrecursive indexes; put gap associations in a separate endpoint-ID
+array. Do not mutate canonical source QA or prior outputs. The new offline exporter
+updates all 32 packets and nine-condition public views consistently with no calls.
+Record follow-up results in docs/reviews/SPQ01a_associations_completion.md.

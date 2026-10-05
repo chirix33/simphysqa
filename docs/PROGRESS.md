@@ -1,3 +1,18 @@
+# SPQ01a bidirectional association export
+
+Derived export/schema simphysqa-associations/1.0.1 adds compact linked_events on
+states and linked_states on full known events, from the existing canonical links.
+Separate between-state entries use endpoint IDs and gap-only relationships.
+Sources/QA IDs/references/measurements/.2 s cutoffs and language are unchanged.
+59 offline tests passed. Updated 32 audit packets, three blank forms and 288
+public baseline requests. 176 physical pairs remain future-only; real active/gap
+coverage is absent and software fixtures are labeled synthetic. No human judgments.
+Actual resume preserves 122 output hashes; all 140 prior SPQ01a and 214 indexed
+SPQ01 files verified. Zero simulations/model calls/spend. No further cleanup.
+See [completion and commands](reviews/SPQ01a_associations_completion.md) and
+[derived export specification](simphysqa/associations.md).
+
+---
 # SPQ01a event-aware public language — 5 October 2026
 
 Branch simphysqa-naacl; accepted parent 6d420b779e0204868fec4c45e26bb1cdcd2b98c7.

@@ -31,3 +31,11 @@ No answering-model runs, definitive formal export or invented new QA families.
 Report commit, updated specification, before/after domain examples, linkage/coverage,
 claim evidence and preservation checks. Human judgments and subsequent QA families
 remain pending. Automatic tests are not human annotation-quality results.
+
+## Authorized derived export follow-up
+Add bidirectional state linked_events /known-event linked_states from canonical
+SPQ01a links, with compact IDs/types/relationships/targets/evidence and no recursive
+embedding. Separate between-state associations by endpoint IDs. Validate reference
+integrity, uniqueness, mirror and canonical agreement. Version the derived schema,
+preserve sources/prior outputs, and update packets/public baseline inputs consistently.
+No new simulations or model calls. See docs/simphysqa/associations.md.

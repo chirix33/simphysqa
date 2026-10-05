@@ -134,12 +134,18 @@ def validate(record: dict) -> None:
         validate_generated(record, {"summary": {k: v for k, v in language["trajectory"].items() if k != "status"},
             "timestamps": [{k: v for k, v in s.items() if k != "status"} for s in language["timestamps"]]})
 
-def public_record(record: dict) -> dict:
+def public_record(record: dict, *, association_version: str | None = None) -> dict:
     validate(record)
-    return {"schema_version": record["schema_version"], "sample_id": record["sample_id"],
+    result = {"schema_version": record["schema_version"], "sample_id": record["sample_id"],
             "question_type": record["question_type"], "annotation_version": record["annotation_version"],
             "input": deepcopy(record["public"]["input"]),
             "annotations": deepcopy(record["public"]["annotations"])}
+    if association_version is not None:
+        from .associations import VERSION, associated_view
+        if association_version != VERSION:
+            raise ValueError("unsupported association export version")
+        return associated_view(result)
+    return result
 
 def attach_annotation(record: dict, result: dict) -> dict:
     # A provider integration may supply this contract. No provider calls in this milestone.

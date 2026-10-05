@@ -135,3 +135,10 @@ Independent reviewer judgments remain absent. Calibration/rubric revision, the
 alternative-source model/protocol, counterfactual matched-intervention truth,
 causal explanation support and genuine clarification gaps remain subsequent work.
 No formal sample or additional QA family is exported here.
+
+## Derived export extension
+
+[Bidirectional associations 1.0.1](associations.md) add compact state/event indexes
+from these canonical links at the public export boundary. Language contract 2.0.0,
+canonical links, physical source records and historical outputs remain unchanged.
+Use the new versioned export for updated development packets/baseline inputs.

@@ -81,3 +81,11 @@ attach-annotation (use --help). Baseline requests include the public annotations
 under evaluation. Answering-model experiments remain workstation-only/tool-free.
 The five-model/nine-condition plan remains; artifact/runtime qualification and
 new-family metrics are pending.
+
+## Bidirectional event-state public export
+
+Use `python -m simphysqa.export_associations --source EXTERNAL_SPQ01A_EVENT_LANGUAGE_ROOT --output EXTERNAL_NEW_ASSOCIATION_ROOT`.
+This offline derived export adds compact state linked_events /event linked_states
+and separate between-state endpoint associations, keeping source records exact.
+[Specification](docs/simphysqa/associations.md) and
+[completion/examples/commands](docs/reviews/SPQ01a_associations_completion.md).
