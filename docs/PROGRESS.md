@@ -1,3 +1,16 @@
+# SPQ01a grounded shared event-description export
+
+Export/schema 1.1.1 and renderer 1.0.1 add canonical shared public event descriptions,
+separate evidence and explicit semantic status. Preserve generic descriptions,
+source recovery, QA references/IDs/measurements/.2 s cutoffs and prior outputs.
+69 offline tests passed; 32 packets/288 public requests/three blank forms exported.
+Sixteen physical descriptions, including four unresolved arm frame relationships.
+Saved resume preserves all 122 output hashes. Zero simulations/model calls/spend.
+Real active/gap coverage and all human judgments remain pending.
+See [completion](reviews/SPQ01a_event_descriptions_completion.md) and
+[specification](simphysqa/event_descriptions.md).
+
+---
 # SPQ01a bidirectional association export
 
 Derived export/schema simphysqa-associations/1.0.1 adds compact linked_events on

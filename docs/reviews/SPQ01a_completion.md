@@ -198,3 +198,8 @@ unaffected. The follow-up preservation commit does not rewrite existing history.
 See [association export completion](SPQ01a_associations_completion.md) for the
 versioned compact bidirectional projection, refreshed packets/baseline inputs,
 preservation and 59-test verification. Original SPQ01a findings above are unchanged.
+
+## Shared event-description export follow-up
+[Completion/examples/verification](SPQ01a_event_descriptions_completion.md) adds
+versioned shared event prose from public controller semantics. Original findings
+and language output above remain preserved.

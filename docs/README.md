@@ -1,3 +1,9 @@
+# Latest SPQ01a follow-up: grounded shared event descriptions
+
+Read [specification](simphysqa/event_descriptions.md) and
+[completion/examples/commands](reviews/SPQ01a_event_descriptions_completion.md).
+Export 1.1.1 preserves source values, canonical matching and prior outputs.
+
 # Latest SPQ01a follow-up: bidirectional public associations
 
 [Specification](simphysqa/associations.md) and

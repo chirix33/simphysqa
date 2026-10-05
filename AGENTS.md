@@ -104,3 +104,11 @@ and compact nonrecursive indexes; put gap associations in a separate endpoint-ID
 array. Do not mutate canonical source QA or prior outputs. The new offline exporter
 updates all 32 packets and nine-condition public views consistently with no calls.
 Record follow-up results in docs/reviews/SPQ01a_associations_completion.md.
+
+## Grounded shared event-description follow-up
+Read docs/simphysqa/event_descriptions.md. Preserve inherited event descriptions;
+add canonical public-only shared text, independent evidence bindings and explicit
+unresolved status. Copy exactly into state/gap associations. Version renderer,
+schema, display convention and cache; never round matching/source values. Preserve
+prior outputs and source recovery. No simulations/model calls or new QA families.
+Report results in docs/reviews/SPQ01a_event_descriptions_completion.md.

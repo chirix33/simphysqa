@@ -82,3 +82,8 @@ Synthetic software fixtures exercise active boundaries, gaps, point completion,
 overlap, phases, empty events and unknown semantics. These are not new simulated
 physical data, model outcomes or human annotation-quality judgments. No simulations
 or model calls are performed; human ratings remain pending.
+
+## Grounded description extension (supersedes the export version above)
+[Export 1.1.1](event_descriptions.md) retains these canonical relationships and
+adds shared event_description, event_description_bindings and semantic status
+fields. Historical 1.0.1 exports remain pinned to their commit/schema.

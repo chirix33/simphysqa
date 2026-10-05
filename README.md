@@ -89,3 +89,10 @@ This offline derived export adds compact state linked_events /event linked_state
 and separate between-state endpoint associations, keeping source records exact.
 [Specification](docs/simphysqa/associations.md) and
 [completion/examples/commands](docs/reviews/SPQ01a_associations_completion.md).
+
+## Grounded public event descriptions
+The versioned association CLI now emits export 1.1.1 with shared controller-grounded
+event descriptions and separate public evidence. See
+[specification](docs/simphysqa/event_descriptions.md) and
+[completion/examples/commands](docs/reviews/SPQ01a_event_descriptions_completion.md).
+Use a fresh external output root; prior versions remain preserved.

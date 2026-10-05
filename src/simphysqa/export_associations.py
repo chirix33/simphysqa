@@ -5,6 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 from .associations import VERSION, strip_associations, validate_view, versions
 from .audit import export_packets, import_ratings
+from .event_descriptions import FIELDS
 from .dataset import load, public_record
 from .evaluation import export_requests
 from .io import ROOT, canonical, digest, external, manifest, parse, read, write
@@ -45,7 +46,7 @@ def run(source, output, plan_path=ROOT / "configs/simphysqa/evaluation.json"):
             continue
         frame.append({"trajectory_id":r["trajectory_id"], "sample_id":r["sample_id"],
             "states":[{"state_id":s["state_id"],"linked_events":s["linked_events"]} for s in v["input"]["states"]],
-            "known_events":[{"event_id":e["event_id"],"linked_states":e["linked_states"]} for e in v["input"]["known_events"]],
+            "known_events":[{"event_id":e["event_id"],"linked_states":e["linked_states"], **{field:e[field] for field in FIELDS}} for e in v["input"]["known_events"]],
             "between_state_associations":v["input"]["between_state_associations"],
             "association_provenance":v["association_provenance"]})
     retained(output / "event-state-associations.json", {"export_version":VERSION,"deduplicated_physical_views":True,"trajectories":frame})
@@ -101,7 +102,10 @@ def run(source, output, plan_path=ROOT / "configs/simphysqa/evaluation.json"):
     report = {"export_version":VERSION, "qa_records":32,"deduplicated_trajectories":16,
         "deduplicated_state_event_associations":sum(relationships.values()),"deduplicated_relationships":dict(relationships),
         "deduplicated_between_state_associations":sum(len(t["between_state_associations"]) for t in frame),
-        "qa_identity_reference_measurement_cutoff_preservation":"passed", "canonical_records_byte_preservation":True,
+        "qa_identity_reference_measurement_cutoff_preservation":"passed",
+        "description_consistency_public_bindings_source_recovery":"passed_all_32_views",
+        "deduplicated_event_descriptions":sum(len(t["known_events"]) for t in frame),
+        "deduplicated_description_statuses":dict(Counter(e["event_description_status"] for t in frame for e in t["known_events"])), "canonical_records_byte_preservation":True,
         "bidirectional_integrity_uniqueness_agreement":"passed_all_32_views", "audit_packets":32,
         "baseline_public_views_checked":32*len(plan["conditions"]),"independent_ratings":0,"blank_forms":3,
         "new_simulations":0,"new_model_calls":0,"new_spend_usd":0,
@@ -109,7 +113,7 @@ def run(source, output, plan_path=ROOT / "configs/simphysqa/evaluation.json"):
     retained(output / "verification" / "checks.json", report)
     if verify_manifest(source) != old_manifest:
         raise ValueError("original SPQ01a output changed")
-    details = {"purpose":"SPQ01a_bidirectional_association_development_export", **identity,
+    details = {"purpose":"SPQ01a_grounded_event_description_development_export", **identity,
         "audit_manifest_sha256":digest(pm),"baseline_manifest_sha256":digest(bm),"checks":report}
     if (output / "manifest.json").exists():
         info = verify_manifest(output)

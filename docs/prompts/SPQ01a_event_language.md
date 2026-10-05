@@ -39,3 +39,12 @@ embedding. Separate between-state associations by endpoint IDs. Validate referen
 integrity, uniqueness, mirror and canonical agreement. Version the derived schema,
 preserve sources/prior outputs, and update packets/public baseline inputs consistently.
 No new simulations or model calls. See docs/simphysqa/associations.md.
+
+## Authorized shared event-description follow-up
+Build on 433c64186555fdc99f17261c069a2dd4b334a11e. Preserve generic description and
+add canonical action/target/magnitude-or-limit/timing/phase prose with separate
+public evidence and unresolved status; exact copies in state/gap associations.
+No state timing in shared prose or guessed frame/controller application. Version
+schema/renderer/cache and number display; keep exact recovery and prior outputs.
+Re-export 32 packets/288 public requests with zero model/simulation calls.
+See docs/simphysqa/event_descriptions.md and the new completion report.

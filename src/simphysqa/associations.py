@@ -8,12 +8,13 @@ from hashlib import sha256
 from pathlib import Path
 from jsonschema import Draft202012Validator
 from .events import derive
+from .event_descriptions import FIELDS, render, versions as description_versions
 from .io import canonical, digest, read
 
-VERSION = "simphysqa-associations/1.0.1"
+VERSION = "simphysqa-associations/1.1.1"
 
 def versions():
-    return {"export_version": VERSION,
+    return {**description_versions(), "export_version": VERSION,
         "association_schema_sha256": sha256(Path(__file__).with_name("association.schema.json").read_text(encoding="utf-8").encode()).hexdigest(),
         "association_implementation_sha256": sha256(Path(__file__).read_text(encoding="utf-8").encode()).hexdigest()}
 
@@ -24,18 +25,23 @@ def strip_associations(inp):
         state.pop("linked_events")
     for event in original["known_events"]:
         event.pop("linked_states")
+        for field in FIELDS:
+            event.pop(field)
     return original
 
 def _project(inp, canonical_links):
-    if "between_state_associations" in inp or any("linked_events" in s for s in inp["states"]) or any("linked_states" in e for e in inp["known_events"]):
+    if any(field in e for e in inp["known_events"] for field in FIELDS) or "between_state_associations" in inp or any("linked_events" in s for s in inp["states"]) or any("linked_states" in e for e in inp["known_events"]):
         raise ValueError("association projection needs original unindexed public input")
     result = deepcopy(inp)
     states = {s["state_id"]: s for s in result["states"]}
     events = {e["event_id"]: e for e in result["known_events"]}
     for state in states.values():
         state["linked_events"] = []
-    for event in events.values():
+    descriptions = {}
+    for j, event in enumerate(result["known_events"]):
         event["linked_states"] = []
+        descriptions[event["event_id"]] = render(inp, canonical_links["events"][j], j)
+        event.update(deepcopy(descriptions[event["event_id"]]))
     # Both indexes come from the SAME canonical link, never separate matching.
     for link in canonical_links["state_links"]:
         state = states[link["state_id"]]
@@ -43,7 +49,7 @@ def _project(inp, canonical_links):
         common = {"temporal_relationship": link["temporal_relationship"],
                   "link_id": link["link_id"], "bindings": deepcopy(link["bindings"])}
         state["linked_events"].append({"event_id": event["event_id"], "event_type": event["type"],
-            "target_entity_ids": deepcopy(link["target_entity_ids"]), **deepcopy(common)})
+            "target_entity_ids": deepcopy(link["target_entity_ids"]), **deepcopy(common), **deepcopy(descriptions[event["event_id"]])})
         event["linked_states"].append({"state_id": state["state_id"], **deepcopy(common)})
     # These associations are intervals/points in a GAP, never endpoint-active.
     result["between_state_associations"] = []
@@ -51,6 +57,7 @@ def _project(inp, canonical_links):
         result["between_state_associations"].append({
             "endpoint_state_ids": [link["previous_state_id"], link["state_id"]],
             "event_id": link["event_id"], "event_type": events[link["event_id"]]["type"],
+            **deepcopy(descriptions[link["event_id"]]),
             **{k: deepcopy(link[k]) for k in ("link_id", "temporal_relationship", "target_entity_ids",
                 "bindings", "entire_interval_between", "scheduled_overlap", "boundaries")}})
     return result
@@ -64,6 +71,13 @@ def validate_input(inp, canonical_links, exported):
         raise ValueError("association export changed source physical input")
     states = {s["state_id"]: s for s in exported["states"]}
     events = {e["event_id"]: e for e in exported["known_events"]}
+    for j, event in enumerate(exported["known_events"]):
+        expected = render(inp, canonical_links["events"][j], j)
+        if canonical({field: event[field] for field in FIELDS}) != canonical(expected):
+            raise ValueError("noncanonical event description or description bindings")
+    for entry in [entry for state in exported["states"] for entry in state["linked_events"]] + exported["between_state_associations"]:
+        if entry["event_id"] in events and canonical({field: entry[field] for field in FIELDS}) != canonical({field: events[entry["event_id"]][field] for field in FIELDS}):
+            raise ValueError("event description copy/bindings disagreement")
     forward, reverse, link_ids = {}, {}, set()
     for state in exported["states"]:
         for entry in state["linked_events"]:

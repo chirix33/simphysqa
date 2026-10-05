@@ -142,3 +142,7 @@ No formal sample or additional QA family is exported here.
 from these canonical links at the public export boundary. Language contract 2.0.0,
 canonical links, physical source records and historical outputs remain unchanged.
 Use the new versioned export for updated development packets/baseline inputs.
+
+## Shared event descriptions at the export boundary
+[Export 1.1.1](event_descriptions.md) adds canonical grounded descriptions without
+rewriting this contract, original event text or inherited language annotations.

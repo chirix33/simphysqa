@@ -12,6 +12,7 @@ from unittest.mock import patch
 from jsonschema.exceptions import ValidationError
 from simphysqa.associations import VERSION, _project, associated_view, strip_associations, validate_input, validate_view
 from simphysqa.dataset import load, public_record
+from simphysqa.event_descriptions import FIELDS
 from simphysqa.events import derive
 from simphysqa.export_associations import run
 from simphysqa.io import canonical, digest, read
@@ -58,7 +59,7 @@ class AssociationTests(unittest.TestCase):
                 self.assertEqual(len(state["linked_events"]),1)
                 entry=state["linked_events"][0]
                 self.assertEqual(entry["temporal_relationship"],"scheduled_future")
-                self.assertEqual(set(entry),{"event_id","event_type","temporal_relationship","target_entity_ids","link_id","bindings"})
+                self.assertEqual(set(entry),{"event_id","event_type","temporal_relationship","target_entity_ids","link_id","bindings",*FIELDS})
                 event=next(e for e in result["input"]["known_events"] if e["event_id"]==entry["event_id"])
                 mirror=next(s for s in event["linked_states"] if s["state_id"]==state["state_id"])
                 self.assertEqual(set(mirror),{"state_id","link_id","temporal_relationship","bindings"})

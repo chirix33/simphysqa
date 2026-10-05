@@ -98,3 +98,8 @@ No additional scientific or machine prerequisite blocks this export. Real active
 coverage, independent human review, model qualification and subsequent
 counterfactual/explanation/clarification work remain pending. No formal sample,
 new annotation prose, physical simulation or benchmark result was produced.
+
+## Grounded event-description follow-up
+[Export 1.1.1 completion/examples/verification](SPQ01a_event_descriptions_completion.md)
+adds shared public event prose and independent evidence. The historical association
+export findings above remain unchanged.
