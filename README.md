@@ -1,3 +1,23 @@
+# SimPhysQA SPQ02: verified matched omission QA
+
+Eight development pairs (two per domain) passed exact factual replay and separate
+factual/alternative coarse/fine admission. The new 0.3.0 counterfactual family
+supports accepted association export 1.1.1, private paired evidence, development
+auditing and typed scoring. Original 32 QA packets and 288 requests are preserved;
+eight new packets and 72 prepared requests use unchanged observed prefixes.
+Human quality and answering-model performance remain pending.
+
+[Exact commands and outcomes](docs/reviews/SPQ02_completion.md),
+[contract](docs/simphysqa/counterfactual.md),
+[saved user prompt](docs/prompts/SPQ02_counterfactual_qa.md),
+[configuration](configs/simphysqa/counterfactual.json).
+
+New entry points: `python -m simphysqa.spq02_prepare`, `spq02_worker --preflight`,
+`spq02_worker`, `spq02_export`, `spq02_verify`, `spq02_coverage` and
+`spq02_arm_inspect` (each module accepts explicit external paths; use `--help`).
+Simulator execution uses the pinned existing WSL environment; data/export checks
+use the existing CPU annotation environment. Historical entry points follow.
+
 # SimPhysQA
 
 SimPhysQA is a dataset/evaluation contribution for NAACL Resources, Benchmarks,

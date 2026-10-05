@@ -1,3 +1,34 @@
+# SPQ02 verified omission counterfactual QA — 5 October 2026
+
+Branch simphysqa-naacl; accepted parent e379013b7e80fe28172682cd39e42f4066fde841.
+Eight frozen development groups, two per domain, seed 20261004; existing twenty
+fresh-formal exclusions preserved. User-confirmed exact canonical factual replay
+passes for all eight, with zero differing scientific fields. Separate factual and
+alternative coarse/fine admission and source validation pass for all eight pairs.
+32 actual simulations: completed 32, failed 0; pairs completed 8, failed 0, pending 0.
+Simulator-call wall time 14.94689782 s; worker wall time 51.244188115 s.
+One additional static arm model compilation used zero simulation steps.
+
+Record schema 0.3.0 adds verified counterfactual QA/evidence and keeps legacy
+loading/restoration. Eight new QA/audit packets, three separate blank forms and
+72 prepared public requests retain association export 1.1.1 and .2 s prefixes.
+79 CPU tests plus six WSL replay/failure-policy software tests pass. Actual saved
+resume adds zero simulations; all 128 run and 56 export file hashes are unchanged.
+Accepted 122 association files, 140 SPQ01a files and 214 SPQ01 indexed files verified.
+Five selected readouts differ under omission; three Boolean readouts are unchanged.
+These are private simulator outcomes, not annotation-quality or benchmark results.
+
+Arm qfrc_applied trace and declared hinge XML resolve the pulse as an additive
+scalar generalized joint torque; raw world/joint_local metadata remains preserved.
+Scan of 11,105 admitted public release QA (6,340 groups) finds zero active/ended/gap
+known-event records under current cutoffs. Separate later-view proposals are not
+exported. Model calls/new annotation spend/human ratings: 0 /USD0 /0.
+Explanation/clarification QA, human review, alternative annotation-source model/
+protocol, later observed-event views and answering benchmarks remain pending.
+No full-release regeneration, definitive formal sample or broad cleanup.
+See [completion](reviews/SPQ02_completion.md) and [contract](simphysqa/counterfactual.md).
+
+---
 # SPQ01a grounded shared event-description export
 
 Export/schema 1.1.1 and renderer 1.0.1 add canonical shared public event descriptions,

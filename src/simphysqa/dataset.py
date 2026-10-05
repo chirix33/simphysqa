@@ -29,7 +29,7 @@ def iter_source(path: Path) -> Iterator[tuple[dict, SourceLocation]]:
                     yield parse(line), SourceLocation(str(file.resolve()), number, file_hash)
 
 def restore(record: dict) -> dict:
-    if record["question_type"] == "direct":
+    if record["question_type"] in ("direct", "counterfactual"):
         return deepcopy(record["private"]["source_record"])
     return {"schema_version": record["source_schema_version"], "sample_id": record["sample_id"],
             "input": deepcopy(record["public"]["input"]),
@@ -84,7 +84,13 @@ def pointer(root: dict, path: str):
 
 def validate(record: dict) -> None:
     canonical(record)
+    if record.get("question_type") == "counterfactual" and record.get("schema_version") != "simphysqa/0.3.0":
+        raise ValueError("counterfactual QA requires matched alternative evidence, never relabeling")
     Draft202012Validator(read(Path(__file__).with_name("record.schema.json"))).validate(record)
+    if record["question_type"] == "counterfactual":
+        from .counterfactual import validate_counterfactual
+        validate_counterfactual(record)
+        return
     source = restore(record)
     validate_source(source, admission=True)
     if record["source"]["record_sha256"] != digest(source):
@@ -173,7 +179,7 @@ def attach_annotation(record: dict, result: dict) -> dict:
 def load(path: Path) -> Iterator[dict]:
     seen = set()
     for raw, location in iter_source(path):
-        record = raw if raw.get("schema_version") in (VERSION, "simphysqa/0.2.0") else migrate(raw, location)
+        record = raw if raw.get("schema_version") in (VERSION, "simphysqa/0.2.0", "simphysqa/0.3.0") else migrate(raw, location)
         validate(record)
         if record["sample_id"] in seen:
             raise ValueError("duplicate sample ID")

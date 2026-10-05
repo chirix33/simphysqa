@@ -1,3 +1,13 @@
+# Current milestone: SPQ02 counterfactual QA
+
+The [consolidated user prompt](prompts/SPQ02_counterfactual_qa.md) and explicit
+exact replay clarification govern this milestone from accepted e379013b7e80fe28172682cd39e42f4066fde841.
+Read [specification](simphysqa/counterfactual.md), [decisions](decisions/SPQ02_counterfactual.md)
+and [completion/commands/artifacts](reviews/SPQ02_completion.md).
+Eight matched omission pairs qualified; accepted association export 1.1.1 and
+prior outputs remain unchanged. Human assessment/answering benchmarks are pending.
+Historical phase instructions and findings remain below.
+
 # Latest SPQ01a follow-up: grounded shared event descriptions
 
 Read [specification](simphysqa/event_descriptions.md) and

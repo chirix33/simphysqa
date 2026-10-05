@@ -96,6 +96,16 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
                   "annotation_completion": record["completion"], "rubric_version": "draft/0.1"}
         if association_version:
             packet.update(export_version=view["export_version"], association_provenance=view["association_provenance"])
+        if record["question_type"] == "counterfactual":
+            proof = record["private"]["counterfactual_evidence"]
+            packet["verification"]["paired_counterfactual"] = {
+                "pair_id": proof["pair_id"], "parent_sample_id": record["private"]["source_record"]["sample_id"],
+                "parent_group_id": record["trajectory_id"], "original_run_id": proof["original_run_id"],
+                "alternative_run_id": proof["alternative_run_id"],
+                "original_reference": record["private"]["source_record"]["reference"],
+                "alternative_reference": record["private"]["reference"],
+                "verification": proof["verification"], "intervention_change": proof["intervention_change"],
+                "simulation_artifacts": proof["simulation_artifacts"]}
         # Annotation provider identity lives only in the organizer key.
         key.append({"packet_id": packet_id, "sample_id": record["sample_id"], "source": record["source"],
                     "annotation_provenance": record["private"]["annotation_provenance"],

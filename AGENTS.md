@@ -1,3 +1,18 @@
+# Active milestone: SPQ02 — 5 October 2026
+
+Read docs/prompts/SPQ02_counterfactual_qa.md, docs/simphysqa/counterfactual.md and
+docs/reviews/SPQ02_completion.md first. The explicit SPQ02 chat specification and
+confirmed exact factual-replay criterion supersede phase-only SPQ01a prohibitions
+on simulations/new QA within this eight-pair milestone. Preserve accepted association
+export 1.1.1 and all prior outputs; do not reopen its renderer for cosmetic changes.
+Work on simphysqa-naacl from e379013b7e80fe28172682cd39e42f4066fde841. Select
+eight existing development groups once; no silent replacement, reference changes
+or implicit replay tolerances. Count coarse/fine factual and omission executions.
+Only verified alternatives support new counterfactual QA. Keep outcomes/evidence
+private; original QA identities, physical values and .2 s cutoffs remain immutable.
+No model benchmark, full-release regeneration, broad cleanup or formal sample.
+Update SPQ02 completion/progress/decisions. Older instructions below remain evidence.
+
 # SimPhysQA coding-agent instructions
 
 ## Active direction and authority

@@ -1,0 +1,48 @@
+{
+  "version": "matched-omission-qa/1.0.0",
+  "record_schema_version": "simphysqa/0.3.0",
+  "accepted_association_export": "simphysqa-associations/1.1.1",
+  "selection_seed": 20261004,
+  "trajectories": 8,
+  "per_domain": 2,
+  "limits": {
+    "maximum_simulation_executions": 32,
+    "total_wall_seconds": 1800,
+    "per_execution_seconds": 180,
+    "model_calls": 0
+  },
+  "omission_execution_field": "omit_scheduled_intervention",
+  "original_runtime": {
+    "mujoco": "3.14.0",
+    "pybullet": "3.2.7",
+    "numpy": "2.4.6",
+    "jsonschema": "4.26.0",
+    "psutil": "7.2.2"
+  },
+  "replay_criterion": {
+    "version": "canonical-exact-replay/1.0.0",
+    "status": "approved_by_user_2026-10-05",
+    "numeric_tolerance": 0,
+    "fields": [
+      "all_saved_states",
+      "private_event_records",
+      "public_prior_controller_event_definitions",
+      "structured_labels"
+    ],
+    "excluded_non_scientific_fields": [
+      "runtime",
+      "creation time",
+      "output paths"
+    ]
+  },
+  "admission": "existing phi_jepa.simulation.pipeline.comparison, validation.validate(admission=True), and existing domain_physics conditions; no threshold changes",
+  "qa_target_rule": "first supported numerical/vector target on first selected case per domain; first supported Boolean target on second case; existing target times and source answer tolerances",
+  "external_paths": {
+    "prepared_plan": "--plan",
+    "simulation_outputs": "--output",
+    "export_outputs": "--output"
+  },
+  "answering_model_evaluation": "pending_not_run",
+  "formal_sample": "not_exported",
+  "human_ratings": "pending"
+}
