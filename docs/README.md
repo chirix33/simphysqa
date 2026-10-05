@@ -16,7 +16,7 @@ Start with [root instructions](../AGENTS.md), [runnable entry points](../README.
 Original Phi-JEPA package follows as historical evidence.
 > Historical Phi-JEPA handoff. The 4 October 2026 SimPhysQA pivot in root AGENTS.md and docs/simphysqa supersedes training/phase instructions here. Original evidence is retained.
 
-> **Active supersession â€” 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
+> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
 
 # Phi-JEPA: Codex implementation handoff
 
@@ -73,7 +73,7 @@ Detailed prior work is included for selective reference: [baseline setup runbook
 
 ## Non-negotiable scientific core
 
-Frozen question/text embedding and prompted LLMs â†’ semantics-preserving structured encoding â†’ hybrid projection â†’ trainable latent ODE â†’ **linear physical readout** and semantic reconstruction. Train on terminal decoded physical MSE plus question-alignment regularization. Generate the final answer using a frozen LLM with named physical predictions.
+Frozen question/text embedding and prompted LLMs → semantics-preserving structured encoding → hybrid projection → trainable latent ODE → **linear physical readout** and semantic reconstruction. Train on terminal decoded physical MSE plus question-alignment regularization. Generate the final answer using a frozen LLM with named physical predictions.
 
 At inference: fixed assessment, evidence-supported diagnosis and bounded fallback. **No EBM training, test-time energy descent, Langevin refinement, prediction-driven schema repair, or Bregman component.** The professor's explicit morning-decisions confirmation overrides contradictory demo/paper passages.
 
@@ -93,7 +93,7 @@ One JSON envelope describes extracted scenario facts; another contains the final
 | P07 | One-domain live pilot, resource profile and reproducible result exports | GPU/live-model gates apply |
 | P08 | Additional domains, approved ID/OOD experiment matrix and paper-ready evidence | GPU/compute/data gates apply |
 
-Detailed acceptance criteria and prerequisites are in [the phase specification](docs/06_phases.md). P00â€“P06 code does not have to wait for the model-specific CUDA checks, but a phase with required unexecuted verification is `implemented_pending_validation`, not complete. Independent preparation may proceed while that specific check is pending; dependent scientific results may not.
+Detailed acceptance criteria and prerequisites are in [the phase specification](docs/06_phases.md). P00–P06 code does not have to wait for the model-specific CUDA checks, but a phase with required unexecuted verification is `implemented_pending_validation`, not complete. Independent preparation may proceed while that specific check is pending; dependent scientific results may not.
 
 ## Two scientific details to keep visible
 

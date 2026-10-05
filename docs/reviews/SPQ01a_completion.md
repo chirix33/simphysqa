@@ -187,3 +187,8 @@ artifact paths are machine-specific; users can pass external paths through CLI.
 Strict exact-law recognition is intentionally bounded, not a general controller
 interpreter. The declared point registry and tested synthetic coverage do not imply
 that such events were observed in these real development windows.
+
+Final handoff check: inherited docs/README.md and docs/PROGRESS.md bodies were
+restored byte-for-byte from the accepted base after detecting locale-decoding
+changes. Only new SPQ01a entries remain; source code and annotation artifacts were
+unaffected. The follow-up preservation commit does not rewrite existing history.
