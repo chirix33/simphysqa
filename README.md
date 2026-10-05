@@ -5,6 +5,14 @@ and Evaluation: simulator-grounded structured/language trajectories, QA/evidence
 and reproducible annotation, plus comparisons across models/domains/question types.
 Phi-JEPA/SCLD/EBM/learned dynamics/CODI/Coconut training is outside active scope.
 
+SPQ01a adds deterministic public event–state links and controller-aware schedule
+claims to all 32 existing development packets, preserving .2 s cutoffs and QA
+references. [Specification](docs/simphysqa/event_language.md),
+[completion and exact commands](docs/reviews/SPQ01a_completion.md).
+Use `python -m simphysqa.spq01a --help`; it is offline and makes zero model calls.
+Real active-event overlap is absent in this development frame; boundary coverage
+uses labeled synthetic software fixtures. Human quality remains pending.
+
 SPQ01 delivers an actual release inventory, 16 live human-unreviewed public
 annotations, 16 verified direct QA plus 16 unchanged predictive QA, audit packets
 and separate blank forms. No human agreement/annotation-quality or answering-model

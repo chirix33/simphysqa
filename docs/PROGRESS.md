@@ -1,4 +1,30 @@
-# SPQ01 bounded annotation and verified direct QA � 4 October 2026
+# SPQ01a event-aware public language — 5 October 2026
+
+Branch simphysqa-naacl; accepted parent 6d420b779e0204868fec4c45e26bb1cdcd2b98c7.
+Original main/base 7dd4a64e90cfb18be743503ac8345cabf2f6e28b remains preserved.
+Event-language contract 2.0.0 /links 1.0.0 add deterministic public schedule,
+controller/phase claims with separate evidence to all 32 SPQ01 development QA.
+Source physical inputs, .2 s cutoffs, QA identities and all references are exact.
+
+16 physical trajectories /176 observed timestamps /16 later known interventions:
+176 future-only links, zero real active/ended/between-state coverage, eight declared
+tethered phases. Labeled synthetic software fixtures cover boundaries, overlapping
+events, gaps, point semantics and controller phases. No fabricated physical example.
+46 offline tests passed. 32 audit packets, separate blank forms and 288 public
+requests for nine conditions exported; all blank imports collect zero ratings.
+Saved resumption preserves all 140 output hashes; 214 original SPQ01 indexed files
+verified unchanged. New model requests/attempts/spend zero; cumulative estimated
+$.522767 within the original USD5 allowance. Original provider provenance preserved.
+
+See [SPQ01a report/commands/artifacts](reviews/SPQ01a_completion.md),
+[event annotation specification](simphysqa/event_language.md) and
+[decisions](decisions/SPQ01a_event_language.md). Real active-overlap development
+coverage, human judgments, alternative-source protocol, new QA families and local
+answering-model qualification/evaluation remain pending. No definitive formal
+sample or benchmark result exists. No further broad cleanup.
+
+---
+# SPQ01 bounded annotation and verified direct QA — 4 October 2026
 
 Branch simphysqa-naacl; accepted SPQ00 parent 129155be63a44c8c3c31af1d69049ef0769548ac;
 original main/base 7dd4a64e90cfb18be743503ac8345cabf2f6e28b remains unchanged.
@@ -29,7 +55,7 @@ counterfactual/explanation/clarification QA, alternative comparison and qualifie
 local answering evaluations remain pending. No further broad cleanup occurred.
 
 ---
-# SPQ00 SimPhysQA bootstrap — 4 October 2026
+# SPQ00 SimPhysQA bootstrap â€” 4 October 2026
 
 Active direction is the SimPhysQA NAACL dataset/evaluation pivot. The historical
 Phi-JEPA entries below retain their original meaning and do not authorize training.
@@ -50,7 +76,7 @@ See [completion](reviews/SPQ00_completion.md), [active annotation contract](simp
 annotation/release/rubric choices and additional local artifacts remain pending.
 
 ---
-# P12 Qwen completion-budget qualification complete — 1 October 2026
+# P12 Qwen completion-budget qualification complete â€” 1 October 2026
 
 Ran all eight original development cases once with Qwen thinking-on at 8,192 total
 output tokens/360 seconds; all other scientific settings and v1.1 interface stayed
@@ -73,7 +99,7 @@ unchanged. Proposed budget: 32 requests, 112-minute worst-case request sum,
 confirmation outcomes or expanded study occurred. See the [completion report](reviews/P12_qwen_completion_budget_completion.md)
 and [disabled fresh proposal](../configs/p12_answer_interface_fresh_validation_v2.proposed.json).
 
-# P12 32-request development qualification complete — 30 September 2026
+# P12 32-request development qualification complete â€” 30 September 2026
 
 Executed the user-authorized frozen four-condition v1.1 qualification once, on the
 same eight development cases. All 32 attempts returned; EOS/syntax/strict-contract
@@ -94,7 +120,7 @@ and unexecuted; no confirmation outcomes or expanded study were accessed. See th
 [completion report](reviews/P12_development_qualification_completion.md) for full
 denominators, repetition, timing/memory, artifacts and remaining decisions.
 
-# P12 four-condition interface proposal frozen, execution disabled — 29 September 2026
+# P12 four-condition interface proposal frozen, execution disabled â€” 29 September 2026
 
 Prepared all four conditions with final v1.1: Qwen off and Llama direct at
 1,024 tokens/120 seconds; Qwen on and explicit Llama CoT at 4,096 total output
@@ -113,7 +139,7 @@ remain outstanding. Historical results and existing training work are preserved.
 See the [completion report](reviews/P12_answer_interface_followup_completion.md)
 and [decision](decisions/P12_four_condition_qualification.md).
 
-# P12 authorized numerical training complete — 29 September 2026
+# P12 authorized numerical training complete â€” 29 September 2026
 
 The user approved proposal SHA-256
 `13cc4b3cbe8578abe22ebe8faa0987b2de2b3309639bf5e7a9988f4e0542add3`.
@@ -143,7 +169,7 @@ thinking-off/on; this does not activate or alter the current training-only plan.
 See [execution decisions](decisions/P12_training_execution.md). Earlier preparation
 and diagnostic entries below retain their historical status at the time written.
 
-# P12 shared local answer-interface debug complete — 29 September 2026
+# P12 shared local answer-interface debug complete â€” 29 September 2026
 
 **Partially resolved; not ready for expanded-study freeze.** The compact public-only
 prompt, metadata adapter and XGrammar final-answer constraints are implemented.
@@ -168,7 +194,7 @@ are pending, and the proposed two-hour window has not been enlarged. See the
 [conclusion report](reviews/P12_answer_interface_completion.md) and
 [decisions](decisions/P12_answer_interface.md). Full study remains unlaunched.
 
-# P12 training-run preparation complete — 29 September 2026
+# P12 training-run preparation complete â€” 29 September 2026
 
 Regenerated a separate **disabled** plan bound to the completed embedding and
 enrichment-origin manifests. Fresh audit confirms 3,721 training scenarios,
@@ -184,7 +210,7 @@ resume safeguards and commands are in [training preparation](reviews/P12_trainin
 Numerical-training approval is separate from pending answer-interface/evaluation
 decisions; the user's diagnostic files remain untouched.
 
-# P12 frozen embedding preparation complete — 29 September 2026
+# P12 frozen embedding preparation complete â€” 29 September 2026
 
 All **8,038 training/validation and 500 confirmation** embeddings passed the
 final identity/provenance audit: **224 reused, 8,314 new, zero missing, zero
@@ -197,7 +223,7 @@ Full numerical training remains unstarted. Its new configuration must bind the
 complete preparation manifests and final agreed answer conditions; the original
 disabled plan remains historical. See [completion and evidence](reviews/P12_embedding_preparation.md).
 
-# P12 Llama runtime qualification complete with answer failures — 29 September 2026
+# P12 Llama runtime qualification complete with answer failures â€” 29 September 2026
 
 Approved HF access resolved the checkpoint gate. The pinned Llama direct-answer
 condition completed all eight validation requests on the RTX 5090: 85.454 s
@@ -212,7 +238,7 @@ and [decisions](decisions/P12_llama_qualification.md). No paid calls were made.
 Enrichment is complete; frozen-encoder preparation/re-audit remain. Full study
 execution is still disabled. Entries below preserve earlier stage status.
 
-# P12 enrichment coverage complete — 29 September 2026
+# P12 enrichment coverage complete â€” 29 September 2026
 
 The user approved a new bounded two-record recovery window. Both missing
 tethered-load training records succeeded in two requests, zero retries, for
@@ -226,7 +252,7 @@ See [recovery completion and evidence](reviews/P12_enrichment_recovery.md).
 Frozen-encoder preparation and Llama qualification remain; full study is unstarted.
 The entries below preserve historical incomplete-coverage and restart evidence.
 
-# P12 enrichment finished with two unresolved records — 29 September 2026
+# P12 enrichment finished with two unresolved records â€” 29 September 2026
 
 Audited the completed worker: **8,273 new successful outputs**, including all
 500 confirmation records. Two tethered-load training records were interrupted
@@ -242,7 +268,7 @@ window, at most six attempts and $2 from the existing remaining allowance.
 See [completion audit and next gate](reviews/P12_enrichment_completion.md).
 Numerical training and outcome evaluation remain unstarted.
 
-# P12 enrichment restart recovery — 29 September 2026
+# P12 enrichment restart recovery â€” 29 September 2026
 
 Second interruption at the next status check: 5,988 successes survived. Charges
 and conservative reserves totaled $241.692681 after adding a $0.30570 hold for
@@ -259,7 +285,7 @@ counted it against the attempt cap and retained a failure without replay. Resume
 remaining work under unchanged approval, source, caps and deadline. The original
 state is archived. See [recovery evidence and live status](reviews/P12_enrichment_full.md).
 
-# P12 full enrichment approved — 28 September 2026
+# P12 full enrichment approved â€” 28 September 2026
 
 The user approved **$475 additional maximum for both scopes**: $425 for 7,775
 remaining training/validation requests and $50 for 500 frozen confirmation
@@ -272,7 +298,7 @@ expanded training and evaluation have not been started.
 See [approved execution and live status](reviews/P12_enrichment_full.md).
 The following entry preserves the pilot's pre-approval measurements and proposal.
 
-# P12 separately authorized enrichment pilot — 28 September 2026
+# P12 separately authorized enrichment pilot â€” 28 September 2026
 
 Completed the user's $5 / 32-attempt pilot: **32/32 success, zero retries,
 $1.284679 usage-based cost**, 228,743 input and 7,053 output tokens. Reused all
@@ -291,7 +317,7 @@ See [pilot measurements and cap proposal](reviews/P12_enrichment_pilot.md),
 [resume commands](P12_enrichment_pipeline.md). The following qualification entry
 records the earlier no-paid-calls stage; its original measurements are preserved.
 
-# P12 expanded experimentation — initial qualification, 28 September 2026
+# P12 expanded experimentation â€” initial qualification, 28 September 2026
 
 Verified the full admitted training population: **3,721 scenarios, 6,702
 questions, 454,130 adjacent pairs**. Reconciled exact local P11 and 40-question
@@ -316,7 +342,7 @@ See [completion and precise blockers](reviews/P12_completion.md),
 [decisions](decisions/P12_expanded_qualification.md), and
 [resume commands](P12_pipeline.md). Paper rewriting remains deferred.
 
-# Question-to-answer WSL runner — post-P11 follow-up
+# Question-to-answer WSL runner â€” post-P11 follow-up
 
 Selection follow-up: counts beyond P11's 12 held-out questions/domain now expand
 to the original release partition, preserving scenario separation. The same
@@ -344,7 +370,7 @@ cached vanilla answers and four retained cache misses. Sequential custom local
 generation ran and preserved both strict-parser failures. No new training or
 paid calls were launched. See [completion](reviews/Answer_runner_completion.md).
 
-# Manual WSL interface — post-P11 follow-up
+# Manual WSL interface â€” post-P11 follow-up
 
 Added [manual commands](Manual_WSL.md) for all four domains: fresh selected
 Phi-JEPA checkpoint replay, optional custom Coconut/CODI generation, saved LLM
@@ -355,7 +381,7 @@ offline interface tests passed. Cache preparation preflight passed for all
 four domains. No training or paid calls were launched. See
 [interface verification](reviews/Manual_WSL_completion.md).
 
-# P11 deadline study — bounded execution complete, 25 September 2026
+# P11 deadline study â€” bounded execution complete, 25 September 2026
 
 The [deadline prompt](prompts/P11_deadline_study.md), [frozen decisions](decisions/P11_deadline_study.md)
 and [commands](P11_pipeline.md) supersede the unexecuted large custom-study
@@ -387,7 +413,7 @@ The run used about 120 GPU-worker minutes; CPU/export accounting is in the
 report and operation records. Assessment remains partial; calibration, OOD
 recognition, clarification efficacy and larger-scale comparisons remain pending.
 
-# P10 integrated qualification — bounded execution complete, 25 September 2026
+# P10 integrated qualification â€” bounded execution complete, 25 September 2026
 
 The latest user instruction authorizes the integrated workflow and a new budget,
 superseding the earlier follow-up's offline-only restriction. See the
@@ -410,7 +436,7 @@ is stronger on common numerical targets. No primary-method superiority,
 four-domain performance, calibrated OOD detection or convergence is claimed.
 All original evidence, failed attempts and unsupported components are preserved.
 
-## Historical P08/P09 follow-up status — 25 September 2026
+## Historical P08/P09 follow-up status â€” 25 September 2026
 
 Completed the [offline P08 diagnosis](reviews/Post_P08_diagnosis.md), then the
 [clarification v1 implementation](reviews/P09_clarification_completion.md), with
@@ -470,7 +496,7 @@ supersede the prototype omission in the historical audit. Assessment-status
 explanation is not substituted for interactive clarification. This extension,
 calibration and full-study claims remain pending and do not delay this pilot.
 
-# Historical post-P07 audit status — 25 September 2026
+# Historical post-P07 audit status â€” 25 September 2026
 
 The requested [focused source/artifact audit](reviews/Post_P07_focused_audit.md)
 is complete, with three contract-preserving fixes and **124 passing targeted
@@ -491,7 +517,7 @@ forward, model generation, paid call or dataset regeneration occurred.
 The [revised proposed budget](reviews/Post_P07_next_pilot_revision.md) reserves a
 training-only fitting diagnostic inside the previous caps; it is not launched.
 
-# Historical sequential-plan status — 24 September 2026
+# Historical sequential-plan status â€” 24 September 2026
 
 Stage 8/P07 is **complete for the user-approved bounded correctness/resource
 evidence package**. Existing seed-11 tether selections/checkpoints and limits are
@@ -531,7 +557,7 @@ answer calls cost USD 0.203640. Context/schema retraining-ablation scope remains
 pending user clarification; Stage 7 has not started. See
 [P05b report](reviews/P05b_completion.md).
 
-Stage 5/P04b–P05a is complete for implementation and bounded development validation.
+Stage 5/P04bâ€“P05a is complete for implementation and bounded development validation.
 97 offline tests pass. Training-only full-2d reference assessment and exact V1
 judge ran on one tether validation question. Combined assessment remains partial
 and uncalibrated because typed contract coverage is empty; no threshold decision
@@ -567,7 +593,7 @@ enrichments and their GPU encodings pass; usage-priced cost USD 0.266964.
 See [completion](reviews/P02b_completion.md). Stage 3 is next, with user-confirmed
 **equal weight per question-conditioned pair**. Model training has not begun.
 
-## Historical initial P02b status — superseded above
+## Historical initial P02b status â€” superseded above
 
 Revision-4 sequential implementation is authorized by the user. P02a/Stage 1
 remains complete. P02b/Stage 2 is **in progress**: offline provider/context/cache
@@ -580,7 +606,7 @@ See [P02b interim report](reviews/P02b_completion.md) and
 [decisions](decisions/P02b_context.md). Work is uncommitted on
 `full-phi-jepa-from-dataset`, base `7f2553ca6591301de588bd3362e72838354169a0`.
 
-# Active P02a status — 24 September 2026
+# Active P02a status â€” 24 September 2026
 
 Implementation/evidence commit: `cd6497856a94b3d01e0500ac54134a844e01e003`.
 43 offline tests passed; final export audit 188.131772 seconds.
@@ -632,7 +658,7 @@ generated/admitted 0. Production remains disabled. See
 are historical and their five-domain release blocker is superseded.
 
 Updated from P00/P01 and the separately authorized dataset preparation task.
-P02–P08 remain plans, not completed model code. The newer dataset/model contract
+P02â€“P08 remain plans, not completed model code. The newer dataset/model contract
 1.1.0 supersedes older physical-readout training assumptions for future work.
 
 Quadruped follow-up, 24 September 2026, `dataset-prep`, starting commit
@@ -669,15 +695,15 @@ remain uncommitted for review; the pre-existing user assets are preserved.
 | --- | --- | --- |
 | P00 | complete | [Completion report](reviews/P00_completion.md), [repository audit](reviews/P00_repo_audit.md); eight CPU tests passed; offline editable install and CLI verified |
 | P01 | complete | [Completion report](reviews/P01_completion.md); 28 CPU tests passed, 32-family dataset and independent oracle/evaluator verification |
-| P02 | not_started | — |
-| P03 | not_started | — |
-| P04 | not_started | — |
-| P05 | not_started | — |
-| P06 | not_started | — |
-| P07 | not_started | — |
-| P08 | not_started | — |
+| P02 | not_started | â€” |
+| P03 | not_started | â€” |
+| P04 | not_started | â€” |
+| P05 | not_started | â€” |
+| P06 | not_started | â€” |
+| P07 | not_started | â€” |
+| P08 | not_started | â€” |
 
-Environment evidence: the active P00 prompt records the user-reported WSL check PASS: PyTorch 2.7.1+cu128, CUDA runtime 12.8, RTX 5090 capability (12, 0), BF16 support and FP32/BF16 forward/backward. The coding agent did not run that GPU check; model-specific gates remain pending. P00 was verified locally on Windows CPU with Python 3.12.14 and setuptools 84.0.0. Scientific decision items Q1–Q4 remain open in [defaults and decisions](docs/08_defaults_decisions.md).
+Environment evidence: the active P00 prompt records the user-reported WSL check PASS: PyTorch 2.7.1+cu128, CUDA runtime 12.8, RTX 5090 capability (12, 0), BF16 support and FP32/BF16 forward/backward. The coding agent did not run that GPU check; model-specific gates remain pending. P00 was verified locally on Windows CPU with Python 3.12.14 and setuptools 84.0.0. Scientific decision items Q1â€“Q4 remain open in [defaults and decisions](docs/08_defaults_decisions.md).
 
 P00 branch: `codex/p00-bootstrap`; base/current HEAD `8e1cd56feb8f9fb0ec8aee92b0d0365b32722066`; changes uncommitted for review. No unresolved P00 blockers. Fixture manifests/results and exact commands are linked in the completion report. [Engineering decisions](decisions/P00_bootstrap.md) record installation, environment, packaging and artifact choices. Next step: planner/user review of P00; P01 requires separate authorization.
 
@@ -689,6 +715,6 @@ Boolean/event update (24 September 2026): the user selected a separate mechanism
 proposal for later review. No Boolean casting, new head or objective is implemented
 here. See `docs/docs/P02a_boolean_event_proposal.md` from the repository root.
 
-## P12 validation answer export — 29 September 2026
+## P12 validation answer export â€” 29 September 2026
 
 User-requested replay of the four selected checkpoints completed for all 1,336 validation questions in 144.910 seconds. All typed results exactly match the historical selected-checkpoint records. Searchable questions/predictions/references and raw trajectories are under docs/reviews/artifacts/P12_validation_answers/. Zero training, paid calls, runtime failures or confirmation access. See docs/reviews/P12_validation_answers_completion.md. Parent-thread work and historical artifacts remain preserved.

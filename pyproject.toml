@@ -22,5 +22,5 @@ simphysqa-simulator = "phi_jepa.simulation.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-simphysqa = ["py.typed", "record.schema.json"]
+simphysqa = ["py.typed", "record.schema.json", "event_language.schema.json"]
 phi_jepa = ["py.typed"]

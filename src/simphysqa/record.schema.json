@@ -121,6 +121,54 @@
                     "pattern": "^/"
                   },
                   "uniqueItems": true
+                },
+                "claims": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "claim_id",
+                      "kind",
+                      "text",
+                      "bindings",
+                      "link_ids"
+                    ],
+                    "properties": {
+                      "claim_id": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "enum": [
+                          "measurement",
+                          "event_schedule",
+                          "controller_definition",
+                          "controller_phase",
+                          "between_saved_states"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "bindings": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^/"
+                        },
+                        "uniqueItems": true
+                      },
+                      "link_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "uniqueItems": true
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -165,7 +213,81 @@
                   "timestamp": {
                     "type": "number",
                     "minimum": 0
+                  },
+                  "claims": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "claim_id",
+                        "kind",
+                        "text",
+                        "bindings",
+                        "link_ids"
+                      ],
+                      "properties": {
+                        "claim_id": {
+                          "type": "string"
+                        },
+                        "kind": {
+                          "enum": [
+                            "measurement",
+                            "event_schedule",
+                            "controller_definition",
+                            "controller_phase",
+                            "between_saved_states"
+                          ]
+                        },
+                        "text": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "bindings": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "pattern": "^/"
+                          },
+                          "uniqueItems": true
+                        },
+                        "link_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "uniqueItems": true
+                        }
+                      }
+                    }
                   }
+                }
+              }
+            },
+            "event_context": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "versions",
+                "cache_identity",
+                "measurement_annotations_sha256",
+                "links"
+              ],
+              "properties": {
+                "versions": {
+                  "type": "object"
+                },
+                "cache_identity": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "measurement_annotations_sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "links": {
+                  "type": "object"
                 }
               }
             }

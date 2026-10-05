@@ -124,7 +124,12 @@ def validate(record: dict) -> None:
             if observed is None or observed["timestamp"] != sentence["timestamp"]:
                 raise ValueError("public timestamp annotation references an unobserved state")
     generated = language["trajectory"]["status"] == "generated_unreviewed"
-    if generated:
+    if "event_context" in language or record["annotation_version"].startswith("simphysqa-event-language/"):
+        from .event_language import validate_view
+        validate_view(inp, language, record["annotation_version"])
+    elif any("claims" in s for s in [language["trajectory"]] + language["timestamps"]):
+        raise ValueError("event claims require the revised annotation contract")
+    elif generated:
         from .annotation import validate_generated
         validate_generated(record, {"summary": {k: v for k, v in language["trajectory"].items() if k != "status"},
             "timestamps": [{k: v for k, v in s.items() if k != "status"} for s in language["timestamps"]]})

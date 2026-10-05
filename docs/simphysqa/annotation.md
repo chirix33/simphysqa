@@ -1,3 +1,10 @@
+# Current extension: SPQ01a
+
+[Event-language contract 2.0.0](event_language.md) enriches the existing public
+measurement annotations with deterministic known-event/controller claims and
+explicit links. Original SPQ01 language/provenance/outputs below are preserved.
+SPQ01a adds zero model requests/spend and keeps source QA references/cutoffs exact.
+
 # Annotation contract and bounded SPQ01 implementation
 
 The paper contributes simulator-grounded structured/language trajectories,

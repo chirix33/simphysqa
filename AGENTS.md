@@ -8,7 +8,7 @@ Evaluation: (A) simulator-grounded structured and language-enriched trajectories
 QA, evidence and reproducible annotation; (B) evaluation across models, domains
 and question types. Learned dynamics and latent-baseline training are outside scope.
 
-Read docs/README.md, docs/PROGRESS.md, docs/prompts/SPQ01_annotations.md and relevant
+Read docs/README.md, docs/PROGRESS.md, docs/prompts/SPQ01a_event_language.md and relevant
 docs/simphysqa specifications. Historical docs/assets/references remain original
 evidence, not implementation authority. Do not duplicate the handoff. Inspect
 nested instructions and git status. Work on simphysqa-naacl in the simphysqa
@@ -72,9 +72,26 @@ Do not push/merge/publish/message others unless requested.
 Bounded CPU verification and reversible local choices may proceed autonomously.
 
 ## Durable handoff
-Update docs/PROGRESS.md, docs/reviews/SPQ01_completion.md and docs/decisions/
+Update docs/PROGRESS.md, docs/reviews/SPQ01a_completion.md and docs/decisions/
 with base/branch/source hashes, changed behavior, actual commands/results,
 artifacts, deviations, pending validation and next step. For blockers use
 docs/prompts/BLOCKER_REPORT.md. SPQ01 authorizes 16 initial requests, 32 total attempts including repairs, and
 $5 total estimated/recorded annotation spend. No full-release jobs, definitive
 formal export, answering-model evaluation or further broad cleanup.
+
+## SPQ01a event annotation enrichment
+Build on accepted SPQ01 6d420b779e0204868fec4c45e26bb1cdcd2b98c7.
+Read docs/simphysqa/event_language.md. Link public known events deterministically
+with half-open interval and declared point semantics; never nearest-state active
+assignment or invented boundary states. Match the whole structured state and
+entity/controller declarations. Keep targets/context, additive/total control,
+limits/applied values and supported controller phases distinct. Scheduled active
+does not verify application/causation; ended timing does not imply effects ended.
+Keep .2 s development cutoffs, source facts/QA IDs/references exact. No private
+reference events/future states in public construction. Version/hash rules, schemas,
+prompt/renderer and cache; preserve SPQ01 outputs in a new versioned external root.
+Use deterministic schedule wording with retained measurement prose; this config
+allows zero new requests and shares the original SPQ01 budget/prior spend.
+Synthetic boundary fixtures are software tests only; report real overlap coverage
+gaps. Re-export all 32 development packets and nine-condition public inputs.
+Counterfactual/explanation/clarification QA and human results remain pending.

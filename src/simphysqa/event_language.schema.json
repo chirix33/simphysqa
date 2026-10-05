@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:simphysqa:event-language:2.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "trajectory",
+    "timestamps",
+    "event_context"
+  ],
+  "properties": {
+    "trajectory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "text",
+        "bindings",
+        "claims"
+      ],
+      "properties": {
+        "status": {
+          "const": "generated_unreviewed"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^/"
+          },
+          "uniqueItems": true
+        },
+        "claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim_id",
+              "kind",
+              "text",
+              "bindings",
+              "link_ids"
+            ],
+            "properties": {
+              "claim_id": {
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "measurement",
+                  "event_schedule",
+                  "controller_definition",
+                  "controller_phase",
+                  "between_saved_states"
+                ]
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "bindings": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^/"
+                },
+                "uniqueItems": true
+              },
+              "link_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "timestamps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "text",
+          "bindings",
+          "claims",
+          "state_id",
+          "timestamp"
+        ],
+        "properties": {
+          "status": {
+            "const": "generated_unreviewed"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bindings": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^/"
+            },
+            "uniqueItems": true
+          },
+          "claims": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "claim_id",
+                "kind",
+                "text",
+                "bindings",
+                "link_ids"
+              ],
+              "properties": {
+                "claim_id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "measurement",
+                    "event_schedule",
+                    "controller_definition",
+                    "controller_phase",
+                    "between_saved_states"
+                  ]
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "bindings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^/"
+                  },
+                  "uniqueItems": true
+                },
+                "link_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          },
+          "state_id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "event_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "versions",
+        "cache_identity",
+        "measurement_annotations_sha256",
+        "links"
+      ],
+      "properties": {
+        "versions": {
+          "type": "object"
+        },
+        "cache_identity": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "measurement_annotations_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "links": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "config_version": "simphysqa-spq01a/1.0.0",
+  "contract": "simphysqa-event-language/2.0.0",
+  "method": "deterministic_schedule_enrichment",
+  "new_model_requests": 0,
+  "source_milestone_commit": "6d420b779e0204868fec4c45e26bb1cdcd2b98c7",
+  "preserve_original_model_provenance": true,
+  "trajectories_per_domain": {
+    "robotic_arm": 4,
+    "driving": 4,
+    "object_pushing_stacking": 4,
+    "tethered_load": 4
+  },
+  "cumulative_budget": {
+    "initial_requests": 16,
+    "total_attempts": 32,
+    "usd": 5
+  },
+  "human_assessment": "pending",
+  "scope": "32 existing development QA only; no live annotation or evaluation"
+}
