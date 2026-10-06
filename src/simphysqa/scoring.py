@@ -36,6 +36,8 @@ def distance(value, truth, target):
     return error, error <= tolerance, unit
 
 def score(records: list[dict], predictions: list[dict], condition_ids: list[str]) -> dict:
+    if any(r["question_type"] == "explanation" for r in records):
+        raise ValueError("explanation QA uses explanation_evaluation.score_facts; numerical readout scores cannot grade explanations")
     if not condition_ids or len(set(condition_ids)) != len(condition_ids):
         raise ValueError("choose distinct configured conditions")
     by_id = {r["sample_id"]: r for r in records}

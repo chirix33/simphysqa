@@ -84,7 +84,11 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
     for record in records:
         validate(record)
     output.mkdir(parents=True, exist_ok=False)
-    (output / "rubric.txt").write_text(RUBRIC, encoding="utf-8")
+    audit_rubric = RUBRIC
+    if any(r["question_type"] == "explanation" for r in records):
+        from .explanation import rubric_text
+        audit_rubric += "\nExplanation-task supplement (selected outcomes intentionally supplied):\n" + rubric_text()
+    (output / "rubric.txt").write_text(audit_rubric, encoding="utf-8")
     assignments = []
     key = []
     for index, record in enumerate(records, 1):
@@ -94,6 +98,8 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
             identity["export_version"] = association_version
         if "answer_annotation" in record["private"]:
             identity["answer_annotation_cache"] = record["private"]["answer_annotation"]["cache_identity"]
+        if "explanation_annotation" in record["private"]:
+            identity["explanation_annotation_cache"] = record["private"]["explanation_annotation"]["cache_identity"]
         packet_id = "SPQ-" + digest(identity)[:16]
         packet = {"packet_id": packet_id, "phase": phase, "sample_id": record["sample_id"],
                   "annotation_version": record["annotation_version"], "question_type": record["question_type"],
@@ -118,6 +124,11 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
             annotation = record["private"]["answer_annotation"]
             packet["answer_annotation"] = annotation
             packet["verification"]["answer_evidence_roots"] = roots(record, annotation["evidence_context"])
+        if record["question_type"] == "explanation":
+            from .explanation import evidence_roots
+            packet["explanation_annotation"] = record["private"]["explanation_annotation"]
+            packet["verification"]["answer_evidence_roots"] = evidence_roots(record)
+            packet["rubric_version"] = record["private"]["reference"]["rubric_version"]
         # Annotation provider identity lives only in the organizer key.
         key.append({"packet_id": packet_id, "sample_id": record["sample_id"], "source": record["source"],
                     "annotation_provenance": record["private"]["annotation_provenance"],
@@ -128,11 +139,11 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
         html += "<h1>" + packet_id + "</h1><p>Private verification evidence: auditor use only. Development packet; annotations may be pending.</p>"
         html += "<h2>Question</h2><p>" + escape(packet["qa"]["question"]) + "</p>"
         html += "<h2>Reference</h2><p>" + escape(packet["qa"]["reference"]["label"]) + "</p>"
-        if "answer_annotation" in record["private"]:
+        if "answer_annotation" in record["private"] or "explanation_annotation" in record["private"]:
             html += "<h2>Answer explanation (human unreviewed)</h2><pre>" + escape(packet["qa"]["reference"]["explanation"]) + "</pre>"
             html += "<h2>Numerical/observed solution trace and evidence bindings</h2><pre>" + escape(canonical(packet["qa"]["reference"]["solution_trace"]).decode()) + "</pre>"
         html += "<h2>Language status</h2><pre>" + escape(canonical(packet["language_annotations"]).decode()) + "</pre>"
-        html += "<h2>Rubric</h2><pre>" + escape(RUBRIC) + "</pre><details><summary>Complete inputs and verification evidence</summary><pre>" + body + "</pre></details>"
+        html += "<h2>Rubric</h2><pre>" + escape(audit_rubric) + "</pre><details><summary>Complete inputs and verification evidence</summary><pre>" + body + "</pre></details>"
         (output / "packets" / (packet_id + ".html")).write_text(html, encoding="utf-8")
         assignments.append({"packet_id": packet_id, "sample_id": record["sample_id"], "phase": phase})
     write(output / "organizer-private" / "identity-key.json", key)
@@ -144,7 +155,7 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
             writer.writeheader()
             for assignment in assignments:
                 writer.writerow({**assignment, "reviewer_id": reviewer})
-    manifest(output, {"purpose": "human_audit_" + phase, "rubric_sha256": digest(RUBRIC),
+    manifest(output, {"purpose": "human_audit_" + phase, "rubric_sha256": digest(audit_rubric),
                       "annotation_versions": sorted({r["annotation_version"] for r in records}),
                       "assignments": assignments, "reviewers": list(REVIEWERS), "ratings_status": "blank_not_collected",
                       "record_hashes": {r["sample_id"]: digest(r) for r in records},

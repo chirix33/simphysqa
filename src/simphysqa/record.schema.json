@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:simphysqa:record:0.3.1",
+  "$id": "urn:simphysqa:record:0.4.0",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -20,7 +20,8 @@
       "enum": [
         "simphysqa/0.1.0",
         "simphysqa/0.2.0",
-        "simphysqa/0.3.0"
+        "simphysqa/0.3.0",
+        "simphysqa/0.4.0"
       ]
     },
     "source_schema_version": {
@@ -689,6 +690,25 @@
         "answer_annotation": {
           "type": "object",
           "description": "Optional private answer annotation contract 1.0.2; independently validated. Source wrapper family versions and raw reference unchanged."
+        },
+        "explanation_evidence": {
+          "type": "object",
+          "required": [
+            "parent_sample_id",
+            "parent_record_sha256",
+            "pair_id",
+            "parent_record"
+          ]
+        },
+        "explanation_annotation": {
+          "type": "object",
+          "required": [
+            "version",
+            "versions",
+            "cache_identity",
+            "generation",
+            "status"
+          ]
         }
       }
     },
@@ -773,6 +793,29 @@
             "required": [
               "source_record",
               "counterfactual_evidence"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "question_type": {
+            "const": "explanation"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schema_version": {
+            "const": "simphysqa/0.4.0"
+          },
+          "private": {
+            "required": [
+              "source_record",
+              "explanation_evidence",
+              "explanation_annotation"
             ]
           }
         }

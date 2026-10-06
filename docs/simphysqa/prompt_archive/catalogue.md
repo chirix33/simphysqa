@@ -2434,6 +2434,593 @@ if __name__ == "__main__":main()
 </details>
 
 
+### explanation-qa/1.0.0
+
+New matched-intervention explanation questions and supported claims; selected factual/omission outcomes intentionally supplied separately; fixed prefix/target/group; saved paired evidence, no new simulations/model prompt.
+
+[Actual code/templates](procedures/explanation-qa-1.0.0.py); source `src/simphysqa/explanation.py`, commit `working implementation pinned by SHA256; final commit in delivery receipt`, SHA256 `9715d6928553cf5313e41fd0a7204435ebd42d8de470abb01a5739cae6ae57ad`.
+
+<details><summary>Exact templates, rules and input projection</summary>
+
+```python
+"""Bounded matched-intervention explanation QA from saved, qualified pairs only."""
+from copy import deepcopy
+from hashlib import sha256
+from pathlib import Path
+from .io import ROOT, canonical, digest, read
+from .dataset import restore, pointer
+from .answer_annotations import binding, comparison, control_text, display, readout, roots as parent_roots
+
+VERSION = "matched-intervention-explanation/1.0.0"
+DISCLOSURE = "supplied-selected-outcomes/1.0.0"
+FIXED = ["initial_conditions", "physical_parameters", "other_controls", "execution_settings"]
+
+def versions():
+    return {"procedure": VERSION,
+        "implementation_sha256": sha256(Path(__file__).read_text(encoding="utf-8").encode()).hexdigest(),
+        "rubric_sha256": digest(read(ROOT/"configs/simphysqa/explanation_rubric.json")),
+        "record_schema_sha256": digest(read(Path(__file__).with_name("record.schema.json"))),
+        "response_implementation_sha256": sha256(Path(__file__).with_name("explanation_evaluation.py").read_text(encoding="utf-8").encode()).hexdigest()}
+
+def action(inp):
+    p={v["name"]:v["value"] for v in inp["controller"]["parameters"]}
+    if inp["domain"]=="robotic_arm":return "the additive +0.5 N*m pulse on joint_1"
+    if inp["domain"]=="driving":return f'the scheduled zero-velocity axle brake command (maximum torque limit {display(p["brake_torque_limit"])} N*m)'
+    if inp["domain"]=="object_pushing_stacking":return f'the scheduled +x external force on block_1 ({display(p["force"])} N)'
+    if inp["domain"]=="tethered_load":return "the complete support-motion program, including both acceleration phases and subsequent prescribed displacement"
+    raise ValueError("unsupported domain; no guessed semantics")
+
+def evidence_roots(record):
+    parent=record["private"]["explanation_evidence"]["parent_record"]
+    root=parent_roots(parent,parent["private"]["answer_annotation"]["evidence_context"])
+    root["public"]=record["public"]["input"]
+    return root
+
+def supplied(parent):
+    target=parent["public"]["input"]["answer_spec"][0]
+    t=parent["private"]["answer_annotation"]["targets"][0]
+    c=t["comparison"]
+    return {"version":DISCLOSURE,
+        "disclosure":"Intentionally supplied simulation outcomes for an explanation task; these readouts are not observations in the saved prefix.",
+        **{k:deepcopy(target[k]) for k in ("target_id","entity_id","quantity","unit","frame")},
+        "timestamp":target["end_time"],
+        "readouts":[{"condition":"factual_scheduled","value":deepcopy(c["factual_value"])},
+                    {"condition":"omission","value":deepcopy(c["alternative_value"])}]}
+
+def public_input(parent):
+    from .explanation_evaluation import response_schema
+    inp=deepcopy(parent["public"]["input"])
+    target=inp["answer_spec"][0]
+    c=parent["private"]["answer_annotation"]["targets"][0]["comparison"]
+    event=inp["known_events"][0]
+    inp.pop("counterfactual")
+    inp["task_type"]="matched_intervention_explanation"
+    focus=("Explain the unchanged predicate outcome without implying that all physical behavior is unchanged."
+           if target["answer_type"]=="boolean" and c["exact_canonical_equality"] else
+           "Explain the predicate-outcome difference using its declared threshold/history/duration rule."
+           if target["answer_type"]=="boolean" else
+           "Distinguish numerical difference from distinguishability under the existing answer tolerance.")
+    inp["question"]=(f'Explain the matched comparison of {target["entity_id"]} {target["quantity"]} at '
+        f'{display(target["end_time"])} s ({target["unit"]}, frame {target["frame"]}). '
+        f'The factual condition retains {action(inp)}; the omission condition removes only that intervention. '
+        'Initial conditions, physical parameters, other controls and execution settings remain fixed. '
+        'Using the separately supplied target outcomes, explain what changed in the intervention, what stayed fixed, '
+        'what the outcomes show, and which interpretation is supported or remains undetermined. '+focus)
+    inp["explanation_task"]={"version":VERSION,"pair_id":parent["private"]["counterfactual_evidence"]["pair_id"],
+        "operation":"omit_scheduled_intervention","omitted_event_id":event["event_id"],
+        "fixed_conditions":FIXED,
+        "worlds":"Known events and public scenario describe the factual condition; only the named intervention is omitted in the comparison condition.",
+        "answer_spec_role":"Descriptor, predicate rule and existing tolerance for the single supplied target; this task requests an explanation, not a new future-state prediction."}
+    inp["supplied_comparison"]=supplied(parent)
+    inp["explanation_response_contract"]={"version":"explanation-response/1.0.0","schema":response_schema(target)}
+    return inp
+
+def reference(record):
+    root=evidence_roots(record); inp=root["public"]; target=inp["answer_spec"][0]
+    proof=root["pair"];context=root["context"]
+    original_id=proof["original_run_id"];alternative_id=proof["alternative_run_id"]
+    factual,fb,_=readout(root,"factual",target,original_id)
+    alternative,ab,_=readout(root,"alternative",target,alternative_id)
+    comp=comparison(factual["value"],alternative["value"],target)
+    tb=[binding(root,"public","/answer_spec/0")]
+    public_bindings=[binding(root,"public","/controller"),binding(root,"public","/known_events/0",event_id=inp["known_events"][0]["event_id"])]
+    changed=[binding(root,"pair","/intervention_change")]
+    for role in ("original-coarse","alternative-coarse"):
+        changed.append(binding(root,"context","/runs/"+role+"/reservation",run_id=context["runs"][role]["run_id"]))
+    impl=[binding(root,"context","/implementation/"+("engines" if inp["domain"] in ("robotic_arm","tethered_load") else "bullet"))]
+    if inp["domain"]=="robotic_arm":impl.append(binding(root,"context","/arm_interpretation"))
+    if inp["domain"]=="tethered_load":impl.append(binding(root,"context","/implementation/scenes"))
+    fixed=[binding(root,"pair","/intervention_change/original_scenario"),binding(root,"pair","/intervention_change/original_config")]
+    for ns in ("factual","alternative"):
+        fixed.extend([binding(root,ns,"/input/states"),binding(root,ns,"/input/controller"),binding(root,ns,"/metadata/simulation")])
+    claims=[]
+    def claim(kind,text,bindings):
+        item={"kind":kind,"text":text,"bindings":deepcopy(bindings)}
+        item["claim_id"]="EXC-"+digest(item)[:16];claims.append(item)
+    event=inp["known_events"][0]
+    claim("declared_control",f'The factual schedule declares {action(inp)}, starting at {display(event["start_time"])} s.',public_bindings)
+    ct=control_text(inp,True).split(" Implementation applies",1)[0]
+    claim("implemented_change",ct,public_bindings+changed+impl)
+    claim("fixed_conditions","The matched runs retain initial states, physical parameters, other controls, seed, solver settings, saved time grid and horizon; only the scheduled intervention is disabled.",fixed+changed)
+    text=(f'{target["entity_id"]} {target["quantity"]} at {display(target["end_time"])} s: factual '
+        f'{display(factual["value"])} versus omission {display(alternative["value"])} {target["unit"]} ({target["frame"]}).')
+    disclosure=[binding(root,"public","/supplied_comparison")]
+    claim("matched_outcome",text,fb+ab+tb+disclosure)
+    if target["answer_type"]=="boolean":
+        history=[binding(root,ns,"/reference/events",run_id=rid) for ns,rid in (("factual",original_id),("alternative",alternative_id))]
+        claim("predicate_rule",f'This flag follows the declared rule: {target["rule_definition"]} History/duration predicates cannot be inferred from one terminal measurement.',tb+fb+ab+history+impl)
+        interpretation=("Both runs return the same predicate outcome; that does not establish identical trajectories or absence of physical effects."
+            if comp["exact_canonical_equality"] else "The predicate outcome differs in the matched simulator comparison; the saved flags follow the declared history/duration rule, rather than terminal speed alone.")
+    else:
+        error=display(comp["scorer_error"]);unit=comp["scorer_error_unit"]
+        distinguish="within" if comp["factual_answer_passes_alternative_scorer"] else "outside"
+        metric="sign-invariant rotation-angle" if target["quantity"]=="orientation" else "Euclidean" if target["answer_type"]=="vector" else "absolute"
+        interpretation=(f'The {metric} readout difference is {error} {unit}, {distinguish} the existing answer tolerance '
+            f'(absolute {display(target["absolute_tolerance"])} plus relative {display(target["relative_tolerance"])} times the reference magnitude). '
+            'A nonzero difference within tolerance is still a numerical difference, not proof of no physical effect.' if comp["factual_answer_passes_alternative_scorer"] else
+            f'The {metric} readout difference is {error} {unit}, outside the existing answer tolerance '
+            f'(absolute {display(target["absolute_tolerance"])} plus relative {display(target["relative_tolerance"])} times the reference magnitude). '
+            'The selected target is distinguishable by this scorer in the matched simulator comparison.')
+    claim("supported_interpretation",interpretation,fb+ab+tb)
+    vb=[binding(root,"pair","/verification"),binding(root,"context","/verification")]
+    claim("remaining_uncertainty","This controlled comparison isolates the intervention within the specified simulator; it does not establish a detailed force/contact pathway or real-world causality. The selected readout alone does not determine all other physical behavior.",changed+fixed+fb+ab+vb)
+    procedure={
+        "declared_control":"Read the factual public schedule and controller parameters to identify the declared action, direct target and onset; do not treat a magnitude limit as a realized measurement.",
+        "implemented_change":"Compare the saved factual/alternative reservations: omit_scheduled_intervention is false/true. Use the saved implementation/intervention record to identify precisely which control program is skipped and which controls remain.",
+        "fixed_conditions":"Check equality of the paired initial states, scenario/configuration hashes, remaining controller parameters and numerical settings. Role and the omission flag distinguish conditions; all other scientific execution settings agree at each matched precision.",
+        "matched_outcome":f'Locate {target["entity_id"]}/{target["quantity"]} at exactly {display(target["end_time"])} s in the factual and alternative saved states. Retain typed values, unit and frame and check that the separate supplied readouts reproduce them exactly.',
+        "predicate_rule":"Read the declared threshold/history/duration rule and saved simulator flags/event histories. Sparse saved measurements do not reconstruct every integration substep; do not substitute an instantaneous endpoint for a historical or continuous-duration predicate.",
+        "supported_interpretation":"Compare the selected typed readouts: canonical equality is distinct from numeric difference and from the unchanged answer scorer's tolerance acceptance. Use scalar absolute error, vector Euclidean error or sign-invariant quaternion angle as applicable; a common Boolean or accepted numeric contrast does not imply all behavior is unchanged.",
+        "remaining_uncertainty":"Connect the one verified controlled change and fixed scenario to the selected simulator contrast. Restrict the inference to this matched simulator; selected readouts and numerical receipts do not verify a detailed force/contact mechanism or real-world causality."
+    }
+    trace=[]
+    for c in claims:
+        trace.append({"step":len(trace)+1,"operation":c["kind"],"supports_claim_ids":[c["claim_id"]],"text":procedure[c["kind"]],"bindings":deepcopy(c["bindings"])})
+    parent_target=record["private"]["explanation_evidence"]["parent_record"]["private"]["answer_annotation"]["targets"][0]
+    numerical=next(s for s in parent_target["solution_trace"]["steps"] if s["operation"]=="saved_numerical_procedure")
+    trace.append({"step":len(trace)+1,"operation":"saved_numerical_procedure","supports_claim_ids":[],"text":numerical["text"],"bindings":deepcopy(numerical["bindings"])})
+    trace.append({"step":len(trace)+1,"operation":"verification","supports_claim_ids":[c["claim_id"] for c in claims if c["kind"] in ("implemented_change","fixed_conditions","remaining_uncertainty")],
+        "text":"Saved canonical exact factual replay and separate factual/alternative admission passed; these receipts verify numerical provenance, not human explanatory quality.","bindings":vb})
+    verification={"status":"saved_evidence_checked","target_readouts_equal_saved_values":True,
+        "exact_factual_replay":True,"separate_factual_and_alternative_admission":True,"bindings":vb+fb+ab,
+        "human_explanation_assessment":"uncollected","new_simulations":0}
+    prose=" ".join(c["text"] for c in claims)
+    return {"label":prose,"explanation":prose,"explanation_kind":"supported_matched_intervention_claims",
+        "claims":claims,"comparison":comp,"solution_trace":{"version":VERSION,"status":"evidence_checked_human_unreviewed","steps":trace,"verification_record":verification},
+        "verification_record":verification,"rubric_version":"matched-explanation-rubric/1.0.0"}
+
+def construct(parent):
+    inp=public_input(parent); proof=parent["private"]["counterfactual_evidence"]
+    target=inp["answer_spec"][0]
+    record={"schema_version":"simphysqa/0.4.0","source_schema_version":parent["source_schema_version"],
+        "sample_id":"spq-explanation-"+digest({"version":VERSION,"pair_id":proof["pair_id"],"target":target})[:24],
+        "trajectory_id":parent["trajectory_id"],"question_type":"explanation","annotation_version":parent["annotation_version"],
+        "source":deepcopy(parent["source"]),"public":{"input":inp,"annotations":deepcopy(parent["public"]["annotations"])},
+        "private":{"source_record":restore(parent),"metadata":deepcopy(parent["private"]["metadata"]),
+            "annotation_provenance":deepcopy(parent["private"]["annotation_provenance"]),
+            "evidence_bindings":deepcopy(parent["private"]["evidence_bindings"]),
+            "explanation_evidence":{"parent_sample_id":parent["sample_id"],"parent_record_sha256":digest(parent),"pair_id":proof["pair_id"],"parent_record":deepcopy(parent)},
+            "reference":{}},"completion":deepcopy(parent["completion"])}
+    record["private"]["reference"]=reference(record)
+    v=versions()
+    record["private"]["explanation_annotation"]={"version":VERSION,"versions":v,
+        "cache_identity":digest({"parent":parent,"versions":v}),"generation":"deterministic_no_model_request",
+        "annotation_language_origin":"reuse_of_SPQ01_measurement_language_and_SPQ01a_deterministic_event_enrichment",
+        "status":"evidence_checked_human_unreviewed","new_model_calls":0,"new_simulations":0,"new_spend_usd":0}
+    record["completion"]["explanation_qa"]="constructed_matched_intervention_human_unreviewed"
+    return record
+
+def build(parent):
+    from .dataset import validate
+    validate(parent)
+    if parent["question_type"]!="counterfactual" or parent["private"]["answer_annotation"]["version"]!="simphysqa-answer-annotation/1.0.3":
+        raise ValueError("explanation requires accepted verified matched parent and answer annotation 1.0.3")
+    result=construct(parent);validate_explanation(result);return result
+
+def validate_explanation(record):
+    from .dataset import validate
+    from .event_language import validate_view
+    parent=record["private"]["explanation_evidence"]["parent_record"]
+    validate(parent)
+    if parent["question_type"]!="counterfactual" or parent["private"]["answer_annotation"]["version"]!="simphysqa-answer-annotation/1.0.3":
+        raise ValueError("unqualified explanation parent")
+    # Four saved reservations isolate the actual change, rather than a label alone.
+    runs=parent["private"]["answer_annotation"]["evidence_context"]["runs"]
+    for precision in ("coarse","fine"):
+        a=deepcopy(runs["original-"+precision]["reservation"]);b=deepcopy(runs["alternative-"+precision]["reservation"])
+        if a.pop("omit_scheduled_intervention") is not False or b.pop("omit_scheduled_intervention") is not True:
+            raise ValueError("saved execution does not implement matched omission")
+        a.pop("role");b.pop("role")
+        if canonical(a)!=canonical(b):raise ValueError("remaining saved execution settings differ")
+    if canonical(record)!=canonical(construct(parent)):
+        raise ValueError("explanation question, disclosure, reference, evidence or provenance differs from pinned construction")
+    inp=record["public"]["input"]
+    validate_view(inp,record["public"]["annotations"],record["annotation_version"])
+    root=evidence_roots(record);ref=record["private"]["reference"]
+    ids={c["claim_id"] for c in ref["claims"]}
+    if len(ids)!=len(ref["claims"]):raise ValueError("duplicate explanation claim")
+    for item in ref["claims"]+ref["solution_trace"]["steps"]:
+        if not item["bindings"] or not item["text"].strip():raise ValueError("unsupported explanation statement")
+        if not set(item.get("supports_claim_ids",[]))<=ids:raise ValueError("unresolved trace claim")
+        for b in item["bindings"]:
+            if digest(pointer(root[b["namespace"]],b["pointer"]))!=b["value_sha256"]:raise ValueError("unresolved explanation evidence")
+    exclusions=read(ROOT/"configs/simphysqa/development_exclusions.json")["excluded_groups"]
+    if record["trajectory_id"] not in exclusions or record["private"]["metadata"]["split_group_id"] not in exclusions:
+        raise ValueError("explanation development group missing formal exclusion")
+    return True
+
+def rubric_text():
+    rubric=read(ROOT/"configs/simphysqa/explanation_rubric.json")
+    return rubric["version"]+"\n"+rubric["instructions"]+"\n\n"+"\n\n".join(
+        c["criterion"]+": "+c["required_supported_claim"]+"\nAcceptable paraphrases: "+"; ".join(c["acceptable_paraphrases"])+
+        "\nMaterial contradictions: "+"; ".join(c["material_contradictions"]) for c in rubric["criteria"])+"\n\n"+rubric["limitations"]+"\n"
+
+```
+
+</details>
+
+
+### explanation-export/1.0.0
+
+Eight frozen paired explanation records, public disclosures, packets, blank forms and 72 requests; links to accepted 40 items. Deterministic, no model prompt.
+
+[Actual code/templates](procedures/explanation-export-1.0.0.py); source `src/simphysqa/explanation_export.py`, commit `working implementation pinned by SHA256; final commit in delivery receipt`, SHA256 `5db1afaf3625058d8e967379a1fbc79f9da97f84ba30b2eb32ebe991e8ce3e4b`.
+
+<details><summary>Exact templates, rules and input projection</summary>
+
+```python
+"""SPQ03: eight saved-pair explanation items; no simulations or model calls."""
+import argparse
+from collections import Counter
+from pathlib import Path
+from html import escape
+from hashlib import sha256
+from .io import ROOT, canonical, digest, read, manifest, external
+from .dataset import load, validate, public_record
+from .explanation import build, versions, rubric_text
+from .explanation_evaluation import VERSION as RESPONSE, EVALUATOR
+from .answer_export import retained_bytes, file_hash
+from .spq01a import retained, verify_manifest
+from .audit import export_packets, import_ratings
+from .evaluation import export_requests
+
+VERSION="spq03-explanation-export/1.0.0"
+
+def export(parents_path,plan_path,output):
+    output=external(output)
+    if output==parents_path.parent or output in parents_path.resolve().parents or parents_path.parent.resolve() in output.parents:
+        raise ValueError("explanation export must be separate from accepted parent artifacts")
+    source_root=parents_path.parent.parent
+    verify_manifest(source_root)
+    all_parents=list(load(parents_path));parents=[p for p in all_parents if p["question_type"]=="counterfactual"]
+    plan=read(plan_path);by_pair={p["private"]["counterfactual_evidence"]["pair_id"]:p for p in parents}
+    expected_ids=[p["pair_id"] for p in plan["pairs"]]
+    if len(all_parents)!=40 or len(parents)!=8 or set(by_pair)!=set(expected_ids) or Counter(p["public"]["input"]["domain"] for p in parents)!={d:2 for d in ("robotic_arm","driving","object_pushing_stacking","tethered_load")}:
+        raise ValueError("require all eight frozen pairs from accepted 40-item export")
+    preflight={"export_version":VERSION,"versions":versions(),"parent_export_sha256":digest(read(source_root/"manifest.json")),
+        "parent_file_sha256":file_hash(parents_path),"frozen_plan_sha256":digest(plan),"frozen_pair_ids":expected_ids,
+        "exporter_sha256":sha256(Path(__file__).read_text(encoding="utf-8").encode()).hexdigest(),
+        "sampling":"Reuse all eight frozen SPQ02 pairs and their selected targets; no new selection or replacement",
+        "formal_exclusions_sha256":digest(read(ROOT/"configs/simphysqa/development_exclusions.json")),
+        "new_simulations":0,"new_model_calls":0,"new_spend_usd":0}
+    retained(output/"preflight.json",preflight)
+    records=[];failures=[];links=[]
+    for selected in plan["pairs"]:
+        parent=by_pair[selected["pair_id"]]
+        if parent["trajectory_id"]!=selected["scenario"]["group"]:raise ValueError("frozen group differs")
+        try:
+            record=build(parent);validate(record)
+        except Exception as exc:
+            failure={"pair_id":selected["pair_id"],"parent_sample_id":parent["sample_id"],"status":"failed",
+                "error_type":type(exc).__name__,"message":str(exc),"versions":versions()}
+            retained(output/"organizer-private/failures"/(selected["pair_id"]+".json"),failure)
+            failures.append(failure);continue
+        retained(output/"organizer-private/items"/(record["sample_id"]+".json"),record)
+        view=public_record(record,association_version="simphysqa-associations/1.1.1")
+        retained(output/"public-items"/(record["sample_id"]+".json"),view)
+        records.append(record)
+        links.append({"explanation_sample_id":record["sample_id"],"counterfactual_parent_id":parent["sample_id"],
+            "pair_id":selected["pair_id"],"trajectory_id":record["trajectory_id"],
+            "split":record["private"]["metadata"]["split"],"split_group_id":record["private"]["metadata"]["split_group_id"],
+            "target":record["public"]["input"]["answer_spec"][0],"related_existing_qa_ids":[p["sample_id"] for p in all_parents if p["trajectory_id"]==record["trajectory_id"]],
+            "fresh_formal_excluded":True})
+    retained_bytes(output/"organizer-private/qa-records.jsonl",b"".join(canonical(r) for r in records))
+    retained(output/"public-qa.json",[public_record(r,association_version="simphysqa-associations/1.1.1") for r in records])
+    retained(output/"item-index.json",{"version":VERSION,"existing_export":source_root.name,
+        "existing_export_manifest_sha256":preflight["parent_export_sha256"],
+        "existing_40_items":[{"sample_id":p["sample_id"],"trajectory_id":p["trajectory_id"],"question_type":p["question_type"],"domain":p["public"]["input"]["domain"]} for p in all_parents],
+        "new_explanation_items":links,"formal_sample_exported":False})
+    rubric=read(ROOT/"configs/simphysqa/explanation_rubric.json")
+    retained(output/"explanation-rubric.json",rubric)
+    retained_bytes(output/"explanation-rubric.txt",rubric_text().encode())
+    packets=output/"audit-development"
+    if records:
+        if packets.exists():verify_manifest(packets)
+        else:export_packets(records,packets,"development",association_version="simphysqa-associations/1.1.1")
+        pm=read(packets/"manifest.json")
+        if pm["record_hashes"]!={r["sample_id"]:digest(r) for r in records}:raise ValueError("stale packet export")
+        requests=output/"public-requests"
+        if requests.exists():verify_manifest(requests)
+        else:export_requests(records,read(ROOT/"configs/simphysqa/evaluation.json"),requests,association_version="simphysqa-associations/1.1.1")
+        blanks=[]
+        for reviewer in ("R1","R2","R3"):
+            dest=output/"verification"/(reviewer+"-blank-import.json")
+            result=read(dest) if dest.exists() else import_ratings(packets,packets/"forms"/(reviewer+".csv"),dest)
+            if result["collected"] or result["blank"]!=len(records):raise ValueError("blank forms became ratings")
+            blanks.append({"reviewer":reviewer,"collected":0,"blank":len(records)})
+        examples={};sections=[]
+        for r in records:
+            entry=next(a for a in pm["assignments"] if a["sample_id"]==r["sample_id"])
+            packet=packets/"packets"/(entry["packet_id"]+".html")
+            domain=r["public"]["input"]["domain"]
+            examples.setdefault(domain,{"sample_id":r["sample_id"],"packet":str(packet)})
+            sections.append('<section><h2>'+escape(domain)+' — '+escape(r["sample_id"])+
+                '</h2><a href="'+packet.as_uri()+'">Complete question/reference/trace/bindings and rubric</a><p>'+escape(r["public"]["input"]["question"])+
+                '</p><pre>'+escape(r["private"]["reference"]["explanation"])+ '</pre></section>')
+        retained(output/"examples.json",examples)
+        retained_bytes(output/"inspection.html",('<!doctype html><meta charset="utf-8"><title>SPQ03 explanation QA development</title><style>body{max-width:1050px;margin:2em auto;font:17px system-ui;line-height:1.5}pre{white-space:pre-wrap}section{border-top:1px solid #aaa;padding-top:1em}</style><h1>Eight matched-intervention explanation QA — development</h1><p>Intentionally supplied selected simulation outcomes; observed prefix unchanged. Private auditor evidence. Human judgments uncollected.</p>'+''.join(sections)).encode())
+    else:blanks=[]
+    counts={"version":VERSION,"completed":len(records),"failed":len(failures),"pending":8-len(records)-len(failures),
+        "domains":dict(Counter(r["public"]["input"]["domain"] for r in records)),"prepared_requests":9*len(records),
+        "blank_rating_imports":blanks,"response_contract":RESPONSE,"factual_evaluator":EVALUATOR,
+        "supplied_outcome_disclosure":"Only selected factual/omission readouts in supplied_comparison; no inserted observed states",
+        "automatic_verification":"target/typed readout equality, saved parent evidence, claim resolution, deterministic consistency; not human prose quality",
+        "human_explanation_judgments":"uncollected","new_simulations":0,"new_model_calls":0,"new_spend_usd":0}
+    retained(output/"verification/checks.json",counts)
+    if (output/"manifest.json").exists():verify_manifest(output)
+    else:manifest(output,{"purpose":"SPQ03_eight_development_explanation_items",**preflight,"counts":counts})
+    print(canonical(counts).decode(),end="")
+    return counts
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    for name in ("parents","plan","output"):p.add_argument("--"+name,type=Path,required=True)
+    a=p.parse_args();c=export(a.parents,a.plan,a.output)
+    if c["failed"] or c["pending"]:raise SystemExit(1)
+
+if __name__=="__main__":main()
+
+```
+
+</details>
+
+
+### explanation-evaluation/1.0.0
+
+Compatible explanation JSON response contract for nine conditions; factual structured checks only, no text/keyword/MSE explanation-quality score. Prepared answering prompts, never executed.
+
+[Actual code/templates](procedures/explanation-evaluation-1.0.0.py); source `src/simphysqa/explanation_evaluation.py`, commit `working implementation pinned by SHA256; final commit in delivery receipt`, SHA256 `25fbc721896c007d922ed050cc6feff88cac84cf98733305322b20121a893174`.
+
+<details><summary>Exact templates, rules and input projection</summary>
+
+```python
+"""Structured factual checks only; never an automatic explanation-quality score."""
+from copy import deepcopy
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import ValidationError
+from .io import canonical, digest
+from .explanation import FIXED
+from .scoring import distance
+
+VERSION="explanation-response/1.0.0"
+EVALUATOR="explanation-factual-components/1.0.0"
+
+def response_schema(target):
+    value={"type":"boolean"} if target["answer_type"]=="boolean" else {"type":"array","minItems":4 if target["quantity"]=="orientation" else 3,"maxItems":4 if target["quantity"]=="orientation" else 3,"items":{"type":"number"}} if target["answer_type"]=="vector" else {"type":"number"}
+    measurement={"type":"object","additionalProperties":False,
+        "required":["value","entity_id","quantity","timestamp","unit","frame"],"properties":{
+            "value":value,"entity_id":{"const":target["entity_id"]},"quantity":{"const":target["quantity"]},
+            "timestamp":{"const":target["end_time"]},"unit":{"const":target["unit"]},"frame":{"const":target["frame"]}}}
+    return {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","additionalProperties":False,
+        "required":["response_version","target_id","intervention","fixed_conditions","outcomes","contrast","explanation","supported_interpretation","remaining_uncertainty"],
+        "properties":{"response_version":{"const":VERSION},"target_id":{"const":target["target_id"]},
+            "intervention":{"type":"object","additionalProperties":False,"required":["operation","omitted_event_id"],
+                "properties":{"operation":{"const":"omit_scheduled_intervention"},"omitted_event_id":{"type":"string"}}},
+            "fixed_conditions":{"type":"array","uniqueItems":True,"items":{"enum":FIXED}},
+            "outcomes":{"type":"object","additionalProperties":False,"required":["factual_scheduled","omission"],
+                "properties":{"factual_scheduled":measurement,"omission":measurement}},
+            "contrast":{"type":"object","additionalProperties":False,"required":["exact_target_equality","factual_passes_omission_scorer"],
+                "properties":{"exact_target_equality":{"type":"boolean"},"factual_passes_omission_scorer":{"type":"boolean"}}},
+            "explanation":{"type":"string","minLength":1},"supported_interpretation":{"type":"string","minLength":1},
+            "remaining_uncertainty":{"type":"string","minLength":1}}}
+
+def expected_facts(record):
+    inp=record["public"]["input"];s=inp["supplied_comparison"]
+    comparison=record["private"]["reference"]["comparison"]
+    return {"response_version":VERSION,"target_id":s["target_id"],
+        "intervention":{"operation":"omit_scheduled_intervention","omitted_event_id":inp["explanation_task"]["omitted_event_id"]},
+        "fixed_conditions":FIXED,
+        "outcomes":{r["condition"]:{"value":deepcopy(r["value"]),**{k:deepcopy(s[k]) for k in ("entity_id","quantity","timestamp","unit","frame")}} for r in s["readouts"]},
+        "contrast":{"exact_target_equality":comparison["exact_canonical_equality"],"factual_passes_omission_scorer":comparison["factual_answer_passes_alternative_scorer"]}}
+
+def prompt(condition):
+    text=("This is explanation QA. The separately identified supplied_comparison contains intentionally supplied simulation target outcomes, not observed prefix states. "
+        "Explain the actual intervention change, fixed conditions, selected outcome comparison, supported interpretation and remaining uncertainty within the specified simulator. "
+        "Use the original public scenario, language annotations, declared controls and supplied target readouts. Do not invent private rollouts, forces/contact histories or real-world causality. "
+        "Return one JSON object following input.explanation_response_contract.schema; include readable explanation, supported_interpretation and remaining_uncertainty, alongside structured factual components. "
+        "Equality of a Boolean or a sub-tolerance numerical contrast does not establish unchanged physical behavior. Respect historical/duration predicate rules.")
+    if condition["reasoning"]=="prompted_cot":
+        text+=" Present your evidence-based explanation in the explanation field before the final structured factual interpretation."
+    return text
+
+def check_facts(record,response):
+    """Content/schema checks do not grade the meaning of any prose field."""
+    target=record["public"]["input"]["answer_spec"][0]
+    canonical(response)  # Reject nonfinite JSON and preserve Boolean/numeric type distinction.
+    Draft202012Validator(response_schema(target)).validate(response)
+    expected=expected_facts(record)
+    checks={"intervention_identity":response["intervention"]==expected["intervention"],
+        "fixed_condition_declarations":set(response["fixed_conditions"])==set(FIXED),
+        "exact_target_equality_fact":response["contrast"]["exact_target_equality"]==expected["contrast"]["exact_target_equality"],
+        "existing_scorer_distinguishability_fact":response["contrast"]["factual_passes_omission_scorer"]==expected["contrast"]["factual_passes_omission_scorer"]}
+    diagnostics={}
+    for role in ("factual_scheduled","omission"):
+        v=response["outcomes"][role]["value"];truth=expected["outcomes"][role]["value"]
+        error,accepted,unit=distance(v,truth,target)
+        checks[role+"_reported_value_under_existing_tolerance"]=accepted
+        diagnostics[role]={"exact_canonical_value":canonical(v)==canonical(truth),"readout_error":error,"error_unit":unit}
+    return {"version":EVALUATOR,"factual_component_checks":checks,"factual_components_correct":sum(checks.values()),
+        "factual_components_total":len(checks),"factual_components_all_correct":all(checks.values()),"diagnostics":diagnostics,
+        "automatic_coverage":"Structured intervention ID, fixed-condition declarations, selected readouts and equality/scorer facts only. Nonempty prose is a format requirement, never proof of explanatory adequacy.",
+        "prose_quality":"not_automatically_assessed","explanatory_adequacy":"human_judgment_uncollected",
+        "unsupported_or_contradictory_prose":"requires_claim_level_review_no_keyword_score","overall_explanation_correctness":None}
+
+def score_facts(records,predictions,condition_ids):
+    """All items remain in denominators; no models, text matching or prose grading."""
+    from .dataset import validate
+    if not condition_ids or len(set(condition_ids))!=len(condition_ids):raise ValueError("distinct conditions required")
+    by_id={r["sample_id"]:r for r in records}
+    if len(by_id)!=len(records):raise ValueError("duplicate record")
+    for r in records:
+        validate(r)
+        if r["question_type"]!="explanation":raise ValueError("explanation-only factual evaluator")
+    supplied={}
+    for p in predictions:
+        key=(p["condition_id"],p["sample_id"])
+        if key in supplied or key[0] not in condition_ids or key[1] not in by_id:raise ValueError("unknown/duplicate prediction")
+        if p["annotation_version"]!=by_id[key[1]]["annotation_version"] or p["task_version"]!=by_id[key[1]]["public"]["input"]["explanation_task"]["version"]:
+            raise ValueError("prediction version differs")
+        supplied[key]=p
+    items=[]
+    for condition in condition_ids:
+        for sid,r in by_id.items():
+            p=supplied.get((condition,sid));status=p["status"] if p else "missing";facts=None;error=None
+            if status not in ("completed","failed","invalid","abstained","missing"):raise ValueError("invalid result status")
+            if status=="completed":
+                try:facts=check_facts(r,p["response"])
+                except (ValueError,KeyError,TypeError,ValidationError) as exc:
+                    status="invalid";error=type(exc).__name__
+            items.append({"condition_id":condition,"sample_id":sid,"domain":r["public"]["input"]["domain"],"question_type":"explanation",
+                "trajectory_id":r["trajectory_id"],"status":status,"factual_content":facts,"validation_error":error})
+    tables=[]
+    for condition in condition_ids:
+        for domain in sorted({r["public"]["input"]["domain"] for r in records}):
+            selected=[i for i in items if i["condition_id"]==condition and i["domain"]==domain]
+            tables.append({"condition_id":condition,"domain":domain,"question_type":"explanation","examples":len(selected),
+                "factual_components_all_correct":sum(bool(i["factual_content"] and i["factual_content"]["factual_components_all_correct"]) for i in selected),
+                "expected_factual_components":6*len(selected),"correct_factual_components":sum(i["factual_content"]["factual_components_correct"] if i["factual_content"] else 0 for i in selected),
+                "status_counts":{s:sum(i["status"]==s for i in selected) for s in ("completed","missing","failed","invalid","abstained")},
+                "overall_explanation_correctness":None,"human_judgments":"uncollected"})
+    return {"version":EVALUATOR,"items":items,"tables":tables,"new_model_calls":0,
+        "coverage":"factual structured components only; no keyword, exact-text or MSE explanation-quality score",
+        "prose_quality_and_explanatory_adequacy":"pending_independent_human_review","uncertainty":"pending_experiment_and_analysis_freeze"}
+
+```
+
+</details>
+
+
+### explanation-rubric/1.0.0
+
+Supported-claim human rubric, acceptable paraphrases and contradictions; human ratings uncollected. Not an annotation-model prompt.
+
+[Actual code/templates](procedures/explanation-rubric-1.0.0.json); source `configs/simphysqa/explanation_rubric.json`, commit `working implementation pinned by SHA256; final commit in delivery receipt`, SHA256 `d42f7962fa49fcf69ee341bfb5da3abcd0040c061f8069bac4d0841b46200220`.
+
+<details><summary>Exact templates, rules and input projection</summary>
+
+```python
+{
+  "version": "matched-explanation-rubric/1.0.0",
+  "status": "development_human_unreviewed",
+  "instructions": "Primary human judgment is acceptable / material_error, with independent criterion findings and error categories. Assess supported factual claims separately from readability and explanatory adequacy. A good answer connects the actual omitted control, fixed conditions and supplied selected outcomes, rather than just listing values. Required claims are answerable from the public task declaration, original scenario/controller/target rule and supplied comparison; private implementation and receipts corroborate them for auditors, and are not required hidden knowledge. Do not require opaque run IDs, engine internals or an exact reference wording. Rate independently. Blank forms are uncollected; original ratings, adjudication and corrections remain separate. No mandatory human generation gate.",
+  "criteria": [
+    {
+      "criterion": "declared_control_and_implemented_change",
+      "required_supported_claim": "Identify the scheduled intervention retained in the factual condition and precisely what the omission condition disables. Keep additive vs total control, maximum vs realized torque, direct vs contextual entity and complete support-motion phases distinct.",
+      "acceptable_paraphrases": ["The extra arm pulse is removed while both base joint torques remain", "The brake command is disabled; its torque setting is a maximum, not a measurement", "Only the force on block_1 is omitted", "The entire prescribed support-motion program is disabled"],
+      "material_contradictions": ["All arm torque is removed", "The brake limit is stated as measured realized torque", "block_2 is identified as directly pushed", "Only one tether acceleration phase is removed"]
+    },
+    {
+      "criterion": "fixed_conditions",
+      "required_supported_claim": "State that the matched comparison holds initial conditions, physical parameters, other controls and execution settings fixed; do not invent changed friction, masses, seeds or solver settings.",
+      "acceptable_paraphrases": ["Only the scheduled control changes in otherwise matched runs", "The initial scenario and numerical setup are shared"],
+      "material_contradictions": ["Different initial conditions are asserted", "Another control or physical parameter is claimed to change"]
+    },
+    {
+      "criterion": "selected_outcome_fidelity",
+      "required_supported_claim": "Correctly describe the factual and omission selected target readouts, entity, time, unit/frame and condition labels. They are supplied simulator outcomes, not newly observed prefix states.",
+      "acceptable_paraphrases": ["Rounded readable values consistent with the existing answer tolerance", "Equivalent descriptions of the exact supplied Booleans"],
+      "material_contradictions": ["Conditions swapped", "Wrong target or time/unit/frame", "Future supplied readouts presented as observed prefix measurements"]
+    },
+    {
+      "criterion": "comparison_and_predicate_interpretation",
+      "required_supported_claim": "For numbers, distinguish exact/numerical difference from existing scorer distinguishability; quaternion differences, if present, use sign-invariant rotation angles. For Booleans, respect the actual threshold/history/duration rule; a common flag does not show identical trajectories.",
+      "acceptable_paraphrases": ["The numeric contrast is nonzero but within the tolerance", "The selected readout is distinguishable under the scorer", "Neither run meets the specified predicate; other physical behavior may differ"],
+      "material_contradictions": ["A within-tolerance difference is called exact equality", "Equal Booleans are called proof of no physical effect", "A duration predicate is replaced with one terminal-speed test", "Quaternion component subtraction is called physical orientation change"]
+    },
+    {
+      "criterion": "supported_interpretation_and_uncertainty",
+      "required_supported_claim": "Connect the controlled intervention difference and fixed settings to the selected outcome comparison within this simulator, while identifying limits: a selected readout does not determine all other behavior, a detailed force/contact pathway, or real-world causality.",
+      "acceptable_paraphrases": ["This isolates the intervention in the specified simulator", "The paired outcomes do not establish a detailed mechanism", "Additional trajectory/history evidence would be needed for more specific mechanisms"],
+      "material_contradictions": ["Unverified forces/contact histories invented", "Causation inferred merely from timing", "Real-world causality claimed", "All other physical behavior is inferred from one readout"]
+    },
+    {
+      "criterion": "readability_and_explanatory_adequacy",
+      "required_supported_claim": "Provide clear connected reasoning that relates changed control, fixed conditions, target contrast and appropriate limits. Repeating two values without connecting them is insufficient. Human judgment evaluates prose entailment, coherence, completeness and unsupported claims.",
+      "acceptable_paraphrases": ["Any clear evidence-supported organization or wording", "Concise connected prose or a readable structured explanation"],
+      "material_contradictions": ["Only copied values with no explanation", "Mutually inconsistent prose and structured facts", "Unreadable or irrelevant explanation", "Missing uncertainty or unsupported mechanism"]
+    }
+  ],
+  "form_criterion_mapping": {
+    "physical_reference": "Control semantics, supplied readouts, target/time/unit/frame and predicates",
+    "language_fidelity": "Reused observed language plus prose readability and factual fidelity",
+    "qa_validity": "Explanation-specific adequacy and required comparison/uncertainty",
+    "evidence_sufficiency": "Claim-specific bindings and supported scope",
+    "public_private_separation": "Supplied outcomes intentionally disclosed only in explanation supplied_comparison; gold/rollouts/receipts remain private"
+  },
+  "automatic_coverage": "Structured intervention identity, fixed-condition declarations, reported selected values using the unchanged answer scorer, and explicit exact-equality/scorer facts. Schema validity or nonempty prose is not explanation correctness.",
+  "limitations": "No exact-text, keyword-presence or MSE explanation-quality metric. Automatic factual checks do not assess semantic entailment, unsupported prose, explanatory adequacy or human acceptability. Independent human judgments remain uncollected. No empirical explanation score or agreement result exists. Eight engineering cases do not estimate release-wide quality or power subgroup claims. Human rubric/analysis can undergo documented revision before a formal study."
+}
+
+```
+
+</details>
+
+
+### prepared-explanation-request/1.0.0
+
+Actual dispatch to the explanation-specific prompt/JSON response contract for all nine tool-free answering conditions; requests prepared only, not annotation requests or model execution.
+
+[Actual code/templates](procedures/prepared-explanation-request-1.0.0.py); source `src/simphysqa/evaluation.py`, commit `working implementation pinned by SHA256; final commit in delivery receipt`, SHA256 `2fb5903b55a49afee2e3f0a394b5d8e1319a32b446dae2380822913b0f7d28f7`.
+
+<details><summary>Exact templates, rules and input projection</summary>
+
+```python
+"""Tool-free model request export. No simulator or private evidence in requests."""
+from pathlib import Path
+from .dataset import public_record
+from .io import canonical, external, manifest, write
+
+def request(record: dict, condition: dict, *, association_version: str | None = None) -> dict:
+    public = public_record(record, association_version=association_version)
+    text = "Answer using the observed structured inputs, public language annotations and declared controls. Return target IDs and typed values in their declared units/frames; abstain if information is insufficient."
+    if record["question_type"] == "explanation":
+        from .explanation_evaluation import prompt
+        text = prompt(condition)
+    elif condition["reasoning"] == "prompted_cot":
+        text += " Explain your reasoning before the final answer."
+    return {"sample_id": public["sample_id"], "condition_id": condition["condition_id"],
+            "tools": [], "messages": [{"role": "user", "content": text + "\n" + canonical(public).decode()}]}
+
+def export_requests(records: list[dict], plan: dict, output: Path, *, association_version: str | None = None) -> dict:
+    output = external(output)
+    output.mkdir(parents=True, exist_ok=False)
+    conditions = plan["conditions"]
+    if len({c["condition_id"] for c in conditions}) != len(conditions):
+        raise ValueError("duplicate condition")
+    for condition in conditions:
+        write(output / (condition["condition_id"] + ".json"), [request(r, condition, association_version=association_version) for r in records])
+    return manifest(output, {"purpose": "request_preparation_only_no_model_calls", "conditions": conditions,
+        "records": len(records), "annotation_versions": sorted({r["annotation_version"] for r in records}),
+        "result_dimensions": ["model", "condition", "domain", "question_type"],
+        "result_status": "pending", "scoring": "private references remain in separate evaluator storage",
+        **({"export_version": association_version} if association_version else {})})
+
+```
+
+</details>
+
+
 ### prepared-answering-request
 
 Tool-free public input plus retained public annotations under nine configured conditions; prepared, never executed. Not an annotation-generation request.
@@ -3984,6 +4571,11 @@ if __name__ == "__main__":main()
 ```
 
 </details>
+
+
+## SPQ03 explanation-task disclosure and generation
+
+Eight new explanation QA reuse the frozen verified pairs and their original selected targets. Public supplied_comparison deliberately discloses only factual/omission target readouts; the observed prefix and original language stay unchanged. Questions/references/traces and the rubric are deterministic, with no new annotation-model request. The explanation-specific answering JSON contract and prompt are prepared under all nine conditions, never executed. Human prose quality and explanatory adequacy remain uncollected; structured factual checks alone cannot establish explanation correctness. New items and their embedded accepted parent copies have distinct per-field mappings in the index.
 
 
 ## Per-file mappings

@@ -1,3 +1,14 @@
+# SPQ03 matched-intervention explanation QA — 6 October 2026
+
+Read docs/prompts/SPQ03_explanation_qa.md and docs/simphysqa/explanation_qa.md.
+Eight new explanation QA are explicitly authorized from the eight frozen SPQ02
+pairs and selected targets. Supplied comparison readouts are intentionally public
+only in this task-specific field; prefix/cutoff, source data, accepted 40 items,
+answer annotation 1.0.3 and association 1.1.1 remain unchanged. No new simulations,
+model calls, answering benchmarks or definitive formal sample. Claims/traces are
+evidence-bound and human-unreviewed. Structured fact checks cannot grade prose.
+Read docs/reviews/SPQ03_completion.md; older constraints remain historical below.
+
 # Current bounded refinement — 6 October 2026
 
 Read docs/prompts/SPQ02b_answer_refinements.md and the latest answer contract.

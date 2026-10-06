@@ -1,3 +1,21 @@
+# Latest: SPQ03 explanation QA — 6 October 2026
+
+Base 10ace28 on simphysqa-naacl. Eight new explanation items completed, zero
+failed/pending, two per domain; all eight frozen groups/targets and .2 s cutoffs
+preserved. Eight packets, three independent blank forms and 72 tool-free requests.
+New task explicitly supplies only the selected factual/omission target outcomes.
+All 40 accepted items/answer annotation 1.0.3 and earlier artifacts remain exact.
+106-test offline suite OK (one retained runtime class skipped); focused archive
+lineage checks also run. New simulations/model calls/spend: 0/0/$0. Human prose
+quality/explanation adequacy judgments and answering benchmarks are uncollected.
+Archive 1.0.6 maps deterministic explanation generation separately from reused
+language and executed 16 SPQ01 requests; those payloads are unchanged.
+[Contract](simphysqa/explanation_qa.md), [complete prompt](prompts/SPQ03_explanation_qa.md),
+[report/commands/examples](reviews/SPQ03_completion.md),
+[archive](simphysqa/prompt_archive/README.md) and
+[per-file mappings](simphysqa/prompt_archive/file-generation-index.json).
+Historical progress below is retained unchanged.
+
 # Latest bounded refinement — 6 October 2026
 
 Answer/schema/renderer/export 1.0.3: concise bound explanations, shared physical

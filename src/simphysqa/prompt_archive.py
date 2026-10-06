@@ -12,7 +12,7 @@ from .associations import strip_associations
 from .spq01a import retained, verify_manifest
 from .answer_export import retained_bytes
 
-ARCHIVE = "simphysqa-prompt-archive/1.0.4"
+ARCHIVE = "simphysqa-prompt-archive/1.0.6"
 HISTORY = {
     "SPQ01": "6d420b779e0204868fec4c45e26bb1cdcd2b98c7",
     "SPQ01a-events": "328ef3f",
@@ -34,6 +34,11 @@ PROCEDURES = {
     "counterfactual/1.0.0": ("SPQ02", "src/simphysqa/counterfactual.py", "Matched omission question and single verified alternative target; new stable ID, original public prefix, independent replay/admission evidence. No model prompt."),
     "answer-annotation/1.0.3": ("current", "src/simphysqa/answer_annotations.py", "Concise shared physical conditions once; target-specific public direct readout or saved numerical readout/rule; sign-invariant quaternion rotation angle, never componentwise physical change; detailed method/settings/verification stay in private solution traces; paired omission comparisons; claim/step pointers and hashes. Eight-significant prose, exact typed source values. Private overlay only. No model prompt."),
     "answer-export/1.0.3": ("current", "src/simphysqa/answer_export.py", "40 private enriched QA, eight multi-target alternatives, audit reference rendering and 360 unchanged public requests. No model prompt."),
+    "explanation-qa/1.0.0": ("current", "src/simphysqa/explanation.py", "New matched-intervention explanation questions and supported claims; selected factual/omission outcomes intentionally supplied separately; fixed prefix/target/group; saved paired evidence, no new simulations/model prompt."),
+    "explanation-export/1.0.0": ("current", "src/simphysqa/explanation_export.py", "Eight frozen paired explanation records, public disclosures, packets, blank forms and 72 requests; links to accepted 40 items. Deterministic, no model prompt."),
+    "explanation-evaluation/1.0.0": ("current", "src/simphysqa/explanation_evaluation.py", "Compatible explanation JSON response contract for nine conditions; factual structured checks only, no text/keyword/MSE explanation-quality score. Prepared answering prompts, never executed."),
+    "explanation-rubric/1.0.0": ("current", "configs/simphysqa/explanation_rubric.json", "Supported-claim human rubric, acceptable paraphrases and contradictions; human ratings uncollected. Not an annotation-model prompt."),
+    "prepared-explanation-request/1.0.0": ("current", "src/simphysqa/evaluation.py", "Actual dispatch to the explanation-specific prompt/JSON response contract for all nine tool-free answering conditions; requests prepared only, not annotation requests or model execution."),
     "prepared-answering-request": ("SPQ02", "src/simphysqa/evaluation.py", "Tool-free public input plus retained public annotations under nine configured conditions; prepared, never executed. Not an annotation-generation request.")
 }
 
@@ -49,6 +54,7 @@ def annotated_nodes(value, prefix=""):
             if "public" in value:
                 yield from annotated_nodes(value.get("private",{}).get("source_record",{}),prefix+"/private/source_record")
                 yield from annotated_nodes(value.get("private",{}).get("counterfactual_evidence",{}).get("alternative_record",{}),prefix+"/private/counterfactual_evidence/alternative_record")
+                yield from annotated_nodes(value.get("private",{}).get("explanation_evidence",{}).get("parent_record",{}),prefix+"/private/explanation_evidence/parent_record")
             return
         if "messages" in value and sample:
             for i,m in enumerate(value["messages"]):
@@ -59,10 +65,10 @@ def annotated_nodes(value, prefix=""):
             return
         for k,v in value.items():yield from annotated_nodes(v,prefix+"/"+k)
 
-def build(spq01, spq01a, spq02, enriched, output):
+def build(spq01, spq01a, spq02, enriched, output, explanations=None):
     output=external(output)
     # Source/parent identities resolve all copied summaries/timestamps back to their actual request.
-    mapping={};group_request={};families={}
+    mapping={};group_request={};families={};explanation_parents={}
     for line in (spq01a/"event-language-2.0.0/qa-records.jsonl").read_text(encoding="utf-8").splitlines():
         r=parse(line);mapping[r["sample_id"]]=r["trajectory_id"];families[r["sample_id"]]=r["question_type"]
         if r["question_type"]=="predictive":group_request[r["trajectory_id"]]=r["sample_id"]
@@ -71,6 +77,9 @@ def build(spq01, spq01a, spq02, enriched, output):
         if r["question_type"]=="counterfactual":
             alt=r["private"]["counterfactual_evidence"]["alternative_record"]
             mapping[alt["sample_id"]]=r["trajectory_id"];families[alt["sample_id"]]="counterfactual"
+    if explanations is not None:
+        for line in (explanations/"organizer-private/qa-records.jsonl").read_text(encoding="utf-8").splitlines():
+            r=parse(line);mapping[r["sample_id"]]=r["trajectory_id"];families[r["sample_id"]]="explanation";explanation_parents[r["sample_id"]]=r["private"]["explanation_evidence"]["parent_sample_id"]
     job=spq01/"annotation-job";requests=[];notes=[]
     for file in sorted((job/"attempts").glob("*.json")):
         attempt=read(file);number=attempt["attempt_number"];path=job/"attempt-requests"/(f"{number:03}.json")
@@ -113,7 +122,7 @@ def build(spq01, spq01a, spq02, enriched, output):
         else:
             commit=subprocess.check_output(["git","rev-parse",HISTORY[stage]],cwd=ROOT).decode().strip()
             raw=subprocess.check_output(["git","show",commit+":"+rel],cwd=ROOT)
-        name="procedures/"+id.replace("/","-")+".py"
+        name="procedures/"+id.replace("/","-")+(".json" if rel.endswith(".json") else ".py")
         retained_bytes(output/name,raw)
         procedures.append({"procedure_id":id,"kind":"executed_annotation_model_prompt" if id=="public-language/1.0.0" else "deterministic_no_model_prompt",
             "source_path":rel,"source_commit":commit,"implementation_sha256":sha256(raw).hexdigest(),"source_file":name,"rules":rule})
@@ -121,6 +130,8 @@ def build(spq01, spq01a, spq02, enriched, output):
         "SPQ01-dry-run":spq01/"dry-run","SPQ01-dry-run-final":spq01/"dry-run-final",
         "SPQ01-source-comparison":spq01/"source-comparison","SPQ02-counterfactual":spq02/"export-1.0.0",
         "SPQ02-alternative-records":spq02/"runs/alternative-records","SPQ02b-enriched":enriched}
+    if explanations is not None:
+        roots["SPQ03-explanation"]=explanations
     preliminary=enriched.parent/"answers-1.0.0"
     if preliminary.exists() and preliminary != enriched:
         roots["SPQ02b-preliminary-1.0.0"]=preliminary
@@ -225,6 +236,11 @@ def build(spq01, spq01a, spq02, enriched, output):
                     fields += ["states[*].linked_events","known_events[*].linked_states","between_state_associations"]
                     pids.append("associations/1.0.0" if alias=="SPQ01a-associations-1.0.0" else "associations/1.1.0" if alias=="SPQ01a-associations-1.1.0" else "associations/1.1.1" if "event_description" in inp.get("known_events",[{}])[0] else "associations/1.0.1")
                     if "event_description" in inp.get("known_events",[{}])[0]:fields.append("event_description and copies");pids.append("event-description/1.0.0" if alias=="SPQ01a-associations-1.1.0" else "event-description/1.0.1")
+                family=node.get("question_type",families.get(sid))
+                node_gold="explanation-qa/1.0.0" if family=="explanation" else gold_id(alias)
+                if family=="explanation":
+                    fields += ["question", "supplied_comparison", "explanation_response_contract"]
+                    pids += ["explanation-qa/1.0.0", "explanation-evaluation/1.0.0", "explanation-rubric/1.0.0"]
                 ref=node.get("reference",node.get("private",{}).get("reference",node.get("qa",{}).get("reference")))
                 if not isinstance(ref,dict):ref=None
                 if language is not None:
@@ -242,21 +258,23 @@ def build(spq01, spq01a, spq02, enriched, output):
                             raise ValueError("copied public input differs from executed annotation projection")
                 if ref is not None:
                     fields += ["reference.explanation","reference.solution_trace"]
-                    pids.append(gold_id(alias) if ref.get("solution_trace",{}).get("status")=="evidence_checked_human_unreviewed" else "source-readout-placeholder")
+                    pids.append(node_gold if ref.get("solution_trace",{}).get("status")=="evidence_checked_human_unreviewed" else "source-readout-placeholder")
                 if "answer_annotation" in node or "answer_annotation" in node.get("private",{}):
                     fields.append("private.answer_annotation/claims/solution_trace");pids.append(gold_id(alias))
-                family=node.get("question_type",families.get(sid))
+                if "explanation_annotation" in node or "explanation_annotation" in node.get("private",{}):
+                    fields.append("private.explanation_annotation/reference/claims/solution_trace");pids.append("explanation-qa/1.0.0")
                 if family=="direct":pids.append("direct-readout/1.0.0")
                 if family=="counterfactual" or "counterfactual" in inp:pids.append("counterfactual/1.0.0")
-                if "requests" in rel or "baseline" in rel:pids.append("prepared-answering-request")
+                if "requests" in rel or "baseline" in rel:pids.append("prepared-explanation-request/1.0.0" if family=="explanation" else "prepared-answering-request")
                 field_generation=[]
                 for field in fields:
                     if field.startswith(("trajectory", "timestamps")):
                         field_generation.append({"field":field,"method":origin,"procedure_id":"public-language/1.0.0","parent_artifact":parent,"complete_request":request["payload_file"] if request else None})
                     else:
-                        gold_procedure=gold_id(alias)
-                        procedure = gold_procedure if "answer_annotation" in field or (field.startswith("reference") and gold_procedure in pids) else "source-readout-placeholder" if field.startswith("reference") else ("event-description/1.0.0" if alias=="SPQ01a-associations-1.1.0" else "event-description/1.0.1") if field.startswith("event_description") else "event-language/2.0.0" if field.startswith("event_context") else "associations/1.1.1" if "associations/1.1.1" in pids else "associations/1.1.0" if "associations/1.1.0" in pids else "associations/1.0.0" if "associations/1.0.0" in pids else "associations/1.0.1"
-                        field_generation.append({"field":field,"method":"deterministic_no_model_prompt","procedure_id":procedure,"parent_artifact":("SPQ02-counterfactual/organizer-private/items/"+sid+".json" if family=="counterfactual" else "SPQ01a-event-language-2.0.0/qa-records.jsonl") if alias=="SPQ02b-enriched" else parent})
+                        gold_procedure=node_gold
+                        procedure = "explanation-evaluation/1.0.0" if field=="explanation_response_contract" else "explanation-qa/1.0.0" if field in ("question","supplied_comparison") or "explanation_annotation" in field else gold_procedure if "answer_annotation" in field or (field.startswith("reference") and gold_procedure in pids) else "source-readout-placeholder" if field.startswith("reference") else ("event-description/1.0.0" if alias=="SPQ01a-associations-1.1.0" else "event-description/1.0.1") if field.startswith("event_description") else "event-language/2.0.0" if field.startswith("event_context") else "associations/1.1.1" if "associations/1.1.1" in pids else "associations/1.1.0" if "associations/1.1.0" in pids else "associations/1.0.0" if "associations/1.0.0" in pids else "associations/1.0.1"
+                        deterministic_parent=("SPQ02b-enriched/organizer-private/items/"+explanation_parents[sid]+".json") if family=="explanation" else ("SPQ02-counterfactual/organizer-private/items/"+sid+".json" if family=="counterfactual" else "SPQ01a-event-language-2.0.0/qa-records.jsonl") if alias=="SPQ02b-enriched" else parent
+                        field_generation.append({"field":field,"method":"deterministic_no_model_prompt","procedure_id":procedure,"parent_artifact":deterministic_parent})
                 if not fields:continue
                 mappings.append({"record_pointer":pointer,"sample_id":sid,"trajectory_id":group,"annotated_fields":fields,"field_generation":field_generation,
                     "origin":origin,"procedure_ids":list(dict.fromkeys(pids)),"parent_artifact":parent,
@@ -286,6 +304,7 @@ def build(spq01, spq01a, spq02, enriched, output):
         "recovery":{"executed_requests":16,"exact_executed_payloads_recovered":16,"unavailable_executed_payloads":0,"reconstructed_executed_payloads":0,"repairs":0,"failures":0,
             "legacy_source_model_prompt":"No source model prompt: original simulator generic context/explanation is deterministic, not completed language annotation.",
             "early_deterministic_implementation":"Historical commits pin accepted code. Preliminary association 1.0.0 source recovered exactly from installer payload and matched to its executed hash. The 1.1.0 association/description working revision original source remains unavailable. Their output hashes are retained; accepted matching rules/templates are documented, not misrepresented as recovered early source."},
+        "SPQ03_disclosure":"Selected factual/omission readouts are intentionally public for explanation QA. Their values and gold/rollouts/receipts are not copied into this paper-facing index; field paths/hashes are mapped. No new annotation-model request occurred.",
         "redactions":["Organizer absolute paths and credential reference paths omitted.","Raw provider response metadata, usage/accounting and organizer-private QA/paired outcome evidence not copied into paper catalogue.","No authorization header was stored in JSON request payload; archived exact payloads contain only permitted public focal input."]}
     retained(output/"file-generation-index.json",index)
     example_request=requests[0]
@@ -322,9 +341,11 @@ def build(spq01, spq01a, spq02, enriched, output):
         if p["source_file"] is None:continue
         code=(output/p["source_file"]).read_text(encoding="utf-8")
         catalogue.append("<details><summary>Exact templates, rules and input projection</summary>\n\n```python\n"+code+"\n```\n\n</details>\n")
+    if explanations is not None:
+        catalogue.append("\n## SPQ03 explanation-task disclosure and generation\n\nEight new explanation QA reuse the frozen verified pairs and their original selected targets. Public supplied_comparison deliberately discloses only factual/omission target readouts; the observed prefix and original language stay unchanged. Questions/references/traces and the rubric are deterministic, with no new annotation-model request. The explanation-specific answering JSON contract and prompt are prepared under all nine conditions, never executed. Human prose quality and explanatory adequacy remain uncollected; structured factual checks alone cannot establish explanation correctness. New items and their embedded accepted parent copies have distinct per-field mappings in the index.\n")
     catalogue.append("\n## Per-file mappings\n\n[file-generation-index.json](file-generation-index.json) inventories every annotation-bearing file, individual sample/trajectory, annotated field, model-request parent, instantiated payload and deterministic stage. Aggregate QA lists and prepared requests retain individual mappings. HTML packets map to their sibling JSON. Each file member has a mapping_id that resolves directly to a deduplicated mapping_definitions entry and its complete executed request; this saves repeating the same mapping across nine conditions. Full private inputs/evidence are deliberately excluded from this paper-facing index. Source/output hashes permit organizer-side verification. All answering requests remain prepared, never executed.\n\n## Historical limitations\n\nAll executed model payloads recovered: 16/16; unavailable: 0; reconstructed: 0; repairs: 0. Original generic simulator contexts/explanations were deterministic placeholders, with no model request to recover. Preliminary association 1.0.0 source is recovered exactly from its saved installer payload (executed hash matches). The preliminary 1.1.0 association/description source remains unrecoverable; its recorded source/output hashes and accepted successor templates remain separate. Credential headers/paths and private QA outcomes/verification are excluded; no redaction alters the 16 public JSON request bodies.\n")
     retained_bytes(output/"catalogue.md","\n".join(catalogue).encode())
-    retained_bytes(output/"README.md",("# Annotation prompt/procedure archive\n\nInspect [one recovered executed request and its output-file mappings, plus a deterministic procedure](provenance-example.md). Start with [the consolidated catalogue](catalogue.md): actual prompt text, all 16 fully instantiated executed inputs, model/settings, and pinned deterministic templates. Use [the per-file index](file-generation-index.json) to resolve every annotation output/copy to its executed request or deterministic procedure.\n\nThis public archive intentionally excludes gold answers, traces, future outcomes, paired verification and organizer credential locations. Complete private evidence remains in the external versioned export. Request bodies use only observed focal states/declared controls; no answering benchmark has run. Authoring instructions: [active milestone](../../prompts/SPQ02b_answer_refinements.md).\n").encode())
+    retained_bytes(output/"README.md",("# Annotation prompt/procedure archive\n\nInspect [one recovered executed request and its output-file mappings, plus a deterministic procedure](provenance-example.md). SPQ03 adds eight deterministic matched-intervention explanation items, with separately disclosed selected target readouts and no new model request. Start with [the consolidated catalogue](catalogue.md): actual prompt text, all 16 fully instantiated executed inputs, model/settings, and pinned deterministic templates. Use [the per-file index](file-generation-index.json) to resolve every annotation output/copy to its executed request or deterministic procedure.\n\nThis public archive intentionally excludes gold answers, traces, future outcomes, paired verification and organizer credential locations. Complete private evidence remains in the external versioned export. Request bodies use only observed focal states/declared controls; no answering benchmark has run. Authoring instructions: [active milestone](../../prompts/SPQ03_explanation_qa.md).\n").encode())
     counts={"version":ARCHIVE,"annotation_files":len(all_files),"indexed_files":len(entries),"record_mappings":sum(len(e.get("mappings",[])) for e in entries),"unique_mapping_definitions":len(mapping_definitions),
             "exact_recovered_requests":16,"unavailable_executed_requests":0,"reconstructed_requests":0,
             "new_model_calls":0,"unavailable_preliminary_source_snapshots":["associations-1.1.0 association implementation and event-description/1.0.0 renderer"],
@@ -337,6 +358,7 @@ def build(spq01, spq01a, spq02, enriched, output):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ("spq01","spq01a","spq02","enriched","output"):p.add_argument("--"+name,type=Path,required=True)
-    a=p.parse_args();build(a.spq01,a.spq01a,a.spq02,a.enriched,a.output)
+    p.add_argument("--explanations",type=Path)
+    a=p.parse_args();build(a.spq01,a.spq01a,a.spq02,a.enriched,a.output,a.explanations)
 
 if __name__=="__main__":main()

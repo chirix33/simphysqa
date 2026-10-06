@@ -6,7 +6,10 @@ from .io import canonical, external, manifest, write
 def request(record: dict, condition: dict, *, association_version: str | None = None) -> dict:
     public = public_record(record, association_version=association_version)
     text = "Answer using the observed structured inputs, public language annotations and declared controls. Return target IDs and typed values in their declared units/frames; abstain if information is insufficient."
-    if condition["reasoning"] == "prompted_cot":
+    if record["question_type"] == "explanation":
+        from .explanation_evaluation import prompt
+        text = prompt(condition)
+    elif condition["reasoning"] == "prompted_cot":
         text += " Explain your reasoning before the final answer."
     return {"sample_id": public["sample_id"], "condition_id": condition["condition_id"],
             "tools": [], "messages": [{"role": "user", "content": text + "\n" + canonical(public).decode()}]}
