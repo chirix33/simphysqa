@@ -1,3 +1,26 @@
+# SPQ05 formal audit preparation and shortfall — 6 October 2026
+
+From current main ff2fe26 on simphysqa-spq05; no merge/push. New instruction
+supersedes the historical20-item calibration plan: same140 independent items for
+R1/R2/R3,420 ratings, four domains/five families/seven per cell. No identity mapping.
+Frozen protocol1.0.1 and random140 primary/140 same-cell reserve source candidates,
+280 unique groups excluding all20 inspected groups. Source11,105 QA/6,340 groups,
+6,340 shards and62 prior manifests preserved. No full release regeneration/enrichment.
+Guide, analysis and rating-import tooling prepared; actual saved resume byte checks.
+Focused extraction validated on56 EXCLUDED development packets:616 states/event
+links,46,620 bindings; blank56-row test forms are not formal140-row reviewer forms.
+131-test integration suite OK; separate4-test foundation run closes its missing
+artifact-variable skip; pinned simulator runtime class remains skipped.
+New calls/simulations/spend/ratings0/0/USD0/0. Formal packets0/140, shortfall140:
+original16 initial calls and32 simulations already consumed; no expanded ceiling
+is assumed. Budget proposal pending; live runner/family qualification/final freeze
+remain outstanding. Status implemented_pending_validation, not review-ready.
+Read [completion](reviews/SPQ05_completion.md), [budget blocker](reviews/SPQ05_blocker.md),
+[protocol](simphysqa/formal_protocol.md), [guide](simphysqa/formal_reviewer_guide.md),
+[analysis](simphysqa/formal_analysis.md), [specification](prompts/SPQ05_formal_audit.md),
+[new provenance supplement](simphysqa/prompt_archive/SPQ05/README.md).
+Historical progress below remains byte-exact.
+
 # Foundation merge review — 6 October 2026
 
 From52f47ace928d339239a262836cff67818d6d68da on simphysqa-naacl; main remains

@@ -1,3 +1,15 @@
+# Current task: SPQ05 formal audit preparation — 6 October 2026
+
+The newest [SPQ05 specification](prompts/SPQ05_formal_audit.md) supersedes older
+calibration/formal restrictions within its scope. Same140 items independently
+reviewed by R1/R2/R3,420 ratings, no separate20-item calibration. See the
+[frozen protocol](simphysqa/formal_protocol.md), [guide](simphysqa/formal_reviewer_guide.md),
+[analysis](simphysqa/formal_analysis.md), [completion/shortfall](reviews/SPQ05_completion.md)
+and [provenance supplement](simphysqa/prompt_archive/SPQ05/README.md).
+Formal readiness0/140: additional explicit budgets required; no live operations,
+ratings, benchmarks, full release enrichment, merge or push. Earlier archive and
+scientific contracts remain preserved. Historical package index follows unchanged.
+
 # Current package index — five-family foundation, 6 October 2026
 
 Read [foundation/setup](simphysqa/foundation.md), [all56 items](simphysqa/development-index.md),
