@@ -1,3 +1,13 @@
+# Current audit preparation status — 6 October 2026
+
+The [authoritative56-item registry](development-index.md) covers all five development
+families, with three blank forms per export and56 development records per reviewer
+across exports. These are neither the20 calibration nor140 fresh formal records.
+All20 inspected/engineering groups remain excluded. Explanation and clarification
+have separate supplements/rubrics; prose adequacy judgments remain uncollected.
+The scientific power/test/simulation findings below remain unchanged and govern
+planning. No definitive formal sample or new agreement result has been produced.
+
 # Human audit and power-method reconciliation (SPQ01)
 
 Three independent reviewers review the same 20 calibration records and the same

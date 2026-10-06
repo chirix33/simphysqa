@@ -1,3 +1,60 @@
+# SimPhysQA active instructions — foundation merge review, 6 October 2026
+
+This section supersedes every historical milestone header below. Read
+docs/simphysqa/foundation.md, docs/simphysqa/development-index.md,
+docs/prompts/foundation_merge_review.md, docs/PROGRESS.md and relevant family
+contracts before changes. Inspect nested instructions and Git status.
+
+Authority is the explicit SimPhysQA pivot and newest user instructions. The paper
+contributes simulator-grounded structured/language trajectories, QA/evidence and
+reproducible annotation, plus model/domain/question-type evaluation. Phi-JEPA
+training/ODE/EBM/CODI/Coconut contracts are historical, outside active scope.
+
+The accepted foundation is 56 engineering-development QA: 16 direct, 16 predictive,
+8 counterfactual, 8 explanation and 8 explicit query-gap clarification. Preserve
+accepted physical source, identities, references, tolerances, units, frames,
+cutoffs, raw provenance and prior artifacts. Never infer new families by relabeling.
+Keep gold explanations/traces, outcomes/witnesses/verification private. Explanation
+QA discloses only its identified selected supplied comparison. Clarification uses
+the dedicated partial contract and two scorer-disjoint completions; reply supplies
+only absent query information. Unknown is not zero. Do not execute extracted formulae.
+
+Public language uses permitted observations and declared controls, with evidence
+bindings. Timing overlap is not causation. Association1.1.1 and answer annotation
+1.0.3 remain accepted; do not cosmetically regenerate them. New derived outputs need
+version/hash identities and exclusive-write or exact-byte resume. Source IDs and
+provenance must survive migration. Schema development is iterative creation,
+enrichment and human revision, not few-shot schema generation.
+
+Three independent auditors: same20 calibration, same140 fresh formal; calibration
+excluded from formal results. Alpha.20, power.80, expected prevalence.90,
+kappa0.60/kappa1.80 are planning assumptions, not results or passing thresholds.
+Use the documented powered test, distinct from provisional Fleiss kappa. Exclude
+all20 inspected/development groups, keep calibration/formal group-disjoint and do
+not freeze the definitive sample until population/version/rubric/analysis are ready.
+The sampler is trajectory-balanced, not uniform QA-record sampling. Human review
+is research; no mandatory generation gate. Blank forms are uncollected judgments.
+
+Answering is workstation-only and tool-free (five models/nine conditions planned
+until locally qualified). Prepared requests are not executed experiments. Automatic
+evidence/scorer checks are not human explanation/clarification quality or agreement.
+Annotation providers and private simulator verification have separate boundaries.
+Record exact identities/configs, every call/solve/retry/failure, costs and thresholds.
+No network in offline tests, no secret/log leakage, no fake live-run fixture fallback.
+
+This task prepares merge review only: no merge/push, simulations, model calls, full
+release or formal sampling. Work on simphysqa-naacl; leave main and all historical
+artifacts unchanged. Resolve routine reversible decisions autonomously. Keep data,
+weights,caches/runs outside tracked source with configurable paths/manifests. Do not
+clean/reset unrelated work or move large artifacts. Preserve original historical
+docs/assets/references. Update PROGRESS, review report and decisions with exact
+commands, limitations and skipped coverage; no fabricated empirical claims.
+
+## Historical milestone instructions (retained as provenance)
+
+The following dated sections describe earlier stages. Their active/current wording
+is historical; the section above and foundation contract govern current work.
+
 # SPQ04 clarification QA — 6 October 2026
 
 Read docs/prompts/SPQ04_clarification_qa.md and docs/simphysqa/clarification_qa.md.

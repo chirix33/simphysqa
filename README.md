@@ -1,3 +1,46 @@
+# SimPhysQA
+
+Simulator-grounded trajectories, public language, five QA families and reproducible
+annotation/evaluation infrastructure for NAACL Resources, Benchmarks, and Evaluation.
+Learned Phi-JEPA/SCLD/EBM dynamics and CODI/Coconut training are outside this submission.
+
+Start with the [foundation contract and setup](docs/simphysqa/foundation.md),
+[authoritative56-item registry](docs/simphysqa/development-index.md) and
+[machine index](docs/simphysqa/development-index.json).
+The engineering set has16 direct,16 predictive,8 counterfactual,8 explanation and
+8 explicit query-gap clarification items in16 train groups. All groups remain
+excluded from fresh formal sampling. This is not the11,105-record source release
+or an unbiased quality/OOD sample.
+
+Current external exports are answers1.0.3, explanations1.0.0 and clarifications1.0.0,
+using association1.1.1;504 initial tool-free requests plus72 conditional templates
+are prepared. Human judgments and answering benchmarks are uncollected/unexecuted.
+Gold explanations/traces and simulator/witness evidence remain private; explanation
+QA intentionally supplies only its selected comparison. Clarification asks for a
+missing query condition, entity or time, not a fabricated unique initial answer.
+
+Supported installation is editable source checkout, Python>=3.11, jsonschema4.26.0,
+setuptools84.0.0. See the foundation for exact offline and ordinary setup commands,
+separate simulator/audit dependencies and accurately bounded test coverage.
+Active code: `src/simphysqa/`; retained physics: `src/phi_jepa/simulation/`;
+configs: `configs/simphysqa/`; tests: `tests/`; scientific contracts: `docs/simphysqa/`.
+Data/model artifacts remain external and path-configurable.
+
+[Prompt/procedure archive entry](docs/simphysqa/prompt_archive/README.md),
+[consolidated catalogue](docs/simphysqa/prompt_archive/catalogue.md),
+[per-file generation mappings](docs/simphysqa/prompt_archive/file-generation-index.json)
+and [executed request/output mapping example](docs/simphysqa/prompt_archive/provenance-example.md)
+separate16 executed annotation requests, reused outputs, deterministic procedures,
+unavailable preliminary source revisions and unexecuted answering preparation.
+
+[Remaining research](docs/simphysqa/pending.md),
+[merge review / proposed title and body](docs/reviews/foundation_merge_review.md),
+[historical preservation plan](docs/decisions/foundation_merge_preservation.md).
+Main/prior artifacts are preserved; this branch has not been merged or pushed.
+
+<details>
+<summary>Historical milestone README (superseded status descriptions)</summary>
+
 # Latest bounded milestone: SPQ02b
 
 All 40 development QA have evidence-bound private answer explanations and solution
@@ -126,3 +169,5 @@ event descriptions and separate public evidence. See
 [specification](docs/simphysqa/event_descriptions.md) and
 [completion/examples/commands](docs/reviews/SPQ01a_event_descriptions_completion.md).
 Use a fresh external output root; prior versions remain preserved.
+
+</details>

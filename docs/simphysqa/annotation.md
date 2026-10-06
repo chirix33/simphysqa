@@ -1,3 +1,12 @@
+# Current integration status — 6 October 2026
+
+[Foundation authority](foundation.md) and [56-item index](development-index.md) supersede
+stage-local pending tables below. All five families now have bounded development
+implementations; release-wide enrichment and independent human assessment remain
+pending. Association1.1.1, answer annotation1.0.3 and prompt archive1.0.7 are accepted.
+The following SPQ01 findings/settings/costs are retained historical provenance;
+they do not authorize new provider calls or supply today's pricing.
+
 # Current extension: SPQ01a
 
 [Event-language contract 2.0.0](event_language.md) enriches the existing public

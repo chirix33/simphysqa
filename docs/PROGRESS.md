@@ -1,3 +1,22 @@
+# Foundation merge review — 6 October 2026
+
+From52f47ace928d339239a262836cff67818d6d68da on simphysqa-naacl; main remains
+7dd4a64e90cfb18be743503ac8345cabf2f6e28b, clean. No merge/push.
+Complete accepted diff reviewed:470 paths without rename detection;276 inventoried
+legacy removals plus five byte-identical test relocations;221 retained internal
+imports resolve. Current root authority/setup/scientific scope reconciled; missing
+clarification package schema fixed. Authoritative56-item registry includes all
+five families, versions/paths/hashes,16 train groups and20 fresh-formal exclusions.
+Explicit query-gap clarification is bounded; broader gaps/OOD/human quality pending.
+Fresh offline editable CPU installation and pip check passed. Final integration:
+123 tests in156.903s OK, one NumPy-dependent runtime class skipped (six methods);
+separate five simulator test files, audit power runtime and GPU coverage not run.
+62 prior manifests and55 sealed archive files/16 executed payloads preserved;
+release manifest unchanged. Zero new simulations/model calls/spend or human ratings.
+Read [foundation](simphysqa/foundation.md), [all56 items](simphysqa/development-index.md),
+[merge proposal/review](reviews/foundation_merge_review.md), [preservation plan](decisions/foundation_merge_preservation.md).
+Historical progress below remains byte-exact, including its legacy encoding.
+
 # Latest: SPQ04 clarification QA - 6 October 2026
 
 Base395139d on simphysqa-naacl. Eight completed, zero failed/pending; two per

@@ -1,3 +1,10 @@
+# Current integration — 6 October 2026
+
+This accepted eight-item explanation export1.0.0 remains unchanged. Clarification
+QA is now separately implemented as eight explicit query-gap items; the older
+"subsequent work" statement below records the SPQ03 stage only. See
+[clarification contract](clarification_qa.md) and [current foundation](foundation.md).
+
 # Matched-intervention explanation QA — SPQ03 /1.0.0
 
 This implements [the full user instruction](../prompts/SPQ03_explanation_qa.md)

@@ -1,3 +1,16 @@
+# Current package index — five-family foundation, 6 October 2026
+
+Read [foundation/setup](simphysqa/foundation.md), [all56 items](simphysqa/development-index.md),
+[merge review](reviews/foundation_merge_review.md) and [active authoring instruction](prompts/foundation_merge_review.md).
+[Archive entry](simphysqa/prompt_archive/README.md), [catalogue](simphysqa/prompt_archive/catalogue.md)
+and [per-file provenance](simphysqa/prompt_archive/file-generation-index.json) are sealed1.0.7.
+All56 development QA complete in software; human judgments, local model qualification,
+full-release enrichment and fresh formal audit remain pending. No merge/push.
+Root AGENTS and foundation supersede historical stage statuses below; original
+Phi-JEPA docs/docs and P* prompts remain evidence, not current implementation authority.
+
+## Historical package index (preserved)
+
 # Latest: SPQ04 clarification QA — 6 October 2026
 
 [Complete prompt](prompts/SPQ04_clarification_qa.md),

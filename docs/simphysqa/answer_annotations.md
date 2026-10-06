@@ -1,3 +1,11 @@
+# Current integration — 6 October 2026
+
+Answer overlay1.0.3 remains accepted on40 items plus eight supporting alternatives.
+Eight separate explanation-QA and eight clarification-QA items now implement the
+later-family contracts anticipated below. Their dedicated evidence/partial-input
+contracts and exports are additional, not changes to accepted40-item artifacts.
+[Foundation versions and scope](foundation.md), [all56-item index](development-index.md).
+
 # Answer refinement 1.0.3 — 6 October 2026
 
 The [bounded user refinement](../prompts/SPQ02b_answer_refinements.md) supersedes

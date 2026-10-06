@@ -1,0 +1,23 @@
+{
+  "version": "simphysqa-foundation-index/1.0.0",
+  "accepted_commit": "52f47ace928d339239a262836cff67818d6d68da",
+  "roots": {
+    "answers": "spq02b/answers-1.0.3",
+    "explanations": "spq03/explanations-1.0.0",
+    "clarifications": "spq04/clarifications-1.0.0"
+  },
+  "support": {
+    "release_inventory": "spq01/inventory-final",
+    "selection": "spq01/selection",
+    "association_baseline": "spq01a/associations-1.1.1",
+    "frozen_pairs": "spq02/plan.json",
+    "saved_runs": "spq02/runs",
+    "audit_method": "spq01/audit-method",
+    "prompt_archive": "spq04/prompt-archive-1.0.7"
+  },
+  "expected_families": {"direct":16,"predictive":16,"counterfactual":8,"explanation":8,"clarification":8},
+  "expected_groups": 16,
+  "expected_excluded_groups": 20,
+  "expected_conditions": 9,
+  "formal_exclusions": "configs/simphysqa/development_exclusions.json"
+}

@@ -1,3 +1,13 @@
+# Current evidence boundary — 6 October 2026
+
+Accepted association/event-description export1.1.1 remains unchanged. The earlier
+public arm frame relationship stays explicitly unresolved in those shared derived
+descriptions; SPQ02 later resolved actual scalar generalized-hinge application from
+implementation/model evidence **privately**, preserving inherited declarations.
+See [counterfactual contract](counterfactual.md) and [answer contract](answer_annotations.md).
+Do not silently rewrite historical public semantics or treat this dated coverage
+report as a restriction on later verified families. [Current foundation](foundation.md).
+
 # Grounded shared event descriptions — export 1.1.1
 
 Builds on bidirectional export commit 433c64186555fdc99f17261c069a2dd4b334a11e.
