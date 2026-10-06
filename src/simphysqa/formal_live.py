@@ -67,10 +67,11 @@ def revise(output):
             changed.append(relative);revision['scientific_source_pins'][relative]=actual
     if not changed:raise ValueError('no adapter repair to freeze')
     revision['previous_plan_sha256']=digest(plan)
-    revision['version']='SPQ05-authorized-execution/1.0.1'
+    number=len(list((output/'execution-plan-revisions').glob('*.json')))+1
+    revision['version']='SPQ05-authorized-execution/1.0.'+str(number)
     revision['producer_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     revision['repair']={'changed_files':changed,'reason':'Supply retained implementation bindings to predictive answer annotation; halt unexpected adapter errors. Original failed candidates remain rejected; unknown interrupted attempt remains reserved. Same frozen order and all cumulative counters.'}
-    write(output/'execution-plan-revisions/001.json',revision)
+    write(output/'execution-plan-revisions'/(str(number).zfill(3)+'.json'),revision)
     print(canonical({'revision_sha256':digest(revision),'repair':revision['repair'],'limits_unchanged':True}).decode(),flush=True)
 
 
@@ -288,7 +289,8 @@ def derive(parent, pair, runs, family, case):
     implementation={}
     for rel in ('src/phi_jepa/simulation/engines.py','src/phi_jepa/simulation/bullet.py','src/phi_jepa/simulation/scenes.py'):
         path=(runs/'source-snapshot'/rel) if pair else ROOT/rel
-        implementation[Path(rel).stem]={'source_path':rel,'sha256':file_hash(path),'text':path.read_text()}
+        text=path.read_text(encoding='utf-8')
+        implementation[Path(rel).stem]={'source_path':rel,'sha256':sha256(text.encode()).hexdigest(),'text':text}
     arm={}
     if parent['public']['input']['domain']=='robotic_arm':
         if pair:

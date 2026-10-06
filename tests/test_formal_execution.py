@@ -1,5 +1,6 @@
 """Offline ceiling/recovery/scope controls; no provider or simulator calls."""
 from copy import deepcopy
+from hashlib import sha256
 from pathlib import Path
 import tempfile
 import unittest
@@ -17,6 +18,7 @@ class FormalExecutionTests(unittest.TestCase):
         implementation=context.call_args.args[3]
         self.assertEqual(set(implementation),{'engines','bullet','scenes'})
         self.assertTrue(all(v['sha256'] and v['text'] for v in implementation.values()))
+        self.assertTrue(all(v['sha256']==sha256(v['text'].encode()).hexdigest() for v in implementation.values()))
     def test_all_annotation_axes_block_before_request(self):
         bound={'usd':1,'input_token_upper_bound':10,'output_token_limit':20}
         history=[{'initial_request':True,'charged_upper_bound_usd':1,'reservation':bound,'wall_seconds':120}]
