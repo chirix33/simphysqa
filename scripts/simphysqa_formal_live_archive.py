@@ -46,6 +46,7 @@ def archive(run,delivery,preparation,previous,output):
                 if relative.startswith('focused'):mode='deterministic_exact_public_packet_extraction'
                 if relative.startswith('auditor-only/'):mode='deterministic_blinded_private_packet_with_saved_evidence'
                 if relative.startswith('public-items/'):mode='deterministic_public_only_projection'
+                if relative.startswith('review-pages/'):mode='deterministic_readable_focused_scope_from_exact_packet_keys'
             entry={'path':str(p),'sha256':file_hash(p),'root_scope':alias,'mode':mode,
                    'candidate_id':candidate,'actual_provider_request_or_response':executed,
                    'language_request_lineage':sorted(by_candidate.get(candidate,[]),key=lambda x:x['attempt_number']),
@@ -55,7 +56,8 @@ def archive(run,delivery,preparation,previous,output):
         path=ROOT/relative
         if file_hash(path)!=plan['scientific_source_pins'][relative]:raise ValueError('executed source modified')
         save_bytes(output/'procedures'/relative,path.read_bytes())
-    for relative in ('scripts/simphysqa_formal_live_archive.py','scripts/simphysqa_verify_formal_delivery.py','scripts/simphysqa_formal_dryrun.py'):
+    for relative in ('scripts/simphysqa_formal_live_archive.py','scripts/simphysqa_verify_formal_delivery.py','scripts/simphysqa_formal_dryrun.py',
+                     'scripts/simphysqa_formal_readable.py','docs/decisions/SPQ05_authorized_execution.md'):
         save_bytes(output/'procedures'/relative,(ROOT/relative).read_bytes())
     index={'version':'SPQ05-executed-provenance/1.0.0','producer_commit':plan['producer_commit'],
            'inherits':{'path':str(previous),'manifest_sha256':file_hash(previous/'manifest.json'),'historical_executed_requests':16},
