@@ -6,6 +6,7 @@ from html import escape
 from pathlib import Path
 import random
 from .dataset import validate, public_record
+from .answer_annotations import enriched_reference
 from .io import ROOT, canonical, digest, external, manifest, read, write
 
 REVIEWERS = ("R1", "R2", "R3")
@@ -74,6 +75,10 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
     for record in records:
         related[record["private"]["metadata"]["split_group_id"]].append(record)
     for group in related.values():
+        if (phase == "development" and all("answer_annotation" in r["private"] for r in group)
+                and len(group) <= 3 and len({r["question_type"] for r in group}) == len(group)
+                and {r["question_type"] for r in group} <= {"direct", "predictive", "counterfactual"}):
+            continue  # Explicit 40-item engineering enrichment; never formal sampling.
         if len(group) > 1 and (phase != "development" or len(group) != 2 or {r["question_type"] for r in group} != {"direct", "predictive"}):
             raise ValueError("related records allowed only as development direct/predictive pairs")
     for record in records:
@@ -87,11 +92,13 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
         identity = {"phase": phase, "sample": record["sample_id"], "version": record["annotation_version"]}
         if association_version:
             identity["export_version"] = association_version
+        if "answer_annotation" in record["private"]:
+            identity["answer_annotation_cache"] = record["private"]["answer_annotation"]["cache_identity"]
         packet_id = "SPQ-" + digest(identity)[:16]
         packet = {"packet_id": packet_id, "phase": phase, "sample_id": record["sample_id"],
                   "annotation_version": record["annotation_version"], "question_type": record["question_type"],
                   "structured_inputs": view["input"], "language_annotations": view["annotations"],
-                  "qa": {"question": record["public"]["input"]["question"], "reference": record["private"]["reference"]},
+                  "qa": {"question": record["public"]["input"]["question"], "reference": enriched_reference(record)},
                   "verification": {"metadata": record["private"]["metadata"], "bindings": record["private"]["evidence_bindings"]},
                   "annotation_completion": record["completion"], "rubric_version": "draft/0.1"}
         if association_version:
@@ -106,6 +113,11 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
                 "alternative_reference": record["private"]["reference"],
                 "verification": proof["verification"], "intervention_change": proof["intervention_change"],
                 "simulation_artifacts": proof["simulation_artifacts"]}
+        if "answer_annotation" in record["private"]:
+            from .answer_annotations import roots
+            annotation = record["private"]["answer_annotation"]
+            packet["answer_annotation"] = annotation
+            packet["verification"]["answer_evidence_roots"] = roots(record, annotation["evidence_context"])
         # Annotation provider identity lives only in the organizer key.
         key.append({"packet_id": packet_id, "sample_id": record["sample_id"], "source": record["source"],
                     "annotation_provenance": record["private"]["annotation_provenance"],
@@ -116,6 +128,9 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
         html += "<h1>" + packet_id + "</h1><p>Private verification evidence: auditor use only. Development packet; annotations may be pending.</p>"
         html += "<h2>Question</h2><p>" + escape(packet["qa"]["question"]) + "</p>"
         html += "<h2>Reference</h2><p>" + escape(packet["qa"]["reference"]["label"]) + "</p>"
+        if "answer_annotation" in record["private"]:
+            html += "<h2>Answer explanation (human unreviewed)</h2><pre>" + escape(packet["qa"]["reference"]["explanation"]) + "</pre>"
+            html += "<h2>Numerical/observed solution trace and evidence bindings</h2><pre>" + escape(canonical(packet["qa"]["reference"]["solution_trace"]).decode()) + "</pre>"
         html += "<h2>Language status</h2><pre>" + escape(canonical(packet["language_annotations"]).decode()) + "</pre>"
         html += "<h2>Rubric</h2><pre>" + escape(RUBRIC) + "</pre><details><summary>Complete inputs and verification evidence</summary><pre>" + body + "</pre></details>"
         (output / "packets" / (packet_id + ".html")).write_text(html, encoding="utf-8")

@@ -1,3 +1,13 @@
+# Current milestone: SPQ02b — 40 answer annotations and prompt archive
+
+Read [active prompt](prompts/SPQ02b_answer_enrichment.md),
+[contract](simphysqa/answer_annotations.md),
+[prompt archive](simphysqa/prompt_archive/README.md) and
+[completion/commands/examples](reviews/SPQ02b_completion.md).
+All gold explanations/traces remain private; no human judgments or answering
+benchmarks exist. Original source records and accepted public export 1.1.1 remain
+exact. Earlier instructions/reports follow as retained history.
+
 # Current milestone: SPQ02 counterfactual QA
 
 The [consolidated user prompt](prompts/SPQ02_counterfactual_qa.md) and explicit

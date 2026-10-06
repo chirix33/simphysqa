@@ -87,6 +87,9 @@ def validate(record: dict) -> None:
     if record.get("question_type") == "counterfactual" and record.get("schema_version") != "simphysqa/0.3.0":
         raise ValueError("counterfactual QA requires matched alternative evidence, never relabeling")
     Draft202012Validator(read(Path(__file__).with_name("record.schema.json"))).validate(record)
+    if "answer_annotation" in record["private"]:
+        from .answer_annotations import validate_answer_annotation
+        validate_answer_annotation(record)
     if record["question_type"] == "counterfactual":
         from .counterfactual import validate_counterfactual
         validate_counterfactual(record)

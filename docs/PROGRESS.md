@@ -1,3 +1,19 @@
+# Latest: SPQ02b answer enrichment and prompt archive - 5 October 2026
+
+Accepted parent 1ae35749421283e63344504dc6a5d24ce18f32e7 on simphysqa-naacl.
+All 40 QA /104 targets and eight alternatives /40 targets have private case-specific
+evidence-bound explanations/traces. Export 1.0.2 has 40 packets, three blank
+40-item forms, 360 prepared requests and 12 domain/type examples. Accepted public
+association 1.1.1 and raw references/identities/cutoffs are exact.
+91 offline tests passed; one retained simulator-runtime class skipped. Final
+resume preserved 235 export files and 39 archive files. New simulations/model
+calls/spend: 0/0/$0. Human quality and answering benchmarks remain pending.
+Archive 1.0.3 recovers 16/16 executed prompts and maps 1,406 artifact files.
+One preliminary association/description source revision remains unrecoverable.
+Read [completion/commands/examples](reviews/SPQ02b_completion.md),
+[answer contract](simphysqa/answer_annotations.md) and
+[prompt archive](simphysqa/prompt_archive/README.md). Historical progress follows.
+
 # SPQ02 verified omission counterfactual QA — 5 October 2026
 
 Branch simphysqa-naacl; accepted parent e379013b7e80fe28172682cd39e42f4066fde841.

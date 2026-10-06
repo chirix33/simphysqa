@@ -19,3 +19,6 @@ docs/reviews/artifacts/P02a/** -text
 configs/model_training_p02a.json -text
 MODEL_TRAINING_CONTRACT.md -text
 docs/references/P02a_notebook_sanitized_review.md -text
+
+# Prompt archive manifests/requests/source snapshots hash exact preserved bytes.
+docs/simphysqa/prompt_archive/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

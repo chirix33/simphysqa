@@ -1,3 +1,13 @@
+# Latest bounded milestone: SPQ02b
+
+All 40 development QA have evidence-bound private answer explanations and solution
+procedures, with 40 audit packets, three blank forms and 360 prepared public
+requests. No new simulations or provider calls. Start with
+[contract](docs/simphysqa/answer_annotations.md),
+[prompt archive](docs/simphysqa/prompt_archive/README.md) and
+[exact commands and outputs](docs/reviews/SPQ02b_completion.md).
+Previous entry points/results remain below.
+
 # SimPhysQA SPQ02: verified matched omission QA
 
 Eight development pairs (two per domain) passed exact factual replay and separate

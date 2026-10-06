@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:simphysqa:answer-annotation:1.0.2",
+  "type": "object", "additionalProperties": false,
+  "required": ["version", "versions", "kind", "status", "parent_record_sha256", "cache_identity", "evidence_context", "targets", "future_family_contracts"],
+  "properties": {
+    "version": {"const": "simphysqa-answer-annotation/1.0.2"},
+    "versions": {"type": "object"},
+    "kind": {"enum": ["observed_evidence_readout", "saved_numerical_prediction", "matched_omission_numerical_comparison"]},
+    "status": {"const": "automatically_checked_human_unreviewed"},
+    "parent_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "cache_identity": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evidence_context": {"type": "object"},
+    "future_family_contracts": {"type": "object", "required": ["explanation", "clarification"]},
+    "targets": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false,
+      "required": ["target_id", "target", "state_id", "run_id", "value", "claims", "comparison", "explanation", "solution_trace"],
+      "properties": {
+        "target_id": {"type": "string"}, "target": {"type": "object"}, "state_id": {"type": "string"}, "run_id": {"type": "string"}, "value": {},
+        "claims": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/statement"}},
+        "comparison": {"type": ["object", "null"]}, "explanation": {"type": "string", "minLength": 40},
+        "solution_trace": {"type": "object", "additionalProperties": false, "required": ["status", "steps", "verification_record"],
+          "properties": {"status": {"const": "evidence_checked_human_unreviewed"},
+            "steps": {"type": "array", "minItems": 3, "items": {"$ref": "#/$defs/statement"}},
+            "verification_record": {"type": "object", "required": ["status", "readout_equals_gold", "bindings", "human_assessment"]}}}
+      }
+    }}
+  },
+  "$defs": {
+    "statement": {"type": "object", "required": ["text", "bindings"], "properties": {
+      "text": {"type": "string", "minLength": 10}, "bindings": {"type": "array", "minItems": 1, "items": {"type": "object",
+        "required": ["namespace", "pointer", "value_sha256"], "properties": {
+          "namespace": {"enum": ["public", "factual", "alternative", "pair", "context"]},
+          "pointer": {"type": "string", "pattern": "^/"}, "value_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }}}
+    }}
+  }
+}

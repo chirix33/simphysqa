@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:simphysqa:record:0.3.0",
+  "$id": "urn:simphysqa:record:0.3.1",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -685,6 +685,10 @@
               }
             }
           }
+        },
+        "answer_annotation": {
+          "type": "object",
+          "description": "Optional private answer annotation contract 1.0.2; independently validated. Source wrapper family versions and raw reference unchanged."
         }
       }
     },

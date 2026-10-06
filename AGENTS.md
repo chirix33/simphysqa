@@ -1,3 +1,15 @@
+# Active milestone: SPQ02b answer enrichment and prompt provenance
+
+Current user instruction from accepted 1ae35749421283e63344504dc6a5d24ce18f32e7
+overrides earlier eight-only scope: enrich all 40 existing QA and eight supporting
+alternatives. Read docs/prompts/SPQ02b_answer_enrichment.md and
+docs/simphysqa/answer_annotations.md. Keep source/public data, association 1.1.1,
+answers/tolerances/cutoffs and prior outputs exact. No simulations/provider calls.
+Gold explanations/traces are private and human-unreviewed. Archive actual
+annotation requests separately from deterministic procedures and prepared
+answering prompts. Durable report: docs/reviews/SPQ02b_completion.md.
+Older instructions and findings remain below.
+
 # Active milestone: SPQ02 — 5 October 2026
 
 Read docs/prompts/SPQ02_counterfactual_qa.md, docs/simphysqa/counterfactual.md and
