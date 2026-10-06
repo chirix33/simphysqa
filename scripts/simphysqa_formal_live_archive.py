@@ -13,7 +13,11 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
     statuses={c['candidate_id']:read(run/'cases'/c['candidate_id']/'status.json') for c in plan['candidates'] if (run/'cases'/c['candidate_id']/'status.json').exists()}
     attempts={p.name:read(p) for p in (run/'annotation/attempts').glob('*.json')}
     by_candidate={}
-    for name,a in attempts.items():by_candidate.setdefault(a['candidate_id'],[]).append({'attempt_file':name,'attempt_number':a['attempt_number'],'request_sha256':a['request_sha256']})
+    for name,a in attempts.items():
+        response=run/'annotation/responses'/name
+        by_candidate.setdefault(a['candidate_id'],[]).append({'attempt_file':name,'attempt_number':a['attempt_number'],
+            'request_sha256':a['request_sha256'],'provider_completion':'recorded_response' if response.exists() else 'unknown_reserved',
+            'validation_failure':read(response)['failure'] if response.exists() else 'interrupted_unknown_reserved'})
     selected={a['sample_id']:a for a in dm['assignments']}
     paths={a['packet_id']:a for a in dm['assignments']}
     verify_manifest(review_bundle)
@@ -34,10 +38,16 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
                 candidate=attempts[p.name]['candidate_id'];mode='provider_attempt_reservation'
             elif alias=='executed_run' and relative.startswith('annotation/items/'):
                 candidate=p.stem;mode='validated_executed_annotation'
+            elif alias=='executed_run' and relative.startswith('simulation-work-completed/'):
+                candidate=read(p)['candidate_id'];mode='actual_worker_or_static_compilation_resource_receipt'
+            elif alias=='executed_run' and relative.startswith('simulation-work/'):
+                candidate=read(p)['candidate_id'];mode='bounded_worker_admission_reservation'
             elif alias=='executed_run' and relative.startswith('cases/'):
                 candidate=relative.split('/')[1]
                 if '/executions/' in relative:mode='real_simulator_execution_evidence'
                 elif '/source-snapshot/' in relative:mode='reused_exact_committed_simulator_source'
+                elif p.name=='simulation-worker.log':mode='actual_simulator_worker_log'
+                elif p.name=='runtime.json':mode='actual_saved_simulator_runtime_provenance'
                 elif p.name=='record.json':mode='deterministic_family_qa_with_executed_public_language'
                 elif p.name=='public-view.json':mode='deterministic_public_only_projection'
                 elif p.name=='arm-interpretation.json':mode='actual_static_model_interpretation_zero_trajectory_steps'
@@ -52,9 +62,16 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
                 if relative.startswith('public-items/'):mode='deterministic_public_only_projection'
                 if relative.startswith('review-pages/'):mode='deterministic_readable_focused_scope_from_exact_packet_keys'
                 if alias=='review_distribution':mode='reused_exact_blinded_distribution_of_same140_items'
+            aggregate=(alias in ('delivery','review_distribution') and candidate is None and
+                       (relative in ('focused.json','focused.jsonl','organizer-private/qa-records.jsonl','organizer-private/identity-key.json')
+                        or relative.startswith('organizer-private/candidate')))
+            source_candidates=([x['candidate_id'] for x in dm['assignments']] if aggregate else [candidate] if candidate else [])
+            if relative.startswith('organizer-private/candidate'):source_candidates=[c['candidate_id'] for c in plan['candidates']]
+            lineage=[v for c in source_candidates for v in by_candidate.get(c,[])]
             entry={'path':str(p),'sha256':file_hash(p),'root_scope':alias,'mode':mode,
                    'candidate_id':candidate,'actual_provider_request_or_response':executed,
-                   'language_request_lineage':sorted(by_candidate.get(candidate,[]),key=lambda x:x['attempt_number']),
+                   'source_candidate_ids':source_candidates,
+                   'language_request_lineage':sorted(lineage,key=lambda x:x['attempt_number']),
                    'generation_procedure_pins_sha256':digest(plan['scientific_source_pins'])}
             mappings.append(entry)
     for relative in plan['scientific_source_pins']:
