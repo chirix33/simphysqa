@@ -1,0 +1,22 @@
+{
+  "version": "simphysqa-formal-audit/1.0.0",
+  "seed": 20261006,
+  "reviewers": ["R1", "R2", "R3"],
+  "identity_mapping": null,
+  "calibration_items": 0,
+  "formal_items": 140,
+  "ratings": 420,
+  "per_cell": 7,
+  "reserve_per_cell": 7,
+  "maximum_candidates": 280,
+  "attempts_per_annotation": 2,
+  "exclusions": "configs/simphysqa/development_exclusions.json",
+  "provider_config": "configs/simphysqa/annotation_spq01.json",
+  "simulation_config": "configs/simphysqa/counterfactual.json",
+  "new_live_budget": null,
+  "sampling": "Python Random(seed); fixed DOMAINS/QUESTION_TYPES; sorted groups shuffled per domain, assigned round-robin to disjoint family pools; one uniformly random sorted source QA per group; first 7 candidates and next 7 same-cell reserves",
+  "qualification": "first seven qualified in each frozen ordered cell; at most 14 processed; no cross-cell borrowing; exhausted cell is a shortfall",
+  "scope": ["global_context", "trajectory_language", "question_wording_and_type", "timestamp_language", "state_event_descriptions"],
+  "uncertainty": {"confidence": 0.8, "bootstrap_replicates": 10000, "seed": 20261006, "unit": "whole_item_three_original_ratings", "strata": "domain/question_type"},
+  "analysis": "descriptive balanced-design acceptance and empirical Fleiss kappa; fixed-prevalence score statistic retained only as labeled planning-model sensitivity, no achieved-power claim"
+}
