@@ -1,3 +1,7 @@
+# SPQ05 executed provenance available — 6 October 2026
+
+Final executed archive: C:/Users/aashraf/.codex/visualizations/2026/10/06/01 a 1131 b-eac 2-7 a 31-afb 4-f 219 a 8 dd 6471/spq05/executed-prompt-archive-1.0.1. Per-file index 6,293 files;145 attempt reservations/144 returned responses/one unknown;140 distinct formal QA. Original preparation index and sealed historical archives remain unchanged. [Executed index pointer](executed-file-generation-index.json). Generator identity/raw requests are organizer-only and excluded from the blinded reviewer bundle. Earlier preparation description follows unchanged.
+
 # SPQ05 provenance supplement /1.0.0
 
 The sealed earlier archive1.0.7 and its catalogue/index/request payloads remain

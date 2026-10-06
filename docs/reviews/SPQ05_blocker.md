@@ -1,3 +1,7 @@
+# Closed historical budget blocker — 6 October 2026
+
+The user authorized additional bounded resources and the exact external annotation payload/destination. Final 140-item package verified; shortfall 0. See [SPQ05 completion](SPQ05_completion.md). The original pre-authorization blocker below is retained as history, not current status. Human ratings remain uncollected.
+
 # SPQ05 blocker — additional live-resource budget
 
 - Phase/substep and status: SPQ05 family qualification/annotation/final packet freeze;

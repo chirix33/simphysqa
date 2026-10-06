@@ -1,3 +1,9 @@
+# SPQ05 final 140 package verified — 6 October 2026
+
+140 unique QA/140 trajectory/split groups, 20 cells × 7, same 140 for R1/R2/R3 (420 blank assignments). No calibration or identity mapping. [Completion](reviews/SPQ05_completion.md) and [blinded review entry](C:/Users/aashraf/.codex/visualizations/2026/10/06/01a1131b-eac2-7a31-afb4-f219a8dd6471/spq05/review-bundle-1.0.0/review-index.html).
+
+143 initial requests/145 attempts/two repairs; charged 4.897423 USD including unknown 0.203280 reservation.340 simulations/21 zero-step static compilations; all additional ceilings respected. Three retained rejections, 137 unused reserves. Full extraction/bindings/privacy/source/exclusion/allocation/form verification and actual zero-call/exact-byte resume passed. Human ratings and quality/agreement/model-performance claims remain uncollected. No benchmark/full release/merge/push. Historical preparation notices follow unchanged.
+
 # SPQ05 formal audit preparation and shortfall — 6 October 2026
 
 From current main ff2fe26 on simphysqa-spq05; no merge/push. New instruction

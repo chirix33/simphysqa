@@ -1,3 +1,8 @@
+# SPQ05 ready for independent human review — 6 October 2026
+
+[Blinded 140-item review entry](C:/Users/aashraf/.codex/visualizations/2026/10/06/01a1131b-eac2-7a31-afb4-f219a8dd6471/spq05/review-bundle-1.0.0/review-index.html) · [Completion/report](reviews/SPQ05_completion.md) · [authorized execution overlay](simphysqa/formal_execution.md).
+All R1/R2/R3 reviewers use the same 140 frozen items;420 blank ratings. Generator settings/provenance stay organizer-only. No calibration, answering benchmark, full-release enrichment, merge or push. Prior handoff/index content follows unchanged.
+
 # Current task: SPQ05 formal audit preparation — 6 October 2026
 
 The newest [SPQ05 specification](prompts/SPQ05_formal_audit.md) supersedes older
