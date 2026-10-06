@@ -1,4 +1,4 @@
-# SPQ05 frozen processing protocol /1.0.0
+# SPQ05 frozen processing protocol /1.0.1
 
 Authority: [SPQ05 instruction](../prompts/SPQ05_formal_audit.md). This supersedes
 the historical calibration/formal plan and foundation-review execution restrictions

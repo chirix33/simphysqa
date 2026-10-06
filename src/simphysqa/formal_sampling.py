@@ -115,7 +115,10 @@ def prepare(inventory, artifacts, output):
     used_initial = sum(a['initial_request'] for a in attempts)
     if used_initial != 16 or len(simulation_reservations) != 32:
         raise ValueError('historical usage changed; reassess capacity explicitly')
-    producer = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    # Later report-only commits do not change the scientific producer of saved output.
+    # The complete file pins below still reject any changed scientific code/config.
+    producer = (read(output/'protocol.json')['producer_commit'] if (output/'protocol.json').exists()
+                else subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip())
     pins = [ROOT/'dataset.schema.json', ROOT/'configs/simphysqa/formal_audit.json',
             ROOT/'docs/prompts/SPQ05_formal_audit.md']
     pins += sorted((ROOT/'src/simphysqa').glob('*.py')) + sorted((ROOT/'src/simphysqa').glob('*.json'))
