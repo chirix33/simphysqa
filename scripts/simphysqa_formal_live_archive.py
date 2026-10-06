@@ -23,6 +23,9 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
             relative=p.relative_to(root).as_posix();mode='deterministic_saved_evidence_procedure';candidate=None;executed=False
             if alias=='executed_run' and relative.startswith('annotation/requests/'):
                 a=attempts[p.name];candidate=a['candidate_id'];executed=True;mode='actual_executed_annotation_request'
+                response=run/'annotation/responses'/p.name
+                if not response.exists() or read(response)['raw_response'] is None:
+                    executed=False;mode='attempted_annotation_request_unknown_provider_completion'
                 save_bytes(output/'actual-requests'/p.name,p.read_bytes())
             elif alias=='executed_run' and relative.startswith('annotation/responses/'):
                 candidate=attempts[p.name]['candidate_id'];mode='actual_provider_response_accounting';executed=True
@@ -70,6 +73,8 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
            'review_distribution':{'path':str(review_bundle),'manifest_sha256':file_hash(review_bundle/'manifest.json'),
                                   'same140_assignments':True,'new_audit_items':0},
            'actual_annotation_attempts':len(attempts),'actual_annotation_initials':sum(a['initial_request'] for a in attempts.values()),
+           'known_returned_provider_requests':sum((run/'annotation/responses'/name).exists() and read(run/'annotation/responses'/name)['raw_response'] is not None for name in attempts),
+           'unknown_completion_attempts':sum(not (run/'annotation/responses'/name).exists() for name in attempts),
            'formal_items':len(dm['assignments']),'ratings_collected':0,'answering_model_calls':0,
            'per_file_generation_index':mappings}
     retained(output/'file-generation-index.json',index)
