@@ -26,6 +26,7 @@ assert len({x['sample_id'] for x in assignments})==len(assignments)
 assert len({x['group_id'] for x in assignments})==len(assignments)
 assert not excluded & {x['group_id'] for x in assignments}
 index={c['candidate_id']:c for c in plan['candidates']};states=events=resolved=0;privatebindings=0;pairs=0
+relationships=Counter();description_statuses=Counter();zero_event_states=0
 with formal_scope(plan['candidates'],plan['excluded_groups']):
     for assignment,out in zip(assignments,focused):
         candidate=index[assignment['candidate_id']];case=a.run/'cases'/candidate['candidate_id']
@@ -48,6 +49,9 @@ with formal_scope(plan['candidates'],plan['excluded_groups']):
             assert canonical(s['timestamp_language'])==canonical(timestamp)
             assert s['timestamp']<=out['evidence']['observation_cutoff']
             states+=1;events+=len(s['linked_events'])
+            zero_event_states+=not s['linked_events']
+            relationships.update(e['temporal_relationship'] for e in s['linked_events'])
+            description_statuses.update(e['event_description_status'] for e in s['linked_events'])
         resolved+=len(out['evidence_resolution'])
         assert set(out['qa'])=={'question'} and 'verification' not in out and 'private' not in out
         assert b'gpt-5.6-sol' not in canonical(packet) and b'annotation_provenance' not in canonical(packet)
@@ -103,6 +107,8 @@ for cell in {c['cell'] for c in plan['candidates']}:
 report={'version':'SPQ05-saved-delivery-verification/1.0.0','formal_items':len(assignments),'final_identity_frozen':dm.get('final_identity_frozen'),
         'unique_sample_and_groups':True,'exclusions_verified':len(excluded),'candidate_order_unchanged':True,
         'extraction_states':states,'extraction_state_event_links':events,'public_bindings_resolved':resolved,
+        'temporal_relationship_counts':dict(relationships),'description_status_counts':dict(description_statuses),
+        'states_without_linked_events_retained':zero_event_states,
         'private_answer_trace_bindings_resolved':privatebindings,'qualified_paired_receipts':pairs,
         'source_shards_preserved':len(sourcehashes),'prior_manifests_preserved':prior_count,'prior_indexed_file_checks':prior_files,
         'blank_per_reviewer':forms,'ratings_collected':0,'within_all_authorized_ceilings':True,
