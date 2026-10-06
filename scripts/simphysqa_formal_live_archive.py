@@ -21,10 +21,15 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
     selected={a['sample_id']:a for a in dm['assignments']}
     paths={a['packet_id']:a for a in dm['assignments']}
     verify_manifest(review_bundle)
-    for alias,root in (('executed_run',run),('delivery',delivery),('review_distribution',review_bundle)):
+    extra_roots=(('payload_dryrun',run.parent/'authorized-payload-dryrun-1.0.0'),
+                 ('preserved_preparation_1.0.0',run.parent/'preparation-1.0.0'))
+    for _,root in extra_roots:verify_manifest(root)
+    for alias,root in (('executed_run',run),('delivery',delivery),('review_distribution',review_bundle),*extra_roots):
         for p in sorted(root.rglob('*')):
             if not p.is_file() or p.name.startswith('.'):continue
             relative=p.relative_to(root).as_posix();mode='deterministic_saved_evidence_procedure';candidate=None;executed=False
+            if alias=='payload_dryrun':mode='prepared_exact_public_payload_unexecuted_dryrun' if relative.startswith('payloads/') else 'deterministic_no_call_payload_privacy_and_source_precheck'
+            if alias=='preserved_preparation_1.0.0':mode='reused_exact_preserved_superseded_preparation_output'
             if alias=='executed_run' and relative.startswith('annotation/requests/'):
                 a=attempts[p.name];candidate=a['candidate_id'];executed=True;mode='actual_executed_annotation_request'
                 response=run/'annotation/responses'/p.name
@@ -74,6 +79,11 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
                    'language_request_lineage':sorted(lineage,key=lambda x:x['attempt_number']),
                    'generation_procedure_pins_sha256':digest(plan['scientific_source_pins'])}
             mappings.append(entry)
+    for p in sorted(run.parent.glob('*')):
+        if p.is_file():mappings.append({'path':str(p),'sha256':file_hash(p),'root_scope':'offline_verification_and_logs',
+             'mode':'actual_offline_check_receipt_or_log_no_new_provider_call','candidate_id':None,
+             'actual_provider_request_or_response':False,'language_request_lineage':[],
+             'generation_procedure_pins_sha256':digest(plan['scientific_source_pins'])})
     for relative in plan['scientific_source_pins']:
         path=ROOT/relative
         if file_hash(path)!=plan['scientific_source_pins'][relative]:raise ValueError('executed source modified')
@@ -85,6 +95,9 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
     index={'version':'SPQ05-executed-provenance/1.0.0','producer_commit':plan['producer_commit'],
            'inherits':{'path':str(previous),'manifest_sha256':file_hash(previous/'manifest.json'),'historical_executed_requests':16},
            'preparation':{'path':str(preparation),'manifest_sha256':file_hash(preparation/'manifest.json'),'prepared_requests':280,'execution_status':'unexecuted_preparations_separate_from_actual_requests'},
+           'inherits_preparation_supplement':{'path':str(run.parent/'prompt-archive-supplement-1.0.0'),
+                  'manifest_sha256':file_hash(run.parent/'prompt-archive-supplement-1.0.0/manifest.json'),
+                  'scope':'Every preparation1.0.1 and excluded development-check file retains its prior per-file mapping.'},
            'execution_plan_sha256':digest(plan),'generation_procedure_pins':plan['scientific_source_pins'],
            'delivery_manifest_sha256':file_hash(delivery/'manifest.json'),
            'review_distribution':{'path':str(review_bundle),'manifest_sha256':file_hash(review_bundle/'manifest.json'),
