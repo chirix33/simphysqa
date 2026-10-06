@@ -1,6 +1,7 @@
 """Archive exact SPQ05 requests and index every executed/reused/deterministic file."""
 import argparse
 from pathlib import Path
+import subprocess
 from simphysqa.io import ROOT,canonical,digest,read,external
 from simphysqa.formal_sampling import file_hash,save_bytes
 from simphysqa.spq01a import retained,verify_manifest
@@ -10,6 +11,7 @@ from simphysqa.formal_live import execution_plan
 def archive(run,delivery,preparation,previous,review_bundle,output):
     output=external(output);pm=verify_manifest(previous);dm=verify_manifest(delivery);prep=verify_manifest(preparation)
     plan=execution_plan(run);mappings=[]
+    producer_lineage=read(run/'producer-lineage.json')
     statuses={c['candidate_id']:read(run/'cases'/c['candidate_id']/'status.json') for c in plan['candidates'] if (run/'cases'/c['candidate_id']/'status.json').exists()}
     attempts={p.name:read(p) for p in (run/'annotation/attempts').glob('*.json')}
     by_candidate={}
@@ -17,7 +19,8 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
         response=run/'annotation/responses'/name
         by_candidate.setdefault(a['candidate_id'],[]).append({'attempt_file':name,'attempt_number':a['attempt_number'],
             'request_sha256':a['request_sha256'],'provider_completion':'recorded_response' if response.exists() else 'unknown_reserved',
-            'validation_failure':read(response)['failure'] if response.exists() else 'interrupted_unknown_reserved'})
+            'validation_failure':read(response)['failure'] if response.exists() else 'interrupted_unknown_reserved',
+            'producer_commit':next(r['producer_commit'] for r in producer_lineage['annotation_attempt_ranges'] if r['first']<=a['attempt_number']<=r['last'])})
     selected={a['sample_id']:a for a in dm['assignments']}
     paths={a['packet_id']:a for a in dm['assignments']}
     verify_manifest(review_bundle)
@@ -92,7 +95,10 @@ def archive(run,delivery,preparation,previous,review_bundle,output):
                      'scripts/simphysqa_formal_readable.py','docs/decisions/SPQ05_authorized_execution.md'):
         save_bytes(output/'procedures'/relative,(ROOT/relative).read_bytes())
     save_bytes(output/'procedures/scripts/simphysqa_formal_blinded_bundle.py',(ROOT/'scripts/simphysqa_formal_blinded_bundle.py').read_bytes())
-    index={'version':'SPQ05-executed-provenance/1.0.0','producer_commit':plan['producer_commit'],
+    archive_producer=(read(output/'file-generation-index.json')['archive_producer_commit'] if (output/'file-generation-index.json').exists()
+                      else subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
+    index={'version':'SPQ05-executed-provenance/1.0.1','producer_commit':plan['producer_commit'],
+           'archive_producer_commit':archive_producer,'exact_execution_producer_lineage':producer_lineage,
            'inherits':{'path':str(previous),'manifest_sha256':file_hash(previous/'manifest.json'),'historical_executed_requests':16},
            'preparation':{'path':str(preparation),'manifest_sha256':file_hash(preparation/'manifest.json'),'prepared_requests':280,'execution_status':'unexecuted_preparations_separate_from_actual_requests'},
            'inherits_preparation_supplement':{'path':str(run.parent/'prompt-archive-supplement-1.0.0'),
