@@ -1,0 +1,43 @@
+{
+  "version": "simphysqa-annotation-plan/0.1.0",
+  "status": "SPQ00_draft_superseded_for_bounded_SPQ01; full_release_generation_not_enabled",
+  "schema_version": "simphysqa/0.1.0",
+  "prompt_version": "simphysqa-public-enrichment/0.1-draft",
+  "model_identity": null,
+  "model_revision": null,
+  "generation_settings": {
+    "temperature": 0,
+    "seed": 20261004,
+    "max_output_tokens": 4096
+  },
+  "execution": {
+    "enabled": false,
+    "max_calls": 0,
+    "max_cost_usd": 0,
+    "max_wall_seconds": 0
+  },
+  "provenance_required": [
+    "exact model identity and revision where available",
+    "prompt and schema hashes",
+    "generation settings",
+    "source and output content hashes",
+    "every attempt and validation failure",
+    "retry/repair count and details"
+  ],
+  "human_review": "research_activity_not_generation_approval_gate",
+  "language_source": "public observed states and declared model/control only",
+  "families": {
+    "direct": "16_SPQ01_observed_readouts_automatically_verified_human_unreviewed",
+    "predictive": "16_SPQ01_original_references_exact_public_language_generated_human_unreviewed; release_wide_enrichment_pending",
+    "counterfactual": "pending_matched_intervention_or_verified_resimulation",
+    "explanation": "pending_claim_level_evidence",
+    "clarification": "pending_genuine_information_gap"
+  },
+  "alternative_source": {
+    "status": "separate_study_plan_pending",
+    "model_identity": null,
+    "matched_subset_manifest": null,
+    "protocol": "docs/simphysqa/annotation.md"
+  },
+  "active_bounded_config": "configs/simphysqa/annotation_spq01.json"
+}

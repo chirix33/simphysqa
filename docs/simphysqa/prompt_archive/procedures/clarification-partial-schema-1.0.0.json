@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:simphysqa:clarification:1.0.0",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "source_schema_version", "sample_id", "trajectory_id", "question_type", "annotation_version", "source", "public", "private", "completion"],
+  "properties": {
+    "schema_version": {"const": "simphysqa-clarification/1.0.0"},
+    "source_schema_version": {"const": "1.0.0"},
+    "sample_id": {"type": "string", "pattern": "^spq-clarification-[a-f0-9]{24}$"},
+    "trajectory_id": {"type": "string"}, "question_type": {"const": "clarification"},
+    "annotation_version": {"type": "string"}, "source": {"type": "object"},
+    "public": {"type": "object", "additionalProperties": false, "required": ["input", "annotations"],
+      "properties": {"annotations": {"type": "object"}, "input": {"$ref": "#/$defs/partial"}}},
+    "private": {"type": "object", "required": ["source_record", "metadata", "clarification_evidence", "reference", "initial_view", "resolved_view", "clarification_annotation"]},
+    "completion": {"type": "object"}
+  },
+  "$defs": {
+    "partial": {"type": "object", "additionalProperties": false,
+      "required": ["domain", "entities", "global_context", "coordinate_convention", "controller", "known_events", "states", "observation_cutoff", "task_type", "question", "query", "partial_input_contract", "scenario_role", "interaction", "between_state_associations"],
+      "properties": {
+        "domain": {"enum": ["robotic_arm", "driving", "object_pushing_stacking", "tethered_load"]},
+        "entities": {"type": "array"}, "global_context": {"type": "string"}, "coordinate_convention": {"type": "string"},
+        "controller": {"type": "object"}, "known_events": {"type": "array"}, "states": {"type": "array"},
+        "observation_cutoff": {"type": "number"}, "task_type": {"const": "clarification_state_readout"},
+        "question": {"type": "string"}, "query": {"type": "object", "additionalProperties": false,
+          "required": ["target_id", "quantity", "unit", "frame", "answer_type", "query_kind", "rule_id", "rule_definition", "absolute_tolerance", "relative_tolerance"],
+          "properties": {"target_id": {"const": "clarified-target"}, "quantity": {"type": "string"}, "entity_id": {"type": "string"},
+            "timestamp": {"type": "number"}, "execution_condition": {"const": "scheduled"}, "unit": {"type": "string"}, "frame": {"type": "string"},
+            "answer_type": {"enum": ["boolean", "number", "integer", "vector"]}, "query_kind": {"type": "string"}, "rule_id": {"type": "string"},
+            "rule_definition": {"type": "string"}, "absolute_tolerance": {"type": "number", "minimum": 0}, "relative_tolerance": {"type": "number", "minimum": 0}},
+          "oneOf": [
+            {"required": ["entity_id", "timestamp"], "not": {"required": ["execution_condition"]}},
+            {"required": ["timestamp", "execution_condition"], "not": {"required": ["entity_id"]}},
+            {"required": ["entity_id", "execution_condition"], "not": {"required": ["timestamp"]}}
+          ]},
+        "partial_input_contract": {"const": "simphysqa-partial-input/1.0.0"}, "scenario_role": {"type": "string"},
+        "interaction": {"type": "object", "required": ["stage", "behavior", "response_schema"], "properties": {"stage": {"const": 1}}},
+        "between_state_associations": {"type": "array"}
+      }
+    }
+  }
+}

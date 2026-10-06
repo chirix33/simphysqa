@@ -1,165 +1,173 @@
-> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
+# SimPhysQA
 
-Finalized licensing and release freeze: see [license scope/status](LICENSE.md)
-and [final preparation report](docs/reviews/PDS_release_preparation_completion.md).
-Rights-holder Kaushik Roy and licensing authority are confirmed for the scoped
-CC BY 4.0 dataset/assets and MIT code. The 6,800-attempt configuration stays disabled.
+Simulator-grounded trajectories, public language, five QA families and reproducible
+annotation/evaluation infrastructure for NAACL Resources, Benchmarks, and Evaluation.
+Learned Phi-JEPA/SCLD/EBM dynamics and CODI/Coconut training are outside this submission.
 
-Current release status: **licenses finalized; generation remains disabled**. See
-[the four-domain completion report](docs/reviews/PDS_four_domain_completion.md).
-`configs/dataset_release_four_domain.json` selects only arm, driving, objects and
-tether, with their existing calibrated timesteps. Its planned total is 6,800 base
-scenarios; production generated/admitted counts are both zero. Quadruped/MJX
-commands below are preserved development documentation, not next steps.
-Explicit adapter access uses `--config configs/dataset_quadruped_development.json`;
-no further quadruped runs are authorized in the current task.
+Start with the [foundation contract and setup](docs/simphysqa/foundation.md),
+[authoritative56-item registry](docs/simphysqa/development-index.md) and
+[machine index](docs/simphysqa/development-index.json).
+The engineering set has16 direct,16 predictive,8 counterfactual,8 explanation and
+8 explicit query-gap clarification items in16 train groups. All groups remain
+excluded from fresh formal sampling. This is not the11,105-record source release
+or an unbiased quality/OOD sample.
 
-# Φ-JEPA dataset design package — revision 1.1.0
+Current external exports are answers1.0.3, explanations1.0.0 and clarifications1.0.0,
+using association1.1.1;504 initial tool-free requests plus72 conditional templates
+are prepared. Human judgments and answering benchmarks are uncollected/unexecuted.
+Gold explanations/traces and simulator/witness evidence remain private; explanation
+QA intentionally supplies only its selected comparison. Clarification asks for a
+missing query condition, entity or time, not a fabricated unique initial answer.
 
-Start with MODEL_DATA_CONTRACT.md and SPECIFICATION.md, then give CODEX_PROMPT.md and this package to Codex in the Φ-JEPA repository.
+Supported installation is editable source checkout, Python>=3.11, jsonschema4.26.0,
+setuptools84.0.0. See the foundation for exact offline and ordinary setup commands,
+separate simulator/audit dependencies and accurately bounded test coverage.
+Active code: `src/simphysqa/`; retained physics: `src/phi_jepa/simulation/`;
+configs: `configs/simphysqa/`; tests: `tests/`; scientific contracts: `docs/simphysqa/`.
+Data/model artifacts remain external and path-configurable.
 
-The ZIP filename retains v1 as the major package version; its contents now contain design revision 1.1.0. The JSON record schema remains 1.0.0. This revision supersedes the original physical-state training interpretation.
+[Prompt/procedure archive entry](docs/simphysqa/prompt_archive/README.md),
+[consolidated catalogue](docs/simphysqa/prompt_archive/catalogue.md),
+[per-file generation mappings](docs/simphysqa/prompt_archive/file-generation-index.json)
+and [executed request/output mapping example](docs/simphysqa/prompt_archive/provenance-example.md)
+separate16 executed annotation requests, reused outputs, deterministic procedures,
+unavailable preliminary source revisions and unexecuted answering preparation.
 
-## Files
+[Remaining research](docs/simphysqa/pending.md),
+[merge review / proposed title and body](docs/reviews/foundation_merge_review.md),
+[historical preservation plan](docs/decisions/foundation_merge_preservation.md).
+Main/prior artifacts are preserved; this branch has not been merged or pushed.
 
-- MODEL_DATA_CONTRACT.md: confirmed numerical-plus-answer-embedding objective, registries, source boundaries and tests.
-- SPECIFICATION.md: scope, contract, scenes, parameters, splits, labels, validation and resource plan.
-- dataset.schema.json: strict JSON Schema Draft 2020-12; root validates a complete record.
-- pilot_config.json: proposed settings and counts, with final generation disabled.
-- example_record.json: schematic future-prediction record; values are invented to illustrate structure, not simulated.
-- example_public_input.json: input-only export of that example.
-- example_keyed_bundle.json: numbered wrapper preserving the requested sample organization.
-- CODEX_PROMPT.md: implementation task and acceptance criteria.
-- VALIDATION.md: checks actually performed on this package.
-- SHA256SUMS.txt: artifact checksums, excluding this checksum file itself.
+<details>
+<summary>Historical milestone README (superseded status descriptions)</summary>
 
-To validate a public record or numbered bundle with the same schema, replace its top-level $ref with #/$defs/public_record or #/$defs/bundle in the validator's in-memory schema. Do not change the definitions.
+# Latest bounded milestone: SPQ02b
 
-JSON Schema verifies structure. The semantic and production-admission gates in SPECIFICATION.md remain required. The examples deliberately have record_origin=illustrative_only and incomplete runtime provenance; they must never enter a real benchmark.
+All 40 development QA have evidence-bound private answer explanations and solution
+procedures, with 40 audit packets, three blank forms and 360 prepared public
+requests. No new simulations or provider calls. Start with
+[contract](docs/simphysqa/answer_annotations.md),
+[prompt archive](docs/simphysqa/prompt_archive/README.md) and
+[exact commands and outputs](docs/reviews/SPQ02b_completion.md).
+Previous entry points/results remain below.
 
-Current first-release scope: four domains (arm, driving, objects, tether), no slosh/fluid, MuJoCo/PyBullet with MJX deferred and one primary engine per domain, future prediction, and private reference outcomes. Concrete simulation settings remain pilot defaults. No simulator or GPU execution was performed for this design package.
+# SimPhysQA SPQ02: verified matched omission QA
 
-## Implemented dataset generator
+Eight development pairs (two per domain) passed exact factual replay and separate
+factual/alternative coarse/fine admission. The new 0.3.0 counterfactual family
+supports accepted association export 1.1.1, private paired evidence, development
+auditing and typed scoring. Original 32 QA packets and 288 requests are preserved;
+eight new packets and 72 prepared requests use unchanged observed prefixes.
+Human quality and answering-model performance remain pending.
 
-The paragraph above describes the supplied design package. Implementation and
-measured development pilots now live under `src/phi_jepa/simulation/`. The actual
-task file is `DATASET_CODEX_PROMPT.md`. See [the execution report](docs/reviews/PDS_completion.md)
-and [recorded decisions](docs/decisions/Dataset_preparation.md) for tested paths,
-counts, calibration changes and failed gates. Production generation remains off.
+[Exact commands and outcomes](docs/reviews/SPQ02_completion.md),
+[contract](docs/simphysqa/counterfactual.md),
+[saved user prompt](docs/prompts/SPQ02_counterfactual_qa.md),
+[configuration](configs/simphysqa/counterfactual.json).
 
-Use an editable installation from this repository; the CLI reads the preserved
-schema, prompts and configuration here. No API credentials or online tracking
-are needed. Three independent working environment locks are included. The
-existing P00 environment and legacy code are not replaced.
+New entry points: `python -m simphysqa.spq02_prepare`, `spq02_worker --preflight`,
+`spq02_worker`, `spq02_export`, `spq02_verify`, `spq02_coverage` and
+`spq02_arm_inspect` (each module accepts explicit external paths; use `--help`).
+Simulator execution uses the pinned existing WSL environment; data/export checks
+use the existing CPU annotation environment. Historical entry points follow.
 
-Windows PowerShell, native MuJoCo and offline contracts:
+# SimPhysQA
 
-```powershell
-# Use any available Python 3.12; this checkout already has .p00-venv.
-.p00-venv/Scripts/python.exe -m venv .dataset-venv
-.dataset-venv/Scripts/python.exe -m pip install -r configs/dataset-windows.lock.txt
-.dataset-venv/Scripts/python.exe -m pip install --no-build-isolation --no-deps -e .
-.dataset-venv/Scripts/phi-dataset.exe inspect-environment
-.dataset-venv/Scripts/phi-dataset.exe validate-schema
-.dataset-venv/Scripts/phi-dataset.exe smoke --domain robotic_arm --scenarios 20 --config configs/dataset_refined_pilot.json --output dataset-runs/my-arm-smoke
-.dataset-venv/Scripts/phi-dataset.exe calibrate --domain tethered_load --scenarios 100 --output dataset-runs/my-tether-calibration
-.dataset-venv/Scripts/phi-dataset.exe validate-dataset --path dataset-runs/my-arm-smoke
-.dataset-venv/Scripts/phi-dataset.exe export-public --path dataset-runs/my-arm-smoke
-.dataset-venv/Scripts/python.exe -m unittest discover -s tests -v
-```
+SimPhysQA is a dataset/evaluation contribution for NAACL Resources, Benchmarks,
+and Evaluation: simulator-grounded structured/language trajectories, QA/evidence
+and reproducible annotation, plus comparisons across models/domains/question types.
+Phi-JEPA/SCLD/EBM/learned dynamics/CODI/Coconut training is outside active scope.
 
-PyBullet runs in WSL Ubuntu with Python 3.11 because the attempted Python 3.12
-installations required unavailable compilers. Normal installation, from WSL:
+SPQ01a adds deterministic public event–state links and controller-aware schedule
+claims to all 32 existing development packets, preserving .2 s cutoffs and QA
+references. [Specification](docs/simphysqa/event_language.md),
+[completion and exact commands](docs/reviews/SPQ01a_completion.md).
+Use `python -m simphysqa.spq01a --help`; it is offline and makes zero model calls.
+Real active-event overlap is absent in this development frame; boundary coverage
+uses labeled synthetic software fixtures. Human quality remains pending.
 
-```bash
-cd /mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa
-# uv may install the requested Python if 3.11 is not already installed.
-uv venv --python 3.11 .dataset-bullet-venv
-uv pip install --python .dataset-bullet-venv/bin/python -r configs/dataset-bullet-linux.lock.txt
-uv pip install --python .dataset-bullet-venv/bin/python --no-build-isolation --no-deps -e .
-.dataset-bullet-venv/bin/phi-dataset smoke --domain driving --scenarios 20 --config configs/dataset_refined_pilot.json --output dataset-runs/my-driving-smoke
-.dataset-bullet-venv/bin/phi-dataset calibrate --domain object_pushing_stacking --scenarios 100 --output dataset-runs/my-object-calibration
-.dataset-bullet-venv/bin/phi-dataset compare-engines --domain robotic_arm --pairs 20 --config configs/dataset_refined_pilot.json --output dataset-runs/my-arm-comparison
-```
+SPQ01 delivers an actual release inventory, 16 live human-unreviewed public
+annotations, 16 verified direct QA plus 16 unchanged predictive QA, audit packets
+and separate blank forms. No human agreement/annotation-quality or answering-model
+result exists. See [SPQ01 report and exact executed commands](docs/reviews/SPQ01_completion.md),
+[annotation](docs/simphysqa/annotation.md), [audit method](docs/simphysqa/audit.md),
+[evaluation plan](docs/simphysqa/evaluation.md) and [remaining work](docs/simphysqa/pending.md).
 
-MJX-JAX uses a separate WSL Python 3.12 environment; the lock includes CUDA 12
-packages. It was tested on this workstation, not assumed from its driver name:
+| Active directory | Role |
+| --- | --- |
+| src/simphysqa | Loader/lineage schema; inventory/selection; provider/job; direct QA; audit/ power checks; public requests/scoring |
+| src/phi_jepa/simulation | Retained simulator generation/verification compatibility; optional engines |
+| configs/simphysqa | Annotation/budget settings, alternative-source draft, exclusions, audit/evaluation plans and pins |
+| docs/simphysqa | Current contracts, estimator/test reconciliation and pending decisions |
+| docs/prompts/SPQ01_annotations.md | Authorized bounded milestone |
+| docs/references/spq01_audit | Byte-preserved supplied audit package/provenance |
+| tests/test_simphysqa.py, tests/test_spq01.py | Existing-source offline checks and test-only transports |
+| dataset.schema.json, SPECIFICATION.md, VALIDATION.md, licenses | Preserved source contracts/licensing |
 
-```bash
-python3 -m venv .dataset-wsl-venv
-.dataset-wsl-venv/bin/python -m pip install -r configs/dataset-mjx-linux.lock.txt
-.dataset-wsl-venv/bin/python -m pip install --no-build-isolation --no-deps -e .
-export XLA_PYTHON_CLIENT_PREALLOCATE=false
-.dataset-wsl-venv/bin/phi-dataset inspect-environment --device-step
-.dataset-wsl-venv/bin/python tools/study_dataset_quadruped.py --output dataset-runs/my-quadruped-study
-# This command verifies nominal refinement evidence before running smoke (20),
-# then calibration (100). Failed nominal qualification stops before either run.
-.dataset-wsl-venv/bin/python tools/run_qualified_quadruped_pilots.py --study dataset-runs/my-quadruped-study --output dataset-runs/my-qualified-quadruped-pilots
-```
+Historical assets/work remain on main/history and retained directories. SPQ01 does
+no further cleanup. New data/cache/weights/run outputs use configurable external,
+versioned, content-hashed roots.
 
-`python -m phi_jepa.simulation.cli` is equivalent to `phi-dataset`. The delivered
-pilots are under `dataset-runs/final/<domain>/{smoke,calibrate}`; exploratory
-failures are also retained under `dataset-runs/`. These large local outputs are
-gitignored; durable compact evidence is linked in the completion report.
+## Setup
 
-Quadruped refinement uses a fixed physical controller clock with held torques.
-The bounded study in `configs/quadruped_refinement_study.json` compares 1, 0.5
-and 0.25 ms integration at a fixed 1 ms controller period, records synchronized
-1 ms states/commands/foot contacts, and changes one contact/solver/gait setting
-at a time. The general adapter default controller period is 2 ms; explicitly
-configure `quadruped_settings.controller_period_s` for a different experiment.
-The old quadruped manifests/registries describe the earlier controller and are
-not qualification evidence for this revision. See
-[fixed-clock decisions](docs/decisions/Quadruped_fixed_clock.md).
-`tools/audit_quadruped_study.py <study-directory>` independently checks saved
-torque laws and contact timestamps; `tools/verify_quadruped_clock.py --output
-<new-json-path>` runs two short instrumented MJX force/hold checks. These audits
-are distinct from nominal qualification and varied-scenario performance.
+Python >=3.11; separate CPU environment; editable installation for retained root
+schema/assets. Existing SPQ00 environment can be reused. No GPU is needed here.
 
-The measured follow-up remains **implemented_pending_validation**: an initial
-nominal pass failed subsequent repeats, including 0.125 ms; smoke admitted 5/20
-scenarios and quarantined 15. The 100-case calibration remains gated. A revoked
-qualification blocks the pilot wrapper. See the
-[measured follow-up report](docs/reviews/PDS_quadruped_refinement_completion.md)
-for unchanged tolerances, all failed configurations and the remaining blocker.
+~~~powershell
+python -m venv C:/path/outside-source/simphysqa-venv
+C:/path/outside-source/simphysqa-venv/Scripts/python.exe -m pip install -r configs/simphysqa/requirements.lock.txt
+C:/path/outside-source/simphysqa-venv/Scripts/python.exe -m pip install -r configs/simphysqa/audit-requirements.lock.txt
+C:/path/outside-source/simphysqa-venv/Scripts/python.exe -m pip install --no-build-isolation --no-deps -e .
+~~~
 
-Add `--resume` to a smoke/calibration command with exactly the same source,
-configuration, mode, domain and scenario count. Completed receipts are verified;
-rejects are not silently rerun. Changed source/configuration needs a new output
-directory. A scenario interrupted before its receipt may be rerun atomically.
-Pilot limits include a 20 GiB output cap, 200 GiB free-space floor and 1,800-second
-per-command wall budget. Counts and memory candidates are configured, not guessed
-from the workstation specification.
+Actual interpreter/artifact paths and commands are in SPQ01_completion.md.
+Engines are optional/separate; annotation does not regenerate simulation.
+Legacy full-release freezes need requalification before new generation.
 
-Each run contains per-scenario `shards/*.jsonl`, model `assets/`, `partitions.json`,
-`diagnostics/`, checksummed `receipts/`, `rejections.jsonl` when applicable,
-quarantined records, source/config/environment records and a checksum manifest.
-`inputs.jsonl` contains only public inputs; `references.jsonl` and `evaluator.jsonl`
-are private. Models must receive only `inputs.jsonl`, whose context already
-contains the shared model prior. Never pass full shards to an inference client.
+## Runnable bounded pipeline
 
-`registry.json` freezes numeric columns and bindings. `target-texts.jsonl`
-contains private training preparation: identical numeric input/target blocks,
-serialized Q/C and Q/C/A, and **no embeddings**. `extracted-adapter.json` pins the
-original extraction schema/prompt and strict canonical aliases. Unmapped
-free-form names require an explicit reviewed binding revision; missing fields
-are never completed from future simulation. A real frozen encoder must be
-configured before `embed_pair` can export vectors. Token counts and model loss
-are not reported without that encoder. Descriptive explanations are not verified
-CoConuT/CODI solution traces.
+~~~powershell
+python -m simphysqa.spq01 --help
+python -m simphysqa.spq01 inventory --data-root EXTERNAL_RELEASE_ROOT --output EXTERNAL_NEW_INVENTORY
+python -m simphysqa.spq01 select --inventory EXTERNAL_INVENTORY --exclusions configs/simphysqa/spq01_selection_exclusions.json --seed 20261004 --output EXTERNAL_NEW_SELECTION
+python -m simphysqa.spq01 audit-check --output EXTERNAL_NEW_POWER_CHECK --seed 20261004 --replicates 200000
+python -m simphysqa.spq01 dry-run --records EXTERNAL_SELECTION/predictive-records.jsonl --output EXTERNAL_NEW_DRY_RUN
+python -m simphysqa.spq01 annotate --records EXTERNAL_SELECTION/predictive-records.jsonl --output EXTERNAL_AUTHORIZED_JOB
+python -m simphysqa.spq01 export-development --records EXTERNAL_SELECTION/predictive-records.jsonl --job EXTERNAL_JOB --output EXTERNAL_NEW_DEVELOPMENT
+python -m simphysqa.spq01 verify-development --selection EXTERNAL_SELECTION --job EXTERNAL_JOB --development EXTERNAL_DEVELOPMENT --output EXTERNAL_NEW_CHECKS
+python -m simphysqa.spq01 compare-prepare --records EXTERNAL_SELECTION/predictive-records.jsonl --output EXTERNAL_NEW_COMPARISON
+~~~
 
-The explicit future release command is:
+Only annotate contacts the provider. SPQ01's authorized live run has completed;
+another job needs a new authorized budget. Identical jobs resume and preserve
+completed outputs; failures remain explicit without synthetic fallback.
+Formal export stays disabled. No mandatory human annotation-generation gate.
 
-```bash
-phi-dataset generate --config configs/dataset_release_four_domain.json --resume
-```
+Selection-prior exclusions reproduce engineering selection; fresh sampling
+separately enforces all 20 inspected groups from development_exclusions.json plus
+caller exclusions. Development direct/predictive pairs may share a group;
+calibration/formal avoid related records.
 
-The prepared `dataset_release_four_domain.json` is frozen and deliberately disabled.
-Activation requires finalized license evidence and refreshed freeze verification, plus
-`status: frozen`, `final_generation_enabled: true`, `release_output`, all four
-`validated_domain_manifests`, and four development-frozen `numeric_registries`.
-Source and config must be committed; manifests must include passed calibration
-and physical checks, cleared gates and granted asset licensing. The command
-checks these before dispatching configured train/validation/ID/OOD partitions.
-Do not create a success manifest to bypass failed physics evidence. No production
-scale run, neural training or claimed model performance is part of this work.
+Existing python -m simphysqa commands remain: smoke, validate, migrate,
+sample-preview, audit-export, import-ratings, baseline-requests, score and
+attach-annotation (use --help). Baseline requests include the public annotations
+under evaluation. Answering-model experiments remain workstation-only/tool-free.
+The five-model/nine-condition plan remains; artifact/runtime qualification and
+new-family metrics are pending.
+
+## Bidirectional event-state public export
+
+Use `python -m simphysqa.export_associations --source EXTERNAL_SPQ01A_EVENT_LANGUAGE_ROOT --output EXTERNAL_NEW_ASSOCIATION_ROOT`.
+This offline derived export adds compact state linked_events /event linked_states
+and separate between-state endpoint associations, keeping source records exact.
+[Specification](docs/simphysqa/associations.md) and
+[completion/examples/commands](docs/reviews/SPQ01a_associations_completion.md).
+
+## Grounded public event descriptions
+The versioned association CLI now emits export 1.1.1 with shared controller-grounded
+event descriptions and separate public evidence. See
+[specification](docs/simphysqa/event_descriptions.md) and
+[completion/examples/commands](docs/reviews/SPQ01a_event_descriptions_completion.md).
+Use a fresh external output root; prior versions remain preserved.
+
+</details>

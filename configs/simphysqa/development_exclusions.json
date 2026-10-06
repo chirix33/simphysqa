@@ -1,0 +1,29 @@
+{
+  "version": "simphysqa-development-exclusions/1.0.0",
+  "excluded_groups": [
+    "01059e1a1226e0b1a70e998504fcafeb",
+    "011b345ec243f7f04d96eeaa736567ed",
+    "01b027129031d73959d13f7d9c32c3dc",
+    "03008ccae19defb9e935b8b614025d14",
+    "09fae68d427585369e6be2bee1ce4441",
+    "0b6c45a66fe8fb6fb7e2a82dd0255286",
+    "201bd588247c0ba999f1955a18d6d3f5",
+    "3c44b44c4f41c3e7b89ffb6ab352a9a3",
+    "61c8d7ee2f1dedf7ee01b63f262a9e3e",
+    "75d5bf58ef3677542fb0eeedc7ef467c",
+    "8527f5b0a2fef1d647c2fb239b52e473",
+    "8c6023bf3a70e990db8eb51fb1ff9106",
+    "a9563dc9343a2c57b624ae5048f3216a",
+    "c666e35a062a41d352b2a241f0969530",
+    "c919f9c23f01e781978c330477762d44",
+    "cafaa3974103ef3a588ca4310bf40402",
+    "de7550b6e98df7e249dc3c44f1874120",
+    "e28bd6316c55e1bebd3c402261edcaf8",
+    "e5b3e572a3a3ae69523f12a8aeb6f616",
+    "fe9fbb418a17d5412a16024d7a76ea64"
+  ],
+  "reason": "SPQ00 four inspected groups plus SPQ01 sixteen engineering groups; union enforced by default in fresh sampling previews",
+  "formal_sample_exported": false,
+  "selection_manifest_sha256": "49ac7768a5fc4d6e480975ec962bb2cc5000601a938c4cce276f4309aa359068",
+  "selection_seed": 20261004
+}

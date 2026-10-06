@@ -1,0 +1,48 @@
+% Replace the Resource-quality audit paragraph in Section 8 (Evaluation Protocol).
+% Planned protocol: keep future tense until the audit has actually been completed.
+\subsection{Human Annotation Audit}
+\label{sec:human-annotation-audit}
+
+We will evaluate annotation quality through a sampled human audit. Three
+reviewers will independently assess the same 140 question--answer records,
+together with their supporting structured and language annotations. A separate
+set of 20 shared calibration examples will be used to refine the rubric and
+excluded from formal analysis. Each reviewer will therefore assess 160
+examples, yielding 420 formal judgments and 60 calibration judgments.
+
+\paragraph{Audit endpoint.}
+The primary judgment will be binary: acceptable or containing a material
+error. Reviewers will check question validity, reference-answer consistency
+with the verification record, language fidelity, evidence support, and
+compliance with the task's public/private information boundary. Criteria will
+be applied according to question type; a clarification item will be assessed
+for whether the missing information and requested clarification are justified.
+Reviewers may inspect private verification evidence for auditing, although
+these fields remain unavailable to evaluated answering models.
+
+\paragraph{Sample-size justification.}
+We adopt an 80\% nominal confidence level, corresponding to a two-sided
+significance level of $\alpha=0.20$, and target 80\% statistical power.
+For three raters, the binary multi-rater agreement calculation implemented
+in \texttt{kappaSize::PowerBinary} \citep{rotondiKappaSize} compares
+$H_0:\kappa=0.60$ with an anticipated alternative of $\kappa=0.80$,
+assuming an acceptable-rating prevalence of $p=0.90$.
+These inputs yield an approximate requirement of 129.03 records, rounded up
+to 130. We select 140 formal records, providing approximately 82.4\% modeled
+power under the same assumptions. The 90\% prevalence is a planning
+assumption, rather than an observed acceptance rate or a dataset acceptance
+threshold. This calculation concerns pooled reviewer agreement; it does not
+power separate domain--question-type comparisons or establish a lower bound
+of 90\% on dataset correctness.
+
+\paragraph{Sampling and reporting.}
+The sample will cover the released domains and question types. Sampling will
+avoid repeated records from the same trajectory to support the independence
+assumption. The sampling seed, allocation, rubric, and reviewer qualifications
+will be documented with the results. We will report multi-rater agreement
+before adjudication, raw agreement, and per-reviewer acceptance rates.
+Disagreements will subsequently be adjudicated against verification evidence,
+with error categories, resulting corrections, and the adjudicated acceptance
+rate reported separately. Actual uncertainty estimates will accompany the
+observed results; modeled power remains conditional on the assumed rating
+distribution and agreement model.

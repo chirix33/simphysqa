@@ -38,13 +38,13 @@ def arm_asset(payload):
     return ('<robot name="phi_arm_v1">'+''.join(parts)+'</robot>').replace('type="continuous"','type="revolute"').replace('<dynamics damping="0.05" friction="0"/>','<dynamics damping="0.05" friction="0"/><limit lower="-2.8" upper="2.8" effort="100" velocity="100"/>')
 
 class BulletAdapter:
-    def simulate(self,s,config,dt):
+    def simulate(self,s,config,dt, *, omit_scheduled_intervention=False):
         import pybullet as b
         cid=b.connect(b.DIRECT)
-        try: return self._run(b,cid,s,config,dt)
+        try: return self._run(b,cid,s,config,dt,omit_scheduled_intervention)
         finally: b.disconnect(cid)
 
-    def _run(self,b,cid,s,config,dt):
+    def _run(self,b,cid,s,config,dt,omit_scheduled_intervention=False):
         p=s.parameters; domain=s.domain
         b.setGravity(0,0,-9.81,physicsClientId=cid)
         b.setTimeStep(dt,physicsClientId=cid)
@@ -146,16 +146,18 @@ class BulletAdapter:
             if step%stride==0: states.append(state(s.group,step,dt,vals,relations))
             if step==count: break
             if domain=="robotic_arm":
-                for j in range(2): b.setJointMotorControl2(body,j,b.TORQUE_CONTROL,force=p["joint_torque_Nm"]+(.5 if j==0 and event_active(step,dt,s.event_start,s.event_start+.1) else 0),physicsClientId=cid)
-            elif domain=="driving" and step>=grid_index(s.event_start,dt):
+                for j in range(2): b.setJointMotorControl2(body,j,b.TORQUE_CONTROL,force=p["joint_torque_Nm"]+(.5 if j==0 and not omit_scheduled_intervention and event_active(step,dt,s.event_start,s.event_start+.1) else 0),physicsClientId=cid)
+            elif domain=="driving" and not omit_scheduled_intervention and step>=grid_index(s.event_start,dt):
                 for j in range(4): b.setJointMotorControl2(body,j,b.VELOCITY_CONTROL,targetVelocity=0,force=.25,physicsClientId=cid)
-            elif domain=="object_pushing_stacking" and event_active(step,dt,s.event_start,s.event_start+.1):
+            elif domain=="object_pushing_stacking" and not omit_scheduled_intervention and event_active(step,dt,s.event_start,s.event_start+.1):
                 pos=b.getBasePositionAndOrientation(objects[0],physicsClientId=cid)[0]
                 b.applyExternalForce(objects[0],-1,[p["push_force_N"],0,0],pos,b.WORLD_FRAME,physicsClientId=cid)
             b.stepSimulation(physicsClientId=cid)
         applied=__import__("copy").deepcopy(pub["known_events"][0]); applied["type"]="applied_intervention"; applied["description"]="Applied on integration grid using the public control law."
-        events.insert(0,applied)
+        if not omit_scheduled_intervention: events.insert(0,applied)
         diag=dict(steps=count,solve_calls=count,wall_seconds=time.perf_counter()-start,subfamily=s.subfamily,applied_intervention_start_s=applied["start_time"],applied_intervention_end_s=applied["end_time"])
+        if omit_scheduled_intervention:
+            diag.update(omit_scheduled_intervention=True,applied_intervention_start_s=None,applied_intervention_end_s=None)
         if domain=="driving": diag.update(min_forward_velocity=min_v,stopped_by_T=stop_time is not None,stop_time=stop_time)
         if domain=="object_pushing_stacking": diag.update(stable_stack_at_T=stable)
         return Rollout(states,events,pub,asset,"urdf" if domain!="object_pushing_stacking" else "json","pybullet",importlib.metadata.version("pybullet"),diag)

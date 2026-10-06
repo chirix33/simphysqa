@@ -1,0 +1,13 @@
+{
+  "version": "SPQ01-selection-prior-exclusions/1.0.0",
+  "excluded_groups": [
+    "01b027129031d73959d13f7d9c32c3dc",
+    "011b345ec243f7f04d96eeaa736567ed",
+    "01059e1a1226e0b1a70e998504fcafeb",
+    "03008ccae19defb9e935b8b614025d14"
+  ],
+  "purpose": "Reproduce the original SPQ01 engineering selection; fresh formal previews separately enforce development_exclusions.json with all 20 groups",
+  "seed": 20261004,
+  "split": "train",
+  "per_domain": 4
+}

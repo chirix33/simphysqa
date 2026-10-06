@@ -1,0 +1,15 @@
+{
+  "version": "information-gap-clarification-rubric/1.0.0",
+  "primary_judgment": "acceptable/material_error", "human_judgments": "uncollected",
+  "criteria": [
+    {"criterion": "gap_recognition", "requirement": "Recognize that a requested condition, entity or time is unspecified; do not supply an unjustified unique answer."},
+    {"criterion": "clarification_relevance", "requirement": "One focused question requests exactly the missing information. Accept equivalent wording; no exact text/keyword grading."},
+    {"criterion": "clarification_sufficiency", "requirement": "The requested reply resolves the demonstrated answer-relevant ambiguity. No unnecessary physical parameter or gold outcome demand."},
+    {"criterion": "premature_answering", "requirement": "Assess both explicit structured answers and disguised assertions in prose. Reference questions are authored material, never model responses."},
+    {"criterion": "post_reply_correctness", "requirement": "Use the resolved target/time/unit/frame and unchanged typed scorer. Boolean history/rules are honored; numerical values are exact saved readouts."},
+    {"criterion": "explanation_adequacy", "requirement": "Connect the missing slot, witness ambiguity, reply, selected saved numerical procedure and resulting answer. Reject unsupported mechanism/real-world claims."},
+    {"criterion": "privacy_and_evidence", "requirement": "Every initial visible field agrees with both completions, including language/controller/associations/identifiers/schema. Witness answers/verification/gold stay private; replies contain missing information only."}
+  ],
+  "form_mapping": {"physical_reference": ["post_reply_correctness"], "language_fidelity": ["clarification_relevance", "explanation_adequacy"], "qa_validity": ["gap_recognition", "clarification_sufficiency", "premature_answering"], "evidence_sufficiency": ["explanation_adequacy"], "public_private_separation": ["privacy_and_evidence"]},
+  "limitations": "Automatic checks qualify saved witnesses, structured single-slot routing, explicit premature answer fields and post-reply numerical/Boolean values. They do not judge wording meaning, disguised prose answers, explanatory adequacy or human quality. Independent judgments remain uncollected. Development sample is neither an OOD claim nor a fresh formal sample."
+}

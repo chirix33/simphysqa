@@ -23,7 +23,7 @@ def public_description(s, dt, asset, entities, parameters, equations, event_enti
     return dict(global_context="Deterministic SI simulation. Full public model prior: "+asset, entities=entities, controller=controller, known_events=[event], coordinate_convention="Right-handed world x-forward/y-left/z-up; quaternion xyzw; unwrapped right-hand joint angles; all channels SI.")
 
 class MujocoAdapter:
-    def simulate(self, s, config, dt):
+    def simulate(self, s, config, dt, *, omit_scheduled_intervention=False):
         import mujoco as mj
         p = s.parameters
         is_arm = s.domain == "robotic_arm"
@@ -72,7 +72,7 @@ class MujocoAdapter:
                 limit_seen = limit_seen or limit
                 values.append(q("arm","joint_limit_by_T",limit_seen))
             else:
-                x,v,a = support_motion(t,s.event_start,p["support_acceleration_m_s2"])
+                x,v,a = support_motion(t,s.event_start,0. if omit_scheduled_intervention else p["support_acceleration_m_s2"])
                 theta,omega = data.qpos[1],data.qvel[1]
                 length = p["cable_length_m"]
                 tension = p["load_mass_kg"]*(9.81*math.cos(theta)-a*math.sin(theta)+length*omega*omega)
@@ -89,14 +89,14 @@ class MujocoAdapter:
             if step == count: break
             if is_arm:
                 data.qfrc_applied[:]=p["joint_torque_Nm"]
-                if event_active(step,dt,s.event_start,s.event_start+.1): data.qfrc_applied[0]+=.5
+                if not omit_scheduled_intervention and event_active(step,dt,s.event_start,s.event_start+.1): data.qfrc_applied[0]+=.5
                 mj.mj_step(model,data)
             else:
                 # Reduced-coordinate constrained pendulum: integrate using RK4 with
                 # MuJoCo mass/bias dynamics and prescribed support acceleration.
                 # Both generalized accelerations solved together via inverse dynamics.
                 def deriv(ti, yi):
-                    xx,vv,aa=support_motion(ti,s.event_start,p["support_acceleration_m_s2"])
+                    xx,vv,aa=support_motion(ti,s.event_start,0. if omit_scheduled_intervention else p["support_acceleration_m_s2"])
                     data.qpos[:]=[xx,yi[0]]; data.qvel[:]=[vv,yi[1]]
                     mj.mj_forward(model,data)
                     mass=np.zeros((2,2)); mj.mj_fullM(model,data,mass)
@@ -105,11 +105,13 @@ class MujocoAdapter:
                 y=np.array([data.qpos[1],data.qvel[1]])
                 k1=deriv(t,y); k2=deriv(t+dt/2,y+dt*k1/2); k3=deriv(t+dt/2,y+dt*k2/2); k4=deriv(t+dt-1e-12,y+dt*k3)
                 y=y+dt*(k1+2*k2+2*k3+k4)/6
-                xx,vv,_=support_motion(t+dt,s.event_start,p["support_acceleration_m_s2"])
+                xx,vv,_=support_motion(t+dt,s.event_start,0. if omit_scheduled_intervention else p["support_acceleration_m_s2"])
                 data.qpos[:]=[xx,y[0]]; data.qvel[:]=[vv,y[1]]; data.time=t+dt
         applied=__import__("copy").deepcopy(pub["known_events"][0]); applied["type"]="applied_intervention"; applied["description"]="Applied on the declared integration grid using [start,end) control semantics."
-        events.insert(0,applied)
+        if not omit_scheduled_intervention: events.insert(0,applied)
         diagnostics=dict(steps=count, solve_calls=count if is_arm else count*4, wall_seconds=time.perf_counter()-started, subfamily=s.subfamily,applied_intervention_start_s=applied["start_time"],applied_intervention_end_s=applied["end_time"])
+        if omit_scheduled_intervention:
+            diagnostics.update(omit_scheduled_intervention=True,applied_intervention_start_s=None,applied_intervention_end_s=None)
         if not is_arm:
             diagnostics.update(min_tension_N=min_tension, max_length_error_m=max_length_error)
             if min_tension <= 0: raise ValueError("outside taut suspension validity: nonpositive tension")

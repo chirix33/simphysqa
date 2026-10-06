@@ -1,0 +1,314 @@
+{
+  "version": "simphysqa-evaluation/0.1.0",
+  "enabled": false,
+  "model_count": 5,
+  "condition_count": 9,
+  "workstation_only": true,
+  "answering_tools": false,
+  "execution_budget": {
+    "model_calls": 0,
+    "wall_seconds": 0
+  },
+  "input_contract": "actual public structured input and public annotations; no private references",
+  "conditions": [
+    {
+      "condition_id": "llama31_8b_cot",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "artifact_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "tokenizer_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "reasoning": "prompted_cot",
+      "historical_qualification": "recorded_P12_development_only",
+      "simphysqa_status": "pending_local_task_qualification",
+      "settings": {
+        "attention": "sdpa",
+        "enable_thinking": null,
+        "max_input_and_output": 32768,
+        "max_new_tokens": 4096,
+        "max_seconds": 240,
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+        "runtime": [
+          [
+            "torch",
+            "2.7.1+cu128"
+          ],
+          [
+            "transformers",
+            "4.51.3"
+          ],
+          [
+            "tokenizers",
+            "0.21.1"
+          ],
+          [
+            "safetensors",
+            "0.5.3"
+          ]
+        ],
+        "seed": 11,
+        "temperature": 0.6,
+        "template_sha256": "4193666d58af6747ecfd55b2b1da103aac2bf158cde51cd0d48c1b6f6c561585",
+        "tokenizer_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+        "top_k": 50,
+        "top_p": 0.9
+      }
+    },
+    {
+      "condition_id": "llama31_8b_direct",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "artifact_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "tokenizer_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+      "reasoning": "direct",
+      "historical_qualification": "recorded_P12_development_only",
+      "simphysqa_status": "pending_local_task_qualification",
+      "settings": {
+        "attention": "sdpa",
+        "enable_thinking": null,
+        "max_input_and_output": 32768,
+        "max_new_tokens": 1024,
+        "max_seconds": 120,
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+        "runtime": [
+          [
+            "torch",
+            "2.7.1+cu128"
+          ],
+          [
+            "transformers",
+            "4.51.3"
+          ],
+          [
+            "tokenizers",
+            "0.21.1"
+          ],
+          [
+            "safetensors",
+            "0.5.3"
+          ]
+        ],
+        "seed": 11,
+        "temperature": 0.6,
+        "template_sha256": "4193666d58af6747ecfd55b2b1da103aac2bf158cde51cd0d48c1b6f6c561585",
+        "tokenizer_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+        "top_k": 50,
+        "top_p": 0.9
+      }
+    },
+    {
+      "condition_id": "qwen3_8b_direct",
+      "model_id": "Qwen/Qwen3-8B",
+      "artifact_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "reasoning": "direct",
+      "historical_qualification": "recorded_P12_development_only",
+      "simphysqa_status": "pending_local_task_qualification",
+      "settings": {
+        "attention": "sdpa",
+        "enable_thinking": false,
+        "max_input_and_output": 32768,
+        "max_new_tokens": 1024,
+        "max_seconds": 120,
+        "model": "Qwen/Qwen3-8B",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "runtime": [
+          [
+            "torch",
+            "2.7.1+cu128"
+          ],
+          [
+            "transformers",
+            "4.51.3"
+          ],
+          [
+            "tokenizers",
+            "0.21.1"
+          ],
+          [
+            "safetensors",
+            "0.5.3"
+          ]
+        ],
+        "seed": 11,
+        "temperature": 0.7,
+        "template_sha256": "46b150267cce1a1cfb0543078b45e2267a34b361c3df26afe288636f31f83351",
+        "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "top_k": 20,
+        "top_p": 0.8
+      }
+    },
+    {
+      "condition_id": "qwen3_8b_thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "artifact_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "reasoning": "native",
+      "historical_qualification": "recorded_P12_development_only",
+      "simphysqa_status": "pending_local_task_qualification",
+      "settings": {
+        "attention": "sdpa",
+        "enable_thinking": true,
+        "max_input_and_output": 32768,
+        "max_new_tokens": 8192,
+        "max_seconds": 360,
+        "model": "Qwen/Qwen3-8B",
+        "precision": "bfloat16",
+        "quantization": "none",
+        "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "runtime": [
+          [
+            "torch",
+            "2.7.1+cu128"
+          ],
+          [
+            "transformers",
+            "4.51.3"
+          ],
+          [
+            "tokenizers",
+            "0.21.1"
+          ],
+          [
+            "safetensors",
+            "0.5.3"
+          ]
+        ],
+        "seed": 11,
+        "temperature": 0.6,
+        "template_sha256": "46b150267cce1a1cfb0543078b45e2267a34b361c3df26afe288636f31f83351",
+        "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "top_k": 20,
+        "top_p": 0.95
+      }
+    },
+    {
+      "condition_id": "qwen3_32b_awq_off",
+      "model_id": "Qwen/Qwen3-32B-AWQ",
+      "artifact_revision": null,
+      "tokenizer_revision": null,
+      "artifact_repository": "Qwen/Qwen3-32B-AWQ",
+      "reasoning": "direct",
+      "simphysqa_status": "planned_pending_artifact_and_local_qualification",
+      "settings": {
+        "quantization": "AWQ",
+        "enable_thinking": false,
+        "runtime": null,
+        "precision": null,
+        "max_input_and_output": null,
+        "max_new_tokens": null,
+        "max_seconds": null,
+        "temperature": null,
+        "top_p": null,
+        "top_k": null,
+        "seed": 11,
+        "template_sha256": null
+      }
+    },
+    {
+      "condition_id": "qwen3_32b_awq_on",
+      "model_id": "Qwen/Qwen3-32B-AWQ",
+      "artifact_revision": null,
+      "tokenizer_revision": null,
+      "artifact_repository": "Qwen/Qwen3-32B-AWQ",
+      "reasoning": "native",
+      "simphysqa_status": "planned_pending_artifact_and_local_qualification",
+      "settings": {
+        "quantization": "AWQ",
+        "enable_thinking": true,
+        "runtime": null,
+        "precision": null,
+        "max_input_and_output": null,
+        "max_new_tokens": null,
+        "max_seconds": null,
+        "temperature": null,
+        "top_p": null,
+        "top_k": null,
+        "seed": 11,
+        "template_sha256": null
+      }
+    },
+    {
+      "condition_id": "gemma3_27b_qat_direct",
+      "model_id": "Gemma-3-27B-IT QAT",
+      "artifact_revision": null,
+      "tokenizer_revision": null,
+      "artifact_repository": null,
+      "reasoning": "direct",
+      "simphysqa_status": "planned_pending_artifact_and_local_qualification",
+      "settings": {
+        "quantization": "QAT_artifact_pending",
+        "enable_thinking": null,
+        "runtime": null,
+        "precision": null,
+        "max_input_and_output": null,
+        "max_new_tokens": null,
+        "max_seconds": null,
+        "temperature": null,
+        "top_p": null,
+        "top_k": null,
+        "seed": 11,
+        "template_sha256": null
+      }
+    },
+    {
+      "condition_id": "gemma3_27b_qat_cot",
+      "model_id": "Gemma-3-27B-IT QAT",
+      "artifact_revision": null,
+      "tokenizer_revision": null,
+      "artifact_repository": null,
+      "reasoning": "prompted_cot",
+      "simphysqa_status": "planned_pending_artifact_and_local_qualification",
+      "settings": {
+        "quantization": "QAT_artifact_pending",
+        "enable_thinking": null,
+        "runtime": null,
+        "precision": null,
+        "max_input_and_output": null,
+        "max_new_tokens": null,
+        "max_seconds": null,
+        "temperature": null,
+        "top_p": null,
+        "top_k": null,
+        "seed": 11,
+        "template_sha256": null
+      }
+    },
+    {
+      "condition_id": "deepseek_r1_distill_qwen32b",
+      "model_id": "DeepSeek-R1-Distill-Qwen-32B",
+      "artifact_revision": null,
+      "tokenizer_revision": null,
+      "artifact_repository": null,
+      "reasoning": "native",
+      "simphysqa_status": "planned_pending_artifact_and_local_qualification",
+      "settings": {
+        "quantization": "locally_qualified_quantized_artifact_pending",
+        "enable_thinking": null,
+        "runtime": null,
+        "precision": null,
+        "max_input_and_output": null,
+        "max_new_tokens": null,
+        "max_seconds": null,
+        "temperature": null,
+        "top_p": null,
+        "top_k": null,
+        "seed": 11,
+        "template_sha256": null
+      }
+    }
+  ],
+  "result_dimensions": [
+    "model",
+    "condition",
+    "domain",
+    "question_type"
+  ],
+  "metrics_status": "typed reference scoring and new-family adapters pending",
+  "uncertainty": "paired physical-trajectory bootstrap; settings pending freeze"
+}

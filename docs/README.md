@@ -1,3 +1,113 @@
+# Current package index — five-family foundation, 6 October 2026
+
+Read [foundation/setup](simphysqa/foundation.md), [all56 items](simphysqa/development-index.md),
+[merge review](reviews/foundation_merge_review.md) and [active authoring instruction](prompts/foundation_merge_review.md).
+[Archive entry](simphysqa/prompt_archive/README.md), [catalogue](simphysqa/prompt_archive/catalogue.md)
+and [per-file provenance](simphysqa/prompt_archive/file-generation-index.json) are sealed1.0.7.
+All56 development QA complete in software; human judgments, local model qualification,
+full-release enrichment and fresh formal audit remain pending. No merge/push.
+Root AGENTS and foundation supersede historical stage statuses below; original
+Phi-JEPA docs/docs and P* prompts remain evidence, not current implementation authority.
+
+## Historical package index (preserved)
+
+# Latest: SPQ04 clarification QA — 6 October 2026
+
+[Complete prompt](prompts/SPQ04_clarification_qa.md),
+[contract](simphysqa/clarification_qa.md), [decisions](decisions/SPQ04_clarification_qa.md),
+[completion/commands/examples](reviews/SPQ04_completion.md).
+Eight genuine query-gap development items; accepted48 QA preserved. Initial/resolved
+views, private disjoint witnesses, packets, three blank forms and72 initial requests
+plus72 conditional templates. No executed conversations/simulations/model calls,
+human judgments, OOD claim, definitive formal sample or merge to main.
+[Prompt archive](simphysqa/prompt_archive/README.md),
+[per-file mappings](simphysqa/prompt_archive/file-generation-index.json).
+Historical progress below remains unchanged.
+
+# Latest: SPQ03 explanation QA — 6 October 2026
+
+Base 10ace28 on simphysqa-naacl. Eight new explanation items completed, zero
+failed/pending, two per domain; all eight frozen groups/targets and .2 s cutoffs
+preserved. Eight packets, three independent blank forms and 72 tool-free requests.
+New task explicitly supplies only the selected factual/omission target outcomes.
+All 40 accepted items/answer annotation 1.0.3 and earlier artifacts remain exact.
+106-test offline suite OK (one retained runtime class skipped); focused archive
+lineage checks also run. New simulations/model calls/spend: 0/0/$0. Human prose
+quality/explanation adequacy judgments and answering benchmarks are uncollected.
+Archive 1.0.6 maps deterministic explanation generation separately from reused
+language and executed 16 SPQ01 requests; those payloads are unchanged.
+[Contract](simphysqa/explanation_qa.md), [complete prompt](prompts/SPQ03_explanation_qa.md),
+[report/commands/examples](reviews/SPQ03_completion.md),
+[archive](simphysqa/prompt_archive/README.md) and
+[per-file mappings](simphysqa/prompt_archive/file-generation-index.json).
+Historical progress below is retained unchanged.
+
+# Latest bounded refinement — 6 October 2026
+
+Answer/schema/renderer/export 1.0.3: concise bound explanations, shared physical
+conditions once, quaternion changes as sign-invariant rotation angles. All 40 QA,
+eight supporting alternatives, three blank forms and 360 public requests exported.
+94 offline tests pass; one retained runtime test class skipped. Public requests
+are byte-identical to 1.0.2; values/tolerances/cutoffs/source artifacts preserved.
+No new simulations/model calls/spend/human judgments. Prompt archive 1.0.4 includes
+a recovered-request/output mapping example and exact deterministic templates.
+Read [refinement report](reviews/SPQ02b_refinements_completion.md),
+[active prompt](prompts/SPQ02b_answer_refinements.md),
+[archive catalogue](simphysqa/prompt_archive/catalogue.md) and
+[per-file index](simphysqa/prompt_archive/file-generation-index.json).
+Historical progress follows unchanged.
+
+# Current milestone: SPQ02b — 40 answer annotations and prompt archive
+
+Read [active prompt](prompts/SPQ02b_answer_enrichment.md),
+[contract](simphysqa/answer_annotations.md),
+[prompt archive](simphysqa/prompt_archive/README.md) and
+[completion/commands/examples](reviews/SPQ02b_completion.md).
+All gold explanations/traces remain private; no human judgments or answering
+benchmarks exist. Original source records and accepted public export 1.1.1 remain
+exact. Earlier instructions/reports follow as retained history.
+
+# Current milestone: SPQ02 counterfactual QA
+
+The [consolidated user prompt](prompts/SPQ02_counterfactual_qa.md) and explicit
+exact replay clarification govern this milestone from accepted e379013b7e80fe28172682cd39e42f4066fde841.
+Read [specification](simphysqa/counterfactual.md), [decisions](decisions/SPQ02_counterfactual.md)
+and [completion/commands/artifacts](reviews/SPQ02_completion.md).
+Eight matched omission pairs qualified; accepted association export 1.1.1 and
+prior outputs remain unchanged. Human assessment/answering benchmarks are pending.
+Historical phase instructions and findings remain below.
+
+# Latest SPQ01a follow-up: grounded shared event descriptions
+
+Read [specification](simphysqa/event_descriptions.md) and
+[completion/examples/commands](reviews/SPQ01a_event_descriptions_completion.md).
+Export 1.1.1 preserves source values, canonical matching and prior outputs.
+
+# Latest SPQ01a follow-up: bidirectional public associations
+
+[Specification](simphysqa/associations.md) and
+[completion/examples/commands](reviews/SPQ01a_associations_completion.md).
+The projection versions exported state/event indexes without changing source data,
+canonical semantics or language. Existing historical reports remain below.
+
+# Current milestone: SPQ01a
+
+Read [SPQ01a prompt](prompts/SPQ01a_event_language.md),
+[event-language specification](simphysqa/event_language.md) and
+[completion/commands/artifacts](reviews/SPQ01a_completion.md).
+SPQ01 is accepted at 6d420b779e0204868fec4c45e26bb1cdcd2b98c7.
+The original SPQ01 records, instructions and report below remain historical evidence.
+
+# Active SimPhysQA handoff
+
+Start with [root instructions](../AGENTS.md), [runnable entry points](../README.md),
+[progress](PROGRESS.md), [SPQ01 prompt](prompts/SPQ01_annotations.md) and
+[SPQ01 completion](reviews/SPQ01_completion.md) (SPQ00 remains accepted history). Active contracts:
+[annotation](simphysqa/annotation.md), [human audit](simphysqa/audit.md),
+[evaluation](simphysqa/evaluation.md), [remaining decisions](simphysqa/pending.md).
+Original Phi-JEPA package follows as historical evidence.
+> Historical Phi-JEPA handoff. The 4 October 2026 SimPhysQA pivot in root AGENTS.md and docs/simphysqa supersedes training/phase instructions here. Original evidence is retained.
+
 > **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
 
 # Phi-JEPA: Codex implementation handoff

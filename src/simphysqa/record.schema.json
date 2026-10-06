@@ -1,0 +1,825 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:simphysqa:record:0.4.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_schema_version",
+    "sample_id",
+    "trajectory_id",
+    "question_type",
+    "annotation_version",
+    "source",
+    "public",
+    "private",
+    "completion"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "simphysqa/0.1.0",
+        "simphysqa/0.2.0",
+        "simphysqa/0.3.0",
+        "simphysqa/0.4.0"
+      ]
+    },
+    "source_schema_version": {
+      "const": "1.0.0"
+    },
+    "sample_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trajectory_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question_type": {
+      "enum": [
+        "direct",
+        "predictive",
+        "counterfactual",
+        "explanation",
+        "clarification"
+      ]
+    },
+    "annotation_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "line",
+        "file_sha256",
+        "record_sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "file_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "record_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "public": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input",
+        "annotations"
+      ],
+      "properties": {
+        "input": {
+          "type": "object"
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "trajectory",
+            "timestamps"
+          ],
+          "properties": {
+            "trajectory": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "text",
+                "bindings"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "pending",
+                    "generated_unreviewed",
+                    "human_revised"
+                  ]
+                },
+                "text": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "bindings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^/"
+                  },
+                  "uniqueItems": true
+                },
+                "claims": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "claim_id",
+                      "kind",
+                      "text",
+                      "bindings",
+                      "link_ids"
+                    ],
+                    "properties": {
+                      "claim_id": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "enum": [
+                          "measurement",
+                          "event_schedule",
+                          "controller_definition",
+                          "controller_phase",
+                          "between_saved_states"
+                        ]
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "bindings": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^/"
+                        },
+                        "uniqueItems": true
+                      },
+                      "link_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "uniqueItems": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "timestamps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "status",
+                  "text",
+                  "bindings",
+                  "state_id",
+                  "timestamp"
+                ],
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "pending",
+                      "generated_unreviewed",
+                      "human_revised"
+                    ]
+                  },
+                  "text": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "bindings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^/"
+                    },
+                    "uniqueItems": true
+                  },
+                  "state_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "timestamp": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "claims": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "claim_id",
+                        "kind",
+                        "text",
+                        "bindings",
+                        "link_ids"
+                      ],
+                      "properties": {
+                        "claim_id": {
+                          "type": "string"
+                        },
+                        "kind": {
+                          "enum": [
+                            "measurement",
+                            "event_schedule",
+                            "controller_definition",
+                            "controller_phase",
+                            "between_saved_states"
+                          ]
+                        },
+                        "text": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "bindings": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "pattern": "^/"
+                          },
+                          "uniqueItems": true
+                        },
+                        "link_ids": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "uniqueItems": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "event_context": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "versions",
+                "cache_identity",
+                "measurement_annotations_sha256",
+                "links"
+              ],
+              "properties": {
+                "versions": {
+                  "type": "object"
+                },
+                "cache_identity": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "measurement_annotations_sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "links": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "private": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference",
+        "metadata",
+        "evidence_bindings",
+        "annotation_provenance"
+      ],
+      "properties": {
+        "reference": {
+          "type": "object"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "evidence_bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "target_id",
+              "kind",
+              "state_ids",
+              "event_ids",
+              "evidence_ids"
+            ],
+            "properties": {
+              "target_id": {
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "recorded_readout",
+                  "observed_readout",
+                  "matched_alternative_readout"
+                ]
+              },
+              "state_ids": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "event_ids": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "evidence_ids": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "alternative_run_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "annotation_provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "model_identity",
+            "prompt_version",
+            "schema_version",
+            "generation_settings",
+            "validation_failures",
+            "attempts",
+            "retries",
+            "repairs"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "legacy_import",
+                "generated_unreviewed",
+                "human_revised"
+              ]
+            },
+            "model_identity": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "prompt_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "schema_version": {
+              "type": "string"
+            },
+            "generation_settings": {
+              "type": "object"
+            },
+            "validation_failures": {
+              "type": "array"
+            },
+            "attempts": {
+              "type": "array"
+            },
+            "retries": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "repairs": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "source_record": {
+          "type": "object"
+        },
+        "derivation": {
+          "type": "object"
+        },
+        "generation_job": {
+          "type": "object"
+        },
+        "counterfactual_evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "version",
+            "pair_id",
+            "source_annotations",
+            "alternative_record",
+            "original_run_id",
+            "alternative_run_id",
+            "verification",
+            "simulation_artifacts",
+            "intervention_change"
+          ],
+          "properties": {
+            "version": {
+              "const": "matched-omission-qa/1.0.0"
+            },
+            "pair_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_annotations": {
+              "type": "object"
+            },
+            "alternative_record": {
+              "type": "object"
+            },
+            "original_run_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "alternative_run_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "verification": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "pair_receipt",
+                "replay",
+                "original_admission",
+                "alternative_admission"
+              ],
+              "properties": {
+                "pair_receipt": {
+                  "type": "object"
+                },
+                "replay": {
+                  "type": "object"
+                },
+                "original_admission": {
+                  "type": "object"
+                },
+                "alternative_admission": {
+                  "type": "object"
+                }
+              }
+            },
+            "simulation_artifacts": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "original-coarse",
+                "original-fine",
+                "alternative-coarse",
+                "alternative-fine"
+              ],
+              "properties": {
+                "original-coarse": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "run_id",
+                    "result_sha256",
+                    "reservation_sha256",
+                    "integration_timestep_s",
+                    "wall_seconds"
+                  ],
+                  "properties": {
+                    "run_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "result_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "reservation_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "integration_timestep_s": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "wall_seconds": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                },
+                "original-fine": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "run_id",
+                    "result_sha256",
+                    "reservation_sha256",
+                    "integration_timestep_s",
+                    "wall_seconds"
+                  ],
+                  "properties": {
+                    "run_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "result_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "reservation_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "integration_timestep_s": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "wall_seconds": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                },
+                "alternative-coarse": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "run_id",
+                    "result_sha256",
+                    "reservation_sha256",
+                    "integration_timestep_s",
+                    "wall_seconds"
+                  ],
+                  "properties": {
+                    "run_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "result_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "reservation_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "integration_timestep_s": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "wall_seconds": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                },
+                "alternative-fine": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "run_id",
+                    "result_sha256",
+                    "reservation_sha256",
+                    "integration_timestep_s",
+                    "wall_seconds"
+                  ],
+                  "properties": {
+                    "run_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "result_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "reservation_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "integration_timestep_s": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "wall_seconds": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            },
+            "intervention_change": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "changed_execution_field",
+                "original",
+                "alternative",
+                "scenario_sha256",
+                "config_sha256",
+                "original_scenario",
+                "original_config",
+                "execution_semantics",
+                "omitted_event_id",
+                "other_scenario_and_execution_settings"
+              ],
+              "properties": {
+                "changed_execution_field": {
+                  "const": "omit_scheduled_intervention"
+                },
+                "original": {
+                  "const": false
+                },
+                "alternative": {
+                  "const": true
+                },
+                "scenario_sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "config_sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "original_scenario": {
+                  "type": "object"
+                },
+                "original_config": {
+                  "type": "object"
+                },
+                "execution_semantics": {
+                  "type": "string"
+                },
+                "omitted_event_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "other_scenario_and_execution_settings": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "answer_annotation": {
+          "type": "object",
+          "description": "Optional private answer annotation contract 1.0.2; independently validated. Source wrapper family versions and raw reference unchanged."
+        },
+        "explanation_evidence": {
+          "type": "object",
+          "required": [
+            "parent_sample_id",
+            "parent_record_sha256",
+            "pair_id",
+            "parent_record"
+          ]
+        },
+        "explanation_annotation": {
+          "type": "object",
+          "required": [
+            "version",
+            "versions",
+            "cache_identity",
+            "generation",
+            "status"
+          ]
+        }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trajectory_description",
+        "timestamp_descriptions",
+        "direct_qa",
+        "predictive_qa",
+        "counterfactual_qa",
+        "explanation_qa",
+        "clarification_qa",
+        "evidence_bindings"
+      ],
+      "properties": {
+        "trajectory_description": {
+          "type": "string"
+        },
+        "timestamp_descriptions": {
+          "type": "string"
+        },
+        "direct_qa": {
+          "type": "string"
+        },
+        "predictive_qa": {
+          "type": "string"
+        },
+        "counterfactual_qa": {
+          "type": "string"
+        },
+        "explanation_qa": {
+          "type": "string"
+        },
+        "clarification_qa": {
+          "type": "string"
+        },
+        "evidence_bindings": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "question_type": {
+            "const": "direct"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schema_version": {
+            "const": "simphysqa/0.2.0"
+          },
+          "private": {
+            "required": [
+              "source_record",
+              "derivation"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "question_type": {
+            "const": "counterfactual"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schema_version": {
+            "const": "simphysqa/0.3.0"
+          },
+          "private": {
+            "required": [
+              "source_record",
+              "counterfactual_evidence"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "question_type": {
+            "const": "explanation"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schema_version": {
+            "const": "simphysqa/0.4.0"
+          },
+          "private": {
+            "required": [
+              "source_record",
+              "explanation_evidence",
+              "explanation_annotation"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

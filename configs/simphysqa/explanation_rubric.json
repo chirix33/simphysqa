@@ -1,0 +1,52 @@
+{
+  "version": "matched-explanation-rubric/1.0.0",
+  "status": "development_human_unreviewed",
+  "instructions": "Primary human judgment is acceptable / material_error, with independent criterion findings and error categories. Assess supported factual claims separately from readability and explanatory adequacy. A good answer connects the actual omitted control, fixed conditions and supplied selected outcomes, rather than just listing values. Required claims are answerable from the public task declaration, original scenario/controller/target rule and supplied comparison; private implementation and receipts corroborate them for auditors, and are not required hidden knowledge. Do not require opaque run IDs, engine internals or an exact reference wording. Rate independently. Blank forms are uncollected; original ratings, adjudication and corrections remain separate. No mandatory human generation gate.",
+  "criteria": [
+    {
+      "criterion": "declared_control_and_implemented_change",
+      "required_supported_claim": "Identify the scheduled intervention retained in the factual condition and precisely what the omission condition disables. Keep additive vs total control, maximum vs realized torque, direct vs contextual entity and complete support-motion phases distinct.",
+      "acceptable_paraphrases": ["The extra arm pulse is removed while both base joint torques remain", "The brake command is disabled; its torque setting is a maximum, not a measurement", "Only the force on block_1 is omitted", "The entire prescribed support-motion program is disabled"],
+      "material_contradictions": ["All arm torque is removed", "The brake limit is stated as measured realized torque", "block_2 is identified as directly pushed", "Only one tether acceleration phase is removed"]
+    },
+    {
+      "criterion": "fixed_conditions",
+      "required_supported_claim": "State that the matched comparison holds initial conditions, physical parameters, other controls and execution settings fixed; do not invent changed friction, masses, seeds or solver settings.",
+      "acceptable_paraphrases": ["Only the scheduled control changes in otherwise matched runs", "The initial scenario and numerical setup are shared"],
+      "material_contradictions": ["Different initial conditions are asserted", "Another control or physical parameter is claimed to change"]
+    },
+    {
+      "criterion": "selected_outcome_fidelity",
+      "required_supported_claim": "Correctly describe the factual and omission selected target readouts, entity, time, unit/frame and condition labels. They are supplied simulator outcomes, not newly observed prefix states.",
+      "acceptable_paraphrases": ["Rounded readable values consistent with the existing answer tolerance", "Equivalent descriptions of the exact supplied Booleans"],
+      "material_contradictions": ["Conditions swapped", "Wrong target or time/unit/frame", "Future supplied readouts presented as observed prefix measurements"]
+    },
+    {
+      "criterion": "comparison_and_predicate_interpretation",
+      "required_supported_claim": "For numbers, distinguish exact/numerical difference from existing scorer distinguishability; quaternion differences, if present, use sign-invariant rotation angles. For Booleans, respect the actual threshold/history/duration rule; a common flag does not show identical trajectories.",
+      "acceptable_paraphrases": ["The numeric contrast is nonzero but within the tolerance", "The selected readout is distinguishable under the scorer", "Neither run meets the specified predicate; other physical behavior may differ"],
+      "material_contradictions": ["A within-tolerance difference is called exact equality", "Equal Booleans are called proof of no physical effect", "A duration predicate is replaced with one terminal-speed test", "Quaternion component subtraction is called physical orientation change"]
+    },
+    {
+      "criterion": "supported_interpretation_and_uncertainty",
+      "required_supported_claim": "Connect the controlled intervention difference and fixed settings to the selected outcome comparison within this simulator, while identifying limits: a selected readout does not determine all other behavior, a detailed force/contact pathway, or real-world causality.",
+      "acceptable_paraphrases": ["This isolates the intervention in the specified simulator", "The paired outcomes do not establish a detailed mechanism", "Additional trajectory/history evidence would be needed for more specific mechanisms"],
+      "material_contradictions": ["Unverified forces/contact histories invented", "Causation inferred merely from timing", "Real-world causality claimed", "All other physical behavior is inferred from one readout"]
+    },
+    {
+      "criterion": "readability_and_explanatory_adequacy",
+      "required_supported_claim": "Provide clear connected reasoning that relates changed control, fixed conditions, target contrast and appropriate limits. Repeating two values without connecting them is insufficient. Human judgment evaluates prose entailment, coherence, completeness and unsupported claims.",
+      "acceptable_paraphrases": ["Any clear evidence-supported organization or wording", "Concise connected prose or a readable structured explanation"],
+      "material_contradictions": ["Only copied values with no explanation", "Mutually inconsistent prose and structured facts", "Unreadable or irrelevant explanation", "Missing uncertainty or unsupported mechanism"]
+    }
+  ],
+  "form_criterion_mapping": {
+    "physical_reference": "Control semantics, supplied readouts, target/time/unit/frame and predicates",
+    "language_fidelity": "Reused observed language plus prose readability and factual fidelity",
+    "qa_validity": "Explanation-specific adequacy and required comparison/uncertainty",
+    "evidence_sufficiency": "Claim-specific bindings and supported scope",
+    "public_private_separation": "Supplied outcomes intentionally disclosed only in explanation supplied_comparison; gold/rollouts/receipts remain private"
+  },
+  "automatic_coverage": "Structured intervention identity, fixed-condition declarations, reported selected values using the unchanged answer scorer, and explicit exact-equality/scorer facts. Schema validity or nonempty prose is not explanation correctness.",
+  "limitations": "No exact-text, keyword-presence or MSE explanation-quality metric. Automatic factual checks do not assess semantic entailment, unsupported prose, explanatory adequacy or human acceptability. Independent human judgments remain uncollected. No empirical explanation score or agreement result exists. Eight engineering cases do not estimate release-wide quality or power subgroup claims. Human rubric/analysis can undergo documented revision before a formal study."
+}

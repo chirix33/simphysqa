@@ -1,0 +1,7 @@
+# Supplied audit-package originals must retain their exact bytes.
+*.py -text
+*.tex -text
+*.bib -text
+README.txt -text
+.gitattributes text eol=lf
+source-package.json text eol=lf
