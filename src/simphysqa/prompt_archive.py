@@ -12,13 +12,14 @@ from .associations import strip_associations
 from .spq01a import retained, verify_manifest
 from .answer_export import retained_bytes
 
-ARCHIVE = "simphysqa-prompt-archive/1.0.3"
+ARCHIVE = "simphysqa-prompt-archive/1.0.4"
 HISTORY = {
     "SPQ01": "6d420b779e0204868fec4c45e26bb1cdcd2b98c7",
     "SPQ01a-events": "328ef3f",
     "SPQ01a-associations": "433c64186555fdc99f17261c069a2dd4b334a11e",
     "SPQ01a-descriptions": "e379013b7e80fe28172682cd39e42f4066fde841",
-    "SPQ02": "1ae35749421283e63344504dc6a5d24ce18f32e7"
+    "SPQ02": "1ae35749421283e63344504dc6a5d24ce18f32e7",
+    "SPQ02b": "1796b8d9cb475b8579330854b298021a200b4c08"
 }
 PROCEDURES = {
     "source-readout-placeholder": ("SPQ02", "src/phi_jepa/simulation/records.py", "Original simulator question/label templates and descriptive placeholders, not model prompts; unavailable solution traces are historical fields, not completed reasoning."),
@@ -31,8 +32,8 @@ PROCEDURES = {
     "associations/1.1.1": ("SPQ01a-descriptions", "src/simphysqa/associations.py", "Accepted 1.1.1 public projection, exact stripping/source recovery; copies shared canonical event descriptions. No model prompt."),
     "event-description/1.0.1": ("SPQ01a-descriptions", "src/simphysqa/event_descriptions.py", "Exact public definition/recognized controller templates; action/target/limit/phases, half-even six-significant decimal display, unresolved semantics explicit. No model prompt."),
     "counterfactual/1.0.0": ("SPQ02", "src/simphysqa/counterfactual.py", "Matched omission question and single verified alternative target; new stable ID, original public prefix, independent replay/admission evidence. No model prompt."),
-    "answer-annotation/1.0.2": ("current", "src/simphysqa/answer_annotations.py", "Target-specific public direct readout or saved numerical method/control/readout/rule; paired omission comparisons; claim/step pointers and hashes. Eight-significant prose, exact typed source values. Private overlay only. No model prompt."),
-    "answer-export/1.0.2": ("current", "src/simphysqa/answer_export.py", "40 private enriched QA, eight multi-target alternatives, audit reference rendering and 360 unchanged public requests. No model prompt."),
+    "answer-annotation/1.0.3": ("current", "src/simphysqa/answer_annotations.py", "Concise shared physical conditions once; target-specific public direct readout or saved numerical readout/rule; sign-invariant quaternion rotation angle, never componentwise physical change; detailed method/settings/verification stay in private solution traces; paired omission comparisons; claim/step pointers and hashes. Eight-significant prose, exact typed source values. Private overlay only. No model prompt."),
+    "answer-export/1.0.3": ("current", "src/simphysqa/answer_export.py", "40 private enriched QA, eight multi-target alternatives, audit reference rendering and 360 unchanged public requests. No model prompt."),
     "prepared-answering-request": ("SPQ02", "src/simphysqa/evaluation.py", "Tool-free public input plus retained public annotations under nine configured conditions; prepared, never executed. Not an annotation-generation request.")
 }
 
@@ -159,8 +160,20 @@ def build(spq01, spq01a, spq02, enriched, output):
             procedures.append({"procedure_id":id,"kind":"deterministic_no_model_prompt","source_path":name,
                 "source_commit":"prior internal export; exact preserved procedure snapshot","implementation_sha256":sha256(raw).hexdigest(),"source_file":name,
                 "rules":"Superseded internal 1.0.1 output and source snapshot retained; final 1.0.2 normalizes code fingerprint newlines to repository LF convention. No model prompt."})
+    # Retain accepted 1.0.2 files and recover their exact committed procedures.
+    prior=enriched.parent/"answers-1.0.2"
+    if prior.exists() and prior!=enriched:
+        roots["SPQ02b-prior-1.0.2"]=prior
+        for id,rel in (("answer-annotation/1.0.2","src/simphysqa/answer_annotations.py"),("answer-export/1.0.2","src/simphysqa/answer_export.py")):
+            commit=HISTORY["SPQ02b"]
+            raw=subprocess.check_output(["git","show",commit+":"+rel],cwd=ROOT)
+            name="procedures/"+id.replace("/","-")+".py"
+            retained_bytes(output/name,raw)
+            procedures.append({"procedure_id":id,"kind":"deterministic_no_model_prompt","source_path":rel,
+                "source_commit":commit,"implementation_sha256":sha256(raw).hexdigest(),"source_file":name,
+                "rules":"Accepted prior answer export 1.0.2; exact committed code recovered. Preserved prior artifacts, no new model request."})
     def gold_id(alias):
-        return "answer-annotation/1.0.0" if alias=="SPQ02b-preliminary-1.0.0" else "answer-annotation/1.0.1" if alias=="SPQ02b-prior-1.0.1" else "answer-annotation/1.0.2"
+        return "answer-annotation/1.0.0" if alias=="SPQ02b-preliminary-1.0.0" else "answer-annotation/1.0.1" if alias=="SPQ02b-prior-1.0.1" else "answer-annotation/1.0.2" if alias=="SPQ02b-prior-1.0.2" else "answer-annotation/1.0.3"
     entries=[];all_files=[]
     for alias,folder in roots.items():
         for path in sorted(folder.rglob("*")):
@@ -275,6 +288,26 @@ def build(spq01, spq01a, spq02, enriched, output):
             "early_deterministic_implementation":"Historical commits pin accepted code. Preliminary association 1.0.0 source recovered exactly from installer payload and matched to its executed hash. The 1.1.0 association/description working revision original source remains unavailable. Their output hashes are retained; accepted matching rules/templates are documented, not misrepresented as recovered early source."},
         "redactions":["Organizer absolute paths and credential reference paths omitted.","Raw provider response metadata, usage/accounting and organizer-private QA/paired outcome evidence not copied into paper catalogue.","No authorization header was stored in JSON request payload; archived exact payloads contain only permitted public focal input."]}
     retained(output/"file-generation-index.json",index)
+    example_request=requests[0]
+    example_files=[]
+    for entry in entries:
+        for member in entry.get("mappings",[]):
+            detail=mapping_definitions[member["mapping_id"]]
+            if detail.get("executed_request_id")==example_request["request_id"]:
+                example_files.append({"artifact":entry["artifact"],"file_sha256":entry["file_sha256"],
+                    "record_pointer":member["record_pointer"],**detail})
+    example={"executed_request":example_request,"complete_exact_payload":example_request["payload_file"],
+        "output_file_mappings":example_files,"deterministic_example":next(p for p in procedures if p["procedure_id"]=="answer-annotation/1.0.3"),
+        "categories":{"executed":"SPQ01 items/responses: actual returned annotation", "reused":"Subsequent packets/requests copy measurement annotation; no new execution",
+            "deterministic":"Answer/trace rendering and event enrichment use pinned code, not model prompts", "unrecoverable":"Preliminary association 1.1.0/event-description 1.0.0 source; all 16 executed model payloads recovered"}}
+    retained(output/"provenance-example.json",example)
+    worked=["# Recovered executed request and deterministic procedure\n",
+        f'Actual request [{example_request["request_id"]}]({example_request["payload_file"]}); sample `{example_request["sample_id"]}`. One execution produced a summary and {example_request["timestamp_outputs"]} timestamps. Complete unchanged instructions, instantiated input and settings: [exact wire payload]({example_request["payload_file"]}).\n',
+        "## Output-file mappings\n\n| Artifact | Origin | Fields |\n|---|---|---|\n"]
+    for m in example_files:
+        worked.append(f'| `{m["artifact"]}` | {m["origin"]} | {", ".join(m["annotated_fields"])} |')
+    worked.append("\n## Deterministic procedure\n\n[answer-annotation/1.0.3](procedures/answer-annotation-1.0.3.py) implements shared physical context once, evidence-bound target readouts and sign-invariant quaternion rotation angle. Exact values remain unchanged; no model prompt or request. Detailed numerical method and verification stay in private traces.\n\nExecuted requests, reused outputs and deterministic field procedures are separately mapped in [the index](file-generation-index.json) and [this complete worked mapping](provenance-example.json). All 16 executed payloads are recovered; preliminary association 1.1.0/event-description 1.0.0 original source remains unrecoverable, not reconstructed. Prepared answering requests are unexecuted.\n")
+    retained_bytes(output/"provenance-example.md","\n".join(worked).encode())
     catalogue=["# SimPhysQA annotation prompts and deterministic procedures\n",
         "This is an annotation provenance archive, not a record of answering-model experiments. All 16 executed language requests are recovered exactly; no reconstruction is needed. One request produced one trajectory summary and 11 timestamp descriptions. Later QA packets copy/enrich those annotations without new requests. Authoring instructions live in docs/prompts and are distinct from generator payloads. Gold answer enrichments are deterministic and remain human-unreviewed.\n",
         "## Exact executed annotation instructions\n\nThe Responses API received an `instructions` string followed by a canonical public `input` string, not a role-tagged system/developer/user message array. Below is the actual instruction text. The complete raw body (including output schema) and fully instantiated input for every attempt are linked and reproduced below.\n"]
@@ -291,7 +324,7 @@ def build(spq01, spq01a, spq02, enriched, output):
         catalogue.append("<details><summary>Exact templates, rules and input projection</summary>\n\n```python\n"+code+"\n```\n\n</details>\n")
     catalogue.append("\n## Per-file mappings\n\n[file-generation-index.json](file-generation-index.json) inventories every annotation-bearing file, individual sample/trajectory, annotated field, model-request parent, instantiated payload and deterministic stage. Aggregate QA lists and prepared requests retain individual mappings. HTML packets map to their sibling JSON. Each file member has a mapping_id that resolves directly to a deduplicated mapping_definitions entry and its complete executed request; this saves repeating the same mapping across nine conditions. Full private inputs/evidence are deliberately excluded from this paper-facing index. Source/output hashes permit organizer-side verification. All answering requests remain prepared, never executed.\n\n## Historical limitations\n\nAll executed model payloads recovered: 16/16; unavailable: 0; reconstructed: 0; repairs: 0. Original generic simulator contexts/explanations were deterministic placeholders, with no model request to recover. Preliminary association 1.0.0 source is recovered exactly from its saved installer payload (executed hash matches). The preliminary 1.1.0 association/description source remains unrecoverable; its recorded source/output hashes and accepted successor templates remain separate. Credential headers/paths and private QA outcomes/verification are excluded; no redaction alters the 16 public JSON request bodies.\n")
     retained_bytes(output/"catalogue.md","\n".join(catalogue).encode())
-    retained_bytes(output/"README.md",("# Annotation prompt/procedure archive\n\nStart with [the consolidated catalogue](catalogue.md): actual prompt text, all 16 fully instantiated executed inputs, model/settings, and pinned deterministic templates. Use [the per-file index](file-generation-index.json) to resolve every annotation output/copy to its executed request or deterministic procedure.\n\nThis public archive intentionally excludes gold answers, traces, future outcomes, paired verification and organizer credential locations. Complete private evidence remains in the external versioned export. Request bodies use only observed focal states/declared controls; no answering benchmark has run. Authoring instructions: [active milestone](../../prompts/SPQ02b_answer_enrichment.md).\n").encode())
+    retained_bytes(output/"README.md",("# Annotation prompt/procedure archive\n\nInspect [one recovered executed request and its output-file mappings, plus a deterministic procedure](provenance-example.md). Start with [the consolidated catalogue](catalogue.md): actual prompt text, all 16 fully instantiated executed inputs, model/settings, and pinned deterministic templates. Use [the per-file index](file-generation-index.json) to resolve every annotation output/copy to its executed request or deterministic procedure.\n\nThis public archive intentionally excludes gold answers, traces, future outcomes, paired verification and organizer credential locations. Complete private evidence remains in the external versioned export. Request bodies use only observed focal states/declared controls; no answering benchmark has run. Authoring instructions: [active milestone](../../prompts/SPQ02b_answer_refinements.md).\n").encode())
     counts={"version":ARCHIVE,"annotation_files":len(all_files),"indexed_files":len(entries),"record_mappings":sum(len(e.get("mappings",[])) for e in entries),"unique_mapping_definitions":len(mapping_definitions),
             "exact_recovered_requests":16,"unavailable_executed_requests":0,"reconstructed_requests":0,
             "new_model_calls":0,"unavailable_preliminary_source_snapshots":["associations-1.1.0 association implementation and event-description/1.0.0 renderer"],

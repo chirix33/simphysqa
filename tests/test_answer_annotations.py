@@ -32,6 +32,64 @@ class AnswerAnnotationTests(unittest.TestCase):
                 self.assertEqual(canonical(t["value"]),canonical(label["value"]))
                 self.assertTrue(t["solution_trace"]["verification_record"]["bindings"])
 
+    def test_concise_explanation_is_bound_and_shared_conditions_appear_once(self):
+        for r in self.records:
+            a=r["private"]["answer_annotation"]
+            paragraphs=[c["text"] for c in a["shared_claims"]]
+            self.assertEqual(len(a["shared_claims"]),0 if r["question_type"]=="direct" else 1)
+            for t in a["targets"]:
+                by_kind={c["kind"]:c for c in t["claims"]}
+                expected=" ".join(by_kind[k]["text"] for k in t["explanation_claim_kinds"])
+                self.assertEqual(t["explanation"],expected)
+                for k in t["explanation_claim_kinds"]:self.assertTrue(by_kind[k]["bindings"])
+                paragraphs.append(expected)
+            explanation=enriched_reference(r)["explanation"]
+            self.assertEqual(explanation,"\n\n".join(paragraphs))
+            for c in a["shared_claims"]:
+                self.assertTrue(c["bindings"])
+                self.assertEqual(explanation.count(c["text"]),1)
+            for technical in ("integration dt", "configured horizon", "Run SPQ02-", "SHA256", "coarse-fine admission passed"):
+                self.assertNotIn(technical,explanation)
+            validate_answer_annotation(r)
+        r=deepcopy(next(r for r in self.records if r["question_type"]=="predictive"))
+        r["private"]["answer_annotation"]["shared_claims"][0]["text"]="Unsupported invented mechanism."
+        with self.assertRaises(ValueError):validate_answer_annotation(r)
+
+    def test_orientation_comparison_is_sign_invariant_rotation_angle(self):
+        import math
+        target={"answer_type":"vector","quantity":"orientation","unit":"1","absolute_tolerance":.01,"relative_tolerance":0}
+        q=[0.,0.,0.,1.];negative=[-v for v in q]
+        c=comparison(q,negative,target)
+        self.assertFalse(c["exact_canonical_equality"])
+        self.assertEqual(c["rotation_angle_rad"],0.)
+        self.assertIsNone(c["alternative_minus_factual"])
+        self.assertTrue(c["factual_answer_passes_alternative_scorer"])
+        quarter=[0.,0.,math.sin(math.pi/4),math.cos(math.pi/4)]
+        a=comparison(q,quarter,target);b=comparison(q,[-v for v in quarter],target)
+        self.assertAlmostEqual(a["rotation_angle_rad"],math.pi/2)
+        self.assertEqual(a["rotation_angle_rad"],b["rotation_angle_rad"])
+        self.assertEqual(a["difference_kind"],"sign_invariant_rotation_angle")
+        self.assertEqual(a["scorer_error_unit"],"rad")
+        with self.assertRaises(ValueError):comparison(q,[0.,0.,0.,0.],target)
+
+    def test_real_orientation_gold_and_narrated_change(self):
+        count=0
+        for r in self.records:
+            for t in r["private"]["answer_annotation"]["targets"]:
+                if t["target"]["quantity"]!="orientation":continue
+                count+=1
+                label=next(x for x in r["private"]["reference"]["structured_label"] if x["target_id"]==t["target_id"])
+                self.assertEqual(canonical(t["value"]),canonical(label["value"]))
+                for c in t["claims"]:
+                    if c["kind"]=="observed_to_saved_change":
+                        self.assertIn("sign-invariant rotation-angle change",c["text"])
+                        self.assertNotIn("differs by [",c["text"])
+                        self.assertIn(" rad",c["text"])
+                    if c["kind"]=="matched_comparison":
+                        self.assertIn("Sign-invariant orientation difference",c["text"])
+                        self.assertIsNone(t["comparison"]["alternative_minus_factual"])
+        self.assertGreater(count,0)
+
     def test_direct_trace_requires_only_observed_public_evidence(self):
         for r in self.records:
             if r["question_type"]!="direct":continue

@@ -1,3 +1,9 @@
+# Current bounded refinement — 6 October 2026
+
+Read docs/prompts/SPQ02b_answer_refinements.md and the latest answer contract.
+Concise bound explanations, shared conditions once, sign-invariant quaternion
+changes; preserve values/cutoffs/privacy/prior outputs. Zero simulation/model calls.
+
 # Active milestone: SPQ02b answer enrichment and prompt provenance
 
 Current user instruction from accepted 1ae35749421283e63344504dc6a5d24ce18f32e7

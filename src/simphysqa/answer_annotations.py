@@ -7,8 +7,8 @@ from .dataset import pointer, restore
 from .io import canonical, digest, read
 from .scoring import distance
 
-VERSION = "simphysqa-answer-annotation/1.0.2"
-RENDERER = "grounded-saved-solution/1.0.2"
+VERSION = "simphysqa-answer-annotation/1.0.3"
+RENDERER = "grounded-saved-solution/1.0.3"
 DISPLAY = "eight-significant-digits/1.0.0"
 
 def versions():
@@ -49,11 +49,14 @@ def readout(root, namespace, target, run_id):
 
 def comparison(factual, alternative, target):
     error, accepted, error_unit = distance(factual, alternative, target)
-    delta = None if type(factual) is bool else ([b-a for a,b in zip(factual, alternative)]
+    orientation = target["quantity"] == "orientation" and target["answer_type"] == "vector"
+    delta = None if type(factual) is bool or orientation else ([b-a for a,b in zip(factual, alternative)]
             if isinstance(factual, list) else alternative-factual)
     return {"factual_value": deepcopy(factual), "alternative_value": deepcopy(alternative),
             "exact_canonical_equality": canonical(factual) == canonical(alternative),
-            "alternative_minus_factual": delta, "scorer_error": error, "scorer_error_unit": error_unit,
+            "alternative_minus_factual": delta,
+            "difference_kind": "sign_invariant_rotation_angle" if orientation else "boolean_equality" if type(factual) is bool else "signed_numeric_difference",
+            "rotation_angle_rad": error if orientation else None, "scorer_error": error, "scorer_error_unit": error_unit,
             "factual_answer_passes_alternative_scorer": accepted,
             "absolute_tolerance": target["absolute_tolerance"], "relative_tolerance": target["relative_tolerance"],
             "interpretation_limit": "Equal Booleans or a difference within answer tolerance do not establish absence of a physical effect."}
@@ -114,7 +117,7 @@ def render(record, context):
               context.get("runs", {}).get("original-coarse", {}).get("run_id", "stored-source:"+restore(record)["sample_id"]))
     if typ == "direct":
         run_id = "public-observed:" + record["sample_id"]
-    targets = []
+    targets = []; shared_claims = []
     for index, target in enumerate(inp["answer_spec"]):
         tb = [binding(root, "public", f"/answer_spec/{index}")]
         measured, rb, state_id = readout(root, namespace, target, run_id)
@@ -157,6 +160,11 @@ def render(record, context):
                 cb += [binding(root, "pair", "/intervention_change")]
             ct = control_text(inp, cf)
             claim("effective_control", ct, cb)
+            if not shared_claims:
+                # Share only physical context; technical execution detail stays in traces.
+                concise_control = ct.split(" Implementation applies", 1)[0]
+                shared_claims.append({"kind": "shared_physical_conditions", "text": concise_control,
+                                      "bindings": deepcopy(cb)})
             initial = inp["states"][0]
             ib = [binding(root, "public", "/states/0", state_id=initial["state_id"])]
             step("effective_conditions", ct + f' Start from observed initial state {initial["state_id"]}; retain initial conditions and all other declared parameters.', cb+ib)
@@ -184,10 +192,20 @@ def render(record, context):
                 factual, fb, _ = readout(root, "factual", target, context["runs"]["original-coarse"]["run_id"])
                 comp = comparison(factual["value"], measured["value"], target)
                 ctext = f'Matched factual value {display(factual["value"])} {target["unit"]}; omission value {display(measured["value"])} {target["unit"]}. Exact canonical equality: {comp["exact_canonical_equality"]}. '
+                if comp["rotation_angle_rad"] is not None:
+                    ctext += f'Sign-invariant orientation difference: {display(comp["rotation_angle_rad"])} rad. '
                 if comp["alternative_minus_factual"] is not None:
                     ctext += f'Alternative minus factual: {display(comp["alternative_minus_factual"])} {target["unit"]}; scorer error {display(comp["scorer_error"])} {comp["scorer_error_unit"]}. '
                 ctext += f'Factual answer passes the alternative scorer: {comp["factual_answer_passes_alternative_scorer"]}. {comp["interpretation_limit"]} This comparison concerns the matched omission in the stated simulator; it does not identify an additional physical mechanism.'
-                claim("matched_comparison", ctext, rb+fb+tb)
+                short = f'Matched factual: {display(factual["value"])} {target["unit"]}. '
+                if comp["rotation_angle_rad"] is not None:
+                    short += f'Sign-invariant orientation difference: {display(comp["rotation_angle_rad"])} rad. '
+                elif comp["alternative_minus_factual"] is not None:
+                    short += f'Alternative minus factual: {display(comp["alternative_minus_factual"])} {target["unit"]}. '
+                else:
+                    short += 'The saved Boolean is unchanged. ' if comp["exact_canonical_equality"] else 'The saved Boolean differs. '
+                short += comp["interpretation_limit"]
+                claim("matched_comparison", short, rb+fb+tb)
             else:
                 # Case-specific change, without claiming its cause from timing.
                 matches = [(j,m) for j,m in enumerate(initial["measurements"]) if (m["entity_id"],m["name"])==(target["entity_id"],target["quantity"])]
@@ -195,9 +213,14 @@ def render(record, context):
                     j, before = matches[0]
                     if (before["unit"], before["frame"]) != (measured["unit"],measured["frame"]):
                         raise ValueError("initial/readout frame mismatch")
-                    delta = comparison(before["value"], measured["value"], target)["alternative_minus_factual"]
+                    change = comparison(before["value"], measured["value"], target)
+                    delta = change["alternative_minus_factual"]
                     db = [binding(root, "public", f"/states/0/measurements/{j}", state_id=initial["state_id"]), binding(root,"public","/states/0/timestamp",state_id=initial["state_id"])]
-                    claim("observed_to_saved_change", f'Initial observed {target["quantity"]} was {display(before["value"])} {target["unit"]} at {display(initial["timestamp"])} s; the saved future value differs by {display(delta)} {target["unit"]}. This is a simulated state change, not a causal inference from temporal overlap.', db+rb)
+                    if change["rotation_angle_rad"] is not None:
+                        change_text = f'From the observed orientation at {display(initial["timestamp"])} s, the sign-invariant rotation-angle change is {display(change["rotation_angle_rad"])} rad.'
+                    else:
+                        change_text = f'Initial observed value at {display(initial["timestamp"])} s: {display(before["value"])} {target["unit"]}; saved change: {display(delta)} {target["unit"]}.'
+                    claim("observed_to_saved_change", change_text + ' This simulated change does not establish causation from timing alone.', db+rb)
             vb = [binding(root, "context", "/verification")]
             if cf:
                 vb.append(binding(root, "pair", "/verification"))
@@ -208,16 +231,31 @@ def render(record, context):
             verification = {"status": "saved_numerical_evidence_checked", "readout_equals_gold": True,
                             "exact_factual_replay": bool(context.get("runs")), "bindings": vb+rb,
                             "admission_source": "saved_receipts_and_source_metadata", "human_assessment": "unreviewed"}
+        # Concise prose is assembled only from these explicitly bound claims.
+        result_text = f'{target["entity_id"]} {target["quantity"]} at {display(target["end_time"])} s: {display(label["value"])} {target["unit"]} ({target["frame"]}).'
+        claim("concise_readout", result_text, rb+tb)
+        prose_kinds = ["concise_readout"]
+        if typ == "direct":
+            claim("direct_interpretation", 'This observed channel determines the answer directly; no interpolation or future simulation is required.', rb+tb)
+            prose_kinds.append("direct_interpretation")
+        elif target["answer_type"] == "boolean":
+            claim("concise_boolean_rule", f'Saved flag follows the rule: {target["rule_definition"]} Historical/duration predicates use recorded history, not just an instantaneous endpoint.', rule_bindings)
+            prose_kinds.append("concise_boolean_rule")
+        if comp is not None:
+            prose_kinds.append("matched_comparison")
+        elif any(c["kind"] == "observed_to_saved_change" for c in claims):
+            prose_kinds.append("observed_to_saved_change")
+        concise = " ".join(next(c["text"] for c in claims if c["kind"] == k) for k in prose_kinds)
         targets.append({"target_id": target["target_id"], "target": deepcopy(target), "state_id": state_id,
                         "run_id": run_id, "value": deepcopy(label["value"]), "claims": claims,
-                        "comparison": comp, "explanation": " ".join(c["text"] for c in claims),
+                        "comparison": comp, "explanation": concise, "explanation_claim_kinds": prose_kinds,
                         "solution_trace": {"status": "evidence_checked_human_unreviewed", "steps": steps,
                                            "verification_record": verification}})
     raw = deepcopy(record); raw["private"].pop("answer_annotation", None)
     return {"version": VERSION, "versions": versions(), "kind": {"direct":"observed_evidence_readout", "predictive":"saved_numerical_prediction", "counterfactual":"matched_omission_numerical_comparison"}[typ],
             "status": "automatically_checked_human_unreviewed", "parent_record_sha256": digest(raw),
             "cache_identity": digest({"record": raw, "context": context, "versions": versions()}),
-            "evidence_context": deepcopy(context), "targets": targets,
+            "evidence_context": deepcopy(context), "shared_claims": shared_claims, "targets": targets,
             "future_family_contracts": {"explanation": "supported claims, their evidence and steps connecting evidence to the answer",
                 "clarification": "genuine information gap; demonstrate underdetermination and why requested information resolves it; no unique numerical answer before supply"}}
 
@@ -229,6 +267,12 @@ def validate_answer_annotation(record):
         if sha256(entry["text"].encode()).hexdigest() != entry["sha256"]:
             raise ValueError("implementation evidence hash differs")
     root = roots(record, context)
+    for part in annotation["shared_claims"]:
+        if not part["bindings"] or not part["text"].strip():
+            raise ValueError("unsupported shared explanation statement")
+        for b in part["bindings"]:
+            if b["value_sha256"] != digest(pointer(root[b["namespace"]], b["pointer"])):
+                raise ValueError("unresolved shared answer evidence")
     for target in annotation["targets"]:
         for part in target["claims"] + target["solution_trace"]["steps"]:
             if not part["bindings"] or not part["text"].strip():
@@ -251,7 +295,7 @@ def enriched_reference(record):
     if annotation:
         validate_answer_annotation(record)
         result["explanation_kind"] = annotation["kind"]
-        result["explanation"] = "\n\n".join(t["explanation"] for t in annotation["targets"])
+        result["explanation"] = "\n\n".join([c["text"] for c in annotation["shared_claims"]] + [t["explanation"] for t in annotation["targets"]])
         result["solution_trace"] = {"status": "evidence_checked_human_unreviewed", "version": VERSION,
             "targets": [{"target_id": t["target_id"], **t["solution_trace"]} for t in annotation["targets"]],
             "verification_record": {"status": "per_target_evidence_checked", "target_verification": [t["solution_trace"]["verification_record"] for t in annotation["targets"]], "human_assessment": "unreviewed"}}

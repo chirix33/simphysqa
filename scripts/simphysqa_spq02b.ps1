@@ -8,8 +8,8 @@ $ErrorActionPreference='Stop'
 $taskRepo=Split-Path $PSScriptRoot -Parent
 $env:PYTHONPATH=Join-Path $taskRepo 'src'
 $env:PYTHONDONTWRITEBYTECODE='1'
-$taskOutput=Join-Path $Artifacts 'spq02b/answers-1.0.2'
-$taskArchive=Join-Path $Artifacts 'spq02b/prompt-archive-1.0.3'
+$taskOutput=Join-Path $Artifacts 'spq02b/answers-1.0.3'
+$taskArchive=Join-Path $Artifacts 'spq02b/prompt-archive-1.0.4'
 Push-Location $taskRepo
 try {
     if ($Mode -eq 'export') {

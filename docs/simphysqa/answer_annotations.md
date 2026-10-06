@@ -1,3 +1,28 @@
+# Answer refinement 1.0.3 — 6 October 2026
+
+The [bounded user refinement](../prompts/SPQ02b_answer_refinements.md) supersedes
+the explanation rendering details below. Contract/schema/renderer/export 1.0.3
+adds shared_claims and per-target explanation_claim_kinds. Rendered explanations
+concatenate each evidence-bound shared physical condition once, then each target's
+concise evidence-bound result/interpretation. Technical controls/implementation,
+solver settings, run identities, hashes, receipt details remain in private traces,
+evidence context and verification. Raw references/measurements are not edited.
+
+Orientation difference uses the existing scorer convention:
+theta = 2 acos(min(1, abs(dot(q1,q2))/(norm(q1) norm(q2)))), radians, hence q and -q
+represent the same rotation. For orientation, alternative_minus_factual is null;
+rotation_angle_rad contains theta and difference_kind identifies the convention.
+No quaternion component subtraction is described as physical orientation change.
+Exact source quaternion values and comparison equality remain unchanged. Scalar
+signed differences and non-orientation vector differences retain their meanings.
+
+Export answers-1.0.3 and prompt archive 1.0.4 preserve accepted prior outputs.
+The archive recovers accepted answer procedure 1.0.2 from its exact committed
+source and inventories both versions separately. The worked provenance example
+lists one executed request's actual outputs and later reused copies, alongside a
+deterministic procedure. No new simulations, provider calls or human judgments.
+Historical accepted specification follows unchanged.
+
 # Private answer explanations and solution procedures — SPQ02b
 
 Accepted parent 1ae35749421283e63344504dc6a5d24ce18f32e7; branch simphysqa-naacl.

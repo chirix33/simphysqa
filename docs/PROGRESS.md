@@ -1,3 +1,18 @@
+# Latest bounded refinement — 6 October 2026
+
+Answer/schema/renderer/export 1.0.3: concise bound explanations, shared physical
+conditions once, quaternion changes as sign-invariant rotation angles. All 40 QA,
+eight supporting alternatives, three blank forms and 360 public requests exported.
+94 offline tests pass; one retained runtime test class skipped. Public requests
+are byte-identical to 1.0.2; values/tolerances/cutoffs/source artifacts preserved.
+No new simulations/model calls/spend/human judgments. Prompt archive 1.0.4 includes
+a recovered-request/output mapping example and exact deterministic templates.
+Read [refinement report](reviews/SPQ02b_refinements_completion.md),
+[active prompt](prompts/SPQ02b_answer_refinements.md),
+[archive catalogue](simphysqa/prompt_archive/catalogue.md) and
+[per-file index](simphysqa/prompt_archive/file-generation-index.json).
+Historical progress follows unchanged.
+
 # Latest: SPQ02b answer enrichment and prompt archive - 5 October 2026
 
 Accepted parent 1ae35749421283e63344504dc6a5d24ce18f32e7 on simphysqa-naacl.

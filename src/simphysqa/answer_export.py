@@ -153,7 +153,7 @@ def export(records_path, counterfactual_path, plan_path, runs, arm_path, output)
         examples.setdefault(key,{"sample_id":r["sample_id"],"packet":str(packets/"packets"/(assignment["packet_id"]+".html")),
             "reference":str(output/"organizer-private/references"/(r["sample_id"]+".json"))})
     retained(output/"examples.json",examples)
-    checks={"version":"spq02b-answer-export/1.0.2","qa_records":40,"families":dict(Counter(r["question_type"] for r in after)),
+    checks={"version":"spq02b-answer-export/1.0.3","qa_records":40,"families":dict(Counter(r["question_type"] for r in after)),
         "annotated_targets":sum(len(r["private"]["answer_annotation"]["targets"]) for r in after),
         "supporting_multi_target_alternatives":8,"prepared_public_requests":n,"examples":len(examples),
         "blank_rating_imports":blanks,"source_recovery":"exact after removing private.answer_annotation",
