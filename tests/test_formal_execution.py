@@ -4,11 +4,19 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
-from simphysqa.formal_live import admit_annotation, LIMITS, CeilingReached, simulation_wall, simulate
+from simphysqa.formal_live import admit_annotation, LIMITS, CeilingReached, simulation_wall, simulate, derive
 from simphysqa.formal_scope import formal_scope
 from simphysqa.io import write, digest
 
 class FormalExecutionTests(unittest.TestCase):
+    def test_predictive_keeps_implementation_bindings_without_new_replay(self):
+        parent={'public':{'input':{'domain':'driving'}}}
+        with patch('simphysqa.answer_export.context_for',return_value={}) as context,patch('simphysqa.answer_annotations.enrich',return_value='software-test'):
+            result,_=derive(parent,None,None,'predictive',Path('unused'))
+        self.assertEqual(result,'software-test')
+        implementation=context.call_args.args[3]
+        self.assertEqual(set(implementation),{'engines','bullet','scenes'})
+        self.assertTrue(all(v['sha256'] and v['text'] for v in implementation.values()))
     def test_all_annotation_axes_block_before_request(self):
         bound={'usd':1,'input_token_upper_bound':10,'output_token_limit':20}
         history=[{'initial_request':True,'charged_upper_bound_usd':1,'reservation':bound,'wall_seconds':120}]

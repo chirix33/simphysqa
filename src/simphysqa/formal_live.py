@@ -45,6 +45,35 @@ def settings():
     return provider
 
 
+def execution_plan(output):
+    plan=read(output/'execution-plan.json')
+    for path in sorted((output/'execution-plan-revisions').glob('*.json')):
+        revision=read(path)
+        if revision['previous_plan_sha256']!=digest(plan):raise ValueError('execution revision chain changed')
+        if any(revision[k]!=plan[k] for k in ('candidates','excluded_groups','provider_config','simulation_limits','candidate_order_sha256')):
+            raise ValueError('repair changed frozen design/budget')
+        plan=revision
+    return plan
+
+
+def revise(output):
+    plan=execution_plan(output);revision=deepcopy(plan)
+    allowed={'src/simphysqa/formal_live.py','src/simphysqa/formal_delivery.py'}
+    changed=[]
+    for relative,expected in plan['scientific_source_pins'].items():
+        actual=file_hash(ROOT/relative)
+        if actual!=expected:
+            if relative not in allowed:raise ValueError('scientific procedure changed:'+relative)
+            changed.append(relative);revision['scientific_source_pins'][relative]=actual
+    if not changed:raise ValueError('no adapter repair to freeze')
+    revision['previous_plan_sha256']=digest(plan)
+    revision['version']='SPQ05-authorized-execution/1.0.1'
+    revision['producer_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    revision['repair']={'changed_files':changed,'reason':'Supply retained implementation bindings to predictive answer annotation; halt unexpected adapter errors. Original failed candidates remain rejected; unknown interrupted attempt remains reserved. Same frozen order and all cumulative counters.'}
+    write(output/'execution-plan-revisions/001.json',revision)
+    print(canonical({'revision_sha256':digest(revision),'repair':revision['repair'],'limits_unchanged':True}).decode(),flush=True)
+
+
 def pair_for(candidate):
     wrapper=source_record(candidate['source'])
     row=candidate['source']; folder=Path(row['source']['path']).parent.parent
@@ -257,10 +286,9 @@ def derive(parent, pair, runs, family, case):
         result=build_direct(parent)
         return answer_enrich(result,context_for(result,None,None,{},{})),None
     implementation={}
-    if pair:
-        for rel in ('src/phi_jepa/simulation/engines.py','src/phi_jepa/simulation/bullet.py','src/phi_jepa/simulation/scenes.py'):
-            path=runs/'source-snapshot'/rel
-            implementation[Path(rel).stem]={'source_path':rel,'sha256':file_hash(path),'text':path.read_text()}
+    for rel in ('src/phi_jepa/simulation/engines.py','src/phi_jepa/simulation/bullet.py','src/phi_jepa/simulation/scenes.py'):
+        path=(runs/'source-snapshot'/rel) if pair else ROOT/rel
+        implementation[Path(rel).stem]={'source_path':rel,'sha256':file_hash(path),'text':path.read_text()}
     arm={}
     if parent['public']['input']['domain']=='robotic_arm':
         if pair:
@@ -326,7 +354,7 @@ def derive(parent, pair, runs, family, case):
 
 
 def process(output):
-    output=external(output);plan=read(output/'execution-plan.json')
+    output=external(output);plan=execution_plan(output)
     if plan['provider_config']!=settings() or plan['simulation_limits']!=SIM_LIMITS:
         raise ValueError('authorization/config identity mismatch')
     for relative,expected in plan['scientific_source_pins'].items():
@@ -386,6 +414,8 @@ def process(output):
                          'source_sample_id':candidate['source']['sample_id'],'group_id':candidate['source']['group_id']}
                 write(status_path,failure);failures.append(failure)
                 print(canonical(failure).decode(),flush=True)
+                if not isinstance(exc,(ValueError,StopIteration)):
+                    stop='unexpected_adapter_error_requires_versioned_repair: '+failure['reason'];break
         history=annotation_ledger(output)
         snapshot={'version':plan['version'],'completed_items':len(completed),'target_items':140,
             'shortfall':140-len(completed),'allocation':counts,'rejections':failures,'stop_reason':stop,
@@ -403,10 +433,11 @@ def process(output):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('command',choices=('freeze','run'))
+    p=argparse.ArgumentParser();p.add_argument('command',choices=('freeze','run','revise'))
     p.add_argument('--preparation',type=Path);p.add_argument('--output',type=Path,required=True)
     a=p.parse_args()
     if a.command=='freeze':freeze(a.preparation,a.output)
+    elif a.command=='revise':revise(external(a.output))
     else:process(a.output)
 
 

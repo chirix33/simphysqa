@@ -9,7 +9,7 @@ import subprocess
 from .io import ROOT, DOMAINS, QUESTION_TYPES, canonical, digest, read, external
 from .formal_sampling import file_hash, save_bytes
 from .formal_scope import formal_scope
-from .formal_live import annotation_ledger, simulation_wall, LIMITS, SIM_LIMITS
+from .formal_live import annotation_ledger, simulation_wall, LIMITS, SIM_LIMITS, execution_plan
 from .spq01a import retained, verify_manifest
 from .focused_audit import extract, blank_forms, validate_form, CRITERIA
 
@@ -70,7 +70,7 @@ def render_item(out):
 
 
 def export(run, output):
-    run=external(run);output=external(output);plan=read(run/'execution-plan.json')
+    run=external(run);output=external(output);plan=execution_plan(run)
     if output==run or run in output.parents:raise ValueError('delivery root must be separate from mutable execution root')
     assignments=[];focused=[];records=[];keys=[];ledger=[];links=[];counts=Counter();examples={}
     with formal_scope(plan['candidates'],plan['excluded_groups']):
