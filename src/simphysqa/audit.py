@@ -88,6 +88,9 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
     if any(r["question_type"] == "explanation" for r in records):
         from .explanation import rubric_text
         audit_rubric += "\nExplanation-task supplement (selected outcomes intentionally supplied):\n" + rubric_text()
+    if any(r["question_type"] == "clarification" for r in records):
+        from .clarification import rubric_text
+        audit_rubric += "\nClarification-task supplement (intentional gap, then recorded reply):\n" + rubric_text()
     (output / "rubric.txt").write_text(audit_rubric, encoding="utf-8")
     assignments = []
     key = []
@@ -100,6 +103,8 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
             identity["answer_annotation_cache"] = record["private"]["answer_annotation"]["cache_identity"]
         if "explanation_annotation" in record["private"]:
             identity["explanation_annotation_cache"] = record["private"]["explanation_annotation"]["cache_identity"]
+        if "clarification_annotation" in record["private"]:
+            identity["clarification_annotation_cache"] = record["private"]["clarification_annotation"]["cache_identity"]
         packet_id = "SPQ-" + digest(identity)[:16]
         packet = {"packet_id": packet_id, "phase": phase, "sample_id": record["sample_id"],
                   "annotation_version": record["annotation_version"], "question_type": record["question_type"],
@@ -129,6 +134,17 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
             packet["explanation_annotation"] = record["private"]["explanation_annotation"]
             packet["verification"]["answer_evidence_roots"] = evidence_roots(record)
             packet["rubric_version"] = record["private"]["reference"]["rubric_version"]
+        if record["question_type"] == "clarification":
+            from .clarification import roots
+            packet["clarification_annotation"] = record["private"]["clarification_annotation"]
+            packet["two_stage_task"] = {"initial_view": record["private"]["initial_view"],
+                "reference_clarification_question": record["private"]["reference"]["reference_clarification_question"],
+                "reference_question_origin": "authored_reference_not_actual_model_response",
+                "recorded_reply": record["private"]["resolved_view"]["input"]["recorded_reply"],
+                "resolved_view": record["private"]["resolved_view"]}
+            packet["verification"]["answer_evidence_roots"] = roots(record)
+            packet["verification"]["private_gap_witnesses"] = record["private"]["reference"]["witnesses"]
+            packet["rubric_version"] = "information-gap-clarification-rubric/1.0.0"
         # Annotation provider identity lives only in the organizer key.
         key.append({"packet_id": packet_id, "sample_id": record["sample_id"], "source": record["source"],
                     "annotation_provenance": record["private"]["annotation_provenance"],
@@ -138,8 +154,13 @@ def export_packets(records: list[dict], output: Path, phase: str = "development"
         html = '<!doctype html><meta charset="utf-8"><title>SimPhysQA auditor packet</title><style>body{max-width:1100px;margin:32px auto;font:16px system-ui}pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer}</style>'
         html += "<h1>" + packet_id + "</h1><p>Private verification evidence: auditor use only. Development packet; annotations may be pending.</p>"
         html += "<h2>Question</h2><p>" + escape(packet["qa"]["question"]) + "</p>"
+        if record["question_type"] == "clarification":
+            stages=packet["two_stage_task"]
+            html += "<h2>Stage 1 reference clarification (authored; no model interaction executed)</h2><p>" + escape(stages["reference_clarification_question"]) + "</p>"
+            html += "<h2>Recorded reply</h2><p>" + escape(stages["recorded_reply"]["text"]) + "</p>"
+            html += "<h2>Stage 2 resolved question</h2><p>" + escape(stages["resolved_view"]["input"]["resolved_question"]) + "</p>"
         html += "<h2>Reference</h2><p>" + escape(packet["qa"]["reference"]["label"]) + "</p>"
-        if "answer_annotation" in record["private"] or "explanation_annotation" in record["private"]:
+        if "answer_annotation" in record["private"] or "explanation_annotation" in record["private"] or "clarification_annotation" in record["private"]:
             html += "<h2>Answer explanation (human unreviewed)</h2><pre>" + escape(packet["qa"]["reference"]["explanation"]) + "</pre>"
             html += "<h2>Numerical/observed solution trace and evidence bindings</h2><pre>" + escape(canonical(packet["qa"]["reference"]["solution_trace"]).decode()) + "</pre>"
         html += "<h2>Language status</h2><pre>" + escape(canonical(packet["language_annotations"]).decode()) + "</pre>"

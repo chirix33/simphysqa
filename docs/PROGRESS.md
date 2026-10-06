@@ -1,3 +1,16 @@
+# Latest: SPQ04 clarification QA - 6 October 2026
+
+Base395139d on simphysqa-naacl. Eight completed, zero failed/pending; two per
+domain. Five query-condition gaps, one block-entity gap and two future-time gaps.
+Rejected equal/overlapping candidates retained; numeric acceptance regions disjoint.
+Accepted48 QA, source values, .2s cutoffs and existing formal exclusions preserved.
+Eight packets, three blank forms,72 initial requests and72 conditional templates.
+No simulations/model calls or executed interactions. Human judgments uncollected.
+119 offline tests OK (one retained runtime class skipped); resume142 files exact.
+Read [contract](simphysqa/clarification_qa.md), [complete prompt](prompts/SPQ04_clarification_qa.md),
+[report/commands](reviews/SPQ04_completion.md), [archive](simphysqa/prompt_archive/README.md).
+Historical progress below remains byte-exact, including its legacy encoding.
+
 # Latest: SPQ03 explanation QA — 6 October 2026
 
 Base 10ace28 on simphysqa-naacl. Eight new explanation items completed, zero

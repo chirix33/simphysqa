@@ -4,6 +4,11 @@ from .dataset import public_record
 from .io import canonical, external, manifest, write
 
 def request(record: dict, condition: dict, *, association_version: str | None = None) -> dict:
+    if record["question_type"] == "clarification":
+        if association_version not in (None, "simphysqa-associations/1.1.1"):
+            raise ValueError("unsupported clarification association version")
+        from .clarification_evaluation import initial_request
+        return initial_request(record, condition)
     public = public_record(record, association_version=association_version)
     text = "Answer using the observed structured inputs, public language annotations and declared controls. Return target IDs and typed values in their declared units/frames; abstain if information is insufficient."
     if record["question_type"] == "explanation":

@@ -29,7 +29,7 @@ def iter_source(path: Path) -> Iterator[tuple[dict, SourceLocation]]:
                     yield parse(line), SourceLocation(str(file.resolve()), number, file_hash)
 
 def restore(record: dict) -> dict:
-    if record["question_type"] in ("direct", "counterfactual", "explanation"):
+    if record["question_type"] in ("direct", "counterfactual", "explanation", "clarification"):
         return deepcopy(record["private"]["source_record"])
     return {"schema_version": record["source_schema_version"], "sample_id": record["sample_id"],
             "input": deepcopy(record["public"]["input"]),
@@ -84,6 +84,10 @@ def pointer(root: dict, path: str):
 
 def validate(record: dict) -> None:
     canonical(record)
+    if record.get("question_type") == "clarification":
+        from .clarification import validate_clarification
+        validate_clarification(record)
+        return
     if record.get("question_type") == "counterfactual" and record.get("schema_version") != "simphysqa/0.3.0":
         raise ValueError("counterfactual QA requires matched alternative evidence, never relabeling")
     Draft202012Validator(read(Path(__file__).with_name("record.schema.json"))).validate(record)
@@ -149,6 +153,10 @@ def validate(record: dict) -> None:
 
 def public_record(record: dict, *, association_version: str | None = None) -> dict:
     validate(record)
+    if record["question_type"] == "clarification":
+        if association_version not in (None, "simphysqa-associations/1.1.1"):
+            raise ValueError("unsupported clarification association version")
+        return deepcopy(record["private"]["initial_view"])
     result = {"schema_version": record["schema_version"], "sample_id": record["sample_id"],
             "question_type": record["question_type"], "annotation_version": record["annotation_version"],
             "input": deepcopy(record["public"]["input"]),
@@ -186,7 +194,7 @@ def attach_annotation(record: dict, result: dict) -> dict:
 def load(path: Path) -> Iterator[dict]:
     seen = set()
     for raw, location in iter_source(path):
-        record = raw if raw.get("schema_version") in (VERSION, "simphysqa/0.2.0", "simphysqa/0.3.0", "simphysqa/0.4.0") else migrate(raw, location)
+        record = raw if raw.get("schema_version") in (VERSION, "simphysqa/0.2.0", "simphysqa/0.3.0", "simphysqa/0.4.0", "simphysqa-clarification/1.0.0") else migrate(raw, location)
         validate(record)
         if record["sample_id"] in seen:
             raise ValueError("duplicate sample ID")

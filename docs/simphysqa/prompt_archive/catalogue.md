@@ -4585,3 +4585,1057 @@ Eight new explanation QA reuse the frozen verified pairs and their original sele
 ## Historical limitations
 
 All executed model payloads recovered: 16/16; unavailable: 0; reconstructed: 0; repairs: 0. Original generic simulator contexts/explanations were deterministic placeholders, with no model request to recover. Preliminary association 1.0.0 source is recovered exactly from its saved installer payload (executed hash matches). The preliminary 1.1.0 association/description source remains unrecoverable; its recorded source/output hashes and accepted successor templates remain separate. Credential headers/paths and private QA outcomes/verification are excluded; no redaction alters the 16 public JSON request bodies.
+
+## SPQ04 clarification QA — deterministic procedures
+
+Eight new engineering-development items use five condition gaps, one block-entity gap and two readout-time gaps. Frozen groups remain excluded from fresh formal sampling. Both witnesses erase to the complete same initial public input, including annotations, associations, identifiers and response schema. Numerical witness regions are disjoint under the actual typed scorer; equal/sub-tolerance omission contrasts were rejected, not relabeled. Tether .4 s readouts were additionally checked against already saved fine-step results using existing admission thresholds. No new simulation or provider request occurred.
+
+Initial public queries use a dedicated partial-input contract with the missing slot absent. Conditional templates never insert authored reference clarification questions as assistant responses. The recorded reply contains missing query information only; gold answer/explanation/trace/private verification remain private. Wording equivalence is assessed by humans; declared-slot routing is deterministic and does not prove prose adequacy. All conversations are prepared, never executed. Historical executed/reused/procedure distinctions and unrecoverable early source material remain unchanged.
+
+### clarification-qa/1.0.0
+
+Deterministic query-gap selection, disjoint acceptance-region witnesses, complete initial-surface projection, author reply, resolved readout and claim/trace bindings; saved evidence only. No annotation-model prompt.
+
+[Exact pinned templates/projection](procedures/clarification-qa-1.0.0.py)
+
+<details><summary>Complete deterministic source</summary>
+
+```python
+"""SPQ04: genuine query ambiguity, saved witnesses, no simulation/provider calls."""
+from copy import deepcopy
+from hashlib import sha256
+from pathlib import Path
+import math
+from jsonschema import Draft202012Validator
+from .io import ROOT, canonical, digest, read
+from .dataset import restore, pointer
+from .answer_annotations import roots as parent_roots, binding, readout, display, control_text
+from .associations import VERSION as ASSOCIATIONS, associated_view, strip_associations
+from .scoring import distance
+
+VERSION = "saved-witness-clarification/1.0.0"
+PARTIAL = "simphysqa-partial-input/1.0.0"
+RECORD = "simphysqa-clarification/1.0.0"
+SLOTS = ("execution_condition", "entity_id", "readout_time")
+SCENARIO_KEYS = ("domain", "entities", "global_context", "coordinate_convention", "controller", "known_events", "states", "observation_cutoff")
+
+
+def versions():
+    return {"procedure": VERSION, "partial_input": PARTIAL, "associations": ASSOCIATIONS,
+        "implementation_sha256": sha256(Path(__file__).read_text(encoding="utf-8").encode()).hexdigest(),
+        "evaluation_sha256": sha256(Path(__file__).with_name("clarification_evaluation.py").read_text(encoding="utf-8").encode()).hexdigest(),
+        "schema_sha256": digest(read(Path(__file__).with_name("clarification.schema.json"))),
+        "rubric_sha256": digest(read(ROOT/"configs/simphysqa/clarification_rubric.json"))}
+
+
+def response_schema():
+    # Same schema across gaps; no selected completion, reference question or gold value.
+    return {"type": "object", "additionalProperties": False,
+        "required": ["response_kind", "requested_information", "clarification_question"],
+        "properties": {"response_kind": {"const": "clarify"},
+            "requested_information": {"enum": list(SLOTS)},
+            "clarification_question": {"type": "string", "minLength": 1}}}
+
+
+def disjoint(a, b, t1, t2):
+    """Scorer acceptance regions, not merely mutual rejection of point answers."""
+    for key in ("answer_type", "quantity", "unit", "frame", "absolute_tolerance", "relative_tolerance"):
+        if canonical(t1[key]) != canonical(t2[key]):
+            raise ValueError("witness scoring semantics differ")
+    error, _, unit = distance(a, b, t2)
+    if t1["answer_type"] == "boolean":
+        return {"qualified": type(a) is bool and type(b) is bool and a != b,
+            "metric": "Boolean inequality", "separation": None, "radii": [0, 0], "metric_unit": "1"}
+    if t1["answer_type"] not in ("number", "integer", "vector"):
+        raise ValueError("unsupported acceptance geometry; no guessed threshold")
+    orientation = t1["quantity"] == "orientation" and t1["answer_type"] == "vector"
+    def radius(value, target):
+        magnitude = 1. if orientation else math.sqrt(sum(v*v for v in value)) if isinstance(value, list) else abs(value)
+        return target["absolute_tolerance"] + target["relative_tolerance"]*magnitude
+    radii = [radius(a,t1), radius(b,t2)]
+    # Quaternion scorer is the SO(3) geodesic metric modulo sign and norm; triangle
+    # inequality gives the same sufficient disjoint-ball certificate in radians.
+    return {"qualified": error > sum(radii), "metric": "sign_invariant_rotation_angle" if orientation else "Euclidean" if isinstance(a,list) else "absolute",
+        "separation": error, "radii": radii, "required_strictly_greater_than": sum(radii), "metric_unit": unit}
+
+
+def roots(record):
+    e = record["private"]["clarification_evidence"]; p = e["parent_record"]
+    root = parent_roots(p, p["private"]["answer_annotation"]["evidence_context"])
+    root.update(initial=record["public"]["input"], resolved=record["private"]["resolved_view"]["input"], gap=e["selection"])
+    for key, value in e["saved_fine_results"].items():
+        root[key] = value
+    return root
+
+
+def select(parent):
+    """Frozen groups, original target first, then sorted source targets; no replacement."""
+    root = parent_roots(parent,parent["private"]["answer_annotation"]["evidence_context"])
+    source = root["factual"]; targets = source["input"]["answer_spec"]
+    selected = parent["public"]["input"]["answer_spec"][0]
+    ordered = [selected] + [t for t in sorted(targets,key=lambda t:t["target_id"]) if t != selected]
+    attempts = []
+    def candidate(slot, ts, ns, values):
+        outcomes = [readout(root,n,t,root["pair"]["original_run_id"] if n=="factual" else root["pair"]["alternative_run_id"])[0]["value"] for t,n in zip(ts,ns)]
+        check = disjoint(*outcomes,*ts)
+        attempts.append({"ambiguity_type":slot,"targets":deepcopy(ts),"namespaces":ns,"completion_values":values,"certificate":check})
+        return {"ambiguity_type":slot,"targets":deepcopy(ts),"namespaces":ns,"completion_values":values,"certificate":check,"candidates":deepcopy(attempts)} if check["qualified"] else None
+    for t in ordered:
+        result = candidate("execution_condition",[t,t],["factual","alternative"],["scheduled","omitted"])
+        if result:return result
+    # Existing pre-stacked source has two admitted same-unit position targets.
+    if source["input"]["domain"] == "object_pushing_stacking":
+        positions = sorted((t for t in targets if t["quantity"]=="position"),key=lambda t:t["entity_id"])
+        if len(positions)==2:
+            result = candidate("entity_id",positions,["factual","factual"],[t["entity_id"] for t in positions])
+            if result:return result
+    # New query times, not new physics: saved 0.4/1.0 readouts. Both future to .2 s.
+    # Readout validity at the additional endpoint is checked against saved fine
+    # results and the EXISTING admission thresholds during construction below.
+    if source["input"]["domain"] == "tethered_load":
+        t = next(t for t in targets if t["quantity"]=="position")
+        early = deepcopy(t);early.update(start_time=.4,end_time=.4)
+        result = candidate("readout_time",[early,t],["factual","factual"],[.4,t["end_time"]])
+        if result:return result
+    return {"status":"failed","reason":"No supported disjoint witness found under declared bounded candidate rules", "candidates":attempts}
+
+
+def fine_evidence(parent, selection, runs):
+    """Read saved executions only; no engine import or solve. Extra-time qualification."""
+    if selection["ambiguity_type"] != "readout_time":return {}, []
+    root = parent_roots(parent,parent["private"]["answer_annotation"]["evidence_context"])
+    run_id = root["pair"]["pair_id"]+"-original-fine"
+    path = Path(runs)/"executions"/run_id/"result.json"
+    raw = path.read_bytes(); fine = read(path)
+    if sha256(raw).hexdigest() != root["context"]["runs"]["original-fine"]["result_file_sha256"] or fine["status"] != "completed":
+        raise ValueError("saved fine result integrity failure")
+    checks=[]
+    for t in selection["targets"]:
+        a,_,_=readout(root,"factual",t,root["pair"]["original_run_id"])
+        states=fine["rollout"]["states"];i,s=next((i,s) for i,s in enumerate(states) if s["timestamp"]==t["end_time"])
+        j,m=next((j,m) for j,m in enumerate(s["measurements"]) if (m["entity_id"],m["name"])==(t["entity_id"],t["quantity"]))
+        if (m["unit"],m["frame"])!=(t["unit"],t["frame"]):raise ValueError("fine metadata differs")
+        tol=0. if type(a["value"]) is bool else .01 if t["unit"] in ("m/s","rad/s") else .005
+        check_target={**t,"absolute_tolerance":tol,"relative_tolerance":0.}
+        error,passed,unit=distance(a["value"],m["value"],check_target)
+        if not passed:raise ValueError("additional saved endpoint fails existing refinement threshold")
+        checks.append({"target":deepcopy(t),"error":error,"tolerance":tol,"unit":unit,"passed":passed,
+            "fine_run_id":run_id,"result_file_sha256":sha256(raw).hexdigest(),
+            "fine_state_pointer":f"/rollout/states/{i}/measurements/{j}","state_id":s["state_id"],
+            "method":"offline_saved_readout_check; thresholds from accepted pipeline.comparison, not answer scoring"})
+    return {"factual_fine":fine},checks
+
+
+def initial(parent, selection, sample_id):
+    p=deepcopy(parent["public"]["input"])
+    p={k:p[k] for k in SCENARIO_KEYS}  # Discard old question, answer_spec, counterfactual IDs/text.
+    t=deepcopy(selection["targets"][0]);t["target_id"]="clarified-target"
+    query={k:deepcopy(v) for k,v in t.items() if k not in ("start_time","end_time")}
+    slot=selection["ambiguity_type"]
+    if slot=="entity_id":query.pop("entity_id")
+    if slot!="readout_time":query["timestamp"]=t["end_time"]
+    if slot!="execution_condition":query["execution_condition"]="scheduled"
+    entity=t["entity_id"] if slot!="entity_id" else "the intended block"
+    when=f'at {display(t["end_time"])} s' if slot!="readout_time" else "at the intended future readout time"
+    suffix={"execution_condition":"The requested condition has not been specified: the declared scheduled intervention may be retained or omitted; all other scenario and execution settings stay fixed.",
+        "entity_id":"The requested block has not been specified: block_1 or block_2.",
+        "readout_time":"The requested future readout time has not been specified."}[slot]
+    p.update(task_type="clarification_state_readout",question=f'What is {entity} {t["quantity"]} {when} ({t["unit"]}, frame {t["frame"]})? '+suffix,
+        query=query,partial_input_contract=PARTIAL,
+        scenario_role="Base scheduled scenario; declared controls and schedule do not select an unspecified query condition. Observed prefix is common to both matched conditions.",
+        interaction={"stage":1,"behavior":"Request one focused clarification before supplying a unique answer.","response_schema":response_schema()})
+    view={"schema_version":RECORD,"sample_id":sample_id,"question_type":"clarification", "annotation_version":parent["annotation_version"],
+        "input":p,"annotations":deepcopy(parent["public"]["annotations"])}
+    return associated_view(view)
+
+
+def erase_resolution(view, slot):
+    """Remove all stage-2 query resolution and derived text to recover initial view."""
+    out=deepcopy(view);inp=out["input"]
+    inp.pop("answer_spec",None);inp.pop("recorded_reply",None)
+    key={"execution_condition":"execution_condition","entity_id":"entity_id","readout_time":"timestamp"}[slot]
+    inp["query"].pop(key,None)
+    # These two values are deterministic derived wording, not additional evidence.
+    inp.pop("resolved_question",None);inp["interaction"]= {"stage":1,"behavior":"Request one focused clarification before supplying a unique answer.","response_schema":response_schema()}
+    out["association_provenance"]["source_public_input_sha256"]=digest(strip_associations(inp))
+    return out
+
+
+def completed_view(initial_view, selection, index):
+    out=deepcopy(initial_view);inp=out["input"];slot=selection["ambiguity_type"]
+    value=selection["completion_values"][index];target=deepcopy(selection["targets"][index]);target["target_id"]="clarified-target"
+    key={"execution_condition":"execution_condition","entity_id":"entity_id","readout_time":"timestamp"}[slot]
+    reply_text={"execution_condition": "Use the condition with the scheduled intervention "+("retained." if value=="scheduled" else "omitted; retain all other controls and conditions."),
+        "entity_id":f'Use {value}.',"readout_time":f'Use the readout at {display(value) if type(value) in (int,float) else value} s.'}[slot]
+    inp["query"][key]=value;inp["answer_spec"]=[target]
+    inp["recorded_reply"]={"requested_information":slot,"value":value,"text":reply_text,"origin":"recorded_task_author_reply_not_model_response"}
+    condition=inp["query"]["execution_condition"]
+    inp["resolved_question"]=(f'In the {condition} condition, what is {target["entity_id"]} {target["quantity"]} at {display(target["end_time"])} s ({target["unit"]}, frame {target["frame"]})?')
+    inp["interaction"]={"stage":2,"behavior":"Answer the resolved question with typed value and concise evidence-supported explanation; no private outcomes are supplied.",
+        "response_schema":{"type":"object","additionalProperties":False,"required":["targets","explanation"],"properties":{
+            "targets":{"type":"array","minItems":1,"maxItems":1,"items":{"type":"object","additionalProperties":False,"required":["target_id","value","unit","frame"],"properties":{
+                "target_id":{"const":"clarified-target"},"value":{"type":"boolean"} if target["answer_type"]=="boolean" else {"type":"array","minItems":4 if target["quantity"]=="orientation" else 3,"maxItems":4 if target["quantity"]=="orientation" else 3,"items":{"type":"number"}} if target["answer_type"]=="vector" else {"type":"number"},"unit":{"const":target["unit"]},"frame":{"const":target["frame"]}}}},"explanation":{"type":"string","minLength":1}}}}
+    out["association_provenance"]["source_public_input_sha256"]=digest(strip_associations(inp))
+    return out
+
+
+def reference(record):
+    root=roots(record);sel=root["gap"];slot=sel["ambiguity_type"]
+    witnesses=[]
+    for i,(ns,t) in enumerate(zip(sel["namespaces"],sel["targets"])):
+        run=root["pair"]["original_run_id"] if ns=="factual" else root["pair"]["alternative_run_id"]
+        m,b,sid=readout(root,ns,t,run)
+        witnesses.append({"completion_value":sel["completion_values"][i],"namespace":ns,"run_id":run,"target":deepcopy(t),"answer":m,"state_id":sid,"bindings":b})
+    target=record["private"]["resolved_view"]["input"]["answer_spec"][0];w=witnesses[1]
+    cert=sel["certificate"];claims=[]
+    def claim(kind,text,bs):
+        c={"kind":kind,"text":text,"bindings":bs};c["claim_id"]="CLC-"+digest(c)[:16];claims.append(c)
+    gap_b=[binding(root,"initial","/query"),binding(root,"gap","/completion_values")]
+    both=witnesses[0]["bindings"]+witnesses[1]["bindings"]+[binding(root,"gap","/certificate")]
+    claim("information_gap",f'The initial question does not determine {slot}; both private completions agree with the complete initial scenario, language and query.',gap_b)
+    difference=("The Boolean answers differ." if target["answer_type"]=="boolean" else f'The witness separation is {display(cert["separation"])} {cert["metric_unit"]}, strictly greater than the sum of acceptance radii {display(sum(cert["radii"]))}. Their answer regions are disjoint under the unchanged scorer.')
+    claim("underdetermination",difference,both)
+    claim("reply_resolution",f'The recorded reply supplies only {slot}: {sel["completion_values"][1]}. This selects one requested readout without disclosing its answer.',[binding(root,"resolved","/recorded_reply"),binding(root,"resolved","/answer_spec/0")])
+    inp=root["factual"]["input"];omission=w["namespace"]=="alternative"
+    # Detailed implementation, including raw arm metadata distinction, remains in trace.
+    text=control_text(inp,omission).split(" Implementation applies",1)[0]
+    if not omission:text += " The requested entity/time is now fixed by the query and reply."
+    controls=[binding(root,"factual","/input/controller"),binding(root,"factual","/input/known_events"),binding(root,"pair","/intervention_change")]
+    claim("effective_conditions",text,controls+[binding(root,"resolved","/query")])
+    claim("resolved_answer",f'{target["entity_id"]} {target["quantity"]} at {display(target["end_time"])} s is {display(w["answer"]["value"])} {target["unit"]} ({target["frame"]}), read from the selected saved {w["namespace"]} run.',w["bindings"]+[binding(root,"resolved","/answer_spec/0")])
+    if target["answer_type"]=="boolean":
+        claim("predicate_rule",target["rule_definition"]+" Use the saved flag and event history; an endpoint measurement alone cannot establish a duration predicate.",w["bindings"]+[binding(root,w["namespace"],"/reference/events",run_id=w["run_id"]),binding(root,"resolved","/answer_spec/0")])
+    claim("interpretation_limit","The reply resolves the requested condition, entity or time; it does not discover a missing physical mechanism. These verified simulator readouts do not establish real-world causality or human explanation quality.",[binding(root,"context","/verification")]+both)
+    questions={"execution_condition":"Should the scheduled intervention be retained or omitted for this question?", "entity_id":"Which block should I report, block_1 or block_2?", "readout_time":"At what time should I report the load position?"}
+    steps=[]
+    for c in claims:
+        steps.append({"step":len(steps)+1,"kind":c["kind"],"text":c["text"],"supports_claim_ids":[c["claim_id"]],"bindings":deepcopy(c["bindings"])})
+    method=[binding(root,"context","/method"),binding(root,"context","/runs"),binding(root,"context","/implementation")]
+    if inp["domain"]=="robotic_arm":method.append(binding(root,"context","/arm_interpretation"))
+    steps.insert(4,{"step":0,"kind":"saved_numerical_procedure","text":"Use the saved execution configuration, simulator method and implementation; no new solve or analytical derivation was performed. Raw source controller/frame metadata stays unchanged; arm generalized-hinge interpretation is separate saved implementation evidence.","supports_claim_ids":[],"bindings":method})
+    checks=record["private"]["clarification_evidence"]["additional_readout_checks"]
+    verification=[binding(root,"pair","/verification"),binding(root,"context","/verification")]
+    if checks:
+        verification.append(binding(root,"gap","/additional_readout_checks"))
+        for check in checks:verification.append(binding(root,"factual_fine",check["fine_state_pointer"],run_id=check["fine_run_id"],state_id=check["state_id"]))
+    for i,s in enumerate(steps,1):s["step"]=i
+    trace={"version":VERSION,"status":"evidence_checked_human_unreviewed","steps":steps,
+        "verification_record":{"status":"saved_exact_replay_and_separate_admissions_passed", "bindings":verification,
+            "additional_readout_checks":checks,"new_simulations":0,"human_explanation_assessment":"uncollected"}}
+    return {"label":"Resolved answer: "+display(w["answer"]["value"])+" "+target["unit"],
+        "structured_label":[{"target_id":"clarified-target", "entity_id":target["entity_id"],"quantity":target["quantity"],"value":deepcopy(w["answer"]["value"]),"unit":target["unit"],"frame":target["frame"],"timestamp":target["end_time"]}],
+        "reference_clarification_question":questions[slot], "reference_question_origin":"authored_reference_not_executed_model_response",
+        "acceptable_equivalents":"Any single focused question that requests the missing slot; exact wording is not required. Compound or answer-leaking questions require human review.",
+        "witnesses":witnesses,"claims":claims,"explanation":" ".join(c["text"] for c in claims if c["kind"] in ("reply_resolution","effective_conditions","resolved_answer","predicate_rule","interpretation_limit")),
+        "explanation_kind":"resolved_saved_witness_readout","solution_trace":trace,"verification_record":trace["verification_record"]}
+
+
+def construct(parent, selection, fine):
+    sel=deepcopy(selection);saved,checks=fine
+    sel["additional_readout_checks"]=checks
+    sample_id="spq-clarification-"+digest({"version":VERSION,"group":parent["trajectory_id"],"gap":sel["ambiguity_type"]})[:24]
+    view=initial(parent,sel,sample_id);resolved=completed_view(view,sel,1)
+    record={"schema_version":RECORD,"source_schema_version":parent["source_schema_version"],"sample_id":sample_id,"trajectory_id":parent["trajectory_id"],
+        "question_type":"clarification","annotation_version":parent["annotation_version"],"source":deepcopy(parent["source"]),
+        "public":{"input":view["input"],"annotations":view["annotations"]},
+        "private":{"source_record":restore(parent),"metadata":deepcopy(parent["private"]["metadata"]),"annotation_provenance":deepcopy(parent["private"]["annotation_provenance"]),
+            "evidence_bindings":deepcopy(parent["private"]["evidence_bindings"]),"initial_view":view,"resolved_view":resolved,
+            "clarification_evidence":{"parent_sample_id":parent["sample_id"],"parent_record_sha256":digest(parent),"parent_record":deepcopy(parent),"selection":sel,"saved_fine_results":saved,"additional_readout_checks":checks},
+            "clarification_annotation":{"version":VERSION,"versions":versions(),"cache_identity":digest({"parent":parent,"selection":sel,"fine":saved,"versions":versions()}),"generation":"deterministic_no_model_request","status":"evidence_checked_human_unreviewed"}},
+        "completion":{**deepcopy(parent["completion"]),"clarification_qa":"constructed_disjoint_witness_human_unreviewed"}}
+    record["private"]["reference"]=reference(record)
+    return record
+
+
+def build(parent, runs):
+    from .dataset import validate
+    validate(parent)
+    if parent["question_type"]!="counterfactual" or parent["private"]["answer_annotation"]["version"]!="simphysqa-answer-annotation/1.0.3":raise ValueError("requires accepted paired parent")
+    sel=select(parent)
+    if sel.get("status")=="failed":return None,sel
+    out=construct(parent,sel,fine_evidence(parent,sel,runs));validate_clarification(out)
+    return out,sel
+
+
+def validate_clarification(record):
+    from .dataset import validate
+    canonical(record)
+    Draft202012Validator(read(Path(__file__).with_name("clarification.schema.json"))).validate(record)
+    e=record["private"]["clarification_evidence"];p=e["parent_record"];validate(p)
+    expected_sel=select(p)
+    if expected_sel.get("status")=="failed":raise ValueError("unqualified witnesses")
+    s=deepcopy(e["selection"]);s.pop("additional_readout_checks")
+    if canonical(s)!=canonical(expected_sel):raise ValueError("candidate selection or scorer certificate changed")
+    if canonical(record)!=canonical(construct(p,s,(e["saved_fine_results"],e["additional_readout_checks"]))):raise ValueError("clarification content differs from deterministic construction")
+    root=roots(record);cutoff=root["initial"]["observation_cutoff"]
+    for ns in ("factual","alternative"):
+        prefix=root[ns]["input"]["states"]
+        # Input/reference differ only in generic context strings; scientific prefix must agree.
+        for a,b in zip(root["initial"]["states"],prefix):
+            for field in ("state_id","timestamp","step_index","measurements","relations"):
+                if canonical(a[field])!=canonical(b[field]):raise ValueError("prefix not common to witnesses")
+        if len(prefix)!=len(root["initial"]["states"]):raise ValueError("prefix length differs")
+    view=record["private"]["initial_view"];slot=s["ambiguity_type"]
+    missing={"execution_condition":"execution_condition","entity_id":"entity_id","readout_time":"timestamp"}[slot]
+    if missing in view["input"]["query"] or "answer_spec" in view["input"] or "recorded_reply" in view["input"]:raise ValueError("partial query contains completion")
+    for i in (0,1):
+        if canonical(erase_resolution(completed_view(view,s,i),slot))!=canonical(view):raise ValueError("entire visible input differs between witnesses")
+    # Recheck fine saved evidence, independent from organizer-supplied check summary.
+    for check in e["additional_readout_checks"]:
+        t=check["target"];coarse=readout(root,"factual",t,root["pair"]["original_run_id"])[0]
+        m=pointer(root["factual_fine"],check["fine_state_pointer"])
+        if t not in s["targets"] or check["result_file_sha256"]!=root["context"]["runs"]["original-fine"]["result_file_sha256"]:
+            raise ValueError("fine readout is not tied to saved qualified run/target")
+        state_path=check["fine_state_pointer"].split("/measurements/")[0]
+        state=pointer(root["factual_fine"],state_path)
+        if state["timestamp"]!=t["end_time"] or state["state_id"]!=check["state_id"] or (m["entity_id"],m["name"],m["unit"],m["frame"])!=(t["entity_id"],t["quantity"],t["unit"],t["frame"]):
+            raise ValueError("fine readout target/time metadata differ")
+        if digest(root["factual_fine"])!=digest(e["saved_fine_results"]["factual_fine"]):raise ValueError("fine namespace differs")
+        if sha256(canonical(root["factual_fine"])).hexdigest()!=check["result_file_sha256"]:raise ValueError("fine raw result integrity differs")
+        err,ok,_=distance(coarse["value"],m["value"],{**t,"absolute_tolerance":check["tolerance"],"relative_tolerance":0.})
+        if not ok or err!=check["error"] or check["tolerance"]!=(.01 if t["unit"] in ("m/s","rad/s") else .005):raise ValueError("invalid extra-time saved refinement check")
+    if s["ambiguity_type"]=="readout_time" and [c["target"] for c in e["additional_readout_checks"]]!=s["targets"]:
+        raise ValueError("extra-time qualification is incomplete")
+    ref=record["private"]["reference"]
+    for c in ref["claims"]+ref["solution_trace"]["steps"]+[ref["verification_record"]]:
+        if not c["bindings"]:raise ValueError("claim/step lacks evidence")
+        for b in c["bindings"]:
+            if digest(pointer(root[b["namespace"]],b["pointer"]))!=b["value_sha256"]:raise ValueError("unresolved clarification evidence")
+    ex=read(ROOT/"configs/simphysqa/development_exclusions.json")["excluded_groups"]
+    if record["trajectory_id"] not in ex or record["private"]["metadata"]["split_group_id"] not in ex:raise ValueError("development exclusion missing")
+    return True
+
+
+def rubric_text():
+    r=read(ROOT/"configs/simphysqa/clarification_rubric.json")
+    return r["version"]+"\n"+"\n".join(c["criterion"]+": "+c["requirement"] for c in r["criteria"])+"\n"+r["limitations"]
+
+```
+</details>
+
+### clarification-export/1.0.0
+
+Eight frozen development groups, explicit candidate failures, private witnesses and two-stage public views, packets/blank forms, 72 initial requests and 72 conditional templates. No model execution.
+
+[Exact pinned templates/projection](procedures/clarification-export-1.0.0.py)
+
+<details><summary>Complete deterministic source</summary>
+
+```python
+"""Bounded SPQ04 export: saved evidence only, immutable outputs, no model calls."""
+import argparse
+from collections import Counter
+from pathlib import Path
+from html import escape
+from hashlib import sha256
+from .io import ROOT, canonical, digest, read, manifest, external
+from .dataset import load, validate, public_record
+from .clarification import build, select, versions, rubric_text, VERSION as CONTRACT
+from .clarification_evaluation import initial_request, continuation_template
+from .answer_export import retained_bytes, file_hash
+from .spq01a import retained, verify_manifest
+from .audit import export_packets, import_ratings
+
+VERSION="spq04-clarification-export/1.0.0"
+
+
+def export(parents_path, explanations, plan_path, runs, output):
+    output=external(output)
+    source_root=parents_path.parent.parent
+    for root in (source_root,explanations,runs):
+        verify_manifest(root)
+        if output==root or root in output.parents or output in root.parents:raise ValueError("new export must be separate from all parents")
+    original=list(load(parents_path));accepted_explanations=list(load(explanations/"organizer-private/qa-records.jsonl"))
+    parents=[r for r in original if r["question_type"]=="counterfactual"]
+    plan=read(plan_path);by_pair={r["private"]["counterfactual_evidence"]["pair_id"]:r for r in parents}
+    if len(original)!=40 or len(accepted_explanations)!=8 or len(parents)!=8 or set(by_pair)!={p["pair_id"] for p in plan["pairs"]}:raise ValueError("require accepted 48 QA and all eight frozen pairs")
+    preflight={"version":VERSION,"versions":versions(),"accepted_base":"395139d3ee9717df0cb48b480daafa40b691b5f8",
+        "accepted_40_sha256":file_hash(parents_path),"accepted_8_explanations_sha256":file_hash(explanations/"organizer-private/qa-records.jsonl"),
+        "frozen_plan_sha256":digest(plan),"saved_runs_manifest_sha256":digest(read(runs/"manifest.json")),
+        "export_implementation_sha256":sha256(Path(__file__).read_text(encoding="utf-8").encode()).hexdigest(),
+        "selection_rule":"Reuse eight frozen groups, in frozen plan order. Original selected target first, then sorted original source targets for condition ambiguity; pre-stacked block positions for entity gap; tether saved .4/1 s position for time gap. Strict scorer-region separation, no replacement or threshold changes.",
+        "formal_exclusions_sha256":digest(read(ROOT/"configs/simphysqa/development_exclusions.json")),
+        "new_simulations":0,"new_model_calls":0,"executed_interactions":0,"spend_usd":0}
+    retained(output/"preflight.json",preflight)
+    records=[];failures=[];selection=[]
+    for pair in plan["pairs"]:
+        parent=by_pair[pair["pair_id"]]
+        chosen=select(parent)
+        try:
+            if parent["trajectory_id"]!=pair["scenario"]["group"]:raise ValueError("frozen group differs")
+            record,chosen=build(parent,runs)
+            if record is None:raise ValueError(chosen["reason"])
+            validate(record)
+        except Exception as exc:
+            failure={"pair_id":pair["pair_id"],"parent_sample_id":parent["sample_id"],"trajectory_id":parent["trajectory_id"],"domain":parent["public"]["input"]["domain"],"status":"failed","candidate_selection":chosen,"error_type":type(exc).__name__,"message":str(exc),"versions":versions()}
+            retained(output/"organizer-private/failures"/(pair["pair_id"]+".json"),failure)
+            failures.append(failure);selection.append(failure);continue
+        sid=record["sample_id"]
+        retained(output/"organizer-private/items"/(sid+".json"),record)
+        retained(output/"organizer-private/witnesses"/(sid+".json"),{"sample_id":sid,"trajectory_id":record["trajectory_id"],"selection":record["private"]["clarification_evidence"]["selection"],"witnesses":record["private"]["reference"]["witnesses"]})
+        retained(output/"public-initial"/(sid+".json"),public_record(record))
+        retained(output/"public-resolved"/(sid+".json"),record["private"]["resolved_view"])
+        records.append(record)
+        selection.append({"sample_id":sid,"pair_id":pair["pair_id"],"trajectory_id":record["trajectory_id"],"domain":record["public"]["input"]["domain"],"status":"qualified","selection":record["private"]["clarification_evidence"]["selection"]})
+    retained(output/"organizer-private/selection-manifest.json",{"version":CONTRACT,"rule":preflight["selection_rule"],"candidates":selection,"population":"bounded engineering groups, not OOD or unbiased quality sample","replacement":False})
+    retained_bytes(output/"organizer-private/qa-records.jsonl",b"".join(canonical(r) for r in records))
+    retained(output/"public-initial.json",[public_record(r) for r in records])
+    retained(output/"public-resolved.json",[r["private"]["resolved_view"] for r in records])
+    retained(output/"clarification-rubric.json",read(ROOT/"configs/simphysqa/clarification_rubric.json"))
+    retained_bytes(output/"clarification-rubric.txt",rubric_text().encode())
+    retained(output/"item-index.json",{"version":VERSION,"accepted_items":[{"sample_id":r["sample_id"],"question_type":r["question_type"],"trajectory_id":r["trajectory_id"]} for r in original+accepted_explanations],
+        "new_items":[{"sample_id":r["sample_id"],"pair_id":r["private"]["clarification_evidence"]["parent_record"]["private"]["counterfactual_evidence"]["pair_id"],"parent_sample_id":r["private"]["clarification_evidence"]["parent_sample_id"],"trajectory_id":r["trajectory_id"],"split":r["private"]["metadata"]["split"],"split_group_id":r["private"]["metadata"]["split_group_id"],"fresh_formal_excluded":True} for r in records],"formal_sample_exported":False,"ood_claim":False})
+    conditions=read(ROOT/"configs/simphysqa/evaluation.json")["conditions"]
+    if len(conditions)!=9 or len({c["condition_id"] for c in conditions})!=9:raise ValueError("require nine configured conditions")
+    for c in conditions:
+        retained(output/"public-requests"/(c["condition_id"]+".json"),[initial_request(r,c) for r in records])
+        retained(output/"continuation-templates"/(c["condition_id"]+".json"),[continuation_template(r,c) for r in records])
+    packets=output/"audit-development";blanks=[];examples={};sections=[]
+    if records:
+        if packets.exists():verify_manifest(packets)
+        else:export_packets(records,packets,"development",association_version="simphysqa-associations/1.1.1")
+        pm=read(packets/"manifest.json")
+        if pm["record_hashes"]!={r["sample_id"]:digest(r) for r in records}:raise ValueError("stale audit export")
+        for reviewer in ("R1","R2","R3"):
+            dest=output/"verification"/(reviewer+"-blank-import.json")
+            result=read(dest) if dest.exists() else import_ratings(packets,packets/"forms"/(reviewer+".csv"),dest)
+            if result["collected"] or result["blank"]!=len(records):raise ValueError("blank forms became judgments")
+            blanks.append({"reviewer":reviewer,"collected":0,"blank":len(records)})
+        for r in records:
+            a=next(a for a in pm["assignments"] if a["sample_id"]==r["sample_id"])
+            path=packets/"packets"/(a["packet_id"]+".html");d=r["public"]["input"]["domain"]
+            examples.setdefault(d,{"sample_id":r["sample_id"],"packet":str(path)})
+            sections.append('<section><h2>'+escape(d)+' — '+escape(r["sample_id"])+ '</h2><a href="'+path.as_uri()+'">Two-stage question/reference/trace/private witnesses</a><p>'+escape(r["public"]["input"]["question"])+ '</p><p>Authored reference clarification: '+escape(r["private"]["reference"]["reference_clarification_question"])+ '</p><p>Recorded reply: '+escape(r["private"]["resolved_view"]["input"]["recorded_reply"]["text"])+ '</p><pre>'+escape(r["private"]["reference"]["explanation"])+ '</pre></section>')
+    retained(output/"examples.json",examples)
+    retained_bytes(output/"inspection.html",('<!doctype html><meta charset="utf-8"><title>SPQ04 clarification development</title><style>body{max-width:1050px;margin:2em auto;font:17px system-ui;line-height:1.5}pre{white-space:pre-wrap}section{border-top:1px solid #aaa;padding-top:1em}</style><h1>Clarification QA — private development inspection</h1><p>Reference questions and recorded author replies; zero executed model interactions. Witness answers are private. Human judgments uncollected.</p>'+''.join(sections)).encode())
+    counts={"version":VERSION,"completed":len(records),"failed":len(failures),"pending":8-len(records)-len(failures),"domains":dict(Counter(r["public"]["input"]["domain"] for r in records)),"gap_types":dict(Counter(r["private"]["clarification_evidence"]["selection"]["ambiguity_type"] for r in records)),"prepared_initial_requests":9*len(records),"conditional_templates":9*len(records),"executed_interactions":0,"blank_imports":blanks,"new_simulations":0,"new_model_calls":0,"human_judgments":"uncollected"}
+    retained(output/"verification/checks.json",counts)
+    if (output/"manifest.json").exists():verify_manifest(output)
+    else:manifest(output,{"purpose":"SPQ04_development_clarification_QA",**preflight,"counts":counts})
+    print(canonical(counts).decode(),end="");return counts
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    for name in ("parents","explanations","plan","runs","output"):p.add_argument("--"+name,type=Path,required=True)
+    a=p.parse_args();c=export(a.parents,a.explanations,a.plan,a.runs,a.output)
+    if c["failed"] or c["pending"]:raise SystemExit(1)
+
+
+if __name__=="__main__":main()
+
+```
+</details>
+
+### clarification-evaluation/1.0.0
+
+Actual prepared answering instructions, dedicated stage contracts, equivalent wording via declared-slot routing, typed post-reply scorer. Text adequacy/premature prose answers require human review. No executed interaction.
+
+[Exact pinned templates/projection](procedures/clarification-evaluation-1.0.0.py)
+
+<details><summary>Complete deterministic source</summary>
+
+```python
+"""Two-stage preparation/routing and factual scoring; no models or prose judge."""
+from copy import deepcopy
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import ValidationError
+from .io import canonical, read, ROOT
+from .clarification import response_schema, VERSION, SLOTS
+from .scoring import distance
+
+VERSION_RESPONSE="clarification-interaction/1.0.0"
+
+
+def initial_request(record, condition):
+    from .dataset import validate
+    validate(record)
+    view=record["private"]["initial_view"]
+    text=("The question is deliberately incomplete. Use every visible surface and request one focused clarification if a unique requested answer is not determined. "
+        "Return JSON following input.interaction.response_schema. Do not guess missing information or give a unique answer before clarification. Tools are unavailable.")
+    if condition["reasoning"]=="prompted_cot":text+=" Express the focused information request in clarification_question; keep it concise."
+    return {"sample_id":record["sample_id"],"condition_id":condition["condition_id"],"tools":[],"messages":[{"role":"user","content":text+"\n"+canonical(view).decode()}]}
+
+
+def inspect_stage1(record, response):
+    """Structured declared-slot checks only; text relevance/adequacy require humans."""
+    canonical(response)
+    premature = any(k in response for k in ("answer","answers","targets","value","resolved_answer")) or response.get("response_kind")=="answer"
+    # A prose answer disguised as a question cannot be decided by a keyword heuristic.
+    try:
+        Draft202012Validator(response_schema()).validate(response);valid=True
+    except ValidationError:valid=False
+    slot=record["private"]["clarification_evidence"]["selection"]["ambiguity_type"]
+    matches=valid and response["requested_information"]==slot
+    return {"version":VERSION_RESPONSE,"gap_recognition_declaration":response.get("response_kind")=="clarify",
+        "structured_slot_matches_gap":matches,"structured_slot_sufficient":matches,"response_contract_valid":valid,
+        "premature_structured_answer":premature,"premature_answer_in_prose":"human_review_required",
+        "clarification_wording_relevance":"human_judgment_uncollected","clarification_wording_sufficiency":"human_judgment_uncollected",
+        "automatic_coverage":"Declared behavior/slot and explicit structured answer fields only; no exact-text or keyword semantic grading"}
+
+
+def route_reply(record, response):
+    result=inspect_stage1(record,response)
+    if not result["structured_slot_matches_gap"] or result["premature_structured_answer"]:
+        return {"status":"unroutable","reply":None,"resolved_view":None,"checks":result}
+    return {"status":"recorded_reply_routed","reply":deepcopy(record["private"]["resolved_view"]["input"]["recorded_reply"]),
+        "resolved_view":deepcopy(record["private"]["resolved_view"]),"checks":result,
+        "policy":"Structured slot routes reproducibly; wording/compound demands remain separately reviewed. Never exact reference wording."}
+
+
+def continuation(record, condition, actual_response):
+    """Only actual supplied responses can become assistant turns; never gold questions."""
+    routed=route_reply(record,actual_response)
+    if routed["status"]!="recorded_reply_routed":return routed
+    first=initial_request(record,condition)
+    first["messages"].extend([{"role":"assistant","content":canonical(actual_response).decode()},
+        {"role":"user","content":"Recorded clarification reply and resolved task (no gold answer):\n"+canonical(routed["resolved_view"]).decode()}])
+    return first
+
+
+def continuation_template(record, condition):
+    # Reference clarification question is PRIVATE and never a prepared assistant message.
+    return {"sample_id":record["sample_id"],"condition_id":condition["condition_id"],"tools":[],
+        "status":"template_not_executed_interaction","version":VERSION_RESPONSE,
+        "initial_request":initial_request(record,condition),
+        "conditional_continuation":{"assistant_message":"Insert actual recorded model stage-1 response only; no authored reference response.",
+            "routing":"clarification_evaluation.route_reply; structured single-slot match required",
+            "user_message":{"role":"user","content":"Recorded clarification reply and resolved task (no gold answer):\n"+canonical(record["private"]["resolved_view"]).decode()}},
+        "on_unroutable":"Record invalid/irrelevant/premature response separately; do not silently supply reply or count a completed interaction"}
+
+
+def check_stage2(record,response):
+    schema=record["private"]["resolved_view"]["input"]["interaction"]["response_schema"]
+    canonical(response);Draft202012Validator(schema).validate(response)
+    target=record["private"]["resolved_view"]["input"]["answer_spec"][0]
+    truth=record["private"]["reference"]["structured_label"][0];v=response["targets"][0]
+    error,accepted,unit=distance(v["value"],truth["value"],target)
+    return {"answer_correct_under_existing_typed_scorer":accepted,"error":error,"metric_unit":unit,
+        "exact_value":canonical(v["value"])==canonical(truth["value"]),
+        "answer_explanation_adequacy":"human_judgment_uncollected","prose_premature_answer_assessment":"separate_human_review"}
+
+
+def score_interactions(records, supplied, condition_ids):
+    """Retain missing/invalid/failed stages. Does not prepare or execute a conversation."""
+    from .dataset import validate
+    if not condition_ids or len(set(condition_ids))!=len(condition_ids):raise ValueError("distinct conditions required")
+    byid={r["sample_id"]:r for r in records}
+    if len(byid)!=len(records):raise ValueError("duplicate clarification record")
+    for r in records:
+        validate(r)
+        if r["question_type"]!="clarification":raise ValueError("clarification-only interaction scorer")
+    predictions={}
+    for p in supplied:
+        key=(p["condition_id"],p["sample_id"])
+        if key in predictions or key[0] not in condition_ids or key[1] not in byid:raise ValueError("unknown/duplicate supplied interaction")
+        if p["task_version"]!=VERSION or p["annotation_version"]!=byid[key[1]]["annotation_version"]:raise ValueError("stale interaction")
+        predictions[key]=p
+    results=[]
+    for c in condition_ids:
+        for sid,r in byid.items():
+            p=predictions.get((c,sid));s1=s2=None;status="missing" if p is None else p["status"]
+            if status not in ("completed","failed","invalid","abstained","missing"):raise ValueError("invalid status")
+            if status=="completed":
+                try:
+                    s1=inspect_stage1(r,p["stage1_response"])
+                    routed=route_reply(r,p["stage1_response"])
+                    if routed["status"]!="recorded_reply_routed":status="invalid"
+                    elif p.get("reply")!=routed["reply"]:status="invalid"
+                    else:s2=check_stage2(r,p["stage2_response"])
+                except (KeyError,TypeError,ValueError,ValidationError):status="invalid"
+            results.append({"condition_id":c,"sample_id":sid,"domain":r["public"]["input"]["domain"],"question_type":"clarification","status":status,"stage1":s1,"stage2":s2})
+    tables=[]
+    for c in condition_ids:
+        for d in sorted({r["public"]["input"]["domain"] for r in records}):
+            rows=[v for v in results if v["condition_id"]==c and v["domain"]==d]
+            tables.append({"condition_id":c,"domain":d,"question_type":"clarification","examples":len(rows),
+                "gap_recognition_declarations":sum(bool(v["stage1"] and v["stage1"]["gap_recognition_declaration"]) for v in rows),
+                "matching_structured_requests":sum(bool(v["stage1"] and v["stage1"]["structured_slot_matches_gap"]) for v in rows),
+                "premature_structured_answers":sum(bool(v["stage1"] and v["stage1"]["premature_structured_answer"]) for v in rows),
+                "correct_post_reply_answers":sum(bool(v["stage2"] and v["stage2"]["answer_correct_under_existing_typed_scorer"]) for v in rows),
+                "status_counts":{s:sum(v["status"]==s for v in rows) for s in ("missing","failed","invalid","abstained","completed")}})
+    return {"version":VERSION_RESPONSE,"items":results,"tables":tables,"model_calls":0,"human_wording_and_explanation_judgments":"uncollected","uncertainty":"pending_experiment_and_analysis_freeze"}
+
+```
+</details>
+
+### clarification-partial-schema/1.0.0
+
+Dedicated partial query omits an unknown condition/entity/time instead of inventing defaults or filling the complete schema. No model prompt.
+
+[Exact pinned templates/projection](procedures/clarification-partial-schema-1.0.0.json)
+
+<details><summary>Complete deterministic source</summary>
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:simphysqa:clarification:1.0.0",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "source_schema_version", "sample_id", "trajectory_id", "question_type", "annotation_version", "source", "public", "private", "completion"],
+  "properties": {
+    "schema_version": {"const": "simphysqa-clarification/1.0.0"},
+    "source_schema_version": {"const": "1.0.0"},
+    "sample_id": {"type": "string", "pattern": "^spq-clarification-[a-f0-9]{24}$"},
+    "trajectory_id": {"type": "string"}, "question_type": {"const": "clarification"},
+    "annotation_version": {"type": "string"}, "source": {"type": "object"},
+    "public": {"type": "object", "additionalProperties": false, "required": ["input", "annotations"],
+      "properties": {"annotations": {"type": "object"}, "input": {"$ref": "#/$defs/partial"}}},
+    "private": {"type": "object", "required": ["source_record", "metadata", "clarification_evidence", "reference", "initial_view", "resolved_view", "clarification_annotation"]},
+    "completion": {"type": "object"}
+  },
+  "$defs": {
+    "partial": {"type": "object", "additionalProperties": false,
+      "required": ["domain", "entities", "global_context", "coordinate_convention", "controller", "known_events", "states", "observation_cutoff", "task_type", "question", "query", "partial_input_contract", "scenario_role", "interaction", "between_state_associations"],
+      "properties": {
+        "domain": {"enum": ["robotic_arm", "driving", "object_pushing_stacking", "tethered_load"]},
+        "entities": {"type": "array"}, "global_context": {"type": "string"}, "coordinate_convention": {"type": "string"},
+        "controller": {"type": "object"}, "known_events": {"type": "array"}, "states": {"type": "array"},
+        "observation_cutoff": {"type": "number"}, "task_type": {"const": "clarification_state_readout"},
+        "question": {"type": "string"}, "query": {"type": "object", "additionalProperties": false,
+          "required": ["target_id", "quantity", "unit", "frame", "answer_type", "query_kind", "rule_id", "rule_definition", "absolute_tolerance", "relative_tolerance"],
+          "properties": {"target_id": {"const": "clarified-target"}, "quantity": {"type": "string"}, "entity_id": {"type": "string"},
+            "timestamp": {"type": "number"}, "execution_condition": {"const": "scheduled"}, "unit": {"type": "string"}, "frame": {"type": "string"},
+            "answer_type": {"enum": ["boolean", "number", "integer", "vector"]}, "query_kind": {"type": "string"}, "rule_id": {"type": "string"},
+            "rule_definition": {"type": "string"}, "absolute_tolerance": {"type": "number", "minimum": 0}, "relative_tolerance": {"type": "number", "minimum": 0}},
+          "oneOf": [
+            {"required": ["entity_id", "timestamp"], "not": {"required": ["execution_condition"]}},
+            {"required": ["timestamp", "execution_condition"], "not": {"required": ["entity_id"]}},
+            {"required": ["entity_id", "execution_condition"], "not": {"required": ["timestamp"]}}
+          ]},
+        "partial_input_contract": {"const": "simphysqa-partial-input/1.0.0"}, "scenario_role": {"type": "string"},
+        "interaction": {"type": "object", "required": ["stage", "behavior", "response_schema"], "properties": {"stage": {"const": 1}}},
+        "between_state_associations": {"type": "array"}
+      }
+    }
+  }
+}
+
+```
+</details>
+
+### clarification-rubric/1.0.0
+
+Gap recognition, relevance/sufficiency, premature answering, resolved answer and explanation quality are separate. Independent human judgments uncollected.
+
+[Exact pinned templates/projection](procedures/clarification-rubric-1.0.0.json)
+
+<details><summary>Complete deterministic source</summary>
+
+```json
+{
+  "version": "information-gap-clarification-rubric/1.0.0",
+  "primary_judgment": "acceptable/material_error", "human_judgments": "uncollected",
+  "criteria": [
+    {"criterion": "gap_recognition", "requirement": "Recognize that a requested condition, entity or time is unspecified; do not supply an unjustified unique answer."},
+    {"criterion": "clarification_relevance", "requirement": "One focused question requests exactly the missing information. Accept equivalent wording; no exact text/keyword grading."},
+    {"criterion": "clarification_sufficiency", "requirement": "The requested reply resolves the demonstrated answer-relevant ambiguity. No unnecessary physical parameter or gold outcome demand."},
+    {"criterion": "premature_answering", "requirement": "Assess both explicit structured answers and disguised assertions in prose. Reference questions are authored material, never model responses."},
+    {"criterion": "post_reply_correctness", "requirement": "Use the resolved target/time/unit/frame and unchanged typed scorer. Boolean history/rules are honored; numerical values are exact saved readouts."},
+    {"criterion": "explanation_adequacy", "requirement": "Connect the missing slot, witness ambiguity, reply, selected saved numerical procedure and resulting answer. Reject unsupported mechanism/real-world claims."},
+    {"criterion": "privacy_and_evidence", "requirement": "Every initial visible field agrees with both completions, including language/controller/associations/identifiers/schema. Witness answers/verification/gold stay private; replies contain missing information only."}
+  ],
+  "form_mapping": {"physical_reference": ["post_reply_correctness"], "language_fidelity": ["clarification_relevance", "explanation_adequacy"], "qa_validity": ["gap_recognition", "clarification_sufficiency", "premature_answering"], "evidence_sufficiency": ["explanation_adequacy"], "public_private_separation": ["privacy_and_evidence"]},
+  "limitations": "Automatic checks qualify saved witnesses, structured single-slot routing, explicit premature answer fields and post-reply numerical/Boolean values. They do not judge wording meaning, disguised prose answers, explanatory adequacy or human quality. Independent judgments remain uncollected. Development sample is neither an OOD claim nor a fresh formal sample."
+}
+
+```
+</details>
+
+### clarification-audit/1.0.0
+
+Private two-stage/witness/evidence rendering, organizer identity separate, three blank independent forms. Deterministic, not ratings.
+
+[Exact pinned templates/projection](procedures/clarification-audit-1.0.0.py)
+
+<details><summary>Complete deterministic source</summary>
+
+```python
+"""Blinded packets, disjoint sampling previews, append-only independent rating imports."""
+from __future__ import annotations
+from collections import Counter, defaultdict
+import csv
+from html import escape
+from pathlib import Path
+import random
+from .dataset import validate, public_record
+from .answer_annotations import enriched_reference
+from .io import ROOT, canonical, digest, external, manifest, read, write
+
+REVIEWERS = ("R1", "R2", "R3")
+CRITERIA = ("physical_reference", "language_fidelity", "qa_validity", "evidence_sufficiency", "public_private_separation")
+ERRORS = ("reference_error", "unit_frame_error", "language_error", "ambiguous_question", "unsupported_claim",
+          "insufficient_evidence", "future_leakage", "missing_annotation", "other")
+COLUMNS = ("packet_id", "sample_id", "reviewer_id", "phase", "judgment", "criteria", "error_categories", "notes")
+RUBRIC = """SimPhysQA rubric draft 0.1 (development; not final)
+Primary judgment: acceptable / material_error. Acceptable means the record is correct and sufficiently complete for its declared task.
+A material error could alter an answer or interpretation, unsupported physical/causal claims, missing required language, ambiguity, or leaked outcomes.
+Check physical_reference (values, Booleans, units, frames, controls, events, provenance); language_fidelity (trajectory and timestamp meaning);
+qa_validity (family-specific question/reference, genuine clarification gap); evidence_sufficiency (target/claim-specific bindings);
+public_private_separation (observed states and declared controls only in predictive public language).
+Mark each criterion acceptable / material_error / not_applicable, and record relevant categories and evidence IDs.
+Generic timestamp context is not a completed annotation. A descriptive readout explanation is not causal explanation QA.
+Private reference states are for audit only. Do not infer causation from temporal association.
+Rate independently; do not discuss formal items until originals are locked. Missing annotations remain findings.
+Calibration feedback may revise the rubric before formal sampling; all three review the same 20 calibration records.
+"""
+
+def preview(records: list[dict], seed: int, calibration_n: int = 20, formal_n: int = 140,
+            excluded_groups: tuple[str, ...] = (), include_development: bool = False) -> dict:
+    if calibration_n < 0 or formal_n < 0:
+        raise ValueError("negative sample size")
+    if not include_development:
+        durable = read(ROOT / "configs/simphysqa/development_exclusions.json")["excluded_groups"]
+        excluded_groups = tuple(sorted(set(excluded_groups) | set(durable)))
+    groups = defaultdict(list)
+    ids = set()
+    for record in records:
+        validate(record)
+        if record["sample_id"] in ids:
+            raise ValueError("duplicate sampling identity")
+        ids.add(record["sample_id"])
+        meta = record["private"]["metadata"]
+        if record["trajectory_id"] not in excluded_groups and meta["split_group_id"] not in excluded_groups:
+            groups[meta["split_group_id"]].append(record)
+    rng = random.Random(seed)
+    # One item per physical group, random choice within group. Both phases share one randomized frame.
+    candidates = [rng.choice(sorted(group, key=lambda r: r["sample_id"])) for _, group in sorted(groups.items())]
+    rng.shuffle(candidates)
+    calibration = candidates[:calibration_n]
+    formal = candidates[calibration_n:calibration_n + formal_n]
+    def allocation(items):
+        return dict(sorted(Counter(r["public"]["input"]["domain"] + "/" + r["question_type"] for r in items).items()))
+    return {"status": "engineering_preview_exclusions_bypassed" if include_development else "preview_only_not_frozen", "seed": seed, "sampling_unit": "split_group_then_one_question",
+            "frame_sha256": digest(sorted((r["sample_id"], digest(r)) for r in records)),
+            "frame_records": len(records), "eligible_groups": len(groups), "excluded_groups": list(excluded_groups),
+            "requested": {"calibration": calibration_n, "formal": formal_n},
+            "available_preview": {"calibration": len(calibration), "formal": len(formal)},
+            "allocation": {"calibration": allocation(calibration), "formal": allocation(formal)},
+            "shortfall": max(0, calibration_n + formal_n - len(candidates)),
+            "inclusion": "accepted simulator records in explicitly supplied frame; one item per split group; exclude prior calibration/development groups",
+            "population": "group-balanced physical trajectories in the supplied versioned release frame, random question within trajectory; pooled only",
+            "formal_identity_export": "disabled_initial_milestone"}
+
+def export_packets(records: list[dict], output: Path, phase: str = "development", *, association_version: str | None = None) -> Path:
+    if phase not in ("development", "calibration"):
+        raise ValueError("definitive formal sample export disabled until annotation/release/rubric readiness")
+    output = external(output)
+    if not records:
+        raise ValueError("empty audit packet set")
+    if len({r["sample_id"] for r in records}) != len(records):
+        raise ValueError("duplicate packet record")
+    related = defaultdict(list)
+    for record in records:
+        related[record["private"]["metadata"]["split_group_id"]].append(record)
+    for group in related.values():
+        if (phase == "development" and all("answer_annotation" in r["private"] for r in group)
+                and len(group) <= 3 and len({r["question_type"] for r in group}) == len(group)
+                and {r["question_type"] for r in group} <= {"direct", "predictive", "counterfactual"}):
+            continue  # Explicit 40-item engineering enrichment; never formal sampling.
+        if len(group) > 1 and (phase != "development" or len(group) != 2 or {r["question_type"] for r in group} != {"direct", "predictive"}):
+            raise ValueError("related records allowed only as development direct/predictive pairs")
+    for record in records:
+        validate(record)
+    output.mkdir(parents=True, exist_ok=False)
+    audit_rubric = RUBRIC
+    if any(r["question_type"] == "explanation" for r in records):
+        from .explanation import rubric_text
+        audit_rubric += "\nExplanation-task supplement (selected outcomes intentionally supplied):\n" + rubric_text()
+    if any(r["question_type"] == "clarification" for r in records):
+        from .clarification import rubric_text
+        audit_rubric += "\nClarification-task supplement (intentional gap, then recorded reply):\n" + rubric_text()
+    (output / "rubric.txt").write_text(audit_rubric, encoding="utf-8")
+    assignments = []
+    key = []
+    for index, record in enumerate(records, 1):
+        view = public_record(record, association_version=association_version) if association_version else record["public"]
+        identity = {"phase": phase, "sample": record["sample_id"], "version": record["annotation_version"]}
+        if association_version:
+            identity["export_version"] = association_version
+        if "answer_annotation" in record["private"]:
+            identity["answer_annotation_cache"] = record["private"]["answer_annotation"]["cache_identity"]
+        if "explanation_annotation" in record["private"]:
+            identity["explanation_annotation_cache"] = record["private"]["explanation_annotation"]["cache_identity"]
+        if "clarification_annotation" in record["private"]:
+            identity["clarification_annotation_cache"] = record["private"]["clarification_annotation"]["cache_identity"]
+        packet_id = "SPQ-" + digest(identity)[:16]
+        packet = {"packet_id": packet_id, "phase": phase, "sample_id": record["sample_id"],
+                  "annotation_version": record["annotation_version"], "question_type": record["question_type"],
+                  "structured_inputs": view["input"], "language_annotations": view["annotations"],
+                  "qa": {"question": record["public"]["input"]["question"], "reference": enriched_reference(record)},
+                  "verification": {"metadata": record["private"]["metadata"], "bindings": record["private"]["evidence_bindings"]},
+                  "annotation_completion": record["completion"], "rubric_version": "draft/0.1"}
+        if association_version:
+            packet.update(export_version=view["export_version"], association_provenance=view["association_provenance"])
+        if record["question_type"] == "counterfactual":
+            proof = record["private"]["counterfactual_evidence"]
+            packet["verification"]["paired_counterfactual"] = {
+                "pair_id": proof["pair_id"], "parent_sample_id": record["private"]["source_record"]["sample_id"],
+                "parent_group_id": record["trajectory_id"], "original_run_id": proof["original_run_id"],
+                "alternative_run_id": proof["alternative_run_id"],
+                "original_reference": record["private"]["source_record"]["reference"],
+                "alternative_reference": record["private"]["reference"],
+                "verification": proof["verification"], "intervention_change": proof["intervention_change"],
+                "simulation_artifacts": proof["simulation_artifacts"]}
+        if "answer_annotation" in record["private"]:
+            from .answer_annotations import roots
+            annotation = record["private"]["answer_annotation"]
+            packet["answer_annotation"] = annotation
+            packet["verification"]["answer_evidence_roots"] = roots(record, annotation["evidence_context"])
+        if record["question_type"] == "explanation":
+            from .explanation import evidence_roots
+            packet["explanation_annotation"] = record["private"]["explanation_annotation"]
+            packet["verification"]["answer_evidence_roots"] = evidence_roots(record)
+            packet["rubric_version"] = record["private"]["reference"]["rubric_version"]
+        if record["question_type"] == "clarification":
+            from .clarification import roots
+            packet["clarification_annotation"] = record["private"]["clarification_annotation"]
+            packet["two_stage_task"] = {"initial_view": record["private"]["initial_view"],
+                "reference_clarification_question": record["private"]["reference"]["reference_clarification_question"],
+                "reference_question_origin": "authored_reference_not_actual_model_response",
+                "recorded_reply": record["private"]["resolved_view"]["input"]["recorded_reply"],
+                "resolved_view": record["private"]["resolved_view"]}
+            packet["verification"]["answer_evidence_roots"] = roots(record)
+            packet["verification"]["private_gap_witnesses"] = record["private"]["reference"]["witnesses"]
+            packet["rubric_version"] = "information-gap-clarification-rubric/1.0.0"
+        # Annotation provider identity lives only in the organizer key.
+        key.append({"packet_id": packet_id, "sample_id": record["sample_id"], "source": record["source"],
+                    "annotation_provenance": record["private"]["annotation_provenance"],
+                    "generation_job": record["private"].get("generation_job")})
+        write(output / "packets" / (packet_id + ".json"), packet)
+        body = escape(canonical(packet).decode())
+        html = '<!doctype html><meta charset="utf-8"><title>SimPhysQA auditor packet</title><style>body{max-width:1100px;margin:32px auto;font:16px system-ui}pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer}</style>'
+        html += "<h1>" + packet_id + "</h1><p>Private verification evidence: auditor use only. Development packet; annotations may be pending.</p>"
+        html += "<h2>Question</h2><p>" + escape(packet["qa"]["question"]) + "</p>"
+        if record["question_type"] == "clarification":
+            stages=packet["two_stage_task"]
+            html += "<h2>Stage 1 reference clarification (authored; no model interaction executed)</h2><p>" + escape(stages["reference_clarification_question"]) + "</p>"
+            html += "<h2>Recorded reply</h2><p>" + escape(stages["recorded_reply"]["text"]) + "</p>"
+            html += "<h2>Stage 2 resolved question</h2><p>" + escape(stages["resolved_view"]["input"]["resolved_question"]) + "</p>"
+        html += "<h2>Reference</h2><p>" + escape(packet["qa"]["reference"]["label"]) + "</p>"
+        if "answer_annotation" in record["private"] or "explanation_annotation" in record["private"] or "clarification_annotation" in record["private"]:
+            html += "<h2>Answer explanation (human unreviewed)</h2><pre>" + escape(packet["qa"]["reference"]["explanation"]) + "</pre>"
+            html += "<h2>Numerical/observed solution trace and evidence bindings</h2><pre>" + escape(canonical(packet["qa"]["reference"]["solution_trace"]).decode()) + "</pre>"
+        html += "<h2>Language status</h2><pre>" + escape(canonical(packet["language_annotations"]).decode()) + "</pre>"
+        html += "<h2>Rubric</h2><pre>" + escape(audit_rubric) + "</pre><details><summary>Complete inputs and verification evidence</summary><pre>" + body + "</pre></details>"
+        (output / "packets" / (packet_id + ".html")).write_text(html, encoding="utf-8")
+        assignments.append({"packet_id": packet_id, "sample_id": record["sample_id"], "phase": phase})
+    write(output / "organizer-private" / "identity-key.json", key)
+    for reviewer in REVIEWERS:
+        path = output / "forms" / (reviewer + ".csv")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("x", encoding="utf-8", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=COLUMNS)
+            writer.writeheader()
+            for assignment in assignments:
+                writer.writerow({**assignment, "reviewer_id": reviewer})
+    manifest(output, {"purpose": "human_audit_" + phase, "rubric_sha256": digest(audit_rubric),
+                      "annotation_versions": sorted({r["annotation_version"] for r in records}),
+                      "assignments": assignments, "reviewers": list(REVIEWERS), "ratings_status": "blank_not_collected",
+                      "record_hashes": {r["sample_id"]: digest(r) for r in records},
+                      **({"export_version": association_version, "public_view_hashes": {
+                          r["sample_id"]: digest(public_record(r, association_version=association_version)) for r in records}}
+                         if association_version else {})})
+    return output
+
+def import_ratings(packet_root: Path, form: Path, output: Path) -> dict:
+    info = read(packet_root / "manifest.json")
+    for name, expected in info["files"].items():
+        path = (packet_root / name).resolve()
+        if packet_root.resolve() not in path.parents or __import__("hashlib").sha256(path.read_bytes()).hexdigest() != expected:
+            raise ValueError("packet integrity failure")
+    assignments = {a["packet_id"]: a for a in info["assignments"]}
+    originals = []
+    seen = set()
+    with form.open(encoding="utf-8-sig", newline="") as stream:
+        reader = csv.DictReader(stream)
+        if tuple(reader.fieldnames or ()) != COLUMNS:
+            raise ValueError("rating form columns mismatch")
+        for row in reader:
+            expected = assignments.get(row["packet_id"])
+            if expected is None or any(row[k] != expected[k] for k in ("sample_id", "phase")) or row["reviewer_id"] not in REVIEWERS:
+                raise ValueError("rating assignment mismatch")
+            identity = (row["packet_id"], row["reviewer_id"])
+            if identity in seen:
+                raise ValueError("duplicate independent rating")
+            seen.add(identity)
+            if not row["judgment"]:
+                if row["criteria"] or row["error_categories"] or row["notes"]:
+                    raise ValueError("findings without primary judgment")
+                continue  # Blank forms are uncollected, never acceptable.
+            if row["judgment"] not in ("acceptable", "material_error"):
+                raise ValueError("invalid primary judgment")
+            findings = dict(item.split("=", 1) for item in row["criteria"].split(";") if item)
+            if set(findings) != set(CRITERIA) or any(v not in ("acceptable", "material_error", "not_applicable") for v in findings.values()):
+                raise ValueError("all criterion findings required")
+            categories = [s for s in row["error_categories"].split(";") if s]
+            if not set(categories) <= set(ERRORS):
+                raise ValueError("unknown error category")
+            if row["judgment"] == "acceptable" and ("material_error" in findings.values() or categories):
+                raise ValueError("acceptable rating contradicts findings")
+            if row["judgment"] == "material_error" and (not categories or not row["notes"].strip()):
+                raise ValueError("material error requires category and evidence notes")
+            originals.append({**row, "criteria": findings, "error_categories": categories})
+    result = {"rating_version": "simphysqa-ratings/0.1.0", "kind": "original_independent",
+              "source_form_sha256": __import__("hashlib").sha256(form.read_bytes()).hexdigest(),
+              "packet_manifest_sha256": digest(info), "ratings": originals,
+              "collected": len(originals), "blank": len(seen) - len(originals),
+              "adjudication": "separate_record_required", "corrections": "separate_version_required"}
+    write(output, result)  # Exclusive-create; original files cannot be overwritten.
+    return result
+
+```
+</details>
+
+### clarification-typed-scorer/1.0.0
+
+Unchanged distance() defines Boolean/scalar/vector/quaternion acceptance. Initial clarification records cannot be numerically graded without resolution.
+
+[Exact pinned templates/projection](procedures/clarification-typed-scorer-1.0.0.py)
+
+<details><summary>Complete deterministic source</summary>
+
+```python
+"""Private scoring of supplied local-model predictions; no inference or oracle tools."""
+from __future__ import annotations
+from collections import defaultdict
+import math
+from pathlib import Path
+from .dataset import validate
+from .io import canonical, digest, external, manifest, write
+
+def distance(value, truth, target):
+    kind = target["answer_type"]
+    if kind == "boolean":
+        if type(value) is not bool:
+            raise ValueError("Boolean target requires Boolean")
+        return None, value == truth, "1"
+    if kind in ("number", "integer"):
+        if type(value) not in (int, float) or not math.isfinite(value) or (kind == "integer" and type(value) is not int):
+            raise ValueError("invalid numeric value")
+        error = abs(value - truth)
+        magnitude = abs(truth)
+        unit = target["unit"]
+    elif kind == "vector":
+        if not isinstance(value, list) or len(value) != len(truth) or any(type(v) not in (int, float) or not math.isfinite(v) for v in value):
+            raise ValueError("invalid vector value")
+        if target["quantity"] == "orientation":
+            norm = math.sqrt(sum(v*v for v in value) * sum(v*v for v in truth))
+            if norm == 0:
+                raise ValueError("zero quaternion")
+            error = 2 * math.acos(min(1., abs(sum(a*b for a, b in zip(value, truth))) / norm))
+            magnitude, unit = 1., "rad"
+        else:
+            error = math.sqrt(sum((a-b)**2 for a, b in zip(value, truth)))
+            magnitude, unit = math.sqrt(sum(v*v for v in truth)), target["unit"]
+    else:
+        return None, value == truth, target["unit"]
+    tolerance = target["absolute_tolerance"] + target["relative_tolerance"] * magnitude
+    return error, error <= tolerance, unit
+
+def score(records: list[dict], predictions: list[dict], condition_ids: list[str]) -> dict:
+    if any(r["question_type"] == "clarification" for r in records):
+        raise ValueError("clarification QA requires clarification_evaluation.score_interactions; no unique initial numerical reference")
+    if any(r["question_type"] == "explanation" for r in records):
+        raise ValueError("explanation QA uses explanation_evaluation.score_facts; numerical readout scores cannot grade explanations")
+    if not condition_ids or len(set(condition_ids)) != len(condition_ids):
+        raise ValueError("choose distinct configured conditions")
+    by_id = {r["sample_id"]: r for r in records}
+    if len(by_id) != len(records):
+        raise ValueError("duplicate evaluation record")
+    for record in records:
+        validate(record)
+    supplied = {}
+    for prediction in predictions:
+        canonical(prediction)
+        key = (prediction["condition_id"], prediction["sample_id"])
+        if key in supplied or key[0] not in condition_ids or key[1] not in by_id:
+            raise ValueError("unknown or duplicate prediction identity")
+        if prediction["annotation_version"] != by_id[key[1]]["annotation_version"]:
+            raise ValueError("prediction evaluated a different annotation version")
+        supplied[key] = prediction
+    items, channels = [], defaultdict(list)
+    for condition in condition_ids:
+        for record in records:
+            key = (condition, record["sample_id"])
+            prediction = supplied.get(key)
+            status = "missing" if prediction is None else prediction["status"]
+            if status not in ("missing", "completed", "failed", "invalid", "abstained"):
+                raise ValueError("unrecognized prediction status")
+            raw_targets = prediction.get("targets", []) if prediction else []
+            target_ids = [t["target_id"] for t in raw_targets]
+            if len(set(target_ids)) != len(target_ids):
+                status = "invalid"
+            targets = {t["target_id"]: t for t in raw_targets}
+            expected = record["public"]["input"]["answer_spec"]
+            if not set(targets) <= {t["target_id"] for t in expected}:
+                status = "invalid"
+            typed, correct, errors = 0, 0, []
+            domain = record["public"]["input"]["domain"]
+            for target in expected:
+                truth = next(v for v in record["private"]["reference"]["structured_label"] if v["target_id"] == target["target_id"])
+                candidate = targets.get(target["target_id"]) if status == "completed" else None
+                valid, ok, error, metric_unit = False, False, None, "rad" if target["quantity"] == "orientation" else target["unit"]
+                if candidate is not None:
+                    try:
+                        if (candidate["unit"], candidate["frame"]) != (truth["unit"], truth["frame"]):
+                            raise ValueError("prediction unit/frame mismatch")
+                        error, ok, metric_unit = distance(candidate["value"], truth["value"], target)
+                        valid = True
+                    except (ValueError, KeyError):
+                        pass
+                typed += valid
+                correct += ok
+                entry = {"target_id": target["target_id"], "valid": valid, "correct": ok,
+                         "error": error, "metric_unit": metric_unit, "answer_type": target["answer_type"],
+                         "frame": target["frame"]}
+                errors.append(entry)
+                channels[(condition, domain, record["question_type"], target["target_id"], metric_unit, target["frame"])].append(entry)
+            items.append({"condition_id": condition, "sample_id": record["sample_id"], "trajectory_id": record["trajectory_id"],
+                "domain": domain, "question_type": record["question_type"], "annotation_version": record["annotation_version"],
+                "status": status, "expected_targets": len(expected), "valid_targets": typed, "correct_targets": correct,
+                "whole_question_correct": typed == correct == len(expected), "targets": errors})
+    groups = defaultdict(list)
+    for item in items:
+        groups[(item["condition_id"], item["domain"], item["question_type"])].append(item)
+    tables = []
+    for key, values in sorted(groups.items()):
+        tables.append({"condition_id": key[0], "domain": key[1], "question_type": key[2],
+            "examples": len(values), "trajectories": len({v["trajectory_id"] for v in values}),
+            "whole_question_correct": sum(v["whole_question_correct"] for v in values),
+            "whole_question_accuracy": sum(v["whole_question_correct"] for v in values) / len(values),
+            "expected_targets": sum(v["expected_targets"] for v in values),
+            "valid_targets": sum(v["valid_targets"] for v in values),
+            "correct_targets": sum(v["correct_targets"] for v in values),
+            "status_counts": {s: sum(v["status"] == s for v in values) for s in ("completed", "missing", "failed", "invalid", "abstained")}})
+    channel_tables = []
+    for key, values in sorted(channels.items()):
+        numeric = [v["error"] for v in values if v["valid"] and v["error"] is not None]
+        channel_tables.append({"condition_id": key[0], "domain": key[1], "question_type": key[2],
+            "target_id": key[3], "metric_unit": key[4], "frame": key[5], "examples": len(values),
+            "valid": sum(v["valid"] for v in values), "correct": sum(v["correct"] for v in values),
+            "accuracy_all_expected": sum(v["correct"] for v in values) / len(values),
+            "numeric_valid_count": len(numeric), "mae_valid_only": sum(numeric)/len(numeric) if numeric else None,
+            "rmse_valid_only": math.sqrt(sum(v*v for v in numeric)/len(numeric)) if numeric else None})
+    return {"version": "simphysqa-scores/0.1.0", "items": items, "tables": tables, "channel_tables": channel_tables,
+            "uncertainty": {"status": "pending_analysis_freeze", "method": "paired physical-trajectory bootstrap",
+                            "confidence": None, "replicates": None}, "model_calls": 0,
+            "policy": "missing/invalid answers remain failures; valid-only numeric error always paired with coverage"}
+
+def export_scores(records: list[dict], predictions: list[dict], plan: dict, conditions: list[str], output: Path) -> dict:
+    known = {c["condition_id"]: c for c in plan["conditions"]}
+    if not set(conditions) <= set(known):
+        raise ValueError("condition not configured")
+    result = score(records, predictions, conditions)
+    for table in result["tables"] + result["channel_tables"]:
+        table["model_id"] = known[table["condition_id"]]["model_id"]
+    output = external(output)
+    output.mkdir(parents=True, exist_ok=False)
+    write(output / "scores.json", result)
+    return manifest(output, {"purpose": "private_supplied_prediction_scoring_no_model_calls", "conditions": conditions,
+        "prediction_sha256": digest(predictions),
+        "record_hashes": {r["sample_id"]: __import__("simphysqa.io", fromlist=["digest"]).digest(r) for r in records},
+        "uncertainty_status": "pending_analysis_freeze"})
+
+```
+</details>

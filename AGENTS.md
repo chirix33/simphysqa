@@ -1,3 +1,17 @@
+# SPQ04 clarification QA — 6 October 2026
+
+Read docs/prompts/SPQ04_clarification_qa.md and docs/simphysqa/clarification_qa.md.
+Eight frozen verified development groups; genuine absent query slot with two
+private completions agreeing with EVERY initial visible surface. Boolean values
+must differ; numerical scorer acceptance regions must be disjoint. No invented
+default completion or unique initial gold answer. Recorded reply resolves only
+missing query information; gold/traces/witnesses/receipts stay private.
+Preserve accepted48 QA, answer annotation1.0.3, association1.1.1 and main.
+No simulations/provider/model calls, benchmarks, full release, OOD claim or formal
+sample. Human judgments remain uncollected; software slot/scorer checks do not
+establish prose adequacy. Read docs/reviews/SPQ04_completion.md.
+Historical instructions follow unchanged.
+
 # SPQ03 matched-intervention explanation QA — 6 October 2026
 
 Read docs/prompts/SPQ03_explanation_qa.md and docs/simphysqa/explanation_qa.md.

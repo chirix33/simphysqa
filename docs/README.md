@@ -1,3 +1,16 @@
+# Latest: SPQ04 clarification QA — 6 October 2026
+
+[Complete prompt](prompts/SPQ04_clarification_qa.md),
+[contract](simphysqa/clarification_qa.md), [decisions](decisions/SPQ04_clarification_qa.md),
+[completion/commands/examples](reviews/SPQ04_completion.md).
+Eight genuine query-gap development items; accepted48 QA preserved. Initial/resolved
+views, private disjoint witnesses, packets, three blank forms and72 initial requests
+plus72 conditional templates. No executed conversations/simulations/model calls,
+human judgments, OOD claim, definitive formal sample or merge to main.
+[Prompt archive](simphysqa/prompt_archive/README.md),
+[per-file mappings](simphysqa/prompt_archive/file-generation-index.json).
+Historical progress below remains unchanged.
+
 # Latest: SPQ03 explanation QA — 6 October 2026
 
 Base 10ace28 on simphysqa-naacl. Eight new explanation items completed, zero
