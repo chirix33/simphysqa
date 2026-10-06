@@ -7,7 +7,7 @@ from simphysqa.spq01a import retained,verify_manifest
 from simphysqa.formal_live import execution_plan
 
 
-def archive(run,delivery,preparation,previous,output):
+def archive(run,delivery,preparation,previous,review_bundle,output):
     output=external(output);pm=verify_manifest(previous);dm=verify_manifest(delivery);prep=verify_manifest(preparation)
     plan=execution_plan(run);mappings=[]
     statuses={c['candidate_id']:read(run/'cases'/c['candidate_id']/'status.json') for c in plan['candidates'] if (run/'cases'/c['candidate_id']/'status.json').exists()}
@@ -16,7 +16,8 @@ def archive(run,delivery,preparation,previous,output):
     for name,a in attempts.items():by_candidate.setdefault(a['candidate_id'],[]).append({'attempt_file':name,'attempt_number':a['attempt_number'],'request_sha256':a['request_sha256']})
     selected={a['sample_id']:a for a in dm['assignments']}
     paths={a['packet_id']:a for a in dm['assignments']}
-    for alias,root in (('executed_run',run),('delivery',delivery)):
+    verify_manifest(review_bundle)
+    for alias,root in (('executed_run',run),('delivery',delivery),('review_distribution',review_bundle)):
         for p in sorted(root.rglob('*')):
             if not p.is_file() or p.name.startswith('.'):continue
             relative=p.relative_to(root).as_posix();mode='deterministic_saved_evidence_procedure';candidate=None;executed=False
@@ -39,7 +40,7 @@ def archive(run,delivery,preparation,previous,output):
                 elif p.name=='arm-interpretation.json':mode='actual_static_model_interpretation_zero_trajectory_steps'
                 elif p.name=='simulation-plan.json':mode='reused_admitted_source_configuration_for_matched_verification'
                 else:mode='deterministic_candidate_verification_or_failure'
-            elif alias=='delivery':
+            elif alias in ('delivery','review_distribution'):
                 if relative.startswith('forms/'):mode='deterministic_identical_blank_reviewer_form_uncollected'
                 if p.stem in paths:candidate=paths[p.stem]['candidate_id']
                 if p.stem in selected:candidate=selected[p.stem]['candidate_id']
@@ -47,6 +48,7 @@ def archive(run,delivery,preparation,previous,output):
                 if relative.startswith('auditor-only/'):mode='deterministic_blinded_private_packet_with_saved_evidence'
                 if relative.startswith('public-items/'):mode='deterministic_public_only_projection'
                 if relative.startswith('review-pages/'):mode='deterministic_readable_focused_scope_from_exact_packet_keys'
+                if alias=='review_distribution':mode='reused_exact_blinded_distribution_of_same140_items'
             entry={'path':str(p),'sha256':file_hash(p),'root_scope':alias,'mode':mode,
                    'candidate_id':candidate,'actual_provider_request_or_response':executed,
                    'language_request_lineage':sorted(by_candidate.get(candidate,[]),key=lambda x:x['attempt_number']),
@@ -59,11 +61,14 @@ def archive(run,delivery,preparation,previous,output):
     for relative in ('scripts/simphysqa_formal_live_archive.py','scripts/simphysqa_verify_formal_delivery.py','scripts/simphysqa_formal_dryrun.py',
                      'scripts/simphysqa_formal_readable.py','docs/decisions/SPQ05_authorized_execution.md'):
         save_bytes(output/'procedures'/relative,(ROOT/relative).read_bytes())
+    save_bytes(output/'procedures/scripts/simphysqa_formal_blinded_bundle.py',(ROOT/'scripts/simphysqa_formal_blinded_bundle.py').read_bytes())
     index={'version':'SPQ05-executed-provenance/1.0.0','producer_commit':plan['producer_commit'],
            'inherits':{'path':str(previous),'manifest_sha256':file_hash(previous/'manifest.json'),'historical_executed_requests':16},
            'preparation':{'path':str(preparation),'manifest_sha256':file_hash(preparation/'manifest.json'),'prepared_requests':280,'execution_status':'unexecuted_preparations_separate_from_actual_requests'},
            'execution_plan_sha256':digest(plan),'generation_procedure_pins':plan['scientific_source_pins'],
            'delivery_manifest_sha256':file_hash(delivery/'manifest.json'),
+           'review_distribution':{'path':str(review_bundle),'manifest_sha256':file_hash(review_bundle/'manifest.json'),
+                                  'same140_assignments':True,'new_audit_items':0},
            'actual_annotation_attempts':len(attempts),'actual_annotation_initials':sum(a['initial_request'] for a in attempts.values()),
            'formal_items':len(dm['assignments']),'ratings_collected':0,'answering_model_calls':0,
            'per_file_generation_index':mappings}
@@ -74,5 +79,5 @@ def archive(run,delivery,preparation,previous,output):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser()
-    for key in ('run','delivery','preparation','previous','output'):p.add_argument('--'+key,type=Path,required=True)
-    a=p.parse_args();archive(a.run,a.delivery,a.preparation,a.previous,a.output)
+    for key in ('run','delivery','preparation','previous','review-bundle','output'):p.add_argument('--'+key,type=Path,required=True)
+    a=p.parse_args();archive(a.run,a.delivery,a.preparation,a.previous,a.review_bundle,a.output)
