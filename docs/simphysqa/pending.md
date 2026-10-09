@@ -23,14 +23,15 @@ human quality or release-wide readiness. [Current56-item registry](development-i
    Additional artifacts remain planned; no answering-model benchmark was executed.
    Freeze failure/abstention handling, model/domain/family aggregation, cluster-aware
    uncertainty and human explanatory/clarification assessment before experiments.
-6. Freeze annotation population, rubric, inclusion rules, allocation, seed, missingness
-   and agreement analysis before fresh formal sampling. Retain20 shared calibration
-   and140 shared formal, group-disjoint with all20 inspected/development groups.
-   Expected prevalence.90 is planning only. Fixed-p powered score test is distinct
-   from empirical Fleiss kappa; heterogeneity/prevalence/CI decisions remain pending.
+6. Collect independent SPQ05 ratings under its frozen scope, retain missingness and
+   apply its declared analysis. Any broader answer/explanation audit needs a separate
+   population/rubric/analysis freeze. Keep all20 development groups excluded. Earlier
+   20/140 calibration design is historical. Expected prevalence.90 remains a planning
+   assumption; powered score testing is distinct from empirical Fleiss kappa.
 7. Before full simulation generation, freeze the pruned source and qualify optional
    runtime/assets again. Saved32 SPQ02 executions and exact eight-group replays do
    not qualify arbitrary machines or standalone wheel installations.
 
-No OOD claim, definitive formal sample, full-release generation or merge has occurred.
+No OOD/answering-performance or human-quality result is established. SPQ05 sampling
+and processing are complete; broader release enrichment and audits remain pending.
 Human review is a research activity, not a mandatory software-generation gate.

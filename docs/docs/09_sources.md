@@ -1,16 +1,20 @@
-> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
+# Historical adopted-source index
+
+This is a dated provenance record. Current authority is [SimPhysQA](../README.md).
+The optional source documents below were not present in this checkout at cleanup;
+identities remain in [the original source manifest](../assets/source_manifest.json).
 
 # Source index and provenance
 
-[Start](../README.md) · [Authority/context](01_context.md)
+[Start](../README.md) · [Authority/context](https://github.com/chirix33/phi-jepa/blob/ccfde9ee904ac5efdc330ba707ebf54843ffb135/docs/docs/01_context.md)
 
 ## Included primary sources
 
-- [Active newer paper](../references/sources/active_paper.pdf): methodology/figures, subject to subsequent meeting corrections. Inference-minimization/repair passages are explicitly superseded. Placeholder/expected results are not measured evidence.
-- [September 22 part 1](../references/sources/september_22_part_1.docx): reviewer concerns, structured encoding, regularization, OOD diagnosis and morning inference decisions.
-- [September 22 part 2](../references/sources/september_22_part_2.docx): generic envelope discussion; final frozen-LLM decoding at 18:35–19:53; semantic regularizer ablation around 22:38 onward.
-- [Professor's notebook source](../references/sources/professor_demo_source.ipynb): source cells unchanged; output/metadata stripped for this handoff. The whole source is prototype evidence, not an instruction to run its optimization/repair paths.
-- [Original demo results archive](../references/sources/phi_jepa_results.zip): preserved user artifact, not final experimental data. Do not load serialized checkpoints unless their provenance/trust and loader format have been reviewed; reading JSON/CSV evidence suffices for the audit.
+- Active newer paper (optional historical source; see source manifest): methodology/figures, subject to subsequent meeting corrections. Inference-minimization/repair passages are explicitly superseded. Placeholder/expected results are not measured evidence.
+- September 22 part 1 (optional historical source; see source manifest): reviewer concerns, structured encoding, regularization, OOD diagnosis and morning inference decisions.
+- September 22 part 2 (optional historical source; see source manifest): generic envelope discussion; final frozen-LLM decoding at 18:35–19:53; semantic regularizer ablation around 22:38 onward.
+- Professor's notebook source (optional historical source; see source manifest): source cells unchanged; output/metadata stripped for this handoff. The whole source is prototype evidence, not an instruction to run its optimization/repair paths.
+- Original demo results archive (optional historical source; see source manifest): preserved user artifact, not final experimental data. Do not load serialized checkpoints unless their provenance/trust and loader format have been reviewed; reading JSON/CSV evidence suffices for the audit.
 - [Exact approved prompt strings](../assets/prompts.json), [extraction schema](../assets/extract_schema.json), [judge schema](../assets/judge_schema.json), [answer schema](../assets/answer_schema.json).
 - [Source manifest](../assets/source_manifest.json): original notebook hash, included-source hashes and exact per-prompt string hashes.
 
@@ -22,7 +26,7 @@ Earlier September 20 transcripts and the original repo audit informed historical
 
 User repository: https://github.com/chirix33/phi-jepa, private, default main. On September 23 the connector returned repository metadata and current requirements; root README.md and AGENTS.md reads returned 404. Current tree/head were not fully audited. P00 must inspect the actual checkout and any nested instructions. Do not treat the historical 6e5f7d0f35b44db32056476d9e3b1ed24878d393 audit as current-head verification.
 
-Official baseline source was cloned/read at CoConuT 27273cb8cca4bb763c041a63b036d0c3b7cbbb48 and CODI 2c2314662c63e9f482ebc46614ffe9af17a241e5. Details and source-file links are in the [runbook](../references/baseline_runbook.md). No baseline GPU run was performed in preparing this handoff.
+Official baseline source was cloned/read at CoConuT 27273cb8cca4bb763c041a63b036d0c3b7cbbb48 and CODI 2c2314662c63e9f482ebc46614ffe9af17a241e5. Details and source-file links are in the [runbook](https://github.com/chirix33/phi-jepa/blob/ccfde9ee904ac5efdc330ba707ebf54843ffb135/docs/references/baseline_runbook.md). No baseline GPU run was performed in preparing this handoff.
 
 ## Other primary technical references
 

@@ -1,3 +1,0 @@
-{"variant": "continued_biasinit_constant_context_text_ode", "update": 5000, "validation_or_fit_score": 15.779134607264552, "loss": 2.8133685603393133e-08}
-{"variant": "continued_biasinit_constant_context_text_ode", "update": 10000, "validation_or_fit_score": 1.531589439084716, "loss": 3.270459814075366e-08}
-{"variant": "continued_biasinit_constant_context_text_ode", "update": 20000, "validation_or_fit_score": 2.4314194331423282, "loss": 3.712492713248139e-08}

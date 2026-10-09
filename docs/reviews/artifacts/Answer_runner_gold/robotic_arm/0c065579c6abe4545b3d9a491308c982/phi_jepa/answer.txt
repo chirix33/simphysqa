@@ -1,1 +1,0 @@
-At t = 1.0 s, the autonomous numerical forecast gives joint_1 angle 3.236399 rad and angular velocity -13.468414 rad/s; joint_2 angle 1.172999 rad and angular velocity 41.712055 rad/s; and tip position [-0.915900, -0.003031, 1.136288] m. The sampled public-rule readout reports joint_limit_by_T = true.

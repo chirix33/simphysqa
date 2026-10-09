@@ -1,1 +1,0 @@
-At t = 2.0 s, the forecast gives forward position 3.984564 m and forward velocity 1.169379 m/s. The sampled public-rule readout reports that the car had not stopped by this time.

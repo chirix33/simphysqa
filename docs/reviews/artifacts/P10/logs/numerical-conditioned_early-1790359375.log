@@ -1,3 +1,0 @@
-{"variant": "conditioned_early", "update": 1000, "validation_or_fit_score": 16.179449649004848, "loss": 0.20211468636989594}
-{"variant": "conditioned_early", "update": 2000, "validation_or_fit_score": 15.836594221945024, "loss": 0.1032758355140686}
-{"variant": "conditioned_early", "update": 4000, "validation_or_fit_score": 16.168621904373765, "loss": 0.014030583202838898}

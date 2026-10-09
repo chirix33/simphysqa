@@ -1,11 +1,13 @@
-# SimPhysQA foundation — review contract /1.0.0
+# SimPhysQA foundation â€” contract /1.0.0
 
-This is the current integration authority from accepted `52f47ace928d339239a262836cff67818d6d68da`.
-The [merge-review instruction](../prompts/foundation_merge_review.md) governs this
-preparation. Stage-specific prompts and dated findings remain historical provenance.
-Phi-JEPA training/ODE/EBM/CODI/Coconut contracts do not govern this dataset paper.
-No merge, push, new simulations, model calls, full-release enrichment or formal
-sample is authorized by this preparation.
+The accepted five-family foundation is integrated in main. Current repository
+workflow/authorization is [AGENTS.md](../../AGENTS.md); dated merge-preparation
+restrictions are historical. [SPQ05 protocol](formal_protocol.md) and
+[verified audit delivery](../reviews/SPQ05_completion.md) supersede earlier
+20/140 calibration planning within that internal audit. Three reviewers receive
+the same 140 items with no calibration set; judgments remain uncollected.
+SPQ06 has not been sent or started. No experiment is authorized by this document.
+Learned-method contracts do not govern this dataset paper.
 
 ## Data, privacy and family boundaries
 
@@ -100,8 +102,8 @@ documentation-only integration step. No new annotation prompt was executed.
 - `tests/`: CPU saved-data integration and synthetic software boundary probes;
   `tests/simulator/` is separately qualified optional-runtime coverage.
 - `docs/simphysqa/`, `docs/prompts/SPQ*`, `docs/reviews/SPQ*`: scientific contracts,
-  authoring specifications and completed-stage evidence. Other Phi-JEPA docs,
-  prompts, assets/references remain historical.
+  authoring specifications and completed-stage evidence. Original adopted assets and source-generation evidence remain;
+  obsolete method docs/results are recoverable through [history](../history.md).
 - External artifact roots: source data, runs, weights, caches, annotations and
   packets. No generated datasets or large weights are tracked/moved by this review.
 
@@ -151,7 +153,12 @@ Audit numerical planning runs use the supplied preserved package separately.
 GPU answering artifacts/runtimes are not dependencies of CPU export/tests; all
 five models/nine conditions still require SimPhysQA-local task qualification.
 
-## Audit, evidence and remaining research
+## Historical audit planning, evidence and remaining research
+
+The 20/140 planning paragraphs below describe foundation-era proposals. Current
+SPQ05 uses its separate no-calibration protocol and has delivered a verified
+140-item package. This is not a comprehensive answer/explanation audit. See
+[pending research](pending.md) for current unresolved work.
 
 [Audit method](audit.md) retains three reviewers, 20 shared calibration and 140
 fresh shared formal records (160/reviewer; 60/420 ratings). Alpha.20, target power.80,

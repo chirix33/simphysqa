@@ -1,1 +1,0 @@
-{"command":["/home/aashraf/phi-jepa/.venvs/phi-codi-custom/bin/python","/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p11_custom.py","train","codi"],"exit_code":0,"log":"/home/aashraf/phi-jepa/p11-tonight-01/operations/codi-train-1790387908.log","name":"codi-train","resource":"gpu","seconds":4497.459103345871,"start_utc":1790387908.182585,"status":"complete"}

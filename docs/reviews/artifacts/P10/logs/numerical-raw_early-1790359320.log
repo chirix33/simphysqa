@@ -1,3 +1,0 @@
-{"variant": "raw_early", "update": 1000, "validation_or_fit_score": 16.176166806833972, "loss": 0.20352253317832947}
-{"variant": "raw_early", "update": 2000, "validation_or_fit_score": 15.844727069105277, "loss": 0.10436159372329712}
-{"variant": "raw_early", "update": 4000, "validation_or_fit_score": 16.17352146831265, "loss": 0.014341861009597778}

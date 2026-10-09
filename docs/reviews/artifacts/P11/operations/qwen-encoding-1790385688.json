@@ -1,1 +1,0 @@
-{"command":["/home/aashraf/phi-jepa/.venvs/phi-core/bin/python","/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p11_data.py","encode"],"exit_code":0,"log":"/home/aashraf/phi-jepa/p11-tonight-01/operations/qwen-encoding-1790385688.log","name":"qwen-encoding","resource":"gpu","seconds":48.221643686294556,"start_utc":1790385688.2111697,"status":"complete"}

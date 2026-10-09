@@ -1,4 +1,0 @@
-{"name": "final-assessment", "resource": "cpu", "start_utc": 1790392509.3750582, "seconds": 38.66892766952515, "exit_code": 0, "status": "complete", "log": "/home/aashraf/phi-jepa/p11-tonight-01/operations/final-assessment-1790392509.log"}
-{"name": "final-evaluation", "resource": "cpu", "start_utc": 1790392548.044406, "seconds": 4.227056980133057, "exit_code": 0, "status": "complete", "log": "/home/aashraf/phi-jepa/p11-tonight-01/operations/final-evaluation-1790392548.log"}
-{"name": "final-plots", "resource": "cpu", "start_utc": 1790392552.2717245, "seconds": 2.1188771724700928, "exit_code": 0, "status": "complete", "log": "/home/aashraf/phi-jepa/p11-tonight-01/operations/final-plots-1790392552.log"}
-{"name": "final-report", "resource": "cpu", "start_utc": 1790392554.3908691, "seconds": 63.90489387512207, "exit_code": 0, "status": "complete", "log": "/home/aashraf/phi-jepa/p11-tonight-01/operations/final-report-1790392554.log"}

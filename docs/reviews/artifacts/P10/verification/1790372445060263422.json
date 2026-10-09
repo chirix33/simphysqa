@@ -1,1 +1,0 @@
-{"archived_log":"verification/1790372445060263422.log","command":["/home/aashraf/phi-jepa/.venvs/phi-core/bin/python","-m","unittest","test_p10","test_p03","test_p04a","test_p04b","test_p05b","test_p06","test_p08_budget","test_clarification","-v"],"exit_code":0}

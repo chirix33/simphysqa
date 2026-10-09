@@ -1,1 +1,0 @@
-{"command":["/home/aashraf/phi-jepa/.venvs/phi-codi-custom/bin/python","/mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/tools/p11_custom.py","inference","codi"],"exit_code":0,"log":"/home/aashraf/phi-jepa/p11-tonight-01/operations/codi-test-1790392405.log","name":"codi-test","resource":"gpu","seconds":100.38406586647034,"start_utc":1790392405.6428347,"status":"complete"}

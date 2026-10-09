@@ -1,4 +1,0 @@
-Validated driving: 56 public contexts; would create /mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/configs/manual/cli-check-driving.json; no writes/training/calls
-Validated object_pushing_stacking: 56 public contexts; would create /mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/configs/manual/cli-check-object_pushing_stacking.json; no writes/training/calls
-Validated robotic_arm: 56 public contexts; would create /mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/configs/manual/cli-check-robotic_arm.json; no writes/training/calls
-Validated tethered_load: 56 public contexts; would create /mnt/c/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/configs/manual/cli-check-tethered_load.json; no writes/training/calls
