@@ -1,3 +1,0 @@
-{"variant": "constant_context_text_rnn", "update": 1000, "validation_or_fit_score": 10.361753294592415, "loss": 302.1638488769531}
-{"variant": "constant_context_text_rnn", "update": 2000, "validation_or_fit_score": 11.59233276376233, "loss": 84.85607147216797}
-{"variant": "constant_context_text_rnn", "update": 4000, "validation_or_fit_score": 9.689967766825585, "loss": 4.025456428527832}

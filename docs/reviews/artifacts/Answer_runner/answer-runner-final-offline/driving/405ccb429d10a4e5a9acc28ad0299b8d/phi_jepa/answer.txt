@@ -1,1 +1,0 @@
-At t = 2.0 s, the forecast gives a forward position of 2.52154 m and forward velocity of -0.12468 m/s. The sampled public-rule readout reports stopped_by_T = false.

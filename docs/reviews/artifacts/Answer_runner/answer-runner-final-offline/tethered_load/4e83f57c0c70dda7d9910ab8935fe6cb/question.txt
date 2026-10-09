@@ -1,1 +1,0 @@
-At 1 seconds from the initialized state, what are load position (m), load swing_angle (rad), load angular_velocity (rad/s), load boundary_crossed (1), under the public model, control law and scheduled intervention?

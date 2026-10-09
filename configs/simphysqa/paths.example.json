@@ -8,6 +8,6 @@
   "environment": {
     "SIMPHYSQA_OUTPUT_ROOT": "alternative to --output"
   },
-  "existing_local_release": "C:/Users/aashraf/Desktop/Work/phi-jepa/phi-jepa/dataset-runs/release-four-domain-v1",
+  "existing_local_release": "SET_EXTERNAL_RELEASE_ROOT",
   "policy": "existing source checkout data read-only; all new artifacts outside active worktree"
 }

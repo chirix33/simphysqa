@@ -1,3 +1,0 @@
-{"variant": "conditioned_full", "update": 1000, "validation_or_fit_score": 16.095293919959154, "loss": 0.20214726030826569}
-{"variant": "conditioned_full", "update": 2000, "validation_or_fit_score": 17.603332182355974, "loss": 0.10327831655740738}
-{"variant": "conditioned_full", "update": 4000, "validation_or_fit_score": 19.23484418470684, "loss": 0.014029125683009624}

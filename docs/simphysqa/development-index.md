@@ -1,3 +1,12 @@
+# Historical machine-path receipt
+
+The registry below preserves the accepted 56-item foundation snapshot. Absolute
+paths identify the producing machine/session, not required checkout locations.
+Use the unchanged [JSON aliases/hashes](development-index.json),
+[artifact configuration](../../configs/simphysqa/development_artifacts.json) and an
+explicit external artifact root. This documentation notice does not regenerate
+records or modify the machine index. Current [status](../PROGRESS.md).
+
 # Authoritative development index — foundation/1.0.0
 
 56 accepted engineering items across five families; 16 groups, all excluded from fresh formal sampling. Gold records and auditor packets are private. This index is organizer material, not model input.

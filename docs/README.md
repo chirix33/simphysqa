@@ -1,209 +1,34 @@
-# SPQ05 ready for independent human review — 6 October 2026
+# SimPhysQA documentation
 
-[Blinded 140-item review entry](C:/Users/aashraf/.codex/visualizations/2026/10/06/01a1131b-eac2-7a31-afb4-f219a8dd6471/spq05/review-bundle-1.0.0/review-index.html) · [Completion/report](reviews/SPQ05_completion.md) · [authorized execution overlay](simphysqa/formal_execution.md).
-All R1/R2/R3 reviewers use the same 140 frozen items;420 blank ratings. Generator settings/provenance stay organizer-only. No calibration, answering benchmark, full-release enrichment, merge or push. Prior handoff/index content follows unchanged.
+Read [agent instructions](../AGENTS.md), [current progress](PROGRESS.md) and the
+[foundation](simphysqa/foundation.md) first. Current main includes the accepted
+foundation and SPQ05 verified audit delivery. SPQ06 has not been sent or started.
 
-# Current task: SPQ05 formal audit preparation — 6 October 2026
-
-The newest [SPQ05 specification](prompts/SPQ05_formal_audit.md) supersedes older
-calibration/formal restrictions within its scope. Same140 items independently
-reviewed by R1/R2/R3,420 ratings, no separate20-item calibration. See the
-[frozen protocol](simphysqa/formal_protocol.md), [guide](simphysqa/formal_reviewer_guide.md),
-[analysis](simphysqa/formal_analysis.md), [completion/shortfall](reviews/SPQ05_completion.md)
-and [provenance supplement](simphysqa/prompt_archive/SPQ05/README.md).
-Formal readiness0/140: additional explicit budgets required; no live operations,
-ratings, benchmarks, full release enrichment, merge or push. Earlier archive and
-scientific contracts remain preserved. Historical package index follows unchanged.
-
-# Current package index — five-family foundation, 6 October 2026
-
-Read [foundation/setup](simphysqa/foundation.md), [all56 items](simphysqa/development-index.md),
-[merge review](reviews/foundation_merge_review.md) and [active authoring instruction](prompts/foundation_merge_review.md).
-[Archive entry](simphysqa/prompt_archive/README.md), [catalogue](simphysqa/prompt_archive/catalogue.md)
-and [per-file provenance](simphysqa/prompt_archive/file-generation-index.json) are sealed1.0.7.
-All56 development QA complete in software; human judgments, local model qualification,
-full-release enrichment and fresh formal audit remain pending. No merge/push.
-Root AGENTS and foundation supersede historical stage statuses below; original
-Phi-JEPA docs/docs and P* prompts remain evidence, not current implementation authority.
-
-## Historical package index (preserved)
-
-# Latest: SPQ04 clarification QA — 6 October 2026
-
-[Complete prompt](prompts/SPQ04_clarification_qa.md),
-[contract](simphysqa/clarification_qa.md), [decisions](decisions/SPQ04_clarification_qa.md),
-[completion/commands/examples](reviews/SPQ04_completion.md).
-Eight genuine query-gap development items; accepted48 QA preserved. Initial/resolved
-views, private disjoint witnesses, packets, three blank forms and72 initial requests
-plus72 conditional templates. No executed conversations/simulations/model calls,
-human judgments, OOD claim, definitive formal sample or merge to main.
-[Prompt archive](simphysqa/prompt_archive/README.md),
-[per-file mappings](simphysqa/prompt_archive/file-generation-index.json).
-Historical progress below remains unchanged.
-
-# Latest: SPQ03 explanation QA — 6 October 2026
-
-Base 10ace28 on simphysqa-naacl. Eight new explanation items completed, zero
-failed/pending, two per domain; all eight frozen groups/targets and .2 s cutoffs
-preserved. Eight packets, three independent blank forms and 72 tool-free requests.
-New task explicitly supplies only the selected factual/omission target outcomes.
-All 40 accepted items/answer annotation 1.0.3 and earlier artifacts remain exact.
-106-test offline suite OK (one retained runtime class skipped); focused archive
-lineage checks also run. New simulations/model calls/spend: 0/0/$0. Human prose
-quality/explanation adequacy judgments and answering benchmarks are uncollected.
-Archive 1.0.6 maps deterministic explanation generation separately from reused
-language and executed 16 SPQ01 requests; those payloads are unchanged.
-[Contract](simphysqa/explanation_qa.md), [complete prompt](prompts/SPQ03_explanation_qa.md),
-[report/commands/examples](reviews/SPQ03_completion.md),
-[archive](simphysqa/prompt_archive/README.md) and
-[per-file mappings](simphysqa/prompt_archive/file-generation-index.json).
-Historical progress below is retained unchanged.
-
-# Latest bounded refinement — 6 October 2026
-
-Answer/schema/renderer/export 1.0.3: concise bound explanations, shared physical
-conditions once, quaternion changes as sign-invariant rotation angles. All 40 QA,
-eight supporting alternatives, three blank forms and 360 public requests exported.
-94 offline tests pass; one retained runtime test class skipped. Public requests
-are byte-identical to 1.0.2; values/tolerances/cutoffs/source artifacts preserved.
-No new simulations/model calls/spend/human judgments. Prompt archive 1.0.4 includes
-a recovered-request/output mapping example and exact deterministic templates.
-Read [refinement report](reviews/SPQ02b_refinements_completion.md),
-[active prompt](prompts/SPQ02b_answer_refinements.md),
-[archive catalogue](simphysqa/prompt_archive/catalogue.md) and
-[per-file index](simphysqa/prompt_archive/file-generation-index.json).
-Historical progress follows unchanged.
-
-# Current milestone: SPQ02b — 40 answer annotations and prompt archive
-
-Read [active prompt](prompts/SPQ02b_answer_enrichment.md),
-[contract](simphysqa/answer_annotations.md),
-[prompt archive](simphysqa/prompt_archive/README.md) and
-[completion/commands/examples](reviews/SPQ02b_completion.md).
-All gold explanations/traces remain private; no human judgments or answering
-benchmarks exist. Original source records and accepted public export 1.1.1 remain
-exact. Earlier instructions/reports follow as retained history.
-
-# Current milestone: SPQ02 counterfactual QA
-
-The [consolidated user prompt](prompts/SPQ02_counterfactual_qa.md) and explicit
-exact replay clarification govern this milestone from accepted e379013b7e80fe28172682cd39e42f4066fde841.
-Read [specification](simphysqa/counterfactual.md), [decisions](decisions/SPQ02_counterfactual.md)
-and [completion/commands/artifacts](reviews/SPQ02_completion.md).
-Eight matched omission pairs qualified; accepted association export 1.1.1 and
-prior outputs remain unchanged. Human assessment/answering benchmarks are pending.
-Historical phase instructions and findings remain below.
-
-# Latest SPQ01a follow-up: grounded shared event descriptions
-
-Read [specification](simphysqa/event_descriptions.md) and
-[completion/examples/commands](reviews/SPQ01a_event_descriptions_completion.md).
-Export 1.1.1 preserves source values, canonical matching and prior outputs.
-
-# Latest SPQ01a follow-up: bidirectional public associations
-
-[Specification](simphysqa/associations.md) and
-[completion/examples/commands](reviews/SPQ01a_associations_completion.md).
-The projection versions exported state/event indexes without changing source data,
-canonical semantics or language. Existing historical reports remain below.
-
-# Current milestone: SPQ01a
-
-Read [SPQ01a prompt](prompts/SPQ01a_event_language.md),
-[event-language specification](simphysqa/event_language.md) and
-[completion/commands/artifacts](reviews/SPQ01a_completion.md).
-SPQ01 is accepted at 6d420b779e0204868fec4c45e26bb1cdcd2b98c7.
-The original SPQ01 records, instructions and report below remain historical evidence.
-
-# Active SimPhysQA handoff
-
-Start with [root instructions](../AGENTS.md), [runnable entry points](../README.md),
-[progress](PROGRESS.md), [SPQ01 prompt](prompts/SPQ01_annotations.md) and
-[SPQ01 completion](reviews/SPQ01_completion.md) (SPQ00 remains accepted history). Active contracts:
-[annotation](simphysqa/annotation.md), [human audit](simphysqa/audit.md),
-[evaluation](simphysqa/evaluation.md), [remaining decisions](simphysqa/pending.md).
-Original Phi-JEPA package follows as historical evidence.
-> Historical Phi-JEPA handoff. The 4 October 2026 SimPhysQA pivot in root AGENTS.md and docs/simphysqa supersedes training/phase instructions here. Original evidence is retained.
-
-> **Active supersession — 2026-09-24:** Model work follows [training contract 2.0.0-candidate.1](../MODEL_TRAINING_CONTRACT.md) and the user's revision-3 Stage 1/P02a request. Adjacent recorded-state training uses frozen E(Q,C), trainable P of width d, the same undetached p on both sides, and full predicted 2d-vector feedback. Conflicting terminal-only, tree/readout/semantic-head, E(Q,C,A), upstream-baseline substitution and truth-forbidden-in-training instructions below are historical. Custom Coconut-inspired/CODI-inspired variants are intentional. Future phases require separate authorization. Frozen dataset/export contracts remain unchanged.
-
-# Phi-JEPA: Codex implementation handoff
-
-**Latest numerical study:** [P12 training completion, curves and checkpoints](reviews/P12_training_completion.md).
-All four ten-pass fits are complete; confirmation evaluation and local-baseline
-generation remain disabled pending their separate finalized plan.
-
-**Questions and final answers in WSL:** [end-to-end comparison commands](Run_answers_WSL.md).
-**Lower-level checkpoint replay:** [manual commands for all four domains](Manual_WSL.md).
-**Current deadline study:** [P11 executable plan](P11_pipeline.md).
-**General implementation entry point:** [P10 executable pipeline](P10_pipeline.md)
-and [progress](PROGRESS.md). The following installation-package description is
-preserved as historical context; it is not a statement that the current repository
-has no implementation. The user's latest learning-qualification scope supersedes
-earlier phase-only execution restrictions within its explicit budget.
-
-Prepared 23 September 2026. **This is a specification and phase-prompt package, not an implemented system.** It incorporates the active manuscript, September 22 meetings, professor's later correction, reviewed demo/source, CoConuT/CODI requirements, and workstation progress.
-
-## Start here
-
-Implementation can proceed. The active P00 prompt records a user-reported PyTorch 2.7.1+cu128 FP32/BF16 forward/backward pass; model-specific GPU verification remains pending. CPU contracts, dataset/oracle validation, provider fixtures, numerical components, evaluation, and checkpoint round trips do not require that workstation GPU. Mark GPU-only verification pending; never convert a fixture pass into an empirical result.
-
-The user coordinates this work. A separate Codex coding agent implements one authorized phase at a time. The planning assistant reviews Codex's reports, resolves questions, and supplies the next prompt. No implementation is launched by distributing this package.
-
-1. This handoff is installed directly in `docs/`, preserving its subdirectories. Use a phase branch and preserve existing work; do not create a duplicate installation.
-2. Read the existing repository-root [AGENTS.md](../AGENTS.md). Preserve applicable instructions and flag genuine conflicts.
-3. Give Codex [the Phase 0 prompt](prompts/P00_bootstrap.md). This phase inspects the actual checkout and establishes the smallest working executable slice.
-4. Return Codex's completion report to the planning assistant. Continue using the prompt for the next authorized phase only after the preceding acceptance gate has been assessed.
-
-The root package is deliberately small to read. Follow the relevant detailed links rather than pasting the entire package into every Codex session.
-
-`SHA256SUMS.txt` is the preserved original distribution snapshot, not an index of
-edited installed documentation; its `AGENTS.md` entry describes the original template.
-Current instructions are at repository-root `AGENTS.md`. Verify preserved assets and
-installed links with `python tools/verify_p00_handoff.py` from repository root.
-
-## Document map
-
-| Document | Purpose |
+| Topic | Entry |
 | --- | --- |
-| [Context and decision authority](docs/01_context.md) | Research goal, what is settled, superseded ideas, prototype audit and reusable parts |
-| [Architecture and contracts](docs/02_architecture.md) | Module boundaries, shapes, losses, output binding, checkpoints, data leakage protection |
-| [Data and evaluation](docs/03_data_evaluation.md) | Oracle validation, initial domain, splits/OOD, metrics, annotations and dataset candidates |
-| [Assessment and fallback](docs/04_assessment_fallback.md) | Fixed scores, retrieval, calibration, judge scope, runtime policy and remaining scientific gaps |
-| [Baselines and experiments](docs/05_baselines.md) | Independent baselines, CoConuT/CODI, comparable inputs, ablations and experiment matrix |
-| [Phases and acceptance gates](docs/06_phases.md) | Deliverable slices, prerequisites, tests and hardware gates |
-| [Codex workflow](docs/07_workflow.md) | Completion reports, blocker protocol, branch discipline and user/planner handoff |
-| [Defaults and open decisions](docs/08_defaults_decisions.md) | Concrete starting values; adjustable engineering choices versus scientific decisions |
-| [Source index](docs/09_sources.md) | Primary files, hashes, official links, source limitations and notebook contract provenance |
-| [Workstation state](docs/10_environment.md) | What is already verified, what remains pending, CPU/GPU environment separation |
-| [Progress tracker](PROGRESS.md) | Initially unstarted phases and evidence required to advance |
+| Purpose, setup, privacy and scope | [Foundation](simphysqa/foundation.md) |
+| Accepted development evidence | [56-item index](simphysqa/development-index.md), [portable aliases/hashes](simphysqa/development-index.json) |
+| Direct/predictive and public language | [Annotation](simphysqa/annotation.md) |
+| Counterfactual | [Matched intervention contract](simphysqa/counterfactual.md) |
+| Explanation | [Explanation contract](simphysqa/explanation_qa.md) |
+| Clarification | [Query-gap contract](simphysqa/clarification_qa.md) |
+| Event language and associations | [Event language](simphysqa/event_language.md), [associations](simphysqa/associations.md), [shared descriptions](simphysqa/event_descriptions.md) |
+| Answer evidence | [Answer annotations](simphysqa/answer_annotations.md) |
+| Current internal human audit | [SPQ05 protocol](simphysqa/formal_protocol.md), [guide](simphysqa/formal_reviewer_guide.md), [analysis](simphysqa/formal_analysis.md), [delivery receipt](reviews/SPQ05_completion.md) |
+| Evaluation and remaining work | [Evaluation](simphysqa/evaluation.md), [pending research](simphysqa/pending.md) |
+| Exact execution/procedure provenance | [Archive](simphysqa/prompt_archive/README.md), [SPQ05 supplement](simphysqa/prompt_archive/SPQ05/README.md) |
+| Licenses/source generation | [License scope](../LICENSE.md), [original specification](../SPECIFICATION.md), [generation validation](../VALIDATION.md) |
+| Workflow/recovery | [Cleanup decision](decisions/repo_cleanup.md), [historical note](history.md), [blocker template](prompts/BLOCKER_REPORT.md) |
 
-Detailed prior work is included for selective reference: [baseline setup runbook](references/baseline_runbook.md), [demo/source audit](references/demo_review.md), and [decision ledger](references/decision_ledger.md). These snapshots provide context. Future phase reports and approved decision updates must record any newer state.
+SPQ prompts are authoring instructions; archived annotation requests are actual
+generator payloads. Neither saved prompts nor proposed configs authorize a new run.
+Completed SPQ reports and PDS source-generation evidence remain in reviews/ and
+decisions/. Their dated execution restrictions and machine paths are historical
+receipts, not current branch instructions. The current task/user authorization governs.
 
-## Non-negotiable scientific core
-
-Frozen question/text embedding and prompted LLMs → semantics-preserving structured encoding → hybrid projection → trainable latent ODE → **linear physical readout** and semantic reconstruction. Train on terminal decoded physical MSE plus question-alignment regularization. Generate the final answer using a frozen LLM with named physical predictions.
-
-At inference: fixed assessment, evidence-supported diagnosis and bounded fallback. **No EBM training, test-time energy descent, Langevin refinement, prediction-driven schema repair, or Bregman component.** The professor's explicit morning-decisions confirmation overrides contradictory demo/paper passages.
-
-One JSON envelope describes extracted scenario facts; another contains the final answer. Preserve both. The initial extraction and final numerical predictions must remain available independently of generated prose.
-
-## Phase overview
-
-| Phase | Completed slice | Can start without workstation GPU? |
-| --- | --- | --- |
-| P00 | Repository audit, package/CLI, configuration, run manifest and tiny fixture flow | Yes |
-| P01 | Verified first-domain data generator, label-free inputs, splits and physical evaluator | Yes |
-| P02 | Frozen provider interfaces, exact prompts/schema, structured features and compact answer payload | Yes; live calls conditional on credentials/budget |
-| P03 | Differentiable predictor, terminal training, text-only fallback model and checkpoint inference | Yes, small CPU runs |
-| P04 | Fixed assessment, calibration, diagnosis interface, bounded fallback and final answers | Yes, fixtures; real judge validation remains a gate |
-| P05 | Independently trained conventional baselines and fully labeled ablations | Yes for implementation/small numerical runs |
-| P06 | CoConuT/CODI adapters and pinned launchers | Yes for adapters; their GPU checks/training need the workstation |
-| P07 | One-domain live pilot, resource profile and reproducible result exports | GPU/live-model gates apply |
-| P08 | Additional domains, approved ID/OOD experiment matrix and paper-ready evidence | GPU/compute/data gates apply |
-
-Detailed acceptance criteria and prerequisites are in [the phase specification](docs/06_phases.md). P00–P06 code does not have to wait for the model-specific CUDA checks, but a phase with required unexecuted verification is `implemented_pending_validation`, not complete. Independent preparation may proceed while that specific check is pending; dependent scientific results may not.
-
-## Two scientific details to keep visible
-
-The manuscript does not fully define how physical labels become its reference latent target. The supplied judge prompt also does not perform the manuscript's retrieved-schema comparison. [Assessment/fallback](docs/04_assessment_fallback.md) defines bounded development modes and the exact claims they cannot support. Early implementation can proceed. Before claiming full paper-faithful hybrid-energy results, resolve these with the user/planning assistant; do not silently invent an additional trained component or relabel a different judge task.
+Original source-generation documents/configs retain obsolete downstream model fields
+for provenance; learned-method sections are superseded. Source records, physical
+definitions, tolerances and generation/admission semantics remain unchanged.
+The two SHA256SUMS files describe original distribution snapshots, not today's tree;
+use Git and the historical revisions to recover removed entries. Exact prompt/schema
+assets and the archived per-file mappings are preserved.

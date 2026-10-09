@@ -1,1 +1,0 @@
-At t=1.0 s: position ≈ [-0.0769, 0, 1.3084] m, swing angle ≈ -0.1159 rad, angular velocity ≈ 0.3188 rad/s, and the boundary was not crossed.

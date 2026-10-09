@@ -1,1 +1,0 @@
-At t=2.0 s, the car is predicted at 4.00 m with forward velocity 1.01 m/s and has not stopped.

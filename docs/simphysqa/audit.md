@@ -1,3 +1,11 @@
+# Current audit authority - 9 October 2026
+
+[SPQ05 protocol](formal_protocol.md) and [verified delivery](../reviews/SPQ05_completion.md)
+govern the completed internal 140-item processing package: three independent reviewers,
+420 blank assignments and no calibration set. Human ratings remain uncollected.
+The earlier foundation/SPQ01 20/140 design below is historical planning, not current
+SPQ05 execution authority. A broader answer/explanation audit requires separate scope.
+
 # Current audit preparation status — 6 October 2026
 
 The [authoritative56-item registry](development-index.md) covers all five development

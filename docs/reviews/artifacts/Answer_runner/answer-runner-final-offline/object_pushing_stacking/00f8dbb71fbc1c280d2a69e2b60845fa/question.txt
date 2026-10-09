@@ -1,1 +1,0 @@
-At 1 seconds from the initialized state, what are block_1 position (m), block_1 orientation (1), block_2 position (m), block_2 orientation (1), block_2 stable_stack (1), block_2 support_lost (1), block_2 left_table (1), under the public model, control law and scheduled intervention?
