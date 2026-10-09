@@ -35,7 +35,7 @@ def main():
     if not snapshot.is_dir() or snapshot.name!=condition['artifact_revision']:raise ValueError('exact local snapshot missing')
     from transformers import AutoTokenizer
     tokenizer=AutoTokenizer.from_pretrained(snapshot,local_files_only=True,trust_remote_code=False)
-    if hashlib.sha256(tokenizer.chat_template.encode()).hexdigest()!=condition['template_sha256']:raise ValueError('template pin mismatch')
+    if hashlib.sha256(canonical(tokenizer.chat_template)).hexdigest()!=condition['template_sha256']:raise ValueError('template pin mismatch')
     torch.cuda.reset_peak_memory_stats();loaded=time.monotonic()
     backend=condition['backend']
     if backend=='transformers':
