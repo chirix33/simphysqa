@@ -94,6 +94,15 @@ def export(run,pilot,output):
                         checks.append({'sample_id':r['sample_id'],'size':size,'condition_id':cid,**check})
                     retained(output/'request-lists'/str(size)/(cid+'-'+label+'-stage1.json'),requests)
         retained(output/'private/candidate-failure-ledger.json',ledger)
+        replacements=[]
+        for cell in allcells:
+            rejected=[row for row in ledger if row['cell']==cell and row['rank']<=20 and row['processing'] and row['processing']['status']!='completed']
+            reserves=[item for item in selected if item['domain']+'/'+item['family']==cell and item['candidate_rank']>20]
+            for failure,reserve in zip(rejected,reserves):
+                replacements.append({'cell':cell,'rejected_candidate_id':failure['candidate_id'],
+                    'rejection':failure['processing'],'selected_same_cell_reserve_candidate_id':reserve['candidate_id'],
+                    'reserve_rank':reserve['candidate_rank'],'policy':'first qualified same-cell reserve in frozen random order; original failure retained'})
+        retained(output/'private/same-cell-replacements.json',replacements)
         accounting={'initial_requests':sum(h['initial_request'] for h in history),'attempts':len(history),'retries':sum(h['repair'] for h in history),
             'charged_usd':sum(h['charged_upper_bound_usd'] for h in history),'annotation_work_seconds':sum(h['wall_seconds'] for h in history),
             'reserved_input_tokens':sum(h['reservation']['input_token_upper_bound'] for h in history),
@@ -117,7 +126,7 @@ def export(run,pilot,output):
             'purpose':'blinded human model-answer prose study; distinct from annotation audit'})
         lines=['# SPQ06 held-out preparation',f"\nQualified {len(selected)} distinct items; core complete: {core_ready}; 400 complete: {full_ready}.",
             '\nNo main answering outputs or human model-answer judgments exist. Original private evidence remains at each executed_case_path.']
-        lines.extend('\n- '+i['domain']+' / '+i['family']+' / '+i['sample_id']+' — '+i['private_record'] for i in selected)
+        lines.extend('\n- '+i['domain']+' / '+i['family']+' / '+i['sample_id']+' — [private source/evidence]('+i['private_record']+') / [prepared enriched request](public/400/enriched/qwen3_8b_direct/'+i['sample_id']+'.json) / [matched structured-only](public/400/structured_only/qwen3_8b_direct/'+i['sample_id']+'.json)' for i in selected)
         save_bytes(output/'INDEX.md',('\n'.join(lines)+'\n').encode())
         by_path={row['path']:row for row in indexes}
         complete_index=[]
