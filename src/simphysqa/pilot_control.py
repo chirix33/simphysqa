@@ -62,7 +62,15 @@ def run(pilot,worker,condition_id,stage):
     if work+timeout>64800:raise ValueError('cumulative pilot GPU work ceiling')
     if not pending:return
     name=condition_id+'-stage'+str(stage);reservation=pilot/'process-reservations'/(name+'.json')
-    if reservation.exists():raise ValueError('prior unknown/failed process retained; no automatic retry')
+    if reservation.exists():
+        previous=reservation.with_name(reservation.stem+'-result.json')
+        log=reservation.with_suffix('.log')
+        zero_call_wsl_denial=(previous.exists() and read(previous)['returncode']!=0 and log.exists()
+            and 'Wsl/E_ACCESSDENIED' in log.read_bytes().decode('utf-16-le',errors='ignore')
+            and not list((pilot/'executions'/name/'reservations').glob('*.json')))
+        if not zero_call_wsl_denial:raise ValueError('prior unknown/failed process retained; no automatic model retry')
+        reservation=reservation.with_name(reservation.stem+'-launch2.json')
+        if reservation.exists():raise ValueError('second process launch already recorded')
     if not requests:return
     write(reservation,{'condition_id':condition_id,'stage':stage,'reserved_seconds':timeout,'maximum_requests':len(pending),'worker_path':str(worker),'worker_sha256':file_hash(worker),'previous_work_charged_seconds':work})
     args=['wsl.exe','-d','Ubuntu-24.04','--','env','PYTHONDONTWRITEBYTECODE=1','HF_HUB_OFFLINE=1','TRANSFORMERS_OFFLINE=1',
@@ -70,9 +78,10 @@ def run(pilot,worker,condition_id,stage):
         '--condition',linux(pilot/'conditions'/(condition_id+'.json')),'--requests',linux(request_path),
         '--output',linux(pilot/'executions'/name)]
     started=time.monotonic()
-    with (pilot/'process-reservations'/(name+'.log')).open('xb') as log:
+    with reservation.with_suffix('.log').open('xb') as log:
         done=subprocess.run(args,stdout=log,stderr=subprocess.STDOUT,timeout=timeout+30)
     write(reservation.with_name(reservation.stem+'-result.json'),{'returncode':done.returncode,'wall_seconds':time.monotonic()-started})
+    if done.returncode:raise RuntimeError('local process failed; inspect immutable launch log')
 
 
 def main():

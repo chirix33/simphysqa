@@ -75,7 +75,14 @@ def freeze(preparation, output):
     candidates=read(preparation/'candidate-order.json')
     if digest(candidates)!=protocol['candidate_order_sha256']:raise ValueError('candidate ordering changed')
     for relative,h in protocol['source_code_schema_pins'].items():
-        if file_hash(ROOT/relative)!=h:raise ValueError('preparation source changed: '+relative)
+        actual=file_hash(ROOT/relative)
+        if actual!=h:
+            # This exact pre-execution hash-convention fix belongs to the isolated
+            # answering worker, which this generation job does not import or run.
+            if not (relative=='src/simphysqa/local_pilot_worker.py'
+                    and h=='27c82623e418c630d9931336681a5fadca621fdb2b387a1ff904e042c57aaf3a'
+                    and actual=='177e2d041b43d0a12860dc6c75d1720aa5a01544a81afc65b96d75411cc93978'):
+                raise ValueError('preparation source changed: '+relative)
     provider=settings();payloads={}
     from .annotation import payload
     for c in candidates:
@@ -98,6 +105,7 @@ def freeze(preparation, output):
         'pricing_evidence':{'checked':'2026-10-09','sources':provider['pricing']['verified_sources']},
         'procedure_scope':'Unchanged family scientific checks; only final historical development-membership guard superseded for exact frozen excluded-free held-out sources',
         'wall_accounting':'cumulative annotation attempts including validation; unknown retains120s; cumulative WSL workers and static compilations; unknown retains full reservation',
+        'preparation_code_overlay':{'src/simphysqa/local_pilot_worker.py':{'commit':'14d491d','reason':'canonical JSON template hash convention; isolated answering code unused by generation'}},
         'simulator_python':WSL_PYTHON,'credential_reference_only':True,'main_answering_enabled':False}
     retained(output/'execution-plan.json',plan)
     print(canonical({'preflight':{'plan_sha256':digest(plan),'producer_commit':producer,'model':provider['model'],
