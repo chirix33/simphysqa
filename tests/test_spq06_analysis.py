@@ -6,6 +6,14 @@ from simphysqa.io import write,read,digest
 from simphysqa.condition_revisions import resolved_condition
 
 class AnalysisBoundaries(unittest.TestCase):
+    def test_clarification_absence_wrong_slot_and_contract_are_separate(self):
+        from simphysqa.main_analysis import clarification_category
+        checks={'premature_structured_answer':False,'gap_recognition_declaration':True,
+            'response_contract_valid':True,'structured_slot_matches_gap':True}
+        self.assertEqual(clarification_category(checks),'supported_recorded_reply_mechanism')
+        self.assertEqual(clarification_category({**checks,'structured_slot_matches_gap':False}),'ineffective_request_for_other_slot')
+        self.assertEqual(clarification_category({**checks,'response_contract_valid':False}),'unsupported_clarification_contract')
+        self.assertEqual(clarification_category({**checks,'gap_recognition_declaration':False}),'absent_structured_clarification')
     def test_failures_stay_in_denominator_and_pairs_share_draws(self):
         rows=[]
         for domain in ('a','b','c','d'):

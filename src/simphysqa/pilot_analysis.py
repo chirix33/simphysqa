@@ -7,6 +7,7 @@ from .io import read,write,external,canonical,parse
 from .spq06 import parse_answer
 from .condition_revisions import resolved_condition
 from .formal_sampling import file_hash
+from .main_analysis import clarification_category
 
 def actual_path(pilot,cid,sid,stage):
     paths=list((pilot/'executions').glob(cid+'-stage'+str(stage)+'*/results/'+sid+'-stage'+str(stage)+'.json'))
@@ -39,6 +40,7 @@ def analyse(pilot,output):
                 row['failure_reason']=actual['failure_reason'];row['reasoning_format']=actual['reasoning_format_diagnostics']
                 if invalid:row['actual_completion_status']=actual['completion_status'];row['execution_status']='invalid_runtime_cpu'
             elif reserved:row['execution_status']='interrupted_unknown_reserved'
+            if family=='clarification':row['clarification_category']='unexecuted_or_execution_failure' if not actual or actual['completion_status']!='completed' else 'unparseable_structured_behavior_unknown'
             if actual and len(reserved)==1:
                 begin=read(reserved[0]).get('reserved_unix_seconds');end=begin+actual['latency_seconds'] if begin is not None else None
                 samples=[m for m in memory if begin is not None and m['returncode']==0 and begin<=m['unix_seconds']<=end]
@@ -55,6 +57,7 @@ def analyse(pilot,output):
                         facts=check_facts(record,response);row['structured_facts']=facts;row['answer_valid']=True;row['answer_correct']=facts['factual_components_all_correct']
                     else:
                         checks=inspect_stage1(record,response);row['clarification_behavior']=checks
+                        row['clarification_category']=clarification_category(checks)
                         row['answer_valid']=checks['response_contract_valid'];row['answer_correct']=False
                         continuation=actual_path(pilot,cid,sid,2)
                         second=read(continuation) if continuation else None

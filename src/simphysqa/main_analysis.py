@@ -18,6 +18,13 @@ def unique_result(run,cid,label,sid,stage):
     if len(paths)>1:raise ValueError('duplicate actual model item/stage')
     return (read(paths[0]),file_hash(paths[0])) if paths else (None,None)
 
+def clarification_category(checks):
+    if checks['premature_structured_answer']:return 'premature_structured_answer'
+    if not checks['gap_recognition_declaration']:return 'absent_structured_clarification'
+    if not checks['response_contract_valid']:return 'unsupported_clarification_contract'
+    if not checks['structured_slot_matches_gap']:return 'ineffective_request_for_other_slot'
+    return 'supported_recorded_reply_mechanism'
+
 def assess(record,condition,first,second):
     from .scoring import score
     from .explanation_evaluation import check_facts
@@ -45,6 +52,7 @@ def assess(record,condition,first,second):
             row['endpoints']['structured_facts_all_correct']=int(facts['factual_components_all_correct'])
         else:
             checks=inspect_stage1(record,response);route=route_reply(record,response)
+            row['clarification_category']=clarification_category(checks)
             row['clarification_behavior']=checks;row['answer_valid']=checks['response_contract_valid']
             row['endpoints'].update({'declared_gap_recognition':int(checks['gap_recognition_declaration']),
                 'structured_slot_match':int(checks['structured_slot_matches_gap']),
