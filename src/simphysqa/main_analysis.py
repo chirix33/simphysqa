@@ -36,7 +36,7 @@ def assess(record,condition,first,second):
         row['reasoning_format']={**(row['reasoning_format'] or {}),**diagnostics}
         if family in ('direct','predictive','counterfactual'):
             scored=score([record],[{'condition_id':cid,'sample_id':record['sample_id'],
-                'annotation_version':record['annotation_version'],'status':'abstained' if response.get('abstain') else 'completed',
+                'annotation_version':record['annotation_version'],'status':'abstained' if response.get('abstained') is True else 'completed',
                 'targets':response.get('targets',[])}],[cid])['items'][0]
             row['answer_valid']=scored['valid_targets']==scored['expected_targets']
             row['endpoints']['typed_correct']=int(scored['whole_question_correct']);row['numerical_details']=scored

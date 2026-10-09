@@ -34,6 +34,12 @@ class AnalysisBoundaries(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             with self.assertRaisesRegex(ValueError,'authorization'):run(Path(d)/'unused',False,48)
             self.assertFalse((Path(d)/'unused').exists())
+    def test_plans_cannot_become_human_model_answer_packets(self):
+        from simphysqa.model_prose_review import packets
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);write(root/'run/main-run-plan.json',{})
+            with self.assertRaisesRegex(ValueError,'executed'):packets(root/'forms',root/'run',root/'packets')
+            self.assertFalse((root/'packets').exists())
     def test_duplicate_stage_results_halt(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d)

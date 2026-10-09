@@ -7,7 +7,7 @@ from .spq06 import ABLATION
 from .condition_revisions import resolved_condition
 from .pilot_analysis import actual_path
 
-def forecast(pilot,preparation,output):
+def forecast(pilot,preparation,output,capacity=None):
     pilot=external(pilot);preparation=external(preparation);output=external(output)
     plan=read(pilot/'pilot-plan.json');manifest=read(preparation/'nested-400-manifest.json');tables=[];blockers=[]
     for base in plan['conditions']:
@@ -71,7 +71,21 @@ def forecast(pilot,preparation,output):
         totals[str(size)]={'main_seconds':main,'ablation_seconds':ablation,'total_without_reserve_hours':(main+ablation)/3600,
             'total_with_25_percent_reserve_hours':(main+ablation)*1.25/3600,'maximum_calls':5280 if size==400 else 2640}
     now=datetime.datetime.now(datetime.timezone.utc);deadline=datetime.datetime(2026,10,13,11,59,tzinfo=datetime.timezone.utc)
-    core=read(preparation/'nested-200-manifest.json');decision=None;reason=[]
+    core=read(preparation/'nested-200-manifest.json');decision=None;reason=[];capacity_by_size={}
+    if capacity is None:blockers.append('main request tokenization/capacity verification missing')
+    else:
+        evidence=read(capacity)
+        for size,data in ((200,core),(400,manifest)):
+            ids={i['sample_id'] for i in data['items']};checks=[r for r in evidence['items'] if r['sample_id'] in ids]
+            expected={(c['condition_id'],i['sample_id'],'enriched') for c in plan['conditions'] for i in data['items']}|{(cid,i['sample_id'],'structured_only') for cid in ABLATION for i in data['items']}
+            actual={(r['condition_id'],r['sample_id'],r['input_condition']) for r in checks}
+            capacity_by_size[str(size)]={'expected_initial_requests':len(expected),'checked_initial_requests':len(checks),
+                'initial_capacity_failures':sum(not r['initial_capacity_ok'] for r in checks),
+                'conservative_continuation_capacity_failures':sum(not r.get('continuation_capacity_ok',True) for r in checks),
+                'complete':expected==actual and len(actual)==len(checks)}
+            # Keep every frozen QA identity. Capacity constraints are a reported
+            # preparation limitation, never a reason to replace hard items.
+        if not all(c['complete'] for c in capacity_by_size.values()):blockers.append('incomplete main tokenization identity coverage')
     if blockers:reason.append('qualification results incomplete/blocked; no final measured size decision')
     elif manifest['complete'] and totals['400']['total_with_25_percent_reserve_hours']<=48 and (deadline-now).total_seconds()>=(12+totals['400']['total_with_25_percent_reserve_hours'])*3600:
         decision=400;reason.append('400 qualified; all-nine measured/conservative timing forecast fits48GPUhours and >=12h writing reserve remains')
@@ -81,10 +95,12 @@ def forecast(pilot,preparation,output):
     result={'version':'SPQ06-timing-decision/1.0.0','conditions':tables,'workloads':totals,'final_size':decision,'reason':reason,'blockers':blockers,
         'decision_utc':now.isoformat(),'submission_deadline_utc':deadline.isoformat(),'minimum_writing_reserve_hours':12,
         'main_outputs_examined':0,'pilot_correctness_read':False,'evaluation_manifest_sha256':file_hash(preparation/('nested-'+str(decision or 400)+'-manifest.json')),
+        'tokenization_capacity':capacity_by_size,'capacity_evidence_path':str(capacity) if capacity else None,'capacity_evidence_sha256':file_hash(capacity) if capacity else None,
+        'capacity_policy':'all frozen items retained; known capacity failures are reported unsuccessful stages, never replacements or zero-time inference; conservative continuation bounds reserve both full outputs and are rechecked on actual dialogue',
         'estimator':'largest measured initial/continuation time within each condition/family, applied to all domains; wholly unmeasured family uses timeout; all possible continuations, shard loading and25%reserve',
         'caveat':'one pilot item/cell; smaller main projection not rerun on models; context rejections are retained but supply no inference timing; family timing extrapolation across those domains is an explicit feasibility inference, not a guaranteed wall bound, accuracy or achieved performance claim'}
     write(output/'runtime-forecast-and-size-decision.json',result);print(canonical({'workloads':totals,'final_size':decision,'reason':reason,'blockers':blockers}).decode());return result
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--pilot',type=Path,required=True);p.add_argument('--preparation',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
-    a=p.parse_args();forecast(a.pilot,a.preparation,a.output)
+    p=argparse.ArgumentParser();p.add_argument('--pilot',type=Path,required=True);p.add_argument('--preparation',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--capacity',type=Path,required=True)
+    a=p.parse_args();forecast(a.pilot,a.preparation,a.output,a.capacity)

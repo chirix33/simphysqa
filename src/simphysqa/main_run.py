@@ -14,12 +14,14 @@ def preflight(preparation,decision,output):
     preparation=external(preparation);output=external(output);verify_manifest(preparation)
     selected=read(decision);size=selected['final_size']
     if size not in (200,400) or selected['blockers']:raise ValueError('no final qualified runtime-based size decision')
+    if not selected.get('capacity_evidence_path') or file_hash(selected['capacity_evidence_path'])!=selected['capacity_evidence_sha256']:raise ValueError('saved tokenization/capacity evidence missing or changed')
     data=read(preparation/('nested-'+str(size)+'-manifest.json'))
     if not data['complete'] or file_hash(preparation/('nested-'+str(size)+'-manifest.json'))!=selected['evaluation_manifest_sha256']:raise ValueError('frozen decision/manifest mismatch')
     conditions=[read(p) for p in sorted((preparation/'conditions').glob('*.json'))]
     if len(conditions)!=9:raise ValueError('nine conditions required')
     plan={'version':'SPQ06-main-run/1.0.0','preparation':str(preparation),'preparation_manifest_sha256':file_hash(preparation/'manifest.json'),
         'decision_sha256':file_hash(decision),'size':size,'items':data['items'],'conditions':conditions,
+        'capacity_evidence_sha256':selected['capacity_evidence_sha256'],'capacity':selected['tokenization_capacity'][str(size)],
         'ablation_conditions':list(ABLATION),'limits':{'initial_requests':size*11,'clarification_continuations':size//5*11,
             'total_calls':5280 if size==400 else 2640,'gpu_work_seconds':172800,'per_process_loading_seconds':600,'maximum_shard_items':50},
         'failure_policy':'single reserved attempt/stage; incomplete, invalid and unknown failures retained; resume only never-reserved item/stages',

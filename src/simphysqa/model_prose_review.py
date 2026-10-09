@@ -44,7 +44,31 @@ def import_submission(root,form,rid,output):
         'missing':len(rows)-len(collected),'independent_rows':collected,'policy':'discussion/adjudication/rubric revisions separate; no frozen-output changes'})
     print(canonical({'collected':len(collected),'missing':len(rows)-len(collected)}).decode())
 
+def packets(root,run,output):
+    """Future actual model responses, blinded metadata; never invent missing text."""
+    from .main_analysis import unique_result
+    from html import escape
+    root=external(root);run=external(run);output=external(output);plan=read(run/'main-run-plan.json')
+    if not list(run.glob('jobs/*/reservations/*.json')):raise ValueError('no executed main responses; cannot create human answer packets from plans')
+    preparation=Path(plan['preparation']);mapping=read(root/'private/condition-code-map.json');reverse={v:k for k,v in mapping.items()}
+    index=[];links=[]
+    for item in read(root/'assignments.json')['items']:
+        cid=reverse[item['blind_condition']];sid=item['sample_id'];actual,h=unique_result(run,cid,'enriched',sid,1)
+        request=read(preparation/'public'/str(plan['size'])/'enriched'/cid/(sid+'.json'))
+        packet={'assessment_id':item['assessment_id'],'sample_id':sid,'blind_condition':item['blind_condition'],
+            'public_task_messages':request['messages'],'actual_raw_response':actual['raw_output'] if actual else None,
+            'completion_status':actual['completion_status'] if actual else 'missing_or_interrupted_unknown',
+            'response_origin':'actual_saved_model_output' if actual else 'unavailable_no_text_substitute',
+            'review_scope':'supplied comparison, factual faithfulness, supported interpretation, uncertainty and readable explanation; model metadata blinded'}
+        name=item['assessment_id'];retained(output/'packets'/(name+'.json'),packet)
+        save_bytes(output/'packets'/(name+'.html'),('<!doctype html><meta charset="utf-8"><title>'+name+'</title><h1>'+name+'</h1><p>Independent model-answer prose review. Metadata blinded; raw text unchanged. Missing response is unavailable, never adequate by default.</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere">'+escape(canonical(packet).decode())+'</pre>').encode())
+        index.append({**item,'actual_condition_id':cid,'raw_result_file_sha256':h,'public_request_file_sha256':file_hash(preparation/'public'/str(plan['size'])/'enriched'/cid/(sid+'.json'))})
+        links.append('<li><a href="packets/'+name+'.html">'+escape(item['blind_condition']+' / '+sid)+'</a></li>')
+    retained(output/'private/source-index.json',index)
+    save_bytes(output/'INDEX.html',('<!doctype html><meta charset="utf-8"><h1>Blinded independent prose review</h1><p>Use separate P1/P2 forms before discussion. Raw self-identification, if present, is retained and may unblind; report it separately.</p><ul>'+''.join(links)+'</ul>').encode())
+
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('command',choices=('forms','import'));p.add_argument('--subset',type=Path);p.add_argument('--root',type=Path);p.add_argument('--form',type=Path);p.add_argument('--assessor');p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('command',choices=('forms','import','packets'));p.add_argument('--subset',type=Path);p.add_argument('--root',type=Path);p.add_argument('--run',type=Path);p.add_argument('--form',type=Path);p.add_argument('--assessor');p.add_argument('--output',type=Path,required=True);a=p.parse_args()
     if a.command=='forms':forms(a.subset,a.output)
-    else:import_submission(a.root,a.form,a.assessor,a.output)
+    elif a.command=='import':import_submission(a.root,a.form,a.assessor,a.output)
+    else:packets(a.root,a.run,a.output)

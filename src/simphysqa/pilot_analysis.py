@@ -3,7 +3,7 @@ from pathlib import Path
 from collections import Counter,defaultdict
 import argparse
 from jsonschema.exceptions import ValidationError
-from .io import read,write,external,canonical
+from .io import read,write,external,canonical,parse
 from .spq06 import parse_answer
 from .condition_revisions import resolved_condition
 from .formal_sampling import file_hash
@@ -15,6 +15,8 @@ def actual_path(pilot,cid,sid,stage):
 
 def analyse(pilot,output):
     pilot=external(pilot);output=external(output);plan=read(pilot/'pilot-plan.json');rows=[];tables=[]
+    memory_file=pilot/'device-memory-samples-1.0.0.jsonl'
+    memory=[parse(line) for line in memory_file.read_text().splitlines()] if memory_file.exists() else []
     from .scoring import score
     from .explanation_evaluation import check_facts
     from .clarification_evaluation import inspect_stage1,check_stage2
@@ -37,11 +39,17 @@ def analyse(pilot,output):
                 row['failure_reason']=actual['failure_reason'];row['reasoning_format']=actual['reasoning_format_diagnostics']
                 if invalid:row['actual_completion_status']=actual['completion_status'];row['execution_status']='invalid_runtime_cpu'
             elif reserved:row['execution_status']='interrupted_unknown_reserved'
+            if actual and len(reserved)==1:
+                begin=read(reserved[0]).get('reserved_unix_seconds');end=begin+actual['latency_seconds'] if begin is not None else None
+                samples=[m for m in memory if begin is not None and m['returncode']==0 and begin<=m['unix_seconds']<=end]
+                row['device_memory_sampling']={'samples':len(samples),'peak_used_mib':max((int(m['gpu_csv'].split(',')[-1].strip()) for m in samples),default=None),
+                    'interval_seconds':1,'method':'nvidia-smi device-wide usage within actual item reservation/latency interval',
+                    'limitation':'sampling can miss short peaks; absent early samples are unavailable, not zero; Torch process allocation alone does not cover vLLM child engine'}
             if actual and not invalid and actual['completion_status']=='completed':
                 try:
                     response,diagnostic=parse_answer(actual['raw_output']);row['parse_status']='valid_json_suffix';row['reasoning_format'].update(diagnostic)
                     if family in ('direct','predictive','counterfactual'):
-                        pred={'condition_id':cid,'sample_id':sid,'annotation_version':record['annotation_version'],'status':'abstained' if response.get('abstain') else 'completed','targets':response.get('targets',[])}
+                        pred={'condition_id':cid,'sample_id':sid,'annotation_version':record['annotation_version'],'status':'abstained' if response.get('abstained') is True else 'completed','targets':response.get('targets',[])}
                         scored=score([record],[pred],[cid])['items'][0];row['typed_scoring']=scored;row['answer_valid']=scored['valid_targets']==scored['expected_targets'];row['answer_correct']=scored['whole_question_correct']
                     elif family=='explanation':
                         facts=check_facts(record,response);row['structured_facts']=facts;row['answer_valid']=True;row['answer_correct']=facts['factual_components_all_correct']
@@ -70,6 +78,7 @@ def analyse(pilot,output):
     result={'version':'SPQ06-pilot-analysis/1.0.0','items':rows,'conditions':tables,'selected_development_items':plan['selected'],
         'purpose':'execution qualification and timing; one item per cell does not establish quality or powered subgroup performance',
         'main_model_outputs':0,'human_judgments':0,'size_decision_uses_correctness':False}
+    result['device_memory_samples_sha256']=file_hash(memory_file) if memory_file.exists() else None
     write(output/'pilot-analysis.json',result);print(canonical({'conditions':tables,'raw_results':sum(r['raw_result_returned'] for r in rows),'reserved_stages':sum(r['stage_reserved'] for r in rows),'main_outputs':0}).decode())
     return result
 
