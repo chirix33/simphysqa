@@ -24,6 +24,8 @@ class AnalysisBoundaries(unittest.TestCase):
         result=paired_intervals(rows,replicates=100,seed=11)
         self.assertEqual([r['balanced_domain_mean'] for r in result['summaries']],[.5,.5])
         self.assertEqual(result['paired_comparisons'][0]['paired_interval_95'],[0.,0.])
+        self.assertTrue(result['paired_comparisons'][0]['bootstrap_support_degenerate'])
+        self.assertFalse(result['summaries'][0]['bootstrap_support_degenerate'])
         self.assertEqual(result['summaries'][0]['independent_qa_items'],8)
         rows[0]['endpoints']['typed_correct']=0
         self.assertEqual(len(result['summaries']),2)
