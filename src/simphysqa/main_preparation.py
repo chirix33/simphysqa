@@ -10,6 +10,7 @@ from .dataset import validate,restore
 from .spq01a import retained,verify_manifest
 from .spq06 import public_request,ABLATION
 from .main_public import request_from
+from .condition_revisions import resolved_condition
 
 def export(run,pilot,output):
     run=external(run);pilot=external(pilot);output=external(output);plan=execution_plan(run)
@@ -57,9 +58,11 @@ def export(run,pilot,output):
         condition_files=list((pilot/'conditions').glob('*.json'))
         if len(condition_files)!=9:raise ValueError('all nine conditions must have pinned configurations')
         for path in condition_files:
-            condition=read(path);cid=condition['condition_id'];retained(output/'conditions'/path.name,condition)
-            source=pilot.parent/('gemma_pilot_worker.py' if condition['backend']=='llama.cpp' else
-                'frozen-workers-large-1.0.0/local_pilot_worker.py' if condition['backend']=='vllm' else 'frozen-workers-1.0.1/local_pilot_worker.py')
+            cid=read(path)['condition_id'];condition,actual_path=resolved_condition(pilot,cid)
+            retained(output/'conditions'/path.name,condition)
+            candidates=[pilot.parent/'gemma_pilot_worker.py',*pilot.parent.glob('frozen-workers*/local_pilot_worker.py')]
+            source=next((p for p in candidates if p.exists() and file_hash(p)==condition['worker_sha256']),None)
+            if source is None:raise ValueError('no exact pinned worker source')
             if file_hash(source)!=condition['worker_sha256']:raise ValueError('qualified standalone worker changed')
             save_bytes(output/'workers'/(cid+'.py'),source.read_bytes())
             for size,items in ((200,core),(400,selected)):

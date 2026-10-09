@@ -4,12 +4,13 @@ import argparse,math,datetime
 from .io import read,write,external,canonical,digest,DOMAINS,QUESTION_TYPES
 from .formal_sampling import file_hash
 from .spq06 import ABLATION
+from .condition_revisions import resolved_condition
 
 def forecast(pilot,preparation,output):
     pilot=external(pilot);preparation=external(preparation);output=external(output)
     plan=read(pilot/'pilot-plan.json');manifest=read(preparation/'nested-400-manifest.json');tables=[];blockers=[]
     for base in plan['conditions']:
-        cid=base['condition_id'];condition=read(pilot/'conditions'/(cid+'.json'));measures={};loading=[]
+        cid=base['condition_id'];condition,condition_path=resolved_condition(pilot,cid);measures={};loading=[]
         runtimes=list((pilot/'executions').glob(cid+'-stage*/runtime.json'))
         if not runtimes:blockers.append(cid+': model runtime not qualified')
         for p in runtimes:loading.append(read(p)['load_seconds'])
