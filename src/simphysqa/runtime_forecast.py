@@ -5,31 +5,34 @@ from .io import read,write,external,canonical,digest,DOMAINS,QUESTION_TYPES
 from .formal_sampling import file_hash
 from .spq06 import ABLATION
 from .condition_revisions import resolved_condition
+from .pilot_analysis import actual_path
 
 def forecast(pilot,preparation,output):
     pilot=external(pilot);preparation=external(preparation);output=external(output)
     plan=read(pilot/'pilot-plan.json');manifest=read(preparation/'nested-400-manifest.json');tables=[];blockers=[]
     for base in plan['conditions']:
         cid=base['condition_id'];condition,condition_path=resolved_condition(pilot,cid);measures={};loading=[]
-        runtimes=list((pilot/'executions').glob(cid+'-stage*/runtime.json'))
+        runtimes=[p for p in (pilot/'executions').glob(cid+'-stage*/runtime.json') if not (pilot/'invalid-runtime-receipts'/(p.parent.name+'.json')).exists()]
         if not runtimes:blockers.append(cid+': model runtime not qualified')
         for p in runtimes:loading.append(read(p)['load_seconds'])
         raw=[]
         for item in plan['selected']:
-            p=pilot/'executions'/(cid+'-stage1')/'results'/(item['sample_id']+'-stage1.json')
-            actual=read(p) if p.exists() else None
-            did_infer=actual is not None and 'context_capacity' not in str(actual.get('failure_reason'))
-            if actual is None:blockers.append(cid+': missing pilot result '+item['sample_id'])
+            p=actual_path(pilot,cid,item['sample_id'],1)
+            actual=read(p) if p else None
+            invalid=p is not None and (pilot/'invalid-runtime-receipts'/(p.parents[1].name+'.json')).exists()
+            did_infer=actual is not None and not invalid and 'context_capacity' not in str(actual.get('failure_reason'))
+            reservations=list((pilot/'executions').glob(cid+'-stage1*/reservations/'+item['sample_id']+'-stage1.json'))
+            if actual is None and not reservations:blockers.append(cid+': unattempted pilot item '+item['sample_id'])
             # A context failure gives no measured inference time. Conservatively
             # use the frozen per-call timeout for that cell; never count zero as fast.
             cost=actual['latency_seconds'] if did_infer else condition['settings']['max_seconds']
-            q=pilot/'executions'/(cid+'-stage2')/'results'/(item['sample_id']+'-stage2.json')
-            second=read(q) if q.exists() else None
+            q=actual_path(pilot,cid,item['sample_id'],2)
+            second=read(q) if q else None
             if item['family']=='clarification':
                 continuation=second['latency_seconds'] if second and 'context_capacity' not in str(second.get('failure_reason')) else condition['settings']['max_seconds']
             else:continuation=0
             raw.append({'domain':item['domain'],'family':item['family'],'initial_seconds':cost,'initial_measured':did_infer,
-                'continuation_seconds':continuation,'continuation_measured':second is not None and 'context_capacity' not in str(second.get('failure_reason')),'raw_result_sha256':file_hash(p) if p.exists() else None})
+                'continuation_seconds':continuation,'continuation_measured':second is not None and 'context_capacity' not in str(second.get('failure_reason')),'raw_result_sha256':file_hash(p) if p else None,'invalid_runtime':invalid,'unknown_reserved':actual is None and bool(reservations)})
         raw_bounds=[dict(v) for v in raw]
         # Requested estimator is by condition and family. Use the largest measured
         # inference time in that family for every domain, not a zero-time capacity

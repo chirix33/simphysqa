@@ -60,7 +60,7 @@ def export(run,pilot,output):
         for path in condition_files:
             cid=read(path)['condition_id'];condition,actual_path=resolved_condition(pilot,cid)
             retained(output/'conditions'/path.name,condition)
-            candidates=[pilot.parent/'gemma_pilot_worker.py',*pilot.parent.glob('frozen-workers*/local_pilot_worker.py')]
+            candidates=[pilot.parent/'gemma_pilot_worker.py',*pilot.parent.glob('frozen-workers*/local_pilot_worker.py'),*pilot.parent.glob('frozen-workers*/gemma_pilot_worker.py')]
             source=next((p for p in candidates if p.exists() and file_hash(p)==condition['worker_sha256']),None)
             if source is None:raise ValueError('no exact pinned worker source')
             if file_hash(source)!=condition['worker_sha256']:raise ValueError('qualified standalone worker changed')

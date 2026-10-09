@@ -6,6 +6,11 @@ from jsonschema.exceptions import ValidationError
 from .io import read,write,external,canonical
 from .spq06 import parse_answer
 
+def actual_path(pilot,cid,sid,stage):
+    paths=list((pilot/'executions').glob(cid+'-stage'+str(stage)+'*/results/'+sid+'-stage'+str(stage)+'.json'))
+    if len(paths)>1:raise ValueError('duplicate actual pilot item/stage')
+    return paths[0] if paths else None
+
 def analyse(pilot,output):
     pilot=external(pilot);output=external(output);plan=read(pilot/'pilot-plan.json');rows=[];tables=[]
     from .scoring import score
@@ -15,15 +20,20 @@ def analyse(pilot,output):
         cid=condition['condition_id'];condition_rows=[]
         for item in plan['selected']:
             sid=item['sample_id'];family=item['family'];record=read(pilot/'private-records'/(sid+'.json'))
-            path=pilot/'executions'/(cid+'-stage1')/'results'/(sid+'-stage1.json')
-            actual=read(path) if path.exists() else None
+            path=actual_path(pilot,cid,sid,1)
+            actual=read(path) if path else None
+            reserved=list((pilot/'executions').glob(cid+'-stage1*/reservations/'+sid+'-stage1.json'))
+            invalid=path is not None and (pilot/'invalid-runtime-receipts'/(path.parents[1].name+'.json')).exists()
             row={**item,'condition_id':cid,'execution_status':actual['completion_status'] if actual else 'missing',
+                'raw_result_returned':actual is not None,'stage_reserved':bool(reserved),'invalid_runtime':invalid,
                 'latency_seconds':actual['latency_seconds'] if actual else None,'input_tokens':actual['input_tokens'] if actual else None,
                 'output_tokens':actual['output_tokens'] if actual else None,'parse_status':'unattempted','reasoning_compliance':'separate_descriptive_format_check',
                 'answer_valid':False,'answer_correct':False,'human_prose_judgment':'uncollected'}
             if actual:
                 row['failure_reason']=actual['failure_reason'];row['reasoning_format']=actual['reasoning_format_diagnostics']
-            if actual and actual['completion_status']=='completed':
+                if invalid:row['actual_completion_status']=actual['completion_status'];row['execution_status']='invalid_runtime_cpu'
+            elif reserved:row['execution_status']='interrupted_unknown_reserved'
+            if actual and not invalid and actual['completion_status']=='completed':
                 try:
                     response,diagnostic=parse_answer(actual['raw_output']);row['parse_status']='valid_json_suffix';row['reasoning_format'].update(diagnostic)
                     if family in ('direct','predictive','counterfactual'):
@@ -34,17 +44,17 @@ def analyse(pilot,output):
                     else:
                         checks=inspect_stage1(record,response);row['clarification_behavior']=checks
                         row['answer_valid']=checks['response_contract_valid'];row['answer_correct']=False
-                        continuation=pilot/'executions'/(cid+'-stage2')/'results'/(sid+'-stage2.json')
-                        second=read(continuation) if continuation.exists() else None
+                        continuation=actual_path(pilot,cid,sid,2)
+                        second=read(continuation) if continuation else None
                         row['continuation_status']=second['completion_status'] if second else 'unexecuted';row['continuation_latency_seconds']=second['latency_seconds'] if second else None
                         if second and second['completion_status']=='completed':
                             resolved,_=parse_answer(second['raw_output']);row['resolved_answer']=check_stage2(record,resolved)
                             row['answer_correct']=row['resolved_answer']['answer_correct_under_existing_typed_scorer']
                 except (ValueError,TypeError,KeyError,ValidationError) as exc:row['parse_or_score_failure']=type(exc).__name__;row['answer_valid']=False
             rows.append(row);condition_rows.append(row)
-        runtime_paths=list((pilot/'executions').glob(cid+'-stage*/runtime.json'))
+        runtime_paths=[p for p in (pilot/'executions').glob(cid+'-stage*/runtime.json') if not (pilot/'invalid-runtime-receipts'/(p.parent.name+'.json')).exists()]
         loading=sum(read(p)['load_seconds'] for p in runtime_paths)
-        tables.append({'condition_id':cid,'initial_items':20,'returned_results':sum(r['execution_status']!='missing' for r in condition_rows),
+        tables.append({'condition_id':cid,'initial_items':20,'returned_results':sum(r['raw_result_returned'] for r in condition_rows),'reserved_stages':sum(r['stage_reserved'] for r in condition_rows),
             'completion_counts':dict(Counter(r['execution_status'] for r in condition_rows)),
             'loading_seconds':loading,'qualification':'actual_task_execution_available' if runtime_paths else 'blocked_or_not_yet_run',
             'family_timings':{f:{'measured_requests':sum(r['latency_seconds'] is not None for r in condition_rows if r['family']==f),
