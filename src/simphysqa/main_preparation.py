@@ -1,5 +1,6 @@
 """Freeze nested qualified manifests and public requests; never execute a model."""
 from collections import Counter
+from copy import deepcopy
 from pathlib import Path
 import argparse,subprocess
 from .io import ROOT,DOMAINS,QUESTION_TYPES,read,write,external,canonical,digest,manifest
@@ -69,6 +70,7 @@ def export(run,pilot,output):
         retained(output/'nested-400-manifest.json',{**identity,'target':400,'complete':full_ready,'items':selected})
         condition_files=list((pilot/'conditions').glob('*.json'))
         if len(condition_files)!=9:raise ValueError('all nine conditions must have pinned configurations')
+        original_requests={};projected_requests={}
         for path in condition_files:
             cid=read(path)['condition_id'];condition,actual_path=resolved_condition(pilot,cid)
             retained(output/'conditions'/path.name,condition)
@@ -82,7 +84,12 @@ def export(run,pilot,output):
                     if ablation and cid not in ABLATION:continue
                     label='structured_only' if ablation else 'enriched';requests=[]
                     for item in items:
-                        r=records[item['sample_id']];q,check=request_from(public_request(r,condition),ablation)
+                        r=records[item['sample_id']];key=(r['sample_id'],condition['reasoning'])
+                        if key not in original_requests:original_requests[key]=public_request(r,condition)
+                        original=deepcopy(original_requests[key]);original['condition_id']=cid
+                        projected_key=(cid,r['sample_id'],ablation)
+                        if projected_key not in projected_requests:projected_requests[projected_key]=request_from(original,ablation)
+                        q,check=projected_requests[projected_key]
                         retained(output/'public'/str(size)/label/cid/(r['sample_id']+'.json'),q);requests.append(q)
                         checks.append({'sample_id':r['sample_id'],'size':size,'condition_id':cid,**check})
                     retained(output/'request-lists'/str(size)/(cid+'-'+label+'-stage1.json'),requests)

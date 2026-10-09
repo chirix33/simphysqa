@@ -5,6 +5,8 @@ import argparse
 from jsonschema.exceptions import ValidationError
 from .io import read,write,external,canonical
 from .spq06 import parse_answer
+from .condition_revisions import resolved_condition
+from .formal_sampling import file_hash
 
 def actual_path(pilot,cid,sid,stage):
     paths=list((pilot/'executions').glob(cid+'-stage'+str(stage)+'*/results/'+sid+'-stage'+str(stage)+'.json'))
@@ -16,8 +18,8 @@ def analyse(pilot,output):
     from .scoring import score
     from .explanation_evaluation import check_facts
     from .clarification_evaluation import inspect_stage1,check_stage2
-    for condition in plan['conditions']:
-        cid=condition['condition_id'];condition_rows=[]
+    for original in plan['conditions']:
+        cid=original['condition_id'];condition,condition_path=resolved_condition(pilot,cid);condition_rows=[]
         for item in plan['selected']:
             sid=item['sample_id'];family=item['family'];record=read(pilot/'private-records'/(sid+'.json'))
             path=actual_path(pilot,cid,sid,1)
@@ -28,6 +30,8 @@ def analyse(pilot,output):
                 'raw_result_returned':actual is not None,'stage_reserved':bool(reserved),'invalid_runtime':invalid,
                 'latency_seconds':actual['latency_seconds'] if actual else None,'input_tokens':actual['input_tokens'] if actual else None,
                 'output_tokens':actual['output_tokens'] if actual else None,'parse_status':'unattempted','reasoning_compliance':'separate_descriptive_format_check',
+                'raw_result_sha256':file_hash(path) if path else None,
+                'peak_memory':{k:v for k,v in actual.items() if k in ('peak_device_memory_mib','peak_allocated_bytes','peak_reserved_bytes')} if actual else None,
                 'answer_valid':False,'answer_correct':False,'human_prose_judgment':'uncollected'}
             if actual:
                 row['failure_reason']=actual['failure_reason'];row['reasoning_format']=actual['reasoning_format_diagnostics']
@@ -54,9 +58,11 @@ def analyse(pilot,output):
             rows.append(row);condition_rows.append(row)
         runtime_paths=[p for p in (pilot/'executions').glob(cid+'-stage*/runtime.json') if not (pilot/'invalid-runtime-receipts'/(p.parent.name+'.json')).exists()]
         loading=sum(read(p)['load_seconds'] for p in runtime_paths)
-        tables.append({'condition_id':cid,'initial_items':20,'returned_results':sum(r['raw_result_returned'] for r in condition_rows),'reserved_stages':sum(r['stage_reserved'] for r in condition_rows),
+        tables.append({'condition_id':cid,'resolved_condition':condition,'resolved_condition_file_sha256':file_hash(condition_path),
+            'initial_items':20,'returned_results':sum(r['raw_result_returned'] for r in condition_rows),'reserved_stages':sum(r['stage_reserved'] for r in condition_rows),
             'completion_counts':dict(Counter(r['execution_status'] for r in condition_rows)),
-            'loading_seconds':loading,'qualification':'actual_task_execution_available' if runtime_paths else 'blocked_or_not_yet_run',
+            'loading_seconds':loading,'qualified_runtime_receipts':[{'path':str(p),'file_sha256':file_hash(p)} for p in runtime_paths],
+            'qualification':'actual_gpu_task_execution_available_with_retained_failures' if runtime_paths and any(r['execution_status']!='completed' for r in condition_rows) else 'actual_gpu_task_execution_available' if runtime_paths else 'blocked_or_not_yet_run',
             'family_timings':{f:{'measured_requests':sum(r['latency_seconds'] is not None for r in condition_rows if r['family']==f),
                 'actual_gpu_inference_requests':sum(r['latency_seconds'] is not None and not r['invalid_runtime'] and 'context_capacity' not in str(r.get('failure_reason')) for r in condition_rows if r['family']==f),
                 'initial_seconds':sum(r['latency_seconds'] or 0 for r in condition_rows if r['family']==f),
