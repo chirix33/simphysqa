@@ -6,7 +6,7 @@ from .io import canonical,parse,digest
 LINEAGE={'bindings','description_bindings','event_description_bindings','matching_bindings',
     'cache_identity','controller_registry_sha256','matching_rules_sha256','point_registry_sha256',
     'source_public_input_sha256','source_state_sha256','source_event_sha256'}
-DERIVED={'event_description','event_description_status'}
+DERIVED={'event_description'}
 
 def strip_lineage(value):
     if isinstance(value,list):return [strip_lineage(x) for x in value]
@@ -21,6 +21,12 @@ def structured_input(value):
 def project(view,structured=False):
     result={k:deepcopy(view[k]) for k in ('sample_id','question_type','schema_version','export_version')}
     result['input']=structured_input(view['input'])
+    events=view.get('annotations',{}).get('event_context',{}).get('links',{}).get('events',[])
+    if events:
+        result['input']['declared_event_semantics']=[
+            {k:strip_lineage(v) for k,v in event.items() if k not in ('bindings','context_note','controller')}
+            | {'controller':{k:strip_lineage(v) for k,v in event.get('controller',{}).items() if k not in ('bindings','claims')}}
+            for event in events]
     if not structured:
         # Each shared event description occurs once, while state links retain IDs
         # and actual temporal relationships. No observed state or fact is removed.
@@ -34,7 +40,8 @@ def project(view,structured=False):
     result['public_task_projection_version']='SPQ06-main-public/1.0.0'
     # The matched ablation differs only by this derived-language field. Original
     # context, question, comparison, units, frames, facts and query gaps are exact.
-    if canonical(result['input'])!=canonical(structured_input(view['input'])):raise ValueError('physical projection mismatch')
+    physical={k:v for k,v in result['input'].items() if k!='declared_event_semantics'}
+    if canonical(physical)!=canonical(structured_input(view['input'])):raise ValueError('physical projection mismatch')
     return result
 
 def request_from(original,structured=False):
