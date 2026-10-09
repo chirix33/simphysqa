@@ -3,18 +3,19 @@ from pathlib import Path
 import argparse,csv,io,random
 from .io import read,write,external,canonical,digest
 from .formal_sampling import save_bytes,file_hash
+from .spq01a import retained
 
 COLUMNS=['assessor_id','assessment_id','sample_id','blind_condition','judgment','criterion_findings','error_categories','source_locations','claim_excerpts','comments']
 
 def forms(subset,output):
     output=external(output);plan=read(subset);conditions=sorted(plan['conditions']);random.Random(20261009).shuffle(conditions)
     mapping={c:'M'+str(i+1).zfill(2) for i,c in enumerate(conditions)}
-    write(output/'private/condition-code-map.json',mapping);assignments=[]
+    retained(output/'private/condition-code-map.json',mapping);assignments=[]
     for item in plan['items']:
         for c in conditions:
             assignments.append({'assessment_id':'PROSE-'+digest({'sample_id':item['sample_id'],'condition':mapping[c]})[:16],
                 'sample_id':item['sample_id'],'blind_condition':mapping[c],'source_private_record':item['private_record']})
-    write(output/'assignments.json',{'version':'SPQ06-model-prose-forms/1.0.0','subset_sha256':file_hash(subset),
+    retained(output/'assignments.json',{'version':'SPQ06-model-prose-forms/1.0.0','subset_sha256':file_hash(subset),
         'items':assignments,'unique_qa_items':len(plan['items']),'conditions':len(conditions),'judgments_collected':0})
     for rid in ('P1','P2'):
         stream=io.StringIO(newline='');writer=csv.DictWriter(stream,fieldnames=COLUMNS,lineterminator='\n');writer.writeheader()
@@ -39,7 +40,7 @@ def import_submission(root,form,rid,output):
         if r['judgment']=='material_error' and not all(r[k] for k in ('criterion_findings','error_categories','source_locations','claim_excerpts','comments')):raise ValueError('material finding lacks evidence')
         collected.append(r)
     save_bytes(output/'submissions'/rid/(file_hash(source)+'.csv'),blob)
-    write(output/'imports'/(rid+'-'+file_hash(source)+'.json'),{'assessor_id':rid,'submission_sha256':file_hash(source),'collected':len(collected),
+    retained(output/'imports'/(rid+'-'+file_hash(source)+'.json'),{'assessor_id':rid,'submission_sha256':file_hash(source),'collected':len(collected),
         'missing':len(rows)-len(collected),'independent_rows':collected,'policy':'discussion/adjudication/rubric revisions separate; no frozen-output changes'})
     print(canonical({'collected':len(collected),'missing':len(rows)-len(collected)}).decode())
 

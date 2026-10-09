@@ -58,13 +58,13 @@ def analyse(pilot,output):
             'completion_counts':dict(Counter(r['execution_status'] for r in condition_rows)),
             'loading_seconds':loading,'qualification':'actual_task_execution_available' if runtime_paths else 'blocked_or_not_yet_run',
             'family_timings':{f:{'measured_requests':sum(r['latency_seconds'] is not None for r in condition_rows if r['family']==f),
-                'actual_inference_requests':sum(r['latency_seconds'] is not None and 'context_capacity' not in str(r.get('failure_reason')) for r in condition_rows if r['family']==f),
+                'actual_gpu_inference_requests':sum(r['latency_seconds'] is not None and not r['invalid_runtime'] and 'context_capacity' not in str(r.get('failure_reason')) for r in condition_rows if r['family']==f),
                 'initial_seconds':sum(r['latency_seconds'] or 0 for r in condition_rows if r['family']==f),
                 'continuation_seconds':sum(r.get('continuation_latency_seconds') or 0 for r in condition_rows if r['family']==f)} for f in ('direct','predictive','counterfactual','explanation','clarification')}})
     result={'version':'SPQ06-pilot-analysis/1.0.0','items':rows,'conditions':tables,'selected_development_items':plan['selected'],
         'purpose':'execution qualification and timing; one item per cell does not establish quality or powered subgroup performance',
         'main_model_outputs':0,'human_judgments':0,'size_decision_uses_correctness':False}
-    write(output/'pilot-analysis.json',result);print(canonical({'conditions':tables,'raw_results':sum(r['execution_status']!='missing' for r in rows),'main_outputs':0}).decode())
+    write(output/'pilot-analysis.json',result);print(canonical({'conditions':tables,'raw_results':sum(r['raw_result_returned'] for r in rows),'reserved_stages':sum(r['stage_reserved'] for r in rows),'main_outputs':0}).decode())
     return result
 
 if __name__=='__main__':

@@ -28,11 +28,12 @@ def forecast(pilot,preparation,output):
             cost=actual['latency_seconds'] if did_infer else condition['settings']['max_seconds']
             q=actual_path(pilot,cid,item['sample_id'],2)
             second=read(q) if q else None
+            second_invalid=q is not None and (pilot/'invalid-runtime-receipts'/(q.parents[1].name+'.json')).exists()
             if item['family']=='clarification':
-                continuation=second['latency_seconds'] if second and 'context_capacity' not in str(second.get('failure_reason')) else condition['settings']['max_seconds']
+                continuation=second['latency_seconds'] if second and not second_invalid and 'context_capacity' not in str(second.get('failure_reason')) else condition['settings']['max_seconds']
             else:continuation=0
             raw.append({'domain':item['domain'],'family':item['family'],'initial_seconds':cost,'initial_measured':did_infer,
-                'continuation_seconds':continuation,'continuation_measured':second is not None and 'context_capacity' not in str(second.get('failure_reason')),'raw_result_sha256':file_hash(p) if p else None,'invalid_runtime':invalid,'unknown_reserved':actual is None and bool(reservations)})
+                'continuation_seconds':continuation,'continuation_measured':second is not None and not second_invalid and 'context_capacity' not in str(second.get('failure_reason')),'raw_result_sha256':file_hash(p) if p else None,'invalid_runtime':invalid,'unknown_reserved':actual is None and bool(reservations)})
         raw_bounds=[dict(v) for v in raw]
         # Requested estimator is by condition and family. Use the largest measured
         # inference time in that family for every domain, not a zero-time capacity
@@ -55,8 +56,9 @@ def forecast(pilot,preparation,output):
             # Gemma's content hash check occurs before runtime load timestamp;
             # process receipts include it. Use the larger observed overhead.
             for p in (pilot/'process-reservations').glob(cid+'-stage*-result.json'):
-                stage=2 if '-stage2' in p.name else 1
-                consumed=sum(read(x)['latency_seconds'] for x in (pilot/'executions'/(cid+'-stage'+str(stage))/'results').glob('*.json'))
+                job=p.stem.removesuffix('-result');folder=pilot/'executions'/job
+                if not (folder/'runtime.json').exists() or (pilot/'invalid-runtime-receipts'/(job+'.json')).exists():continue
+                consumed=sum(read(x)['latency_seconds'] for x in (folder/'results').glob('*.json'))
                 load=max(load,max(0,read(p)['wall_seconds']-consumed))
             seconds=n*per_item_sum+shards*load
             table['sizes'][str(size)]={'initial_calls':size,'possible_continuations':size//5,'shards':shards,'load_seconds_per_shard':load,
@@ -71,9 +73,9 @@ def forecast(pilot,preparation,output):
     now=datetime.datetime.now(datetime.timezone.utc);deadline=datetime.datetime(2026,10,13,11,59,tzinfo=datetime.timezone.utc)
     core=read(preparation/'nested-200-manifest.json');decision=None;reason=[]
     if blockers:reason.append('qualification results incomplete/blocked; no final measured size decision')
-    elif manifest['complete'] and totals['400']['total_with_25_percent_reserve_hours']<=48 and (deadline-now).total_seconds()>=12*3600:
+    elif manifest['complete'] and totals['400']['total_with_25_percent_reserve_hours']<=48 and (deadline-now).total_seconds()>=(12+totals['400']['total_with_25_percent_reserve_hours'])*3600:
         decision=400;reason.append('400 qualified; all-nine measured/conservative timing forecast fits48GPUhours and >=12h writing reserve remains')
-    elif core['complete'] and totals['200']['total_with_25_percent_reserve_hours']<=48 and (deadline-now).total_seconds()>=12*3600:
+    elif core['complete'] and totals['200']['total_with_25_percent_reserve_hours']<=48 and (deadline-now).total_seconds()>=(12+totals['200']['total_with_25_percent_reserve_hours'])*3600:
         decision=200;reason.append('prespecified200core selected by runtime/preparation feasibility; no main accuracy inspected')
     else:reason.append('no ready size under frozen qualification/time/population rules; report concrete constraint')
     result={'version':'SPQ06-timing-decision/1.0.0','conditions':tables,'workloads':totals,'final_size':decision,'reason':reason,'blockers':blockers,

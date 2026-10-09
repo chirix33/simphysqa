@@ -9,7 +9,8 @@ from .heldout_live import annotation_ledger,simulation_wall,execution_plan
 from .dataset import validate,restore
 from .spq01a import retained,verify_manifest
 from .spq06 import public_request,ABLATION
-from .main_public import request_from
+from .main_public import request_from,project
+from .public_updates import difference,apply
 from .condition_revisions import resolved_condition
 
 def export(run,pilot,output):
@@ -34,6 +35,17 @@ def export(run,pilot,output):
                 'nested_core':rank<=10,'record_sha256':digest(r),'original_source_sha256':c['source']['source']['record_sha256'],
                 'private_record':'private/records/'+r['sample_id']+'.json','executed_case_path':str(case)}
             selected.append(item);records[r['sample_id']]=r;retained(output/item['private_record'],r)
+            if c['question_type']=='clarification':
+                for structured in (False,True):
+                    initial=project(r['private']['initial_view'],structured);resolved=project(r['private']['resolved_view'],structured)
+                    changes=difference(initial,resolved)
+                    if canonical(apply(initial,changes))!=canonical(resolved):raise ValueError('conditional public update lost facts')
+                    content='Recorded clarification reply: '+canonical(r['private']['resolved_view']['input']['recorded_reply']).decode()+'\nApply these exact updates to the original public task; unchanged facts remain supplied. Return the typed resolved answer.\n'+canonical({'public_task_updates':changes}).decode()
+                    label='structured_only' if structured else 'enriched'
+                    retained(output/'private/conditional-public-replies'/label/(r['sample_id']+'.json'),
+                        {'sample_id':r['sample_id'],'status':'conditional_template_not_executed_conversation',
+                         'stage2_user_content':content,'resolved_projected_view_sha256':digest(resolved),
+                         'assistant_turn':'must be actual model first turn; no authored reference substitute'})
             indexes.append({'path':item['private_record'],'sha256':digest(r),'kind':'reused_qualified_output',
                 'source_case':str(case),'annotation_attempts':[x['attempt_number'] for x in history if x['candidate_id']==c['candidate_id']],
                 'source_execution_procedures':['event_language.enrich','answer_annotations.enrich',
@@ -81,7 +93,17 @@ def export(run,pilot,output):
             'reserved_output_tokens':sum(h['reservation']['output_token_limit'] for h in history),
             'simulation_executions':len(list((run/'cases').glob('*/runs/executions/*/reservation.json'))),'simulation_worker_static_seconds':simulation_wall(run)}
         retained(output/'resource-accounting.json',accounting);retained(output/'public-projection-validation.json',checks)
-        retained(output/'per-file-generation-index.json',indexes)
+        archive=[]
+        for attempt in history:
+            name=str(attempt['attempt_number']).zfill(4)+'.json'
+            sources={label:run/'annotation'/label/name for label in ('attempts','requests','responses')}
+            archive.append({'kind':'actual_executed_annotation_request','candidate_id':attempt['candidate_id'],
+                'attempt_number':attempt['attempt_number'],'repair':attempt['repair'],
+                'request_payload_sha256':attempt['request_sha256'],
+                'saved_sources':{label:{'path':str(path),'file_sha256':file_hash(path)} for label,path in sources.items() if path.exists()},
+                'accounting':{key:attempt.get(key) for key in ('charged_upper_bound_usd','recorded_cost_usd','wall_seconds','status')},
+                'procedure':'annotation.payload + annotation.http_call; exact saved payload, no reconstructed prompt'})
+        retained(output/'private/executed-annotation-index.json',archive)
         prose=[i for i in core if i['family']=='explanation' and i['qualified_cell_rank']<=2]
         retained(output/'model-prose-assessment-subset.json',{'version':'SPQ06-model-prose-subset/1.0.0','items':prose,
             'conditions':[read(p)['condition_id'] for p in condition_files],'assessments':len(prose)*9,'judgments_collected':0,
@@ -90,6 +112,23 @@ def export(run,pilot,output):
             '\nNo main answering outputs or human model-answer judgments exist. Original private evidence remains at each executed_case_path.']
         lines.extend('\n- '+i['domain']+' / '+i['family']+' / '+i['sample_id']+' — '+i['private_record'] for i in selected)
         save_bytes(output/'INDEX.md',('\n'.join(lines)+'\n').encode())
+        by_path={row['path']:row for row in indexes}
+        complete_index=[]
+        for path in sorted(output.rglob('*')):
+            if not path.is_file() or path.name in ('manifest.json','per-file-generation-index.json'):continue
+            rel=path.relative_to(output).as_posix()
+            row=by_path.get(rel,{'path':rel,'kind':'reused_pinned_configuration_or_worker' if rel.startswith(('workers/','conditions/')) else 'deterministic_procedure',
+                'export_procedure':'main_preparation.export; public tasks use main_public.request_from; no answering calls',
+                'execution_plan_sha256':digest(plan)})
+            row={**row,'file_sha256':file_hash(path)}
+            if rel.startswith('public/'):
+                sid=path.stem;row.update({'record_sha256':digest(records[sid]),'public_input_procedure':'main_public.project',
+                    'answering_status':'prepared_not_executed','condition_sha256':file_hash(output/'conditions'/(path.parent.name+'.json'))})
+            complete_index.append(row)
+        retained(output/'per-file-generation-index.json',{'version':'SPQ06-per-file-generation/1.0.0','files':complete_index,
+            'self_index_and_manifest':'excluded from this self-referential index; manifest hashes index and all other exported files',
+            'actual_executed_requests_index':'private/executed-annotation-index.json',
+            'prompt_authority':'adopted annotation.PROMPT/PROMPT_VERSION and exact saved request payloads; main answering requests are plans, not execution evidence'})
         return manifest(output,{'purpose':'SPQ06 frozen nested evaluation preparation','identities':identity,'accounting':accounting,'new_model_calls':0})
 
 if __name__=='__main__':
