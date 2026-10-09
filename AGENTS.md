@@ -45,8 +45,8 @@ Use ordinary branches from current main, validate, review the complete diff, the
 commit and merge through the configured repository workflow. Do not create another
 worktree merely for routine changes, switch dirty checkouts, reset/clean unrelated
 work, remove existing worktrees or rewrite/force-push history. Publish or message
-others only when the user authorizes it. This cleanup session explicitly authorizes
-its validated commit/merge/push; it authorizes no experiments.
+others only when the user authorizes it. This cleanup session authorizes its validated commit and branch publication.
+The user will merge PR #3; do not merge it in this session. No experiments are authorized.
 
 Supported setup is an editable checkout with separate CPU, simulator, numerical
 audit and answering-model environments; optional numpy pins conflict. See the

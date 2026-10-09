@@ -1,10 +1,12 @@
 # Repository cleanup completion - 9 October 2026
 
 Base/current remote before cleanup: `ccfde9ee904ac5efdc330ba707ebf54843ffb135`.
-Branch: `simphysqa-repo-cleanup`; implementation revision is the commit containing
-this report. The final PR/merge revisions are recorded in the session integration
-receipt and final handoff, after publication. User explicitly authorized cleanup,
-validation, commit, merge and publication; no experiments or SPQ06 were authorized.
+Branch: `simphysqa-repo-cleanup`; cleanup implementation commit:
+`a7d9fd5f8c983af4f5f7127eb2424f398069588d`.
+[PR #3](https://github.com/chirix33/phi-jepa/pull/3) is published and open. The user
+subsequently directed that they will merge it; no merge is performed in this session.
+Local main and GitHub main remain at the base above. This report/instruction follow-up
+is a separate documentation commit on the same PR. No experiments or SPQ06 are authorized.
 
 ## Changed behavior and inventory
 
@@ -109,7 +111,8 @@ Windows Git long-path warnings required per-command core.longpaths=true for revi
 mixed historical PROGRESS encoding was confined to superseded method entries and
 removed from the active tracker. Original bytes remain in Git. No scientific change.
 
-After review/integration, future work branches from cleaned current main. Active
+The remaining integration step is the user-owned PR merge. After that merge,
+future work branches from cleaned current main. Active
 paths and commands are unchanged: src/simphysqa, configs/simphysqa, existing test and
 export scripts; phi_jepa simulator namespace and original assets/root schemas remain
 required. SPQ06 is unstarted. Human judgments, answering-runtime qualification,
