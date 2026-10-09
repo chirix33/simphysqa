@@ -3,7 +3,9 @@
 Foundation and SPQ05 verified 140-item audit delivery are merged in main; inspected
 pre-cleanup local/remote tip: ccfde9ee904ac5efdc330ba707ebf54843ffb135.
 SPQ06 has NOT been sent or started. This session performs repository cleanup only.
-No simulations, annotation/model calls, answering experiments or rating collection.
+Cleanup commit a7d9fd5 is published in PR #3; the user will merge it. This cleanup
+has not changed main. No simulations, annotation/model calls, answering experiments
+or rating collection.
 
 The 56 engineering items and original four-domain release stay unchanged.
 SPQ05 forms remain blank; human quality/agreement and answering results are pending.

@@ -1,4 +1,4 @@
-# Focused repository cleanup â€” 9 October 2026
+# Focused repository cleanup — 9 October 2026
 
 User-authorized cleanup and branch publication only; the user will merge PR #3.
 Do not merge in this session. No SPQ06, scientific pipeline change or
@@ -39,7 +39,7 @@ Keep two small old configs and one provider ledger because SPQ01 explicitly cite
 them. Original adopted assets remain exact; no cosmetic payload rewrites.
 
 Replace root/active documentation with current authority, setup, privacy and
-branch â†’ validation â†’ review â†’ merge workflow. Preserve completed-stage reports as
+branch → validation → review → merge workflow. Preserve completed-stage reports as
 dated receipts. Repair the legacy source-index links to immutable historical URLs
 and label optional absent source documents; preserve original source manifest.
 SPQ05's no-calibration protocol/current verified delivery supersedes old 20/140
