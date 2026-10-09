@@ -104,6 +104,7 @@ def paired_intervals(rows,replicates=10000,seed=20261009):
                 dist=distributions[(label,metric)]
                 summaries.append({'condition_id':label[0],'input_condition':label[1],'family':family,'endpoint':metric,
                     'balanced_domain_mean':point,'interval_95':[percentile(dist,.025),percentile(dist,.975)],
+                    'bootstrap_support_degenerate':len(set(dist))==1,
                     'independent_qa_items':len(items),'trajectory_groups':len(items)})
         for a,b in pairs:
             for metric in metrics:
@@ -111,9 +112,11 @@ def paired_intervals(rows,replicates=10000,seed=20261009):
                 point=sum(sum(values[(*a,sid)][metric]-values[(*b,sid)][metric] for sid in ids)/len(ids) for ids in strata.values())/4
                 contrasts.append({'family':family,'endpoint':metric,'condition_a':list(a),'condition_b':list(b),
                     'difference_a_minus_b':point,'paired_interval_95':[percentile(diff,.025),percentile(diff,.975)],
+                    'bootstrap_support_degenerate':len(set(diff))==1,
                     'multiplicity':'descriptive prespecified comparisons; intervals are marginal, not simultaneous'})
     return {'summaries':summaries,'paired_comparisons':contrasts,'replicates':replicates,'seed':seed,
         'method':'paired whole-trajectory percentile bootstrap within domain/family strata; balanced domain means',
+        'limitations':'nominal marginal intervals, not simultaneous or exact finite-sample coverage; constant observed binary outcomes or paired differences can produce degenerate bootstrap support, which is reported and is not evidence of zero population uncertainty',
         'claims':'qualified balanced benchmark; not natural release frequency, prose quality, power or OOD'}
 
 def analyse(run,output):
