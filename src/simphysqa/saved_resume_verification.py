@@ -14,8 +14,11 @@ def verify(run, pilot, preparation, output):
     run=external(run);pilot=external(pilot);preparation=external(preparation);output=external(output)
     completed=[read(p) for p in run.glob('cases/*/status.json') if read(p)['status']=='completed']
     counts=Counter(s['cell'] for s in completed)
-    if len(completed)!=400 or len(counts)!=20 or set(counts.values())!={20}:
-        raise ValueError('only a completed 400-item export can exercise this zero-work resume proof')
+    plan=heldout_live.execution_plan(run)
+    for candidate in plan['candidates']:
+        if counts[candidate['cell']]<20 and not (run/'cases'/candidate['candidate_id']/'status.json').exists():
+            raise ValueError('unfinished required candidate work; zero-work resume proof must wait for quotas or exhausted pools')
+    expected=len(completed)
     before=snapshot(run);export_before=snapshot(preparation);calls=[]
     def forbidden(*args, **kwargs):
         calls.append('unexpected_live_boundary')
@@ -24,14 +27,14 @@ def verify(run, pilot, preparation, output):
         result=heldout_live.process(run)
         main_preparation.export(run,pilot,preparation)
     after=snapshot(run);export_after=snapshot(preparation)
-    if calls or result['shortfall'] or result['stop_reason']:
+    if calls or result['completed_items']!=expected or result['shortfall']!=400-expected or result['stop_reason']:
         raise ValueError('saved resume attempted new work or lost qualification')
     if any(after.get(p)!=h for p,h in before.items()) or export_before!=export_after:
         raise ValueError('saved resume changed a prior file')
     added=sorted(set(after)-set(before))
     if len(added)!=1 or not added[0].startswith('summaries/'):
         raise ValueError('resume added files other than its immutable summary snapshot')
-    report={'version':'SPQ06-actual-saved-resume/1.0.0','qualified_items':400,
+    report={'version':'SPQ06-actual-saved-resume/1.0.0','qualified_items':expected,'retained_shortfall':400-expected,
         'existing_run_files_preserved':len(before),'existing_export_files_preserved':len(export_before),
         'added_summary':added[0],'new_annotation_requests':0,'new_simulator_executions':0,
         'new_static_compilations':0,'new_answering_calls':0,'existing_hashes_unchanged':True,
