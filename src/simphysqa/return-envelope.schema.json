@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "simphysqa-return-envelope/1.0.0",
+  "type": "object",
+  "required": ["version", "kind", "assignment", "executor", "process_reservation", "qualification_sha256", "entries", "files"],
+  "properties": {
+    "version": {"const": "SPQ06-execution/1.0.0"},
+    "kind": {"enum": ["main", "fixture"]},
+    "assignment": {"type": "string", "minLength": 1},
+    "executor": {"type": "string", "minLength": 1},
+    "process_reservation": {"type": "string", "minLength": 1},
+    "qualification_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "entries": {"type": "array", "items": {"type": "object", "required": ["key", "request", "result", "prompt"], "properties": {"key": {"type": "string"}, "request": {"type": "string"}, "result": {"type": "string"}, "prompt": {"type": "string"}, "routing": {"type": "string"}}, "additionalProperties": false}},
+    "files": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+  },
+  "additionalProperties": false
+}

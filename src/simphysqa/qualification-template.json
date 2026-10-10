@@ -1,0 +1,25 @@
+{
+  "template_only": true,
+  "status": "unqualified",
+  "executor_id": null,
+  "condition_id": null,
+  "representation": null,
+  "package_sha256": null,
+  "worker_sha256": null,
+  "support_sha256": null,
+  "scientific_condition_sha256": null,
+  "resolved_condition_sha256": null,
+  "bindings_sha256": null,
+  "hardware_runtime": {
+    "gpu_name": null, "device_uuid": null, "vram_mib": null,
+    "os": null, "wsl": null, "driver": null, "cuda_runtime": null,
+    "backend_versions": null
+  },
+  "model_files": null,
+  "tokenizer_files": null,
+  "quantization": null,
+  "precision": null,
+  "render_verification": {"status": "pending", "evidence_sha256": null},
+  "stop_verification": {"status": "pending", "evidence_sha256": null},
+  "task_rehearsal": {"status": "pending", "evidence_sha256": null}
+}

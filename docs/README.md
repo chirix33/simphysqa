@@ -16,6 +16,7 @@ qualification and frozen held-out preparation; the main experiment is not launch
 | Event language and associations | [Event language](simphysqa/event_language.md), [associations](simphysqa/associations.md), [shared descriptions](simphysqa/event_descriptions.md) |
 | Answer evidence | [Answer annotations](simphysqa/answer_annotations.md) |
 | Current internal human audit | [SPQ05 protocol](simphysqa/formal_protocol.md), [guide](simphysqa/formal_reviewer_guide.md), [analysis](simphysqa/formal_analysis.md), [delivery receipt](reviews/SPQ05_completion.md) |
+| SPQ06 portable/shared execution readiness | [Report](reviews/SPQ06_execution_readiness.md), [archive](simphysqa/prompt_archive/SPQ06/execution-readiness-1.0.0/README.md) |
 | SPQ06 prompt/measurement confirmation | [Report](reviews/SPQ06_prompt_measurement_confirmation.md), [exact catalogue/mappings](simphysqa/prompt_archive/SPQ06/confirmation-1.0.2/README.md) |
 | SPQ06 qualification/preparation | [Completion](reviews/SPQ06_completion.md), [protocol](simphysqa/spq06_protocol.md), [main design](simphysqa/spq06_main_design.md), [commands](simphysqa/spq06_commands.md), [GGUF CUDA notes](simphysqa/gguf_cuda_setup.md) |
 | Evaluation and remaining work | [Evaluation](simphysqa/evaluation.md), [pending research](simphysqa/pending.md) |

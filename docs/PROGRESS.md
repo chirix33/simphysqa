@@ -1,3 +1,19 @@
+# Current follow-up — SPQ06 execution readiness (10 October 2026)
+
+Portable public200-core package has2200exact initials/2640possiblekeys, unassigned
+ownership and preserved400inventory. Separately versioned workers add essential
+logging; a central transactional ledger and immutable importer preserve failures,
+duplicates/conflicts and aggregate48h accounting.45offline tests pass; all10190
+existing baseline/archive files remain unchanged. No inference, simulations, paid
+calls, owners, real main reservations, merge or push. Revised workers and any second
+workstation remain pending task qualification. A55+11development rehearsal is
+prepared but not authorized/executed.
+
+[Readiness report](reviews/SPQ06_execution_readiness.md),
+[archive supplement](simphysqa/prompt_archive/SPQ06/execution-readiness-1.0.0/README.md).
+
+The earlier milestones below remain their dated receipts.
+
 # Current follow-up — SPQ06 prompt/measurement confirmation
 
 Offline-only confirmation on simphysqa-spq06 preserves the preparation milestone,
