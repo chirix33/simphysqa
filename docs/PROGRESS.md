@@ -1,3 +1,19 @@
+# Current follow-up — SPQ06 AWQ supplemental qualification (10 October 2026)
+
+Three AWQ combinations completed 15 initials +3 actual continuations on five OTHER
+accepted train QA/groups, through the exact main projection.18 immutable imports/
+parsed objects;102 offline checks and18 actual token/history/stop checks pass.
+Original 40-row rehearsal/15 failed AWQ reservations/four continuations unchanged.
+Supplemental work822.298/8640 s incl outer dispatcher; combined2716.394/20400 s.
+Six-process scope extension is separate; no scientific retry. Corrected main 1.1.1
+preserves all 2200 initials,200/400 identities, workers/support and science settings.
+Eight Ashraf combinations have mapped initial evidence; Llama CoT live stage 2 stays
+unexercised. Ashraf-only forecast17.041 h with reserve; no joint collaborator forecast.
+No main/collaborator inference, annotations, simulations, merge/rebase/push.
+
+[Report](reviews/SPQ06_awq_supplement.md), [commands](simphysqa/awq_supplement_commands.md),
+[handoff](simphysqa/awq_supplement_handoff.md). Earlier receipts below remain unchanged.
+
 # Current follow-up — SPQ06 Ashraf development rehearsal (10 October 2026)
 
 Development-only issuer/launcher/import/scoring now exist. The frozen five train

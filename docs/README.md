@@ -16,6 +16,7 @@ qualification and frozen held-out preparation; the main experiment is not launch
 | Event language and associations | [Event language](simphysqa/event_language.md), [associations](simphysqa/associations.md), [shared descriptions](simphysqa/event_descriptions.md) |
 | Answer evidence | [Answer annotations](simphysqa/answer_annotations.md) |
 | Current internal human audit | [SPQ05 protocol](simphysqa/formal_protocol.md), [guide](simphysqa/formal_reviewer_guide.md), [analysis](simphysqa/formal_analysis.md), [delivery receipt](reviews/SPQ05_completion.md) |
+| SPQ06 AWQ supplemental qualification and corrected main package | [Report](reviews/SPQ06_awq_supplement.md), [commands](simphysqa/awq_supplement_commands.md), [handoff](simphysqa/awq_supplement_handoff.md) |
 | SPQ06 actual Ashraf development rehearsal | [Report](reviews/SPQ06_development_rehearsal.md), [blocker](reviews/SPQ06_rehearsal_blocker.md), [commands](simphysqa/development_rehearsal_commands.md), [handoff](simphysqa/development_rehearsal_handoff.md) |
 | SPQ06 portable/shared execution readiness | [Report](reviews/SPQ06_execution_readiness.md), [archive](simphysqa/prompt_archive/SPQ06/execution-readiness-1.0.0/README.md) |
 | SPQ06 prompt/measurement confirmation | [Report](reviews/SPQ06_prompt_measurement_confirmation.md), [exact catalogue/mappings](simphysqa/prompt_archive/SPQ06/confirmation-1.0.2/README.md) |
