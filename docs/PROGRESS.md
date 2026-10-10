@@ -1,3 +1,22 @@
+# Current follow-up — SPQ06 Ashraf development rehearsal (10 October 2026)
+
+Development-only issuer/launcher/import/scoring now exist. The frozen five train
+tasks were issued to Ashraf's six enriched and two ablation combinations:25 actual
+initials +4 actual continuations returned;15 AWQ initials remain reserved after
+vLLM UUID startup failure. No scientific retry. A verified numeric-index startup-only
+AWQ repair passed with zero answering calls; task/decode qualification remains
+incomplete. Llama CoT's actual requested_information:null was unroutable.
+68 offline checks and29 exact-token/output checks pass. Conservative accounting
+is1894.096/20400s (694.096 measured +1200 unknown abandoned metadata overhead),
+15 process reservations/13 actual workers. Main200/400/48h and prior artifacts
+remain unchanged. No main/collaborator inference, simulations, annotation, merge or push.
+
+[Actual rehearsal report](reviews/SPQ06_development_rehearsal.md),
+[qualification blocker](reviews/SPQ06_rehearsal_blocker.md),
+[commands](simphysqa/development_rehearsal_commands.md),
+[collaborator handoff](simphysqa/development_rehearsal_handoff.md).
+The earlier milestones below remain dated receipts.
+
 # Current follow-up — SPQ06 execution readiness (10 October 2026)
 
 Portable public200-core package has2200exact initials/2640possiblekeys, unassigned
