@@ -122,3 +122,5 @@ alter frozen model outputs. Report both independent assessments and missingness;
 agreement is descriptive with eight task clusters, without a power claim. Any prose
 adequacy claim is limited to this eight-task subset and conditions. This is a model
 answer study, distinct from the140-item annotation audit and its three reviewers.
+
+Bootstrap intervals are nominal and marginal, not exact finite-sample or simultaneous coverage. Constant observed binary endpoints or paired differences can produce degenerate resampling support. The analysis flags this explicitly; it never interprets a zero-width interval as evidence of zero population uncertainty. No main scores were examined when this reporting clarification was added.

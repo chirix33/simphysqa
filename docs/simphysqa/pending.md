@@ -1,5 +1,7 @@
 # Outstanding SimPhysQA research — foundation/1.0.0
 
+SPQ06 completes bounded local qualification and frozen held-out preparation; see [completion](../reviews/SPQ06_completion.md). SPQ05 feedback is processing per user. The larger main run, independent model-answer prose assessment, audit analysis and writing remain. The foundation-era inventory below is historical; no broad release enrichment or OOD claim follows from this milestone.
+
 All five families have bounded engineering implementations; this does not establish
 human quality or release-wide readiness. [Current56-item registry](development-index.md).
 

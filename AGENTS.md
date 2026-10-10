@@ -3,8 +3,9 @@
 Read [the documentation index](docs/README.md), [current progress](docs/PROGRESS.md),
 [foundation contract](docs/simphysqa/foundation.md), relevant family contracts and
 nested AGENTS.md files. Inspect actual Git status and worktrees before edits.
-The newest explicit user instruction governs authorized scope. SPQ06 has not been
-sent or started; plans and prepared requests never authorize experiments.
+The newest explicit user instruction governs authorized scope. SPQ06's active prompt
+authorizes its bounded local pilot and held-out preparation. The larger main run
+requires separate authorization; plans and prepared requests alone never authorize it.
 
 ## Scientific boundaries
 
@@ -42,11 +43,12 @@ mandatory software-generation approval gate.
 ## Engineering and workflow
 
 Use ordinary branches from current main, validate, review the complete diff, then
-commit and merge through the configured repository workflow. Do not create another
+commit for review through the configured repository workflow; merge only when authorized. Do not create another
 worktree merely for routine changes, switch dirty checkouts, reset/clean unrelated
 work, remove existing worktrees or rewrite/force-push history. Publish or message
-others only when the user authorizes it. This cleanup session authorizes its validated commit and branch publication.
-The user will merge PR #3; do not merge it in this session. No experiments are authorized.
+others only when the user authorizes it. The cleanup-only authorization was a dated receipt and its PR is integrated.
+SPQ06 authorizes local implementation/qualification/preparation and a review commit;
+do not merge, push or launch the larger main benchmark in this milestone.
 
 Supported setup is an editable checkout with separate CPU, simulator, numerical
 audit and answering-model environments; optional numpy pins conflict. See the

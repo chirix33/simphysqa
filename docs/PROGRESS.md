@@ -1,3 +1,34 @@
+# Current SimPhysQA status — SPQ06 preparation
+
+Updated-main base5e1355d63b6829395b266a18edec198603e10932; normal branch
+simphysqa-spq06, same worktree. Cleanup is integrated. The active SPQ06 user
+instruction authorized local pilot and held-out preparation, with separate bounded
+annotation/simulation ceilings. No main answering launch, merge or push.
+
+All nine local conditions executed the same20developmentQA/16groups:180initial
+stage reservations and16actualclarification continuations, with failures/unknown
+retained. Prepared400uniqueheld-outQA/400groups,400targetcomplete:True, nested200core10/cell.
+Timing-only decision200; main+ablation forecastincluding25%reserve
+43.136GPUhours.
+414initial annotationrequests/420attempts/6repairs;
+chargedUSD13.631765;1020simulator executions.
+Source/privateevidence/publicprivacy/nesting/exclusions/blankforms and actual
+zero-new-work saved-output resume verified. All ceilings respected.
+
+SPQ05's same140items/threeindependent reviewers remains intact. User reports
+feedbackprocessing; no imported humanrating inferred. No20humancalibration.
+Model-answer prose assessment is separate and prospective; mainoutputs/judgments0.
+No humanacceptability, explanation adequacy, OOD, achievedpower or mainresultclaim.
+
+[Completion/identities/hashes](reviews/SPQ06_completion.md),
+[decision](decisions/SPQ06_qualification_and_main_freeze.md),
+[activeprompt](prompts/SPQ06_local_qualification_and_heldout.md),
+[mainprotocol](simphysqa/spq06_main_design.md),
+[exactcommands](simphysqa/spq06_commands.md),
+[CUDAusernotes](simphysqa/gguf_cuda_setup.md).
+
+## Dated cleanup receipt (superseded session scope)
+
 # Current SimPhysQA status â€” 9 October 2026
 
 Foundation and SPQ05 verified 140-item audit delivery are merged in main; inspected

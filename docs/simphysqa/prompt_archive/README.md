@@ -3,3 +3,5 @@
 Inspect [the consolidated catalogue](catalogue.md) and [per-file generation index](file-generation-index.json). [Recovered executed request and output mappings](provenance-example.md) remains unchanged. SPQ04 deterministic query projection/witness qualification, reply routing, references/traces, schemas/rubric and export procedures are appended. No annotation requests or answering conversations executed. Reused observation language resolves directly to the original complete executed payload.
 
 Full gold/witness/outcome/receipt information is private and external. Historical archive1.0.6 and all prior artifacts are preserved. Authoring instruction: [SPQ04](../../prompts/SPQ04_clarification_qa.md), distinct from annotation-model prompts.
+
+Dated supplements: [SPQ05](SPQ05/README.md) and [SPQ06 exact execution/procedure mappings](SPQ06/README.md). The statements above describe the accepted SPQ04 archive snapshot; later executed work is identified in the separate supplements.

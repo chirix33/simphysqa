@@ -5,8 +5,10 @@ workflow/authorization is [AGENTS.md](../../AGENTS.md); dated merge-preparation
 restrictions are historical. [SPQ05 protocol](formal_protocol.md) and
 [verified audit delivery](../reviews/SPQ05_completion.md) supersede earlier
 20/140 calibration planning within that internal audit. Three reviewers receive
-the same 140 items with no calibration set; judgments remain uncollected.
-SPQ06 has not been sent or started. No experiment is authorized by this document.
+the same 140 items with no calibration set. User reports audit feedback processing;
+no imported judgments are inferred from the original blank forms. The active SPQ06
+user instruction separately authorizes its bounded pilot and held-out preparation;
+this foundation document itself does not authorize experiments.
 Learned-method contracts do not govern this dataset paper.
 
 ## Data, privacy and family boundaries
