@@ -1,3 +1,17 @@
+# Current follow-up — SPQ06 prompt/measurement confirmation
+
+Offline-only confirmation on simphysqa-spq06 preserves the preparation milestone,
+frozen200core/400pool and all previous outputs. Exact110prompt examples/renderings,
+22conditional templates,39measurement groups,596-record enriched inventory and
+2,640unassigned collaborator stage keys are reviewable. No inference, paid calls,
+simulations, owner assignment, main launch, merge or push. Logging/portable-runtime/
+distributed-import gaps are documented, not patched into frozen workers.
+
+[Confirmation report](reviews/SPQ06_prompt_measurement_confirmation.md),
+[archive supplement](simphysqa/prompt_archive/SPQ06/confirmation-1.0.2/README.md).
+
+The preparation status below remains its dated, unchanged milestone receipt.
+
 # Current SimPhysQA status — SPQ06 preparation
 
 Updated-main base5e1355d63b6829395b266a18edec198603e10932; normal branch

@@ -1,0 +1,236 @@
+[
+  {
+    "artifact_missing_failure_policy": "`nested-200-manifest.json:items[].sample_id`; also requests, reservations, results and analysis rows. Unknown/duplicate IDs must halt import.",
+    "definition_denominator": "Original/derived `sample_id`; one selected task",
+    "field_or_metric": "QA identity",
+    "implementation_and_recording": "Automatic; manifest recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "`items[].group_id/domain/family/split`. Worker results omit group/domain/family; join from the frozen manifest. Do not infer from filenames or change splits.",
+    "definition_denominator": "Original group/split; canonical family is `explanation`",
+    "field_or_metric": "Group, domain, family, split",
+    "implementation_and_recording": "Automatic; recorded in manifest/pilot analysis"
+  },
+  {
+    "artifact_missing_failure_policy": "Request `input_condition`; main analysis `input_condition`; jobs encode representation. Raw worker results omit representation: join exact request/job. Pilot used full accepted public exports, not main projection.",
+    "definition_denominator": "Enriched versus structured-only; model/reasoning condition is a separate axis",
+    "field_or_metric": "Representation and condition",
+    "implementation_and_recording": "Automatic; requests and main rows implemented"
+  },
+  {
+    "artifact_missing_failure_policy": "`stage`; initial prepared main request can omit stage and worker defaults to1. A conditional template is not an executed stage.",
+    "definition_denominator": "Initial=1; conditional actual dialogue answer=2",
+    "field_or_metric": "Stage",
+    "implementation_and_recording": "Automatic; reservations/results recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "`conditions/<condition>.json: model_id/artifact_revision/tokenizer_revision/template_sha256/settings`; `backend_options` and `memory_plan` where present. Never call all conditions unquantized.",
+    "definition_denominator": "Repository, exact revision, template hash, precision and quantizer",
+    "field_or_metric": "Model/tokenizer/quantization",
+    "implementation_and_recording": "Automatic metadata; actual pins recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "`runtime.json`, condition JSON, worker source, source manifest; main plan `runner_sha256`. Historical condition `simphysqa_status` remains a stale planning label: use actual qualification receipts, not that field as current status.",
+    "definition_denominator": "Frozen worker/config/request hashes and installed versions",
+    "field_or_metric": "Runtime/code/configuration",
+    "implementation_and_recording": "Automatic; actual runtime receipt"
+  },
+  {
+    "artifact_missing_failure_policy": "Torch runtime `gpu_name/gpu_capability`; Gemma `cuda-device-preflight.json` and server log. Not every result contains hardware/driver/toolkit/OS. Another workstation needs a separate receipt.",
+    "definition_denominator": "GPU name/capability plus device-wide monitor evidence",
+    "field_or_metric": "Hardware",
+    "implementation_and_recording": "Partial automatic; actual workstation receipt"
+  },
+  {
+    "artifact_missing_failure_policy": "`executed-requests/<sample>-stage<N>.json`; main prepared `public/<size>/<representation>/<condition>/<sample>.json`. Request SHA is canonical JSON; per-file SHA covers exact original bytes.",
+    "definition_denominator": "Complete messages, tools=[], physical input/projection and response contract",
+    "field_or_metric": "Exact public request",
+    "implementation_and_recording": "Automatic; actual pilot records, prepared main only"
+  },
+  {
+    "artifact_missing_failure_policy": "`tokenized-prompts/<sample>-stage<N>.json:prompt/token_ids`. HF template uses `add_generation_prompt=True`, then tokenization without extra special tokens. Gemma actual `/apply-template` and `/tokenize` rendering is qualified against saved prompts.",
+    "definition_denominator": "Exact chat text and token IDs sent to local backend",
+    "field_or_metric": "Rendered input",
+    "implementation_and_recording": "Automatic; actual pilot record; offline main examples"
+  },
+  {
+    "artifact_missing_failure_policy": "`results/*.json:raw_output/output_token_ids`; Gemma also `raw_stream_events`. HF uses `decode(skip_special_tokens=True)`: decoded text is not a byte-level detokenization of every special token. IDs preserve generated EOS/control tokens. Never repair raw text.",
+    "definition_denominator": "Emitted decoded response plus generated token IDs",
+    "field_or_metric": "Raw output",
+    "implementation_and_recording": "Automatic; recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "Result `input_tokens`, reservation `prompt_tokens`. Includes full assistant history/reply in stage2 and includes tokenized context-rejected requests; these are not all actual prefilled tokens. No hidden reasoning-token estimate.",
+    "definition_denominator": "Entire rendered stage history, including template/control tokens",
+    "field_or_metric": "Input tokens",
+    "implementation_and_recording": "Automatic; recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "Result `output_tokens` and `output_token_ids`. Gemma collects returned stream tokens. A failed/interrupted request can have partial or unknown output; do not equate missing output with measured zero. No semantic answer-only count is implemented.",
+    "definition_denominator": "Length of retained generated token-ID list, including emitted reasoning/control tokens",
+    "field_or_metric": "Output tokens",
+    "implementation_and_recording": "Automatic; recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "`latency_seconds`; HF includes synchronization/decoding, Gemma includes loopback stream handling. Prompt rendering/tokenization and model loading occur before this timer. A context rejection's short latency is not inference throughput.",
+    "definition_denominator": "Worker monotonic interval through capacity check, generation/streaming and finishing",
+    "field_or_metric": "Stage latency",
+    "implementation_and_recording": "Automatic; recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "No common result columns. Gemma server stream may include timing fields, but the runner does not normalize them. Total stage end-to-end latency including serialization/tokenization is also not recorded separately.",
+    "definition_denominator": "Separate generation phases or TTFT",
+    "field_or_metric": "Prefill/decode latency",
+    "implementation_and_recording": "**Not consistently implemented**"
+  },
+  {
+    "artifact_missing_failure_policy": "`runtime.json:load_seconds`. Gemma GGUF hash verification and CUDA preflight precede this timer; process wall includes them. Loading happens per worker process/shard, not per item.",
+    "definition_denominator": "Model load interval",
+    "field_or_metric": "Loading",
+    "implementation_and_recording": "Automatic; runtime receipt recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "Pilot `process-reservations/*-result.json:wall_seconds` and accounting receipt. Main `jobs/*/process-reservation.json:reserved_seconds` / `process-result.json:wall_seconds`; cumulative limit172800s. Unknown processes retain full reservation. This is allocated process work, not a profiler measurement of active GPU seconds. No cross-executor shared budget scheduler is implemented.",
+    "definition_denominator": "Whole process wall or full unknown reservation, plus loading reserve",
+    "field_or_metric": "GPU work accounting",
+    "implementation_and_recording": "Automatic; partial historical measurements"
+  },
+  {
+    "artifact_missing_failure_policy": "Result `peak_allocated_bytes/peak_reserved_bytes`; runtime loading peaks. Does not cover vLLM child engine allocations. Not a device-wide total.",
+    "definition_denominator": "Reset peak process CUDA allocated/reserved bytes",
+    "field_or_metric": "Torch peak memory",
+    "implementation_and_recording": "Automatic; recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "Pilot external monitor at1s: `device-memory-samples-1.0.0.jsonl`; joined `device_memory_sampling.samples/peak_used_mib/interval_seconds`. Missing samples -> null. Sampling can miss peaks. This external monitor is **not integrated into the main runner**.",
+    "definition_denominator": "Peak sampled `nvidia-smi` memory used",
+    "field_or_metric": "Device memory",
+    "implementation_and_recording": "Automatic; actual pilot analysis"
+  },
+  {
+    "artifact_missing_failure_policy": "`peak_device_memory_mib`, sample loop0.5s, reset per stage; `peak_loading_device_memory_mib`. Read errors are ignored and no sample count/source status is saved: zero cannot prove an available zero measurement. This is a required logging discrepancy.",
+    "definition_denominator": "Worker thread's device-wide high-water mark",
+    "field_or_metric": "Gemma memory",
+    "implementation_and_recording": "Partial automatic"
+  },
+  {
+    "artifact_missing_failure_policy": "`completion_status/failure_reason`. Capacity uses input+full output allowance <=32768; no truncation. A rejection is `failed` with `context_capacity_exceeded_no_truncation`; no inference occurs.",
+    "definition_denominator": "Success, length cap, timeout or exception",
+    "field_or_metric": "Completion / context rejection",
+    "implementation_and_recording": "Automatic; recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "Gemma retains stream `stop_type/truncated`; HF checks final token against inherited generation-config EOS; vLLM inspects `finish_reason=='length'` but does **not save the actual finish_reason/stop_reason**. No uniform finish-reason field.",
+    "definition_denominator": "Backend reason for completion",
+    "field_or_metric": "Finish/stop reason",
+    "implementation_and_recording": "**Partial**"
+  },
+  {
+    "artifact_missing_failure_policy": "Gemma stream `truncated` -> failed; output limit -> `length_limited`. HF/vLLM precheck forbids intended input truncation. No universal independent tokenizer/backend truncation receipt.",
+    "definition_denominator": "Unexpected input truncation or output length limit",
+    "field_or_metric": "Truncation",
+    "implementation_and_recording": "Partial automatic"
+  },
+  {
+    "artifact_missing_failure_policy": "Worker timeout result if returned; orphan reservation -> `interrupted_unknown_reserved` in pilot analysis. Gemma initial invalid CPU runs have separate `invalid-runtime-receipts`; strict revised worker rejects CUDA absence. Main analysis does **not consult pilot-style invalid-runtime sidecars**; central import must reject unqualified runtime results before scoring. Old Gemma second CPU timeout144.509s exceeded120s, retained.",
+    "definition_denominator": "Execution failures, not scientific answer scores",
+    "field_or_metric": "Timeout / CPU fallback / interruption",
+    "implementation_and_recording": "Recorded with retained deviations"
+  },
+  {
+    "artifact_missing_failure_policy": "Raw output remains; no uniform refusal field or semantic refusal detector. Do not invent a label retrospectively without a prespecified assessment.",
+    "definition_denominator": "Explicit refusal distinct from invalid/abstention",
+    "field_or_metric": "Refusal",
+    "implementation_and_recording": "**Not classified automatically**"
+  },
+  {
+    "artifact_missing_failure_policy": "`numerical_details.status='abstained'`; unsuccessful fixed-denominator endpoint. Top-level main `completion_status` can still be completed. Explanation/clarification contracts do not have the same abstention escape.",
+    "definition_denominator": "Explicit `{\"abstained\":true}` for numeric families",
+    "field_or_metric": "Abstention",
+    "implementation_and_recording": "Automatic in typed scorer"
+  },
+  {
+    "artifact_missing_failure_policy": "`parse_answer`: after last `</think>`; optionally unwrap whole fenced JSON; require one complete object suffix; reject nonfinite/duplicate keys. Main `parsing` and `parse_or_scoring_failure`; pilot `parse_status/parse_or_score_failure`. No repair/coercion. **Parsed answer object is not uniformly saved** outside pilot clarification routing; raw output and scorer diagnostics are saved.",
+    "definition_denominator": "Unique strict complete final JSON object, optional prose prefix",
+    "field_or_metric": "Parsing",
+    "implementation_and_recording": "Automatic; recorded diagnostics"
+  },
+  {
+    "artifact_missing_failure_policy": "Typed scorer `valid_targets/expected_targets/targets[].valid`. Missing/unknown/duplicate targets or wrong units/frames invalidate affected/all targets as implemented; valid alone does not imply correct. Numeric format instruction is prose, not a constrained decoding grammar.",
+    "definition_denominator": "Correct required target IDs/types/units/frames",
+    "field_or_metric": "Typed validity",
+    "implementation_and_recording": "Automatic; actual pilot and future main"
+  },
+  {
+    "artifact_missing_failure_policy": "`numerical_details.whole_question_correct`; main endpoint `typed_correct`. Denominator all selected QA in family/condition/representation; failure/missing/abstention=0.",
+    "definition_denominator": "Every expected target is typed-valid and within its accepted scorer",
+    "field_or_metric": "Whole-item correctness",
+    "implementation_and_recording": "Automatic; pilot recorded; main future"
+  },
+  {
+    "artifact_missing_failure_policy": "`targets[].correct/error/metric_unit/answer_type/frame`. Absolute scalar error; Euclidean vector distance; tolerance=absolute+relative×truth magnitude. Integer requires actual JSON int. Wrong unit/frame is invalid, no conversion. Boolean requires actual bool, exact equality, no numeric error.",
+    "definition_denominator": "Same unchanged target-specific tolerance",
+    "field_or_metric": "Target correctness / numerical errors",
+    "implementation_and_recording": "Automatic; target diagnostics recorded"
+  },
+  {
+    "artifact_missing_failure_policy": "`2*acos(min(1,abs(dot)/(norm_product)))` radians; zero quaternion invalid; relative magnitude1. No component-wise MSE or sign penalty. Scorer and exact target tolerance remain unchanged.",
+    "definition_denominator": "Rotation distance invariant to sign and norm",
+    "field_or_metric": "Quaternion",
+    "implementation_and_recording": "Automatic"
+  },
+  {
+    "artifact_missing_failure_policy": "`scoring.score:channel_tables` groups condition/domain/family/target_id/unit/frame; main rows retain per-target errors but only binary endpoint bootstrap summaries are exported. Secondary aggregation remains a reporting implementation gap; never pool incompatible units/quantities.",
+    "definition_denominator": "Coverage-paired valid-only MAE/RMSE",
+    "field_or_metric": "Numerical aggregation",
+    "implementation_and_recording": "Implemented scorer; **not aggregated by main analysis**"
+  },
+  {
+    "artifact_missing_failure_policy": "Worker `reasoning_format_diagnostics.contains_think_open/explicit_think_closure`; parser `prose_prefix_present`. Availability of emitted text only. No internal CoT inference or semantic compliance score, and no complete reasoning-token count. Nonempty text is not reasoning validity.",
+    "definition_denominator": "Visible reasoning delimiters/prose, distinct from inaccessible internal state",
+    "field_or_metric": "Emitted reasoning",
+    "implementation_and_recording": "Partial automatic diagnostics"
+  },
+  {
+    "artifact_missing_failure_policy": "`structured_facts.factual_component_checks`, endpoint `structured_facts_all_correct`. Six expected checks/item; missing/invalid/failure all-item endpoint0. Schema requires nonempty prose fields; does not inspect their meaning.",
+    "definition_denominator": "Intervention, fixed conditions, two supplied readouts, equality and scorer-distinguishability facts",
+    "field_or_metric": "Explanation factual components",
+    "implementation_and_recording": "Automatic; six checks"
+  },
+  {
+    "artifact_missing_failure_policy": "Prospective eight core explanation tasks×nine conditions=72responses, independent P1/P2 forms. `prose_adequacy/human_prose_judgment` remains uncollected. SPQ05 annotation audit is not this assessment. No automatic explanation-quality claim.",
+    "definition_denominator": "Evidence fidelity, supported interpretation, causal restraint, limitations and clarity",
+    "field_or_metric": "Explanation prose adequacy",
+    "implementation_and_recording": "**Human-assessed, uncollected**"
+  },
+  {
+    "artifact_missing_failure_policy": "`clarification_behavior`, `clarification_category`; main endpoints `declared_gap_recognition/structured_slot_match/premature_structured_answer`. Denominator every selected clarification QA, including execution failures. A zero premature-answer flag after nonexecution is not safe clarification; publish coverage beside it.",
+    "definition_denominator": "Declared gap recognition, slot match, premature structured answer",
+    "field_or_metric": "Clarification behavior",
+    "implementation_and_recording": "Automatic structured checks, not semantic wording"
+  },
+  {
+    "artifact_missing_failure_policy": "`private-routing/`, `recorded_reply_routed` versus unroutable/invalid. Matching is structured, not exact authored question wording. Questions with the right slot but poor/compound prose may route: semantic relevance/sufficiency needs humans.",
+    "definition_denominator": "Valid single supported slot and no premature structured answer",
+    "field_or_metric": "Reply routing",
+    "implementation_and_recording": "Automatic; recorded actual pilot"
+  },
+  {
+    "artifact_missing_failure_policy": "Result stage2; row `continuation_status/resolved_answer`; endpoint `resolved_answer_correct` on all clarification items. Conditional accuracy among routed/completed/valid stage2 is secondary and not an implemented main aggregate. Missing/unsupported first turn triggers no supplied gold question and no continuation.",
+    "definition_denominator": "Actual first raw turn + recorded reply/update; actual second answer",
+    "field_or_metric": "Continuation / resolved correctness",
+    "implementation_and_recording": "Automatic; actual16 pilot continuations, main future"
+  },
+  {
+    "artifact_missing_failure_policy": "`uncertainty.paired_comparisons:condition_a/condition_b/difference_a_minus_b/paired_interval_95`; only Qwen3-8B direct and Qwen3-32B-AWQ on. Underlying facts/comparison/query gaps preserved. It estimates input representation effect in those conditions, not separate causal effects of size/quantization/reasoning.",
+    "definition_denominator": "Same QA/condition, structured-only minus enriched",
+    "field_or_metric": "Matched ablation",
+    "implementation_and_recording": "Automatic future paired analysis"
+  },
+  {
+    "artifact_missing_failure_policy": "10,000draws, seed20261009, 95%percentile; group resampling within domain/family strata, same draws across conditions; reject duplicate/cross-stratum groups. `bootstrap_support_degenerate` flags constant support; nominal marginal intervals, no exact/simultaneous coverage or achieved-power claim.",
+    "definition_denominator": "Balanced paired trajectory bootstrap",
+    "field_or_metric": "Uncertainty",
+    "implementation_and_recording": "Implemented, unexecuted on main"
+  }
+]
