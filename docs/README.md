@@ -3,9 +3,10 @@
 Read [agent instructions](../AGENTS.md), [current progress](PROGRESS.md) and the
 [foundation](simphysqa/foundation.md) first. Current main includes the accepted
 foundation and SPQ05 verified audit delivery. This unmerged SPQ06 branch includes
-Ashraf's authorized main share: 1,565 saved
-initial responses and 280 actual continuations on the frozen 200-item core. The 35
-restart-missing initials remain in fixed denominators; collaborator work is pending.
+Ashraf's authorized main share and separately authorized external-restart recovery:
+1,600 saved initials (two original length-limited) and 290 actual continuations on the
+frozen 200-item core. The original interrupted analysis/reservations/unknown charge
+remain preserved alongside the recovered version; collaborator work is pending.
 
 | Topic | Entry |
 | --- | --- |
@@ -18,7 +19,8 @@ restart-missing initials remain in fixed denominators; collaborator work is pend
 | Event language and associations | [Event language](simphysqa/event_language.md), [associations](simphysqa/associations.md), [shared descriptions](simphysqa/event_descriptions.md) |
 | Answer evidence | [Answer annotations](simphysqa/answer_annotations.md) |
 | Current internal human audit | [SPQ05 protocol](simphysqa/formal_protocol.md), [guide](simphysqa/formal_reviewer_guide.md), [analysis](simphysqa/formal_analysis.md), [delivery receipt](reviews/SPQ05_completion.md) |
-| SPQ06 actual Ashraf main share | [Report](reviews/SPQ06_ashraf_main_execution.md), [commands](simphysqa/ashraf_main_commands.md), [handoff](simphysqa/ashraf_main_handoff.md), [archive](simphysqa/prompt_archive/SPQ06/main-execution-1.0.0/README.md) |
+| SPQ06 authorized post-result restart recovery | [Review](reviews/SPQ06_restart_recovery.md), [decision](decisions/SPQ06_restart_recovery.md), [commands](simphysqa/restart_recovery_commands.md) |
+| SPQ06 original Ashraf main share | [Report](reviews/SPQ06_ashraf_main_execution.md), [commands](simphysqa/ashraf_main_commands.md), [handoff](simphysqa/ashraf_main_handoff.md), [archive](simphysqa/prompt_archive/SPQ06/main-execution-1.0.0/README.md) |
 | SPQ06 AWQ supplemental qualification and corrected main package | [Report](reviews/SPQ06_awq_supplement.md), [commands](simphysqa/awq_supplement_commands.md), [handoff](simphysqa/awq_supplement_handoff.md) |
 | SPQ06 actual Ashraf development rehearsal | [Report](reviews/SPQ06_development_rehearsal.md), [blocker](reviews/SPQ06_rehearsal_blocker.md), [commands](simphysqa/development_rehearsal_commands.md), [handoff](simphysqa/development_rehearsal_handoff.md) |
 | SPQ06 portable/shared execution readiness | [Report](reviews/SPQ06_execution_readiness.md), [archive](simphysqa/prompt_archive/SPQ06/execution-readiness-1.0.0/README.md) |

@@ -1,3 +1,35 @@
+# Current follow-up — SPQ06 authorized restart recovery (11 October 2026)
+
+Explicit post-result user authorization covered only 35 restart-missing Qwen3-8B
+direct structured-only initials. Exact selection/reservation/request/saved-output
+checks froze eligibility before inference; no saved original responses were found.
+Same central ledger, sealed package1.1.1 and worker/settings.35 initials +10 supported
+actual-history continuations completed and passed immutable/token/render checks.
+Original interrupted job/15 salvaged/35 invalid imports/null routes/analysis and unknown
+6,600 s charge remain unchanged. No score-based retry or replacement.
+
+New fixed-denominator analysis preserves200 groups/40 family items and unchanged
+scorers/bootstrap. Structured-only Qwen3-8B CF27.5→35%, explanation facts 40→65%;
+clarification resolved 0% unchanged, routing25→35/40. Every other primary row is exact
+unchanged. Original/recovered ablations and separate first/continuation/parser/type
+reporting are exported. Llama rejected text is classified, never repaired/scored.
+39,909 files and original ledger rows verified preserved.12 latest focused offline
+checks, earlier56 broad checks and 45 live-stage integrity checks pass.
+
+Additional accounted1,056.265 s; total58,172.897/72,000 s. Ashraf remaining 13,827.103 s;
+collaborator 100,800 s untouched; shared remaining 114,627.103 s. No collaborator
+inference, new data, annotation, simulations, hosted answering, merge/rebase/push.
+The post-result exception is disclosed, not presented as preplanned single-attempt
+execution. Human explanation quality/annotation acceptability remain uncollected.
+
+[Recovery review](reviews/SPQ06_restart_recovery.md),
+[decision](decisions/SPQ06_restart_recovery.md),
+[commands](simphysqa/restart_recovery_commands.md),
+[archive](simphysqa/prompt_archive/SPQ06/restart-execution-1.0.0/README.md).
+Previous entries remain unchanged dated evidence.
+
+---
+
 # Current follow-up — SPQ06 Ashraf main execution (11 October 2026)
 
 Ashraf's six enriched conditions and two matched structured-only ablations finished

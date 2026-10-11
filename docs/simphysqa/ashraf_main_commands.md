@@ -125,3 +125,14 @@ Final Ashraf accounted57116.632/72000s; collaborator100800s untouched; shared
 remaining 115,683.368/172,800 s. No further Ashraf inference, collaborator issuance or
 budget reassignment is authorized by these commands. Use the same central ledger
 for later separately authorized collaborator work; qualify that workstation first.
+
+## Superseding scoped authorization — 11 October 2026
+
+The earlier no-reopening restriction above remains the original experiment's dated
+record. Ashraf subsequently explicitly authorized recovery ONLY for its 35 external-
+restart missing initials and supported continuations of their ten actual recovered
+first turns. The separately versioned [recovery commands](restart_recovery_commands.md)
+and [review](../reviews/SPQ06_restart_recovery.md) document the executed exception.
+The same ledger, original reservations/imports/analysis/null routes and unknown 6,600 s
+charge remain intact; all other reserved failures/unsupported requests stay excluded.
+No general retry permission, collaborator inference or budget expansion follows.

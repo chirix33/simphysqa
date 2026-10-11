@@ -1,0 +1,31 @@
+{
+  "external_root": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\restart-execution-1.0.0",
+  "files": [
+    {
+      "kind": "exact executed central procedure; public worker/scoring unchanged",
+      "path": "procedures/restart_execution.py",
+      "sha256": "cabbded59305cd225d21ea3aa4e5da2f8cc96a52ba3969ab482776f192e389fe",
+      "source": "C:\\Users\\aashraf\\.codex\\worktrees\\simphysqa\\phi-jepa\\src\\simphysqa\\restart_execution.py"
+    },
+    {
+      "kind": "exact executed central procedure; public worker/scoring unchanged",
+      "path": "procedures/result_diagnostics.py",
+      "sha256": "a3f6e0712b216dcc6f331f5f852986dfae700c549706396145a733e2aa9047d9",
+      "source": "C:\\Users\\aashraf\\.codex\\worktrees\\simphysqa\\phi-jepa\\src\\simphysqa\\result_diagnostics.py"
+    },
+    {
+      "kind": "exact executed central procedure; public worker/scoring unchanged",
+      "path": "procedures/recover.py",
+      "sha256": "fd12d8bfff4f95c57abc5902582ab8720f25a63061f0cabeb47429316d04746a",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\restart-execution-src-1.0.0\\recover.py"
+    },
+    {
+      "kind": "exact executed central procedure; public worker/scoring unchanged",
+      "path": "procedures/finish.py",
+      "sha256": "a490630f2183c21c3ef64cc8362fcd0bd03281847a871db139d8c6fa7be5dcfd",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\restart-analysis-src-1.0.0\\finish.py"
+    }
+  ],
+  "raw_private_evidence_not_committed": true,
+  "version": "SPQ06-restart-execution-archive/1.0.0"
+}
