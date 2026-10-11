@@ -1,0 +1,19 @@
+{
+  "version": "SPQ06-main-execution-archive/1.0.0",
+  "procedure_files": {
+    "procedures/finish_main.py": "5b0f21df80edabb90c543dc89c11101caee201acacb89b3b28cee6521af2f5ba",
+    "procedures/main_run_1_0_0.py": "38743c4fdef28b0c0943e8c1ef2e6e56dc20ac138a7e557320f830d79729d1ec",
+    "procedures/main_run_1_0_1.py": "0d82fca5ac411580f92a4fb1c88b6297f8a2942361ca914cd4a2751a31113057",
+    "procedures/recover_main_1_0_0.py": "ee5f59f79183fe32f45287124c6644aef44ec5ce03b4d006bca8e09e76f21559",
+    "procedures/render_report.py": "5d70c15f2b01e80fe8dd9726acba82ebcfae81a39ae4574dc790e675698c6245",
+    "procedures/verify_delivery.py": "8d499743a0264e601c9c6782e9328fa7814dfe4430958674bc0d5d04599a2c06",
+    "procedures/verify_prose_export.py": "b55edbec5f4a4f14a6c067081d70e92cadf261310fe0e88a51715cf93e62405e"
+  },
+  "public_package_manifest_sha256": "722276ecb67b851ef9c8de0563ee074c83c2b1493727e3a25fc0f95bb3981094",
+  "request_bytes_modified": false,
+  "private_evidence_committed": false,
+  "authoritative_external_root": "C:/Users/aashraf/.codex/visualizations/2026/10/06/01a1131b-eac2-7a31-afb4-f219a8dd6471/spq06/2026-10-09/main-ashraf-1.0.0",
+  "actual_execution_mapping": "delivery-1.0.0/per-file-procedure-index.json",
+  "source_commit": "8c901ee7fb10fd589ef14dae52fcdfb535dc017f",
+  "branch": "simphysqa-spq06"
+}

@@ -1,3 +1,37 @@
+# Current follow-up — SPQ06 Ashraf main execution (11 October 2026)
+
+Ashraf's six enriched conditions and two matched structured-only ablations finished
+all never-reserved authorized work on the unchanged 200 QA / 200 groups. The 1,600
+initial reservations produced 1,565 saved responses (1,563 completed, two length-
+limited); 280 supported actual continuations completed. An abrupt restart left 35
+missing initials in Qwen3-8B direct structured-only. Its full 6,600-second unknown
+process bound is retained; no retry, replacement or denominator change. Forty
+conditionals are unexecuted, including ten missing first turns. Each primary item
+denominator remains 200.
+
+All 1,845 actual stages passed immutable import/render/token/history/memory/scoring-
+join checks. No conflicts; 35 missing return entries preserved. Main accounted work
+is 57,116.632 seconds (15.866 hours), below Ashraf's 72,000 seconds. Ashraf retains
+14,883.368 seconds; collaborator's 100,800 seconds are untouched. Shared remaining:
+115,683.368 / 172,800 seconds. No second-machine completion schedule is measured.
+Unchanged family endpoints and paired stratified trajectory bootstrap are reported.
+Legacy parsing:not_completed also labels completed JSON parsing failures; the report
+separates these interface failures from generation status without changing parsing.
+The Qwen3-8B input ablation is confounded by restart coverage.
+
+Preservation checks pass for 24,340 frozen/historical files, including the 200 core,
+400 pool and 2,200 prepared initials. The 115 offline checks and 16 restart/import/
+allocation checks passed. The frozen eight-task prose subset has 48 actual packets
+and 24 missing collaborator responses; original 72-row P1/P2 forms remain blank.
+Human prose quality and annotation acceptability are uncollected. No collaborator
+inference, annotation, simulation, new dataset generation, hosted answering, merge,
+rebase or push occurred.
+
+[Actual main report](reviews/SPQ06_ashraf_main_execution.md),
+[commands](simphysqa/ashraf_main_commands.md),
+[collaborator handoff](simphysqa/ashraf_main_handoff.md),
+[procedure archive](simphysqa/prompt_archive/SPQ06/main-execution-1.0.0/README.md).
+The earlier milestones below remain unchanged dated receipts.
 # Current follow-up — SPQ06 AWQ supplemental qualification (10 October 2026)
 
 Three AWQ combinations completed 15 initials +3 actual continuations on five OTHER
