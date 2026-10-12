@@ -160,7 +160,7 @@ analysis or ablation performance is fabricated from prepared requests.
 
 ## Verification, preservation and delivery
 
-All 47 relevant offline tests pass; final13focused tests pass after forecast-only helper
+All 48 relevant offline tests pass; the earlier 13 focused tests also pass after forecast-only helper
 versioning. Actual1600offline render checks passed with exact request/token counts.
 The partial1.0.0export (1200 requests) stopped on a repeated shared-condition exclusive
 copy; retained with log/source. Corrected1.0.1export allows exact-byte reuse only,
@@ -189,6 +189,6 @@ must use the exact implemented primitives/commands and reserve every control ope
 current support deliberately has no automatic GPU launch command. No collaborator
 expansion is assigned or presumed. Local commit only; no merge/rebase/push.
 
-[Exact commands](../simphysqa/remaining 200_commands.md),
+[Exact commands](../simphysqa/remaining200_commands.md),
 [decision](../decisions/SPQ06_remaining200_preparation.md),
 [budget/calendar blocker](SPQ06_remaining200_blocker.md).
