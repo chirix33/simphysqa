@@ -1,3 +1,33 @@
+# Current follow-up — collaborator clarification preparation (12 October 2026)
+
+Public diagnostic/export handoff prepared; actual issuance blocked by missing
+original provenance/authority. Provided 600 raw initials exactly match core 200 IDs
+and sealed request/worker/condition hashes. Complete original job returns are absent;
+the original central ledger has no matching collaborator assignments, qualifications
+or 12 local process reservations. No canonical import, retroactive ticket, accounting
+invention, preflight, stage2 reservation or answering inference occurred.
+
+Frozen central parser/router applied to all 120 clarification outputs: DeepSeek 1,
+Gemma direct 0, Gemma CoT 1 supported candidates; 118 unexecuted-conditionals
+(113 parser failures,3 schema failures,1 wrong selector,1 absent declaration).
+Two public drafts preserve actual assistant text verbatim and frozen recorded replies/
+updates. They are explicitly unissued; canonical routes/resolved results stay pending.
+Gemma CoT's unit-question wording concern is separate from its accepted structured
+selector. No scientific/parser/schema/prompt/scoring changes or semantic gate.
+
+Original-job export helper discovers real pinned interpreters/paths and runs only
+the documented return exporter; it refuses missing evidence. 46 central offline tests
+passed / 1 skipped, 3 helper tests passed; public ZIP/file-hash/privacy-boundary checks pass.
+Branch simphysqa-spq06 base bcf5ee71, unmerged/unpushed. The running remaining-200
+evaluation and all existing work are preserved; ledger inspection was read-only.
+
+[Preparation report](reviews/SPQ06_collaborator_clarification_preparation.md),
+[concrete blocker](reviews/SPQ06_collaborator_clarification_blocker.md),
+[public handoff](simphysqa/collaborator_clarification_handoff.md),
+[decision](decisions/SPQ06_collaborator_clarification_preparation.md).
+
+---
+
 # Current follow-up — authorized remaining-200 execution (12 October 2026)
 
 Ashraf explicitly approved complement execution, cumulative Ashraf126000 s,

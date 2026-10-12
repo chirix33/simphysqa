@@ -1,0 +1,19 @@
+{
+  "artifact_root": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\collaborator-clarification-1.0.0",
+  "public_zip": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\SimPhysQA-collaborator-clarification-preparation-1.0.0.zip",
+  "public_zip_sha256": "f63dfec2beab77528f968a6b9c6fcaf82366dd1b8d543a0b2ba62449135ddab1",
+  "frozen_sources_sha256": {
+    "clarification": "139b3aeb234e4436f1608aa5bd97c289e073e92bed17ab9f6d9c57917e3be5cd",
+    "clarification_evaluation": "df8e4caf53371b955ea2976f89df3a19d00cfb53df8b2b1b48527271ed325843",
+    "execution_adapter": "b0c3b52ac3f8017328e0e8dae6a9f70624438241bf56fbb03e677369cfc63466",
+    "main_analysis": "e1451b558313c3157f72500d1bbd1dc4fd9982100008640beaabbd838bd6ffe9",
+    "main_public": "12615b8f9d7911f31826d9531376541b94c9f6551bda29574777176c7cc66444",
+    "public_updates": "b604c62d7e88c3f62d40df48cc8bfcf33c1650b92b4a9b9f77997f7219cf0d5c",
+    "scoring": "458edaf5267f6af505b37fa2c0b47cc6de78313dca9ccba21e47d80544fdf52c",
+    "spq06": "ad2af6890a30138dc821d23dd29ecefd15edb542a4beee7e73842ddf226d607b"
+  },
+  "raw_archive_sha256": "fdad56af33d498fb602ceed346b09aa67d321039414e77fa585d0120db981683",
+  "canonical_imports": 0,
+  "issued_jobs": [],
+  "ledger_mutations": 0
+}
