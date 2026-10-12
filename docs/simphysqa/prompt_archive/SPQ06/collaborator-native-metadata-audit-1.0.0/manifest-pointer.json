@@ -1,0 +1,12 @@
+{
+  "input_archive": "C:/Users/aashraf/Desktop/Work/phi-jepa/NAACL Paper/SimPhysQA-records-600_more_metadata.zip",
+  "input_archive_sha256": "101ad300b92cb20a5376fd47bcebc5ee993129648073ee30e5c6453fa01a49d8",
+  "audit_root": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\metadata-audit-1.0.1",
+  "audit_script_sha256": "33bcb4dc66f2b9e32482eb7c6a871c97fc2f06782cfb629c9a9a063605529a44",
+  "public_zip": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\SimPhysQA-collaborator-metadata-followup-1.0.0.zip",
+  "public_zip_sha256": "b3f78e0387db887f6c7c6d6f7f5310292b43a65f29e758473f7118ef34f2656f",
+  "starting_head": "49adc366ce929eaae9d6af032a3d9232c8d725a5",
+  "canonical_imports": 0,
+  "issued_jobs": [],
+  "ledger_mutations": 0
+}

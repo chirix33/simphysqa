@@ -1,3 +1,26 @@
+# Current follow-up — collaborator native metadata received (12 October 2026)
+
+The additional 3,102-file ZIP supplies all 600 matching original result bytes,
+executed requests, saved render/token evidence, 12 native batch outcomes, local
+assignment/qualification records, 15 development first turns and actual paths.
+Frozen request/condition and native hash/identity/count/capacity checks pass.
+Earlier request/render/path gaps are closed; originals and prior reports are preserved.
+
+Central issuance remains blocked by independent local authority/format: all 12 main
+contexts say organizer_approved=false and reservations shared_ledger=false. Their IDs
+are absent centrally; standard ticket/return/bindings/approved qualification/preflight
+files are not present. Native measured batch time sums 15,950.378097443 s, not settled
+full lifecycle accounting. A supplied ceiling-waiver claim is not adopted. No false
+central history, import, reservation, budget change, scoring or inference occurred.
+The two supported drafts/118 unsupported diagnostics are unchanged; resolved results
+remain pending. Running remaining-200 work and original central ledger are untouched.
+
+[Native metadata audit](reviews/SPQ06_collaborator_native_metadata_audit.md),
+[public status and actual paths](simphysqa/collaborator_native_metadata_status.md),
+[treatment decision](decisions/SPQ06_collaborator_native_metadata.md).
+
+---
+
 # Current follow-up — collaborator clarification preparation (12 October 2026)
 
 Public diagnostic/export handoff prepared; actual issuance blocked by missing
