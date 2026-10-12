@@ -1,0 +1,56 @@
+{
+  "exact_public_requests_external": true,
+  "files": [
+    {
+      "path": "procedures/complement_preparation.py",
+      "procedure_class": "offline deterministic preparation/render/forecast; no model generation",
+      "sha256": "4eb84d4dc6aa7c648228b4dc25d460fd5499a78bf870edb8cd3393b82458284d",
+      "source": "C:\\Users\\aashraf\\.codex\\worktrees\\simphysqa\\phi-jepa\\src\\simphysqa\\complement_preparation.py",
+      "source_recovery_note": null
+    },
+    {
+      "path": "procedures/complement_render.py",
+      "procedure_class": "offline deterministic preparation/render/forecast; no model generation",
+      "sha256": "1f2d9607d18dea9e8505175eb7c7a0d096d091b5fd397f8d168bceacfc2f3253",
+      "source": "C:\\Users\\aashraf\\.codex\\worktrees\\simphysqa\\phi-jepa\\src\\simphysqa\\complement_render.py",
+      "source_recovery_note": null
+    },
+    {
+      "path": "procedures/complement_budget.py",
+      "procedure_class": "future central support; no real ledger call",
+      "sha256": "f965e9c6542e0146c7e9bfa604fd81ab48f567ee957914a340d3334b38f21ace",
+      "source": "C:\\Users\\aashraf\\.codex\\worktrees\\simphysqa\\phi-jepa\\src\\simphysqa\\complement_budget.py",
+      "source_recovery_note": null
+    },
+    {
+      "path": "procedures/complement_execution.py",
+      "procedure_class": "future central support; no real ledger call",
+      "sha256": "52cd02339a818baf56b243fab48b2eb787713e49cf6b5c2622f82e6436a0f020",
+      "source": "C:\\Users\\aashraf\\.codex\\worktrees\\simphysqa\\phi-jepa\\src\\simphysqa\\complement_execution.py",
+      "source_recovery_note": null
+    },
+    {
+      "path": "procedures/complement_preflight.py",
+      "procedure_class": "future central support; no real ledger call",
+      "sha256": "6cc051dbd00a4e9b3dc89b684d502855575db3bcfbe0cb51e415447262702863",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-support-1.0.0\\complement_preflight.py",
+      "source_recovery_note": null
+    },
+    {
+      "path": "procedures/render.py",
+      "procedure_class": "offline deterministic preparation/render/forecast; no model generation",
+      "sha256": "9605bdd0db8dc8744a117b325708d6941370413042586b9b4ec78b7d6c8575c6",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-render-driver-1.0.0\\render.py",
+      "source_recovery_note": null
+    },
+    {
+      "path": "procedures/complement_preparation_1_0_1_export_recovered.py",
+      "procedure_class": "offline deterministic preparation/render/forecast; no model generation",
+      "sha256": "7a6d06d4fe6312a0165b8a9c1c721504826c96fd4f67cb0b6990395330ba6d9a",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-procedure-snapshots-1.0.0\\complement_preparation_1_0_1_export_recovered.py",
+      "source_recovery_note": "prior export source recovered from exact recorded forecast-only edit, not contemporaneous freeze"
+    }
+  ],
+  "private_gold_not_committed": true,
+  "version": "SPQ06-complement-archive/1.0.0"
+}

@@ -1,3 +1,39 @@
+# Current follow-up — remaining-200 offline preparation (12 October 2026)
+
+Clean base291df3d, same unmerged simphysqa-spq06. Exact frozen400-minus-core200
+computed by sample AND original group, retaining rank/order/split:200unique groups,
+40/family,10/domain-family. Disjoint from208frozen development/audit/prompt-use groups.
+Export1.0.1seals1600byte-identical prepared400-pool requests,1920prospective scoped keys,
+eight Ashraf combinations only. All1600fresh tokenizer-only renderings match saved
+capacity evidence; weights/GPU/inference zero. Twenty worst-full-first-output
+continuation bounds fail; actual histories require unchanged checks, no replacement.
+
+48offline tests and13latest focused tests pass.44,516historical hashes and all live
+ledger-table digests unchanged; no actual expansion registration/assignment/reservation
+or budget revision. Original failed partial export/fixture logs retained separately.
+Original selected200decision, core/recovered analyses and unknown6600s charge remain.
+
+Live Ashraf58,172.897/72,000s, remaining13,827.103; collaborator0/100,800s.
+Historical repeat+25%reserve64,466.121s (17.91h):50,639.018s shortfall. Component
+forecast+reserve64,993.882s (18.05h). Proposed Ashraf126,000/shared226,800 (+54,000s),
+collaborator100,800protected, covers estimates but is NOT approved/applied. Current
+ceilings unchanged. Frozen import cutoffOct12 18:00Chicago/23:00UTC; official deadline
+Oct13 06:59Chicago/11:59UTC,12h59writing reserve. Point timing fits at snapshot;25%
+reserve misses cutoff and waiting reduces margin. No complete400readiness claim.
+
+New central budget/registry/issuance/import/routing support is offline-verified only;
+future fresh qualification/preflight and first normal batch integrity remain required.
+No answering/simulations/annotation/newdata/humanratings/collaboratorrun/push/merge/rebase.
+
+[Review](reviews/SPQ06_remaining200_preparation.md),
+[blocker](reviews/SPQ06_remaining200_blocker.md),
+[decision](decisions/SPQ06_remaining200_preparation.md),
+[commands](simphysqa/remaining200_commands.md),
+[archive](simphysqa/prompt_archive/SPQ06/complement-preparation-1.0.0/README.md).
+Prior entries are unchanged dated history.
+
+---
+
 # Current follow-up — SPQ06 authorized restart recovery (11 October 2026)
 
 Explicit post-result user authorization covered only 35 restart-missing Qwen3-8B
