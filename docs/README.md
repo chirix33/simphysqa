@@ -7,8 +7,10 @@ Ashraf's authorized main share and separately authorized external-restart recove
 1,600 saved initials (two original length-limited) and 290 actual continuations on the
 frozen 200-item core. The original interrupted analysis/reservations/unknown charge
 remain preserved alongside the recovered version; collaborator work is pending.
-The frozen200-item complement is prepared offline for Ashraf’s eight combinations;
-no expansion inference or proposed budget increase is authorized/applied.
+Ashraf explicitly authorized the frozen200-item complement across his eight combinations
+on12October, with cumulative126000/226800 s Ashraf/shared budgets and unchanged
+100800 s collaborator allocation. Serial execution is in progress; completed core200
+remains the fallback. See the latest decision and progress, not historical restrictions.
 
 | Topic | Entry |
 | --- | --- |
@@ -21,6 +23,7 @@ no expansion inference or proposed budget increase is authorized/applied.
 | Event language and associations | [Event language](simphysqa/event_language.md), [associations](simphysqa/associations.md), [shared descriptions](simphysqa/event_descriptions.md) |
 | Answer evidence | [Answer annotations](simphysqa/answer_annotations.md) |
 | Current internal human audit | [SPQ05 protocol](simphysqa/formal_protocol.md), [guide](simphysqa/formal_reviewer_guide.md), [analysis](simphysqa/formal_analysis.md), [delivery receipt](reviews/SPQ05_completion.md) |
+| SPQ06 authorized complement execution | [Decision](decisions/SPQ06_complement_execution.md), [progress](PROGRESS.md) |
 | SPQ06 remaining-200 offline expansion preparation | [Review](reviews/SPQ06_remaining200_preparation.md), [budget/calendar blocker](reviews/SPQ06_remaining200_blocker.md), [commands](simphysqa/remaining200_commands.md) |
 | SPQ06 authorized post-result restart recovery | [Review](reviews/SPQ06_restart_recovery.md), [decision](decisions/SPQ06_restart_recovery.md), [commands](simphysqa/restart_recovery_commands.md) |
 | SPQ06 original Ashraf main share | [Report](reviews/SPQ06_ashraf_main_execution.md), [commands](simphysqa/ashraf_main_commands.md), [handoff](simphysqa/ashraf_main_handoff.md), [archive](simphysqa/prompt_archive/SPQ06/main-execution-1.0.0/README.md) |

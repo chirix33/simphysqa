@@ -33,6 +33,32 @@ class Extension(unittest.TestCase):
   self.revise();(self.prep/'authorization-record.json').write_bytes(a.canonical({'result_import_cutoff_utc':'2000-01-01T00:00:00+00:00'}))
   with self.assertRaisesRegex(ValueError,'cutoff passed'):self.register()
   self.assertEqual(self.l.db.execute("SELECT name FROM sqlite_master WHERE name='complement_registry'").fetchall(),[])
+ def test_calendar_revision_requires_dated_explicit_approval(self):
+  self.revise();self.approval['result_import_cutoff_utc']='2099-01-02T00:00:00+00:00'
+  with self.assertRaisesRegex(ValueError,'calendar revision'):self.register()
+  self.approval.update(explicit_human_calendar_revision=True,authorization_utc='2026-10-12T07:38:00Z')
+  body=self.register();self.assertEqual(body['cutoff_utc'],'2099-01-02T00:00:00+00:00')
+  self.assertEqual(body['original_cutoff_utc'],'2099-01-01T00:00:00+00:00')
+ def test_actual_history_only_complement_routing(self):
+  from contextlib import nullcontext
+  self.revise();self.register();ledger=e.Ledger(self.l.path)
+  try:
+   record={'MOCK_ONLY':True};item={'sample_id':self.sid,'group_id':'NEW-FIXTURE','family':'clarification','private_record':'private/mock.json','record_sha256':a.digest(record)}
+   (self.prep/'complement-manifest.json').write_bytes(a.canonical({'items':[item]}))
+   ledger.registry['selected_complement_sha256']=a.sha(self.prep/'complement-manifest.json')
+   organizer=self.f.root/'ORGANIZER-MOCK';a.put(organizer/'private/mock.json',record)
+   a.put(organizer/'conditions'/(self.f.cid+'.json'),{'MOCK_ONLY':True});a.put(organizer/'private/generation-scope.json',{'candidates':[],'excluded_groups':[]})
+   ledger.registry['spec']['conditions'][self.f.cid]['original_sha256']=a.sha(organizer/'conditions'/(self.f.cid+'.json'))
+   actual={'completion_status':'completed','raw_output':'  ACTUAL MOCK FIRST TURN\n'}
+   def continuation(record,condition,raw,response,structured):
+    self.assertEqual(raw,actual['raw_output'])
+    return {'messages':[{'role':'assistant','content':raw},{'role':'user','content':'RECORDED MOCK REPLY'}]}, {'status':'recorded_reply_routed'}
+   with patch.object(ledger,'check'),patch.object(a,'canonical_records',return_value={self.key:actual}),patch('simphysqa.spq06.parse_answer',return_value=({'MOCK_ONLY':True},{})),patch('simphysqa.main_public.continuation',side_effect=continuation),patch('simphysqa.heldout_scope.formal_scope',return_value=nullcontext()):
+    result=e.route(ledger,self.key,organizer,self.f.root/'mock-route.json')
+   self.assertEqual(result['actual_raw'],actual['raw_output']);self.assertEqual(result['request']['messages'][-2]['content'],actual['raw_output'])
+   self.assertEqual(self.l.db.execute('SELECT COUNT(*) FROM routes').fetchone()[0],0)
+   self.assertEqual(ledger.db.execute('SELECT COUNT(*) FROM routes').fetchone()[0],1)
+  finally:ledger.db.close()
  def test_central_registry_preserves_requests_and_original_stage_table(self):
   self.revise();self.register();ledger=e.Ledger(self.l.path)
   try:

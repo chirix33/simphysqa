@@ -1,3 +1,27 @@
+# Current follow-up — authorized remaining-200 execution (12 October 2026)
+
+Ashraf explicitly approved complement execution, cumulative Ashraf126000 s,
+collaborator100800 s unchanged, shared226800 s, and a replacement result-import
+cutoff2026-10-13 02:00UTC / October12 21:00America/Chicago. The official deadline
+remains October13 11:59UTC; writing reserve is now9h59. This supersedes the prior
+preparation-only budget/calendar blocker prospectively, preserving its history.
+
+The additive revision and one explicit assignment containing eight disjoint frozen
+shards are recorded in the original central ledger. No collaborator work is issued.
+Central support1.1.0 adds explicit dated calendar revision and a complement-specific
+private evidence join for unchanged actual-response routing. Fifty offline tests pass.
+The separately snapshotted serial driver1.0.0 reserves processes/controls, settles
+measured work once, retains unknown charges and stops before conservative batch/import
+plus final analysis no longer fit. No scientific worker, parser, scorer or request changes.
+First normal50-item Qwen3-8B enriched fresh preflight passed; actual execution/import
+verification is in progress. Core200/recovery/analysis and historical6600 s charge stay
+preserved. Expansion is a post-core-results decision on the previously frozen pool.
+
+[Authorization/decision](decisions/SPQ06_complement_execution.md). Results are pending;
+this entry does not claim completed400 coverage. Earlier entries are dated history.
+
+---
+
 # Current follow-up — remaining-200 offline preparation (12 October 2026)
 
 Clean base291df3d, same unmerged simphysqa-spq06. Exact frozen400-minus-core200

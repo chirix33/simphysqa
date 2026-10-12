@@ -174,7 +174,7 @@ def validate(output):
   a.assert_public(q)
  return {'version':VERSION,'unique_items':200,'initial_requests':1600,'possible_stages':1920,'hashes_verified':len(actual),'inference_calls':0}
 
-def forecast(base,prepared,output,now=None):
+def forecast(base,prepared,output,now=None,cutoff_utc=None):
  base,prepared,output=map(Path,(base,prepared,output));snapshot=ledger_snapshot(base/'central-main-1.0.0/main.sqlite')
  manifest=a.read(prepared/'complement-manifest.json');items={r['sample_id']:r for r in a.read(base/'main-preparation-1.0.0/nested-200-manifest.json')['items']}
  # Only actual saved measurement fields are inspected; parsing/correctness unused.
@@ -212,7 +212,7 @@ def forecast(base,prepared,output,now=None):
  ash=snapshot['allocations']['Ashraf'];current=ash['accounted_seconds'];original_unknown=sum(r[2] for r in snapshot['active_or_unknown_processes'] if r[3] is None and r[4]=='interrupted')
  historical_extrapolation=current-original_unknown;reserve=.25*historical_extrapolation;full=historical_extrapolation+reserve
  if now is None:now=datetime.now(timezone.utc)
- cutoff=datetime.fromisoformat(CUTOFF);deadline=datetime.fromisoformat(DEADLINE);available=max(0,(cutoff-now).total_seconds())
+ active_cutoff=cutoff_utc or CUTOFF;cutoff=datetime.fromisoformat(active_cutoff);deadline=datetime.fromisoformat(DEADLINE);available=max(0,(cutoff-now).total_seconds())
  observed_process=sum(r[3] for r in snapshot['table_rows']['processes'] if r[3] is not None and r[4]=='complete')
  controls=sum(r[4] for r in snapshot['table_rows']['control_work'] if r[4] is not None and r[5]=='complete')
  gaps=sum(r[1] for r in snapshot['table_rows']['dispatcher_gaps'])
@@ -236,7 +236,7 @@ def forecast(base,prepared,output,now=None):
   'current_ashraf_remaining_seconds':ash['remaining_seconds'],'forecast_shortfall_current_seconds':max(0,full-ash['remaining_seconds']),
   'proposed_allocations_seconds':{'Ashraf':126000,'Collaborator':100800,'shared':226800},'proposed_ashraf_remaining_seconds':126000-current,
   'proposed_forecast_margin_seconds':126000-current-full,'proposed_revision_approved':False,
-  'calendar':{'deadline_utc':DEADLINE,'deadline_Chicago':'2026-10-13 06:59 CDT','cutoff_utc':CUTOFF,'cutoff_Chicago':'2026-10-12 18:00 CDT',
+  'calendar':{'deadline_utc':DEADLINE,'deadline_Chicago':'2026-10-13 06:59 CDT','cutoff_utc':active_cutoff,'cutoff_Chicago':(cutoff-timedelta(hours=5)).strftime('%Y-%m-%d %H:%M CDT'),
    'writing_reserve_seconds':(deadline-cutoff).total_seconds(),'available_until_import_cutoff_seconds':available,
    'point_completion_utc':(now+timedelta(seconds=historical_extrapolation)).isoformat(),'with_reserve_completion_utc':(now+timedelta(seconds=full)).isoformat(),
    'point_fits_cutoff':historical_extrapolation<=available,'reserve_forecast_fits_cutoff':full<=available,'reserve_shortfall_calendar_seconds':max(0,full-available),

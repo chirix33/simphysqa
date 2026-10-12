@@ -10,7 +10,7 @@ from pathlib import Path
 from . import execution_adapter as a,main_allocation,main_record_index,main_import
 from .complement_preparation import SCOPE,COMBINATIONS,validate,ledger_snapshot
 
-VERSION='SPQ06-complement-central/1.0.0'
+VERSION='SPQ06-complement-central/1.1.0'
 
 class Connection:
  def __init__(self,db):self.original=db
@@ -35,7 +35,9 @@ def register(ledger,prepared,approval):
  stages=a.read(prepared/'stage-ownership-plan.json')['stages']
  for cid,label in COMBINATIONS:
   spec['shards'].append({'shard_id':SCOPE+'::'+cid+'--'+label,'owner':None,'keys':[r['worker_key'] for r in stages if (r['condition_id'],r['representation'])==(cid,label)]})
- cutoff=a.read(prepared/'authorization-record.json')['result_import_cutoff_utc']
+ original_cutoff=a.read(prepared/'authorization-record.json')['result_import_cutoff_utc']
+ cutoff=approval.get('result_import_cutoff_utc',original_cutoff)
+ if cutoff!=original_cutoff and (approval.get('explicit_human_calendar_revision') is not True or not approval.get('authorization_utc')):raise ValueError('explicit dated calendar revision required')
  if datetime.now(timezone.utc)>=datetime.fromisoformat(cutoff):raise ValueError('frozen import cutoff passed; no implicit calendar revision')
  db=ledger.db
  db.executescript("""
@@ -49,7 +51,7 @@ def register(ledger,prepared,approval):
  """)
  body={'version':VERSION,'scope':SCOPE,'prepared':str(prepared.resolve()),'manifest_sha256':a.sha(prepared/'manifest.json'),'spec':spec,'authorization':approval,'cutoff_utc':cutoff,
   'selected_complement_sha256':a.sha(prepared/'complement-manifest.json'),'stage_namespace':'scope|sample_id|condition_id|representation|stage; worker four-part keys remain unchanged',
-  'sealed_package_hash':ledger.meta('package_hash')}
+  'sealed_package_hash':ledger.meta('package_hash'),'original_cutoff_utc':original_cutoff,'calendar_revision_explicit':cutoff!=original_cutoff}
  ledger.db.execute('INSERT INTO complement_registry VALUES(?,?)',(SCOPE,a.canonical(body).decode()));return body
 
 class Ledger(main_allocation.Ledger):
@@ -114,11 +116,33 @@ def import_return(ledger,source,root):
  return receipt
 
 def route(ledger,key,preparation,output):
+ """Unchanged actual-response parser/continuation, complement-specific evidence join."""
+ from .spq06 import parse_answer
+ from .main_public import continuation
+ from .heldout_scope import formal_scope
  ledger.check()
- if key.split('|')[0] not in {r['sample_id'] for r in ledger.registry['spec']['items']}:raise ValueError('complement first response only')
- # Legacy guard verifies the preserved original core source pin; the new registry
- # separately pins the exact complement manifest/item set and private record hash.
- return a.coordinate_reply(ledger,key,preparation,output)
+ if not key.endswith('|1'):raise ValueError('initial clarification stage required')
+ raw=a.canonical_records(ledger).get(key)
+ if raw is None:raise ValueError('canonical nonconflicted first result required')
+ sid,cid,label,_=key.split('|');selected=a.read(Path(ledger.registry['prepared'])/'complement-manifest.json')
+ if a.sha(Path(ledger.registry['prepared'])/'complement-manifest.json')!=ledger.registry['selected_complement_sha256']:raise ValueError('frozen complement changed')
+ item=next(x for x in selected['items'] if x['sample_id']==sid)
+ if item['family']!='clarification':raise ValueError('frozen clarification required')
+ record=a.read(Path(preparation)/item['private_record']);condition=a.read(Path(preparation)/'conditions'/(cid+'.json'))
+ if a.digest(record)!=item['record_sha256'] or a.sha(Path(preparation)/'conditions'/(cid+'.json'))!=ledger.registry['spec']['conditions'][cid]['original_sha256']:raise ValueError('frozen organizer evidence/config changed')
+ request=None;reason=raw['completion_status']
+ try:
+  if raw['completion_status']=='completed':
+   scope=a.read(Path(preparation)/'private/generation-scope.json')
+   with formal_scope(scope['candidates'],scope['excluded_groups']):
+    response,diagnostics=parse_answer(raw['raw_output'])
+    request,routed=continuation(record,condition,raw['raw_output'],response,label=='structured_only');reason=routed['status']
+ except (ValueError,KeyError,TypeError) as exc:reason=type(exc).__name__+': '+str(exc)
+ second=a.stage_key(sid,cid,label,2)
+ receipt={'version':VERSION,'scope':SCOPE,'key':second,'initial_key':key,'actual_raw':raw['raw_output'],'initial_result_sha256':a.digest(raw),
+  'status':'supported' if request else 'unexecuted_conditional','reason':reason,'request':request,'request_sha256':a.digest(request) if request else None}
+ ledger.db.execute('INSERT INTO routes VALUES(?,?)',(second,a.canonical(receipt).decode()));a.put(output,receipt);return receipt
+
 
 def dry_plan(prepared,output):
  prepared,output=Path(prepared),Path(output);validate(prepared);cm=a.read(prepared/'complement-manifest.json');public=a.read(prepared/'public/execution-inputs.json');items=cm['items'];batches=[]
