@@ -9,8 +9,8 @@ frozen 200-item core. The original interrupted analysis/reservations/unknown cha
 remain preserved alongside the recovered version; collaborator work is pending.
 Ashraf explicitly authorized the frozen200-item complement across his eight combinations
 on12October, with cumulative126000/226800 s Ashraf/shared budgets and unchanged
-100800 s collaborator allocation. Serial execution is in progress; completed core200
-remains the fallback. See the latest decision and progress, not historical restrictions.
+100800 s collaborator allocation. Complement execution is settled; complete eight-combination coverage: True. Core200
+remains preserved as the fallback. See the latest decision and progress, not historical restrictions.
 
 | Topic | Entry |
 | --- | --- |
@@ -23,6 +23,7 @@ remains the fallback. See the latest decision and progress, not historical restr
 | Event language and associations | [Event language](simphysqa/event_language.md), [associations](simphysqa/associations.md), [shared descriptions](simphysqa/event_descriptions.md) |
 | Answer evidence | [Answer annotations](simphysqa/answer_annotations.md) |
 | Current internal human audit | [SPQ05 protocol](simphysqa/formal_protocol.md), [guide](simphysqa/formal_reviewer_guide.md), [analysis](simphysqa/formal_analysis.md), [delivery receipt](reviews/SPQ05_completion.md) |
+| SPQ06 actual complement execution | [Completion](reviews/SPQ06_complement_execution.md), [commands](simphysqa/complement_execution_commands.md) |
 | SPQ06 authorized complement execution | [Decision](decisions/SPQ06_complement_execution.md), [progress](PROGRESS.md) |
 | SPQ06 remaining-200 offline expansion preparation | [Review](reviews/SPQ06_remaining200_preparation.md), [budget/calendar blocker](reviews/SPQ06_remaining200_blocker.md), [commands](simphysqa/remaining200_commands.md) |
 | SPQ06 authorized post-result restart recovery | [Review](reviews/SPQ06_restart_recovery.md), [decision](decisions/SPQ06_restart_recovery.md), [commands](simphysqa/restart_recovery_commands.md) |

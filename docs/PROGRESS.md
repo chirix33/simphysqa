@@ -1,3 +1,20 @@
+# Current completion — remaining-200 execution (12 October 2026)
+
+Approved complement execution has settled and been centrally analyzed; all-eight
+coverage/accounting complete: True. The fixed core/complement/
+union analyses preserve 200/200/400 assigned denominators and unchanged scoring and
+paired stratified bootstrap. The expansion occurred after core results were available;
+selection/order were frozen earlier. Collaborator work and human prose ratings remain
+outside this completion. Original artifacts, reservations and unknown charges remain.
+
+[Completion review](reviews/SPQ06_complement_execution.md),
+[exact commands](simphysqa/complement_execution_commands.md),
+[actual analysis archive](simphysqa/prompt_archive/SPQ06/complement-analysis-1.0.1/README.md).
+Local final commit identity is in the external post-commit receipt. No push/merge/rebase.
+Prior entries are preserved dated history.
+
+---
+
 # Current follow-up — collaborator native metadata received (12 October 2026)
 
 The additional 3,102-file ZIP supplies all 600 matching original result bytes,

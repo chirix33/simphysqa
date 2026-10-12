@@ -1,0 +1,69 @@
+{
+  "version": "1.0.1",
+  "entries": [
+    {
+      "file": "finish_complement.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-analysis-src-1.0.1\\finish_complement.py",
+      "sha256": "912785febd0aeaccde3bcd8cd1f459e5d2242609590323c8e6b3d09a2b35e135",
+      "kind": "executed_central_analysis_no_model_calls"
+    },
+    {
+      "file": "analysis-equivalence.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-analysis-check-1.0.1.py",
+      "sha256": "73d244b757a05be7106a91b871943ac7465057d6d18d94462af154840da18dd3",
+      "kind": "executed_1600_core_row_equivalence"
+    },
+    {
+      "file": "test_analysis.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\test_complement_analysis_1_0_1.py",
+      "sha256": "34a394b7b5d7b5d2030dcbbc2b2f4195ca29f5fdd502e4d57c2265442bfd7a88",
+      "kind": "executed_five_offline_coverage_fixtures"
+    },
+    {
+      "file": "preservation-check-failed.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-preservation-final-1.0.0.py",
+      "sha256": "e5280f473acbd25aa60ec5064da078fc96e2994dc30281d59d776861d73ee637",
+      "kind": "executed_helper_failed_on_incorrect_manifest_key_no_artifacts_changed"
+    },
+    {
+      "file": "preservation-check.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-preservation-final-1.0.1.py",
+      "sha256": "219a8190a353d53d1b5b5d92ceaeea049662dd33c03c8a023623fdace795dd76",
+      "kind": "executed_historical_artifact_hash_verification"
+    },
+    {
+      "file": "delivery-control.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-delivery-control-1.0.0.py",
+      "sha256": "27af0876be52d3272d04f393b1e7a41de1816574dae85843665bd6061af660b3",
+      "kind": "executed_bounded_documentation_hash_verification"
+    },
+    {
+      "file": "completion-documents.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-final-docs-1.0.0.py",
+      "sha256": "f4bfa59b855eb7eafc811aeec14e5b245ea8ecd940ebecddcd7eae85699cde7d",
+      "kind": "executed_documentation_from_actual_receipts"
+    },
+    {
+      "file": "closure-failed.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-closure-1.0.0.py",
+      "sha256": "b782b497683684ce031d215ca125a5700aa76275ed023ccde0bde0bbb1cb4e59",
+      "kind": "executed_reporting_helper_failed_on_unexpanded_condition_placeholders"
+    },
+    {
+      "file": "closure.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-closure-1.0.1.py",
+      "sha256": "4b52b3693f6f755b7cab35e69b0b8bd17796720911f5b0d7b76c2087b404064b",
+      "kind": "executed_recovery_raw_hash_and_reporting_addendum"
+    },
+    {
+      "file": "review-close.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-review-close-1.0.0.py",
+      "sha256": "ee774a1678c64031b9002cdab01b9cf098ec379ee7470c50976f34003290732e",
+      "kind": "executed_bounded_local_review_bookkeeping"
+    }
+  ],
+  "worker_changed": false,
+  "private_evidence_committed": false,
+  "annotation_calls": 0,
+  "simulations": 0
+}

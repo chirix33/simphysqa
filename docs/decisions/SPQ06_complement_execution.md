@@ -47,3 +47,13 @@ External execution root:
 Actual authorization, additive budget receipt, registration, assignment, freeze,
 forecasts, future batch logs/returns/scoring records are versioned there. The completed
 core submission remains available regardless of expansion completion.
+
+
+Completion: all 1,600 complement initials and 293 supported continuations were
+immutably imported; 27 conditionals remain explicitly unexecuted. The six length
+limits and five unavailable memory measurements are retained. Core/complement/union
+analyses are saved separately with unchanged primary scorers/bootstrap; raw core
+hashes and prior recovery files match. Final helper failures retain their source,
+logs and full unknown controls, with separate corrected versions. This completion
+does not revise scientific selection/settings, release composition or collaborator
+authority. See the completion review, reporting addendum and local post-commit receipt.
