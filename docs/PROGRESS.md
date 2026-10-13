@@ -1,3 +1,32 @@
+# Current follow-up — native reconciliation and two issued jobs (12 October 2026)
+
+Explicit user authorization applied: 600 verified native first turns accepted into
+an immutable independent-provenance registry in the original central ledger. Original
+local IDs/false approval flags and all prior rows/charges remain; no historical
+central tickets or approvals were fabricated. Budgets/cutoff remain unchanged.
+Measured main/development subprocess sum 17174.049031062 s plus 9000 s explicitly
+unknown original outer bounds were recognized once. New jobs reserve 1800 s total.
+
+Frozen canonical routing on all 120 actual clarifications derived two supports and
+118 unexecuted-conditionals. Verbatim assistant histories and recorded public replies/
+updates are sealed in one runnable public ZIP. One DeepSeek and one Gemma CoT job have
+NEW central assignments/reservations, issued_pending_remote_metadata. Their actual
+pinned interpreters run bounded fresh metadata on the collaborator's machine before
+any answering. Fixed host attempt guards prevent copied-job retries. No first-turn
+rerun, local model answering or fabricated fresh proof. Resolved scores remain pending.
+
+15 native tests,32 central regression tests,3 Linux CPU probes passed;6 final pending/
+index checks passed. Public/base hashes, history/privacy boundaries and preservation
+checks pass. Ashraf's completed complement/core analyses remain untouched. This is
+preparation/issuance completion, not a claim that remote metadata or answers passed.
+
+[Issuance completion](reviews/SPQ06_collaborator_stage2_issuance_completion.md),
+[public runnable instructions](simphysqa/collaborator_stage2_issued_handoff.md),
+[return/import/scoring commands](simphysqa/collaborator_stage2_return_commands.md),
+[decision](decisions/SPQ06_native_reconciliation_and_stage2.md).
+
+---
+
 # Current completion — remaining-200 execution (12 October 2026)
 
 Approved complement execution has settled and been centrally analyzed; all-eight

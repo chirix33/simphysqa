@@ -1,4 +1,4 @@
-"""Central immutable-return index /1.0.0; same canonicalization, fewer reads.
+"""Central immutable-return index /1.1.0; same canonicalization, fewer reads.
 
 Hash each unique imported source once per lookup, instead of once per item.
 Never caches across calls/transactions. A conflict blocks the item and its
@@ -7,10 +7,11 @@ conditional stage exactly as in the sealed adapter. No parser/scorer changes.
 from collections import defaultdict
 from contextlib import contextmanager
 from pathlib import Path
+import sqlite3
 from . import execution_adapter as adapter
 from . import main_allocation
 
-VERSION='SPQ06-main-record-index/1.0.0'
+VERSION='SPQ06-main-record-index/1.1.0'
 
 def canonical_records(ledger):
     blocked=set(adapter.conflicts(ledger))
@@ -27,6 +28,17 @@ def canonical_records(ledger):
         if not ledger.db.execute('SELECT 1 FROM transports WHERE id=?',(transport,)).fetchone():raise ValueError('immutable transport envelope changed')
         entries={entry['key']:entry for entry in envelope['entries']}
         for key in keys:result[key]=adapter.read(adapter.within(path,entries[key]['result']))
+    # Native history applies only to the original core connection. Scoped restart/
+    # complement connections retain their own namespace; their core joins happen later.
+    if isinstance(ledger.db, sqlite3.Connection):
+        from .native_reconciliation import canonical_native, exists
+        native = canonical_native(ledger)
+        if exists(ledger, 'native_entries'):
+            for (key,) in ledger.db.execute('SELECT key FROM native_entries'):
+                if key not in native:
+                    blocked.update((key, key[:-1] + '2'))
+        result.update(native)
+        result = {k: v for k, v in result.items() if k not in blocked}
     return result
 
 @contextmanager

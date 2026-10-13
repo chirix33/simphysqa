@@ -1,0 +1,30 @@
+{
+  "artifact_root": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\collaborator-issued-1.0.0",
+  "public_zip": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\SimPhysQA-collaborator-stage2-issued-1.0.0.zip",
+  "public_zip_sha256": "4eb1afa93c4436c9cf7d6b7f12d662e766de9f4b09cd5f8fc650e69538e6f6f9",
+  "completion_receipt": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\collaborator-issued-1.0.0\\completion-receipt.json",
+  "source_sha256": {
+    "native_reconciliation": "13505394397d9ef76f7dc70db26768bbc625ce5f5fd781792523fd9831f04f74",
+    "native_remote": "8415e4e808dbe3a32d4c0b97366716c4f3648a1af1db61b6383a52106d4a051b",
+    "main_record_index": "a8434409bbc75a19543fa1a89e58792218a8bde67d2fdbc27a1c8a704a8614b8",
+    "spq06": "ad2af6890a30138dc821d23dd29ecefd15edb542a4beee7e73842ddf226d607b",
+    "clarification": "139b3aeb234e4436f1608aa5bd97c289e073e92bed17ab9f6d9c57917e3be5cd",
+    "clarification_evaluation": "df8e4caf53371b955ea2976f89df3a19d00cfb53df8b2b1b48527271ed325843",
+    "scoring": "458edaf5267f6af505b37fa2c0b47cc6de78313dca9ccba21e47d80544fdf52c",
+    "main_analysis": "e1451b558313c3157f72500d1bbd1dc4fd9982100008640beaabbd838bd6ffe9",
+    "main_public": "12615b8f9d7911f31826d9531376541b94c9f6551bda29574777176c7cc66444",
+    "public_updates": "b604c62d7e88c3f62d40df48cc8bfcf33c1650b92b4a9b9f77997f7219cf0d5c"
+  },
+  "starting_head": "35dc73e8e3342f6fb548fc23693bde0ef81135f9",
+  "preexisting_source_snapshot": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\preexisting-native-source-1.0.0",
+  "actual_metadata_status": "pending_on_collaborator",
+  "answering_calls_here": 0,
+  "historical_tickets_created": 0,
+  "delivered_public_zip": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\SimPhysQA-collaborator-stage2-issued-1.0.2.zip",
+  "delivered_public_zip_sha256": "e9d15098418cbcc83879bb72db66e19ea2408daf484754ca2304f1a51c991070",
+  "delivery_receipt": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\12\\01a13168-edb1-7ec2-af49-de486a5552c9\\collaborator-issued-1.0.0\\delivery-receipt-1.0.2.json",
+  "metadata_renderer_dependencies": {
+    "jinja2": "3.1.6",
+    "markupsafe": "3.0.4"
+  }
+}
