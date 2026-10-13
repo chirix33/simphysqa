@@ -1,3 +1,31 @@
+# Current follow-up — collaborator stage-2 returns reconciled (12 October 2026)
+
+Both complete returns preserved unchanged and verified/imported through native1.0.0
+into the original authoritative ledger. No conflicts; all unrelated rows/remaining-200
+artifacts preserved. Gemma CoT's completed answer parses but is numerically incorrect.
+Its unit-question/execution_condition mismatch is recorded separately; frozen routing,
+verbatim history, prompts/parser/settings/scoring stay unchanged. No semantic gate.
+
+DeepSeek attempted stage2 and timed out at960.115s without a saved answer. Metadata
+413.894s and subsequent startup490.918s left about55.099s under the unchanged960s
+outer deadline, against its360s response cap. Pre-worker admission fails to preserve
+response opportunity after loading: orchestration defect, not evidence of a full360s
+model-response failure. Actual timeout/missingness/cost are retained; no retries.
+
+Combined frozen core analysis is complete:200items/2200condition rows;40-family
+and bootstrap unchanged. Both collaborator supported resolved endpoints are zero;
+DeepSeek missing output remains in the denominator with attempted-timeout provenance.
+Collaborator remaining73141.925618s; shared87828.780618s; Ashraf14686.855s unchanged.
+No ceilings/cutoff changes. Late central processing is disclosed. Four offline native
+regression tests passed; no new model calls, limit increases, push or merge.
+
+[Reconciliation review](reviews/SPQ06_collaborator_stage2_return_reconciliation.md),
+[timeout/protocol decision](decisions/SPQ06_stage2_timeout_disposition.md).
+Any further attempt requires explicit prospective retry/result-treatment, setup budget
+and calendar decisions; existing allocation is not execution authorization.
+
+---
+
 # Current follow-up — native reconciliation and two issued jobs (12 October 2026)
 
 Explicit user authorization applied: 600 verified native first turns accepted into

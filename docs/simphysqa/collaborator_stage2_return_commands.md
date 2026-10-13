@@ -34,3 +34,15 @@ authority and newly issued continuations. No intermediate resolved scores are
 reported while supported jobs/routes remain unprocessed. Failed metadata or absent
 answers retain failure status; there is no retry, fabricated response or repair.
 Preserve existing core/complement/400 analyses rather than replacing old files.
+
+
+## Actual complete-return processing — 12 October 2026
+
+The received outer SimPhysQA-stage2-returns.zip has been preserved/validated and both
+contained complete-return folders imported using the commands above with their actual
+preserved extracted paths. Combined analysis is complete; do not issue or rerun either
+job. [Scoring, timing, final settled budget and expired-cutoff disclosure](../reviews/SPQ06_collaborator_stage2_return_reconciliation.md).
+The frozen bridge's no-result/unexecuted label and the import receipt's generic
+metadata_failed_unexecuted_keys field do not classify DeepSeek as unattempted:
+process=timed_out, inference_started=true, stage=worker_failed_no_result, actual
+reservation/render/runtime evidence preserved in the additive audit.
