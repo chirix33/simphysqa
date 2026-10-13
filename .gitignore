@@ -74,3 +74,13 @@ outputs/
 /docs/reviews/artifacts/P12_validation_answers/
 /docs/reviews/artifacts/Post_P07/
 /docs/reviews/artifacts/Post_P08_diagnosis/
+.claude/launch.json
+paper_figures/export.ps1
+paper_figures/figures.js
+paper_figures/index.html
+paper_figures/README.md
+paper_figures/styles.css
+paper_figures/out/figure1.pdf
+paper_figures/out/figure2.pdf
+paper_figures/out/figure3.pdf
+paper_figures/out/figure4.pdf
