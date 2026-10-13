@@ -1,5 +1,7 @@
 # Evaluation direction — five-family foundation/1.0.0
 
+SPQ06 now provides actual local nine-condition pilot execution and a frozen held-out preparation/analysis design; see [completion](../reviews/SPQ06_completion.md) and [main design](spq06_main_design.md). The historical foundation-only statements below retain their dated meaning. No main benchmark was launched or model prose quality established.
+
 Answering is workstation-only and tool-free; annotations/public structured inputs
 under evaluation are actually included. Private gold/traces/rollouts/receipts stay
 out. configs/simphysqa/evaluation.json retains exact artifact/runtime fields and

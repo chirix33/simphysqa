@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "entries": [
+    {
+      "file": "original-first-batch-driver.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-live-src-1.0.0\\complement_run.py",
+      "sha256": "12033b0934a1dc344f11e738787a57527fb376a44051c91492b518f10b274cb1",
+      "kind": "actual_executed_procedure_then_coordinator_dependency_failure",
+      "scientific_generation_worker_changed": false
+    },
+    {
+      "file": "complement_run.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-live-src-1.0.1\\complement_run.py",
+      "sha256": "debbb3032e8f9ca9d9fffacbf1a50f5c73f83ea2d586abc1733eac5cea9107c0",
+      "kind": "actual_executed_serial_coordinator",
+      "scientific_generation_worker_changed": false
+    },
+    {
+      "file": "complement_preflight.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-live-src-1.0.1\\complement_preflight.py",
+      "sha256": "6cc051dbd00a4e9b3dc89b684d502855575db3bcfbe0cb51e415447262702863",
+      "kind": "actual_executed_metadata_only_preflight",
+      "scientific_generation_worker_changed": false
+    },
+    {
+      "file": "main_verify.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-live-src-1.0.1\\main_verify.py",
+      "sha256": "2f9dc800151376c456dc6e5f4a6a97c0f53c8bb9172d1beab9e91d87b127cf27",
+      "kind": "actual_executed_token_memory_timing_verification",
+      "scientific_generation_worker_changed": false
+    },
+    {
+      "file": "finish_complement.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-analysis-src-1.0.0\\finish_complement.py",
+      "sha256": "ba2aa4b10def7acc69af9285192682c298955b5a6268b39fb83850a5a19d0dc4",
+      "kind": "prepared_central_analysis_not_yet_executed",
+      "scientific_generation_worker_changed": false
+    },
+    {
+      "file": "coordinator-check.py",
+      "source": "C:\\Users\\aashraf\\.codex\\visualizations\\2026\\10\\06\\01a1131b-eac2-7a31-afb4-f219a8dd6471\\spq06\\2026-10-09\\complement-coordinator-check-1.0.1.py",
+      "sha256": "b5a0935b356f62696a712e4e9bea948418958523e4b5c8a89a8b6f02848f1bba",
+      "kind": "actual_saved-output_join_and_routing_repair_no_inference",
+      "scientific_generation_worker_changed": false
+    },
+    {
+      "file": "complement_execution.py",
+      "source": "C:\\Users\\aashraf\\.codex\\worktrees\\simphysqa\\phi-jepa\\src\\simphysqa\\complement_execution.py",
+      "sha256": "2bb5508da7b544ad9af645a612db7db6b443dfb01073f02612bea84203fde9cc",
+      "kind": "actual_executed_central_support",
+      "scientific_generation_worker_changed": false
+    },
+    {
+      "file": "complement_budget.py",
+      "source": "C:\\Users\\aashraf\\.codex\\worktrees\\simphysqa\\phi-jepa\\src\\simphysqa\\complement_budget.py",
+      "sha256": "f965e9c6542e0146c7e9bfa604fd81ab48f567ee957914a340d3334b38f21ace",
+      "kind": "actual_executed_additive_budget_revision",
+      "scientific_generation_worker_changed": false
+    },
+    {
+      "file": "complement_preparation.py",
+      "source": "C:\\Users\\aashraf\\.codex\\worktrees\\simphysqa\\phi-jepa\\src\\simphysqa\\complement_preparation.py",
+      "sha256": "c3b631754074bd9961aaa6aa627d2929de1e6fc74dbcc15323a1e7b0cb8914f4",
+      "kind": "actual_executed_readonly_frozen_validation_and_forecast",
+      "scientific_generation_worker_changed": false
+    }
+  ],
+  "initial_requests": "1600 byte-identical reused400-pool requests; actual executed copies stay in external worker evidence",
+  "new_annotation_calls": 0,
+  "simulator_calls": 0,
+  "private_gold_committed": false
+}

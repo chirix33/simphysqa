@@ -1,0 +1,5 @@
+# SPQ06 exact answering-prompt and measurement confirmation /1.0.2
+
+Offline-only follow-up; original sealed archives and requests remain unchanged. [Complete readable catalogue](C:/Users/aashraf/.codex/visualizations/2026/10/06/01a1131b-eac2-7a31-afb4-f219a8dd6471/spq06/2026-10-09/confirmation-1.0.2/catalogue.md); [measurement contract](C:/Users/aashraf/.codex/visualizations/2026/10/06/01a1131b-eac2-7a31-afb4-f219a8dd6471/spq06/2026-10-09/confirmation-1.0.2/measurement-contract.md); [inventory](C:/Users/aashraf/.codex/visualizations/2026/10/06/01a1131b-eac2-7a31-afb4-f219a8dd6471/spq06/2026-10-09/confirmation-1.0.2/inventory/inventory.md); [collaborator template](C:/Users/aashraf/.codex/visualizations/2026/10/06/01a1131b-eac2-7a31-afb4-f219a8dd6471/spq06/2026-10-09/confirmation-1.0.2/collaborator/ownership-template.json).
+
+[Review report](../../../../reviews/SPQ06_prompt_measurement_confirmation.md).110unexecuted instantiated examples,22conditional templates and16reused actual executed pilot dialogues are separately labeled. File mappings refer to the exact external root, not guessed aliases. No inference or owner assignment.
